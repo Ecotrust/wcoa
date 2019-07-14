@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+wcoa/__init__.py
+wcoa/admin.py
+wcoa/apps.py
+wcoa/models.py
+wcoa/project_urls.py
+wcoa/tests.py
+wcoa/urls.py
+wcoa/views.py
+wcoa.egg-info/PKG-INFO
+wcoa.egg-info/SOURCES.txt
+wcoa.egg-info/dependency_links.txt
+wcoa.egg-info/top_level.txt
+wcoa/migrations/__init__.py
