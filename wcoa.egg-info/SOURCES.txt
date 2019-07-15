@@ -7,6 +7,7 @@ wcoa/admin.py
 wcoa/apps.py
 wcoa/models.py
 wcoa/project_urls.py
+wcoa/settings.py
 wcoa/tests.py
 wcoa/urls.py
 wcoa/views.py
