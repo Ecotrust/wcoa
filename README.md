@@ -163,9 +163,8 @@ Quick start
 
     path('wcoa/', include('wcoa.urls')),
 
-3. Run `python manage.py migrate` to create the polls models.
+3. Run `python manage.py migrate` to create the wcoa models.
 
-4. Start the development server and visit http://127.0.0.1:8000/admin/
-   to create a poll (you'll need the Admin app enabled).
+4. Start the development server and visit http://localhost:8000/admin/
 
-5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
+5. Visit http://localhost:8000/wcoa/ to participate in the poll.
