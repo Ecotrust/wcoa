@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
   <div class="row packery-container">
     {% for block in page.body %}
       {% if block.block_type == 'brick' %}
-          <div class="{% cycle 'span8' 'span4' 'span4' 'span5' 'span3' 'span8' 'span4' %}">
-            <h2>{{ block.value.title }}</h2>
+        {% image block.value.photo max-500x500 as bg_img %}
+        <a class="{% cycle 'span8' 'span4' 'span4' 'span5' 'span3' 'span8' 'span4' %} home-item" href="{{ block.value.url }}" style="background-image: url({{ bg_img.url }}); background-size: cover; background-color: pink; background-repeat: no-repeat; display: inline-block;">
+          <div class="home-item-cntr">
+            <div class="home-item-label clearfix">
+              <div>{{ block.value.title }}</div>
+            </div>
+            <div>{{ block.value.text }}</div>
           </div>
+        </a>
       {% else %}
         <ol>
           <li class="block-{{ block.block_type }}">{% include_block block %}</li>
