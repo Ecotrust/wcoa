@@ -1,14 +1,19 @@
 from django.db import models
 
-from modelcluster.fields import ParentalKey
-
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.search import index
+
+class CTAStreamBlock(blocks.StructBlock):
+    cta_title = blocks.CharBlock()
+    cta_content = blocks.RichTextBlock()
+    cta_link = blocks.URLBlock(label="URL",required=False)
+
+    class Meta:
+        icon='cogs'
 
 class ConnectPage(Page):
 
@@ -19,7 +24,7 @@ class ConnectPage(Page):
     grid_cta_three = RichTextField()
 
     body = RichTextField()
-    body_image = cover = models.ForeignKey(
+    body_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
@@ -28,48 +33,22 @@ class ConnectPage(Page):
     )
 
     cta_list = StreamField([
-        ('cta_list_block', blocks.StreamBlock([
-            blocks.StructBlock([
-                ('title', blocks.CharBlock()),
-                ('paragraph', blocks.RichTextBlock(required=False)),
-                ('link', blocks.URLBlock(label="URL",required=False)),
-            ]),
-            blocks.StructBlock([
-                ('paragraph', blocks.RichTextBlock()),
-            ]),
-        ])),
+        ('connection', CTAStreamBlock()),
+        ('details', blocks.RichTextBlock()),
     ])
 
     date = models.DateField("Post date")
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    # Search index configuration
-
-    search_fields = Page.search_fields + [
-        index.SearchField('body'),
-        index.FilterField('date'),
-    ]
 
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldRowPanel([
-            'grid_cta_three',
-            'grid_cta_three',
-            'grid_cta_three',
+            FieldPanel('grid_cta_one'),
+            FieldPanel('grid_cta_two'),
+            FieldPanel('grid_cta_three'),
         ]),
-        FieldPanel('body', classname="full"),
+        FieldPanel('body'),
         ImageChooserPanel('body_image'),
-    ]
-
-    promote_panels = [
-        MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-        ImageChooserPanel('feed_image'),
+        StreamFieldPanel('cta_list'),
     ]
