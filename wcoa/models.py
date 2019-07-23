@@ -10,9 +10,6 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 
-class CTAListBlock(blocks.StreamBlock):
-
-
 class ConnectPage(Page):
 
     # Database fields
