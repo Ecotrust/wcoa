@@ -32,7 +32,7 @@ class ConnectPage(Page):
             blocks.StructBlock([
                 ('title', blocks.CharBlock()),
                 ('paragraph', blocks.RichTextBlock(required=False)),
-                ('link', blocks.URLBlock(label="URL",required=False)
+                ('link', blocks.URLBlock(label="URL",required=False)),
             ]),
             blocks.StructBlock([
                 ('paragraph', blocks.RichTextBlock()),
