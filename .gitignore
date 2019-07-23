@@ -2,4 +2,4 @@ __pycache__
 wcoa/__pycache__
 .DS_Store
 *.pyc
-#.egg-info*
+*.egg-info*
