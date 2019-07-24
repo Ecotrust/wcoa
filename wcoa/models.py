@@ -19,12 +19,12 @@ class ConnectPage(Page):
 
     # Database fields
 
-    grid_cta_one_title = TextField()
-    grid_cta_one = TextField()
-    grid_cta_two_title = TextField()
-    grid_cta_two = TextField()
-    grid_cta_three_title = TextField()
-    grid_cta_three = TextField()
+    grid_cta_one_title = CharBlock()
+    grid_cta_one = CharBlock()
+    grid_cta_two_title = CharBlock()
+    grid_cta_two = CharBlock()
+    grid_cta_three_title = CharBlock()
+    grid_cta_three = CharBlock()
 
     body = RichTextField()
     body_image = models.ForeignKey(
