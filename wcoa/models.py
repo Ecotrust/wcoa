@@ -43,11 +43,15 @@ class ConnectPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
-        FieldRowPanel([
-            FieldPanel('grid_cta_one'),
-            FieldPanel('grid_cta_two'),
-            FieldPanel('grid_cta_three'),
-        ]),
+        MultiFieldPanel(
+            [
+                FieldPanel('grid_cta_one'),
+                FieldPanel('grid_cta_two'),
+                FieldPanel('grid_cta_three'),
+            ],
+            heading="Top of page calls to action",
+            classname="collapsible",
+        ),
         FieldPanel('body'),
         ImageChooserPanel('body_image'),
         StreamFieldPanel('cta_list'),
