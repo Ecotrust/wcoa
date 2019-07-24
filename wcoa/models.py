@@ -19,9 +19,12 @@ class ConnectPage(Page):
 
     # Database fields
 
-    grid_cta_one = RichTextField()
-    grid_cta_two = RichTextField()
-    grid_cta_three = RichTextField()
+    grid_cta_one_title = TextField()
+    grid_cta_one = TextField()
+    grid_cta_two_title = TextField()
+    grid_cta_two = TextField()
+    grid_cta_three_title = TextField()
+    grid_cta_three = TextField()
 
     body = RichTextField()
     body_image = models.ForeignKey(
@@ -45,8 +48,11 @@ class ConnectPage(Page):
         FieldPanel('date'),
         MultiFieldPanel(
             [
+                FieldPanel('grid_cta_one_title'),
                 FieldPanel('grid_cta_one'),
+                FieldPanel('grid_cta_two_title'),
                 FieldPanel('grid_cta_two'),
+                FieldPanel('grid_cta_three_title'),
                 FieldPanel('grid_cta_three'),
             ],
             heading="Top of page calls to action",
