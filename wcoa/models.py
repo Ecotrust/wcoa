@@ -31,6 +31,12 @@ class CTAStreamBlock(blocks.StructBlock):
     cta_title = blocks.CharBlock()
     cta_content = blocks.RichTextBlock()
     cta_link = blocks.URLBlock(label="URL",required=False)
+    width = blocks.IntegerBlock(required=False,max_value=12,min_value=0,help_text="Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))")
+    background_color = blocks.ChoiceBlock(choices=[
+        ('blue', 'Blue'),
+        ('green', 'Green'),
+    ], icon='color', required=False)
+    background_image = ImageChooserBlock(required=False)
 
     class Meta:
         icon = 'cogs'
@@ -40,12 +46,23 @@ class MasonryPage(Page):
         ('heading', blocks.CharBlock(classname="block-title")),
         ('text', blocks.RichTextBlock()),
         ('brick', BrickBlock()),
-        ('image', ImageChooserBlock()),
+        ('image', ImageChooserBlock(required=False)),
     ])
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
     ]
+
+class CTAPage(Page):
+    body = StreamField([
+        ('item', CTAStreamBlock()),
+        ('details', blocks.RichTextBlock()),
+    ])
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
+
 
 class ConnectPage(Page):
 
