@@ -72,12 +72,9 @@ class ConnectPage(Page):
         ('details', blocks.RichTextBlock()),
     ])
 
-    date = models.DateField("Post date",null=True,blank=True)
-
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
-        FieldPanel('date'),
         MultiFieldPanel(
             [
                 FieldPanel('grid_cta_one_title'),
