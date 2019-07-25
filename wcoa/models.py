@@ -60,7 +60,7 @@ class ConnectPage(Page):
 
     body = RichTextField()
     body_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'base.PortalImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
