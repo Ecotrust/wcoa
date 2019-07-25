@@ -5,6 +5,28 @@
   <div class="container">
 
     <div class="row">
+      <div class="span1"></div>
+      <div class="home-item blue span3">
+        <a href="">
+          <h3>{{ page.grid_cta_one_title|richtext }}</h3>
+          <p>{{ page.grid_cta_one|richtext }}</p>
+        </a>
+      </div>
+      <div class="home-item orange span3">
+        <a href="">
+          <h3>{{ page.grid_cta_two_title|richtext }}</h3>
+          <p>{{ page.grid_cta_two|richtext }}</p>
+        </a>
+      </div>
+      <div class="home-item lime span3">
+        <a href="">
+          <h3>{{ page.grid_cta_three_title|richtext }}</h3>
+          <p>{{ page.grid_cta_three|richtext }}</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
       {% image page.body_image width-400 %}
       <p>{{ page.body|richtext }}</p>
     </div>
