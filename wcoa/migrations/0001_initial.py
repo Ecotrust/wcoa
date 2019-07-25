@@ -25,19 +25,6 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(verbose_name='Post date')),
                 ('body', wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='full title')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock())])),
             ],
-        ),
-        migrations.CreateModel(
-            name='ConnectPage',
-            fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('grid_cta_one', wagtail.core.fields.RichTextField()),
-                ('grid_cta_two', wagtail.core.fields.RichTextField()),
-                ('grid_cta_three', wagtail.core.fields.RichTextField()),
-                ('body', wagtail.core.fields.RichTextField()),
-                ('cta_list', wagtail.core.fields.StreamField([('connection', wagtail.core.blocks.StructBlock([('cta_title', wagtail.core.blocks.CharBlock()), ('cta_content', wagtail.core.blocks.RichTextBlock()), ('cta_link', wagtail.core.blocks.URLBlock(label='URL', required=False))])), ('details', wagtail.core.blocks.RichTextBlock())])),
-                ('date', models.DateField(verbose_name='Post date')),
-                ('body_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
-            ],
             options={
                 'abstract': False,
             },
