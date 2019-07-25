@@ -2,21 +2,30 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-  <div class="row packery-container">
-    {% for block in page.cta_list %}
+  {% for block in page.cta_list %}
+    <div class="row">
       {% if block.block_type == 'connection' %}
-        <div class="span12">
-          <div class="home-item-cntr">
-            <div class="home-item-label clearfix">
-              <div>{% include_block block %}</div>
+        <div class="home-item blue span12">
+          <div class="home-item-cntr about">
+            <div class="home-item-label inverse clearfix">
+              <div>{{ block.value.cta_title }}</div>
+            </div>
+            <div>
+              <p>{{ block.value.cta_content }}</p>
+            </div>
+            <div>
+              <p><a href="{{ block.value.cta_link }}">{{ block.value.cta_link }}</a></p>
             </div>
           </div>
         </div>
       {% else %}
-        <ol>
-          <li class="block-{{ block.block_type }}">{% include_block block %}</li>
-        </ol>
+        <div class="home-item white span12">
+          <div class="home-item-cntr learn-more">
+            <p>{% include_block block %}</p>
+            <hr />
+          </div>
+        </div>
       {% endif %}
-    {% endfor %}
-  </div>
+    </div>
+  {% endfor %}
 {% endblock %}
