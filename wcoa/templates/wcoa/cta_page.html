@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      {% for block in page.body %}
+        {% if block.block_type == 'item' %}
+          {% image block.value.background_image max-500x500 as bg_img %}
+          <div class="span{{ block.value.width }}" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-color: pink; background-repeat: no-repeat; display: inline-block;">
+            <a href="{{ block.value.cta_link }}">
+              <div class="home-item-label clearfix">
+                <p>{{ block.value.cta_title }}</p>
+              </div>
+              <div>
+                <p>{{ block.value.cta_content }}</p>
+              </div>
+            </a>
+          </div>
+        {% else %}
+          <div class="home-item white span12">
+            <div class="home-item-cntr learn-more">
+              <p>{% include_block block %}</p>
+              <hr />
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
