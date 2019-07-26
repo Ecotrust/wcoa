@@ -7,7 +7,7 @@
       {% for block in page.body %}
         {% if block.block_type == 'item' %}
           {% image block.value.background_image max-500x500 as bg_img %}
-          <div class="span{{ block.value.width }}" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-color: pink; background-repeat: no-repeat; display: inline-block;">
+          <div class="span{{ block.value.width }}" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-repeat: no-repeat; display: inline-block; margin: 0 -2px; vertical-align: top; width: calc({{ block.value.width }}/12*100%)">
             <a href="{{ block.value.cta_link }}">
               <div class="home-item-label clearfix">
                 <p>{{ block.value.cta_title }}</p>
