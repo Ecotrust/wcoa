@@ -17,8 +17,8 @@ class LinkStructValue(blocks.StructValue):
             return page.url
 
 class BrickBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    text = blocks.RichTextBlock()
+    title = blocks.CharBlock(required=False)
+    text = blocks.RichTextBlock(required=False)
     page = blocks.PageChooserBlock(label="page", required=False)
     external_url = blocks.URLBlock(label="external URL", required=False)
     photo = ImageChooserBlock(required=False)
@@ -28,8 +28,8 @@ class BrickBlock(blocks.StructBlock):
         value_class = LinkStructValue
 
 class CTAStreamBlock(blocks.StructBlock):
-    cta_title = blocks.CharBlock()
-    cta_content = blocks.RichTextBlock()
+    cta_title = blocks.CharBlock(required=False)
+    cta_content = blocks.RichTextBlock(required=False)
     cta_link = blocks.URLBlock(label="URL",required=False)
     width = blocks.IntegerBlock(required=False,max_value=12,min_value=0,help_text="Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))")
     background_color = blocks.ChoiceBlock(choices=[
@@ -43,8 +43,8 @@ class CTAStreamBlock(blocks.StructBlock):
 
 class MasonryPage(Page):
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="block-title")),
-        ('text', blocks.RichTextBlock()),
+        ('heading', blocks.CharBlock(classname="block-title", required=False)),
+        ('text', blocks.RichTextBlock(required=False)),
         ('brick', BrickBlock()),
         ('image', ImageChooserBlock(required=False)),
     ])
