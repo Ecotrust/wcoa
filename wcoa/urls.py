@@ -7,7 +7,7 @@ from . import views
 app_name = 'wcoa'
 urlpatterns = [
     # path('', views.index, name='index'),
-    path('/', views.index, name='index'),
-    re_path(r'^planner/', show_wcoa_planner, name="planner_planner"),
-    re_path(r'^visualize/', show_wcoa_planner, name="planner"),
+    re_path(r'^planner/$', show_wcoa_planner, name="planner_planner"),
+    re_path(r'^visualize/$', show_wcoa_planner, name="planner"),
+    re_path(r'^/$', views.index, name='index'),
 ]
