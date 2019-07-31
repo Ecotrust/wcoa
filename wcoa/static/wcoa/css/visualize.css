@@ -1,3 +1,53 @@
 header {
-  padding-bottom: 0 !important;
+  padding-bottom: 0;
+}
+
+body.template-visualize #primary-content {
+  height: 100vh;
+}
+
+body.template-visualize #left-panel .panel-heading {
+  height: auto;
+}
+
+body.template-visualize #left-panel .panel-title{
+  text-align: center;
+}
+body.template-visualize #left-panel form.form-search div {
+  margin: auto;
+}
+
+body.template-visualize #left-panel .panel-title > a {
+    float: unset;
+    color: unset;
+    background-color: transparent;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    padding-left: unset;
+    padding-top: unset;
+    text-align: unset;
+}
+
+body.template-visualize #left-panel .panel-title > a.collapse-button {
+    float: right;
+    color: white;
+    background-color: #00a564;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding-left: 1px;
+    padding-top: 2px;
+    text-align: center;
+}
+
+#left-panel-project-logo {
+  width: 252px;
+  height: 136px;
+  display: initial;
+  margin-left: 35px;
+}
+
+#myTab li[data-tab='designs'] {
+  display: none;
 }

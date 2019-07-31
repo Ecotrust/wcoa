@@ -1,12 +1,37 @@
 {% extends 'visualize/planner.html' %}
 {% load static %}
 
-{% block extra_css %}
+{% block extra_head %}
   {{block.super}}
   <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
 {% endblock %}
 
 {% block header %}{% endblock %}
+
+{% block left_panel_heading %}
+  <div class="panel-heading">
+      <div class="panel-title">
+          <a data-bind="click: toggleLayers" class="collapse-button">
+              <i class="fa fa-angle-double-left"></i>
+          </a>
+          <a href="/">
+            <img src="{% static 'img/WCODP_web_logo.png' %}" id='left-panel-project-logo' />
+          </a>
+      </div>
+      <form class="form-search hide-collapsed" data-bind="submit: layerSearch">
+        <div class="input-group inner-addon">
+          <!-- data-provide="typeahead"  -->
+          <input type="text" class="search-box main-search form-control"
+          data-bind="value: searchTerm, event: { keyup: keySearch }"
+          style="text-overflow: ellipsis;"
+          placeholder="Search data" id="data-search-input">
+
+          <i class="fa fa-search right search-icon" data-bind="visible: !searchTermInput()"></i>
+          <i class="btn fa fa-close right"style="display:none" data-bind="visible: searchTermInput(), click: clearSearch"></i>
+        </div>
+      </form>
+  </div>
+{% endblock left_panel_heading %}
 
 {% block APP_MAP_JAVASCRIPT %}
   {% if MAP_LIBRARY == 'ol2' %}
