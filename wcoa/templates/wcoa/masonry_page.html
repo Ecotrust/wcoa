@@ -10,7 +10,7 @@
     {% for block in page.body %}
       {% if block.block_type == 'brick' %}
         {% image block.value.photo max-500x500 as bg_img %}
-        <a class="{% cycle 'span8' 'span4' 'span4' 'span5' 'span3' 'span8' 'span4' %} home-item" href="{{ block.value.url }}" style="background-image: url({{ bg_img.url }}); background-size: cover; background-color: pink; background-repeat: no-repeat; display: inline-block;">
+        <a class="{% cycle 'span8' 'span4' 'span4' 'span5' 'span3' 'span8' 'span4' %} home-item" href="{{ block.value.url }}" style="background-image: url({{ bg_img.url }}); background-size: cover; background-color: pink; background-repeat: no-repeat; display: inline-block; vertical-align: top; margin: 0 -2px;">
           <div class="home-item-cntr">
             <div class="home-item-label clearfix">
               <div>{{ block.value.title }}</div>
