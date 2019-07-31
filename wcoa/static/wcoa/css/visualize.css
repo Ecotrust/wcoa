@@ -139,3 +139,12 @@ body.template-visualize #left-panel .panel-body {
 #myTab li[data-tab='designs'] {
   display: none;
 }
+
+body.template-visualize .feedback-button {
+  background-color: rgba(217, 237, 255, .85);
+  border-color: rgba(117, 137, 155, 1);
+  color: black;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom: none;
+}
