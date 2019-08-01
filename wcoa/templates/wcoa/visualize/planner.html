@@ -1,0 +1,75 @@
+{% extends 'visualize/planner.html' %}
+{% load static %}
+
+{% block extra_head %}
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block left_panel_heading %}
+  <div class="panel-heading">
+      <div class="panel-title">
+          <a data-bind="click: toggleLayers" class="collapse-button">
+              <i class="fa fa-angle-double-left"></i>
+          </a>
+          <a href="/" data-bind="visible: showLayers()">
+            <img src="{% static 'img/WCODP_web_logo.png' %}" id='left-panel-project-logo' />
+          </a>
+      </div>
+      <form class="form-search hide-collapsed" data-bind="submit: layerSearch; visible: showLayers()">
+        <div class="input-group inner-addon">
+          <!-- data-provide="typeahead"  -->
+          <input type="text" class="search-box main-search form-control"
+          data-bind="value: searchTerm, event: { keyup: keySearch }"
+          style="text-overflow: ellipsis;"
+          placeholder="Search data" id="data-search-input">
+
+          <i class="fa fa-search right search-icon" data-bind="visible: !searchTermInput()"></i>
+          <i class="btn fa fa-close right"style="display:none" data-bind="visible: searchTermInput(), click: clearSearch"></i>
+        </div>
+      </form>
+  </div>
+{% endblock left_panel_heading %}
+
+{% block APP_MAP_JAVASCRIPT %}
+  {% if MAP_LIBRARY == 'ol2' %}
+    <script src="{% static 'js/wrappers/ol2/ol2_controls.js' %}"></script>
+    <script src="{% static 'js/wrappers/ol2/ol2_map.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/wrappers/wrapper_init.js' %}"></script>
+      <!-- LOAD MAP WRAPPERS -->
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_layers.js"></script>
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_wrapper.js"></script>
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_map.js"></script>
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_controls.js"></script>
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_events.js"></script>
+      <!-- LOAD APP-SPECIFIC JS -->
+      <!-- <script src="{% static 'wcoa/js/app_events.js' %}"></script> -->
+      <!-- LOAD MAP FOR ALL NON-OL2 TECHS -->
+      <script src="{% static 'js/map.js' %}"></script>
+  {% endif %}
+{% endblock %}
+
+{% block ADDITIONAL_APP_JAVASCRIPT %}
+  <script src="{% static 'js/bookmarks.js' %}"></script>
+  <script src="{% static 'js/scenarios.js' %}"></script>
+  <script src="{% static 'js/reports.js' %}"></script>
+  <script src="{% static 'js/drawing.js' %}"></script>
+  {% if MAP_LIBRARY == 'ol2' %}
+    <script src="{% static 'js/wrappers/ol2/ol2_models.js' %}"></script>
+    <script src="{% static 'js/server.js' %}"></script>
+    <script src="{% static 'js/wrappers/ol2/ol2_state.js' %}"></script>
+    <script src="{% static 'js/wrappers/ol2/ol2_app.js' %}"></script>
+  {% else %}
+    <script src="{% static 'js/models.js' %}"></script>
+    <script src="{% static 'wcoa/js/wcoa_models.js' %}"></script>
+    <script src="{% static 'js/server.js' %}"></script>
+    <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_state.js"></script>
+    <script src="{% static 'js/state.js' %}"></script>
+    <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_app.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/events.js' %}"></script>
+  {% endif %}
+{% endblock %}
