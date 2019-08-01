@@ -1,5 +1,21 @@
 [
 {
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "localhost",
+    "name": "production"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 2,
+  "fields": {
+    "domain": "stage-localhost",
+    "name": "Stage"
+  }
+},
+{
   "model": "data_manager.theme",
   "pk": 9,
   "fields": {
