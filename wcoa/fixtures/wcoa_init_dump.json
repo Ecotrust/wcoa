@@ -1,0 +1,38 @@
+[
+{
+  "model": "wcoa.masonrypage",
+  "pk": 60,
+  "fields": {
+    "body": "[{\"type\": \"brick\", \"value\": {\"title\": \"Welcome\", \"text\": \"<p>Discover &amp; ....</p><p></p>\", \"page\": 59, \"external_url\": \"\", \"photo\": null}, \"id\": \"357f4c75-ab71-4f2d-a5fb-5eb1a9b23d91\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Search placeholder\", \"text\": \"<p>registered resources</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"dcf62b0f-8e86-49ae-8ab7-992096e72c6c\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Marine Debris Data</p><p>blah blah blah</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"a7c642fb-cd3a-4086-a8b1-b0cec51408ab\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Human Use Data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"e79cf87c-b73f-4b0f-bf97-b0c80b9c84f1\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Biological Data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"96ebcf5c-b2c5-4f71-8330-9be3d7fb0e89\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Explore\", \"text\": \"<p>Contributers ....</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"22d198e2-1ee3-4b46-b591-f7d9adcb26d5\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Physical data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"41e64b39-13d2-4985-9222-3330e6309f8e\"}]"
+  }
+},
+{
+  "model": "wcoa.masonrypage",
+  "pk": 61,
+  "fields": {
+    "body": "[{\"type\": \"brick\", \"value\": {\"title\": \"Welcome\", \"text\": \"<p>Discover &amp; ....</p><p></p>\", \"page\": 59, \"external_url\": \"\", \"photo\": null}, \"id\": \"357f4c75-ab71-4f2d-a5fb-5eb1a9b23d91\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Search placeholder\", \"text\": \"<p>registered resources</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"dcf62b0f-8e86-49ae-8ab7-992096e72c6c\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Marine Debris Data</p><p>blah blah blah</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"a7c642fb-cd3a-4086-a8b1-b0cec51408ab\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Human Use Data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"e79cf87c-b73f-4b0f-bf97-b0c80b9c84f1\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Biological Data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"96ebcf5c-b2c5-4f71-8330-9be3d7fb0e89\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Explore\", \"text\": \"<p>Contributers ....</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"22d198e2-1ee3-4b46-b591-f7d9adcb26d5\"}, {\"type\": \"brick\", \"value\": {\"title\": \"Discover\", \"text\": \"<p>Physical data</p>\", \"page\": null, \"external_url\": \"\", \"photo\": null}, \"id\": \"41e64b39-13d2-4985-9222-3330e6309f8e\"}]"
+  }
+},
+{
+  "model": "wcoa.ctapage",
+  "pk": 64,
+  "fields": {
+    "body": "[{\"type\": \"item\", \"value\": {\"cta_title\": \"INFORMING OCEAN AND COASTAL HEALTH DECISIONS\", \"cta_content\": \"<p>Threats including marine debris, sea-level rise, and changing ocean conditions will continue to affect ocean and coastal areas across the West Coast. Tapping into the West Coast&#x27;s rich data resources and providing tools to visualize and map that information, the West Coast Ocean Data Portal helps ocean and coastal managers make sound decisions to improve ocean health. You can start exploring the issues of marine debris, regional planning, and changing ocean conditions.</p>\", \"cta_link\": \"\", \"width\": 7, \"text_color\": \"white\", \"background_color\": \"blue\", \"background_image\": null}, \"id\": \"7a570741-e8e2-4316-bc2b-b1ef9b5bfba8\"}, {\"type\": \"item\", \"value\": {\"cta_title\": \"\", \"cta_content\": \"<p>Explore our story map</p>\", \"cta_link\": \"http://geo.maps.arcgis.com/apps/MapJournal/index.html?appid=4aeb6fec28b04d99b83dd726f8c98f83\", \"width\": 5, \"text_color\": \"white\", \"background_color\": \"\", \"background_image\": 77}, \"id\": \"5a4363db-c9cd-41c0-89c5-3d5851c4eebf\"}]"
+  }
+},
+{
+  "model": "wcoa.connectpage",
+  "pk": 62,
+  "fields": {
+    "grid_cta_one_title": "Blog",
+    "grid_cta_one": "...",
+    "grid_cta_two_title": "People",
+    "grid_cta_two": "...",
+    "grid_cta_three_title": "Calendar",
+    "grid_cta_three": "...",
+    "body": "<p>Connect to data producers and users</p><p>The West Coast Ocean Data Network is dedicated to increasing communication between state and federal agencies, tribes, universities, NGOs, and industry to leverage resources for new data collection, develop data best management practices, conduct trainings, and ensure compatibility of regional datasets.</p>",
+    "body_image": 79,
+    "cta_list": "[{\"type\": \"connection\", \"value\": {\"cta_title\": \"Catalog Services for the Web (CSW)\", \"cta_content\": \"<p>CSW is an open standard created by the Open Geospatial Consortium for discovering, browsing, and querying metadata records from a data catalog. This portal uses CSW to harvest many of the published resources from our network providers, and in turn publishes a CSW interface that you can connect to. Access our CSW interface at the following URL using your favorite CSW client:</p>\", \"cta_link\": \"http://portal.westcoastoceans.org/geoportal/csw\"}, \"id\": \"e1cbc140-febf-4366-8b19-1654a09dca6f\"}, {\"type\": \"details\", \"value\": \"<p><a href=\\\"https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax\\\">Geoportal REST API Documentation</a></p>\", \"id\": \"7c85b571-bb36-4191-89b9-1599a8fd1bc1\"}, {\"type\": \"details\", \"value\": \"<p>Example 1 - click the following URL to initiate a Geoportal <i>find</i> query that returns the first 10 metadata records in the portal as a JSON document:</p><p><a href=\\\"http://portal.westcoastoceans.org/geoportal/rest/find/document?f=pjson\\\">http://portal.westcoastoceans.org/geoportal/rest/find/document?f=pjson</a></p>\", \"id\": \"bcfd0d6f-d6ea-405a-b610-05ca5d22728f\"}]"
+  }
+}
+]
