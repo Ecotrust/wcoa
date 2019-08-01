@@ -136,6 +136,146 @@
   }
 },
 {
+  "model": "data_manager.attributeinfo",
+  "pk": 60,
+  "fields": {
+    "display_name": "Vulnerability",
+    "field_name": "CVI",
+    "precision": null,
+    "order": 1
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 61,
+  "fields": {
+    "display_name": "Tide",
+    "field_name": "TIDE",
+    "precision": null,
+    "order": 2
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 62,
+  "fields": {
+    "display_name": "Waves",
+    "field_name": "WAVES",
+    "precision": null,
+    "order": 3
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 63,
+  "fields": {
+    "display_name": "Erosion",
+    "field_name": "EROSION",
+    "precision": null,
+    "order": 4
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 64,
+  "fields": {
+    "display_name": "Sea Level",
+    "field_name": "SEALEVEL",
+    "precision": null,
+    "order": 5
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 65,
+  "fields": {
+    "display_name": "Geomorphology",
+    "field_name": "GEOMORPHOL",
+    "precision": null,
+    "order": 6
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 66,
+  "fields": {
+    "display_name": "Slope",
+    "field_name": "SLOPE",
+    "precision": null,
+    "order": 7
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 67,
+  "fields": {
+    "display_name": "Speed (m/s)",
+    "field_name": "SPEED_90",
+    "precision": 3,
+    "order": 1
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 98,
+  "fields": {
+    "display_name": "Min Wind Speed",
+    "field_name": "WINDREV_MI",
+    "precision": 1,
+    "order": 5
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 99,
+  "fields": {
+    "display_name": "Max Wind Speed",
+    "field_name": "WINDREV_MA",
+    "precision": 1,
+    "order": 6
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 115,
+  "fields": {
+    "display_name": "Number of Shipwrecks",
+    "field_name": "FREQUENCY",
+    "precision": null,
+    "order": 1
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 120,
+  "fields": {
+    "display_name": "",
+    "field_name": "descriptio",
+    "precision": null,
+    "order": 1
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 121,
+  "fields": {
+    "display_name": "Source Date",
+    "field_name": "sourceDate",
+    "precision": null,
+    "order": 2
+  }
+},
+{
+  "model": "data_manager.attributeinfo",
+  "pk": 123,
+  "fields": {
+    "display_name": "",
+    "field_name": "NAME",
+    "precision": null,
+    "order": 1
+  }
+},
+{
   "model": "data_manager.layer",
   "pk": 157,
   "fields": {
