@@ -6,7 +6,7 @@ from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPan
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
-
+from portal.base.models import PortalImage
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
@@ -82,7 +82,7 @@ class ConnectPage(Page):
 
     body = RichTextField()
     body_image = models.ForeignKey(
-        'base.PortalImage',
+        PortalImage,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
