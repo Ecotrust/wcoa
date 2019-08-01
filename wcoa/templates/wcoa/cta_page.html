@@ -11,15 +11,17 @@
       {% for block in page.body %}
         {% if block.block_type == 'item' %}
           {% image block.value.background_image max-500x500 as bg_img %}
-          <div class="span{{ block.value.width }}" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-repeat: no-repeat; display: inline-block; margin: 0 -2px; vertical-align: top; width: calc({{ block.value.width }}/12*99.5%)">
-            <a href="{{ block.value.cta_link }}">
-              <div class="home-item-label clearfix">
-                <p>{{ block.value.cta_title }}</p>
-              </div>
-              <div>
-                <p>{{ block.value.cta_content }}</p>
-              </div>
-            </a>
+          <div class="span{{ block.value.width }} white home-item" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-repeat: no-repeat; color: {{ block.value.text_color }}; display: inline-block; margin: 0 -2px; vertical-align: top; width: calc({{ block.value.width }}/12*99.5%)">
+            <div class="home-item-cntr learn-more">
+              <a href="{{ block.value.cta_link }}" style="color: inherit;">
+                <div class="home-item-label clearfix">
+                  <p>{{ block.value.cta_title }}</p>
+                </div>
+                <div>
+                  <p>{{ block.value.cta_content }}</p>
+                </div>
+              </a>
+            </div>
           </div>
         {% else %}
           <div class="home-item white span12">
