@@ -1,8 +1,12 @@
-* {
+html * {
   box-sizing: content-box;
 }
 
 .container {
   padding-left: 0;
   padding-right: 0;
+}
+
+.packery-container {
+  padding-left: 0;
 }
