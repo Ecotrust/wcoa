@@ -2,7 +2,8 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/all.css' %}" />
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" />
 {% endblock %}
 
 {% block content %}
