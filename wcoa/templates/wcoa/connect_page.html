@@ -1,10 +1,5 @@
-{% extends 'cms/base.html' %}
+{% extends 'wcoa/wcoa_site/cms_page.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
-
-{% block extra_css %}
-  {{block.super}}
-  <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" />
-{% endblock extra_css %}
 
 {% block content %}
   <div class="container">
