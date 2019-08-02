@@ -11,10 +11,64 @@ html * {
   padding-left: 0;
 }
 
+/**
+ * Rich Text Properties
+ * ====================
+ */
+
+.rich-text {
+  overflow: hidden;
+}
+
+.richtext-image.right {
+  float: right;
+}
+
+.richtext-image.left {
+  float: left;
+}
+
+/**
+ * Page Properties
+ * ===============
+ */
+
+.cta-page-page {
+
+}
+
 .home-item,
-.cta-item {
+.cta-item-wrap {
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.cta-item {
+  padding: 38px 50px 40px 50px;
+}
+
+.cta-item p:first-child {
+  /* margin-top: 30px; */
+}
+
+.cta-item .rich-text,
+.cta-item .rich-text p {
+  font-weight: 200;
+  font-size: 1.14285em;
+  line-height: 2.25;
+  font-family: OpenSans, sans-serif;
+  word-wrap: break-word;
+}
+
+.cta-item a {
+  font-weight: normal;
+}
+
+.cta-item .title {
+  border-bottom: #9ec73d 2px solid;
+  font-family: "PtMono", "Courier New", Courier, monospace;
+  font-size: 1em;
+  line-height: 1.75;
 }
 
 /**
@@ -22,31 +76,31 @@ html * {
  * ============================
  */
 
-.cta-item.text-white {
+.cta-item-wrap.text-white {
   color: #fff;
 }
 
-.cta-item.text-blue {
+.cta-item-wrap.text-blue {
   color: #0070cf;
 }
 
-.cta-item.text-red {
+.cta-item-wrap.text-red {
   color: #ff3817;
 }
 
-.cta-item.text-green {
+.cta-item-wrap.text-green {
   color: #baba27;
 }
 
-.cta-item.text-grey {
+.cta-item-wrap.text-grey {
   color: #999;
 }
 
-.cta-item.text-purple {
+.cta-item-wrap.text-purple {
   color: #ba1e47;
 }
 
-.cta-item.text-black {
+.cta-item-wrap.text-black {
   color: #332e1f;
 }
 
@@ -55,30 +109,30 @@ html * {
  * ======================================
  */
 
- .cta-item.bg-white {
-   color: #fff;
+ .cta-item-wrap.bg-white {
+   background-color: #fff;
  }
 
- .cta-item.bg-blue {
-   color: #0070cf;
+ .cta-item-wrap.bg-blue {
+   background-color: #0070cf;
  }
 
- .cta-item.bg-red {
-   color: #ff3817;
+ .cta-item-wrap.bg-red {
+   background-color: #ff3817;
  }
 
- .cta-item.bg-green {
-   color: #baba27;
+ .cta-item-wrap.bg-green {
+   background-color: #baba27;
  }
 
- .cta-item.bg-grey {
-   color: #999;
+ .cta-item-wrap.bg-grey {
+   background-color: #999;
  }
 
- .cta-item.bg-purple {
-   color: #ba1e47;
+ .cta-item-wrap.bg-purple {
+   background-color: #ba1e47;
  }
 
- .cta-item.bg-black {
-   color: #332e1f;
+ .cta-item-wrap.bg-black {
+   background-color: #332e1f;
  }
