@@ -10,3 +10,75 @@ html * {
 .packery-container {
   padding-left: 0;
 }
+
+.home-item,
+.cta-item {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/**
+ * Variable Colors - set in CMS
+ * ============================
+ */
+
+.cta-item.text-white {
+  color: #fff;
+}
+
+.cta-item.text-blue {
+  color: #0070cf;
+}
+
+.cta-item.text-red {
+  color: #ff3817;
+}
+
+.cta-item.text-green {
+  color: #baba27;
+}
+
+.cta-item.text-grey {
+  color: #999;
+}
+
+.cta-item.text-purple {
+  color: #ba1e47;
+}
+
+.cta-item.text-black {
+  color: #332e1f;
+}
+
+/**
+ * Variable Background Color - set in CMS
+ * ======================================
+ */
+
+ .cta-item.bg-white {
+   color: #fff;
+ }
+
+ .cta-item.bg-blue {
+   color: #0070cf;
+ }
+
+ .cta-item.bg-red {
+   color: #ff3817;
+ }
+
+ .cta-item.bg-green {
+   color: #baba27;
+ }
+
+ .cta-item.bg-grey {
+   color: #999;
+ }
+
+ .cta-item.bg-purple {
+   color: #ba1e47;
+ }
+
+ .cta-item.bg-black {
+   color: #332e1f;
+ }

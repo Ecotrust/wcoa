@@ -7,9 +7,9 @@
       {% for block in page.body %}
         {% if block.block_type == 'item' %}
           {% image block.value.background_image max-500x500 as bg_img %}
-          <div class="span{{ block.value.width }} white home-item" style="background-color: {{ block.value.background_color }}; background-image: url({{ bg_img.url }}); background-size: cover; background-repeat: no-repeat; color: {{ block.value.text_color }};">
-            <div class="home-item-cntr learn-more">
-              <a href="{{ block.value.cta_link }}" style="color: inherit;">
+          <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item" style="background-image: url({{ bg_img.url }});">
+            <div class="home-item-cntr">
+              <a href="{{ block.value.cta_link }}">
                 <div class="home-item-label clearfix">
                   <p>{{ block.value.cta_title }}</p>
                 </div>
@@ -20,7 +20,7 @@
             </div>
           </div>
         {% else %}
-          <div class="home-item white span12">
+          <div class="home-item span12">
             <div class="home-item-cntr learn-more">
               <p>{% include_block block %}</p>
               <hr />

@@ -36,10 +36,20 @@ class CTAStreamBlock(blocks.StructBlock):
     text_color = blocks.ChoiceBlock(choices=[
         ('white', 'White'),
         ('black', 'Black'),
-    ], icon='color_palette', required=False)
-    background_color = blocks.ChoiceBlock(choices=[
         ('blue', 'Blue'),
         ('green', 'Green'),
+        ('red', 'Red'),
+        ('purple', 'Purple'),
+        ('grey', 'Grey'),
+    ], icon='color_palette', required=False)
+    background_color = blocks.ChoiceBlock(choices=[
+        ('white', 'White'),
+        ('black', 'Black'),
+        ('blue', 'Blue'),
+        ('green', 'Green'),
+        ('red', 'Red'),
+        ('purple', 'Purple'),
+        ('grey', 'Grey'),
     ], icon='color', required=False)
     background_image = ImageChooserBlock(required=False)
 

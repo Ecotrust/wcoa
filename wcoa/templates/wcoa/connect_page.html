@@ -34,9 +34,9 @@
     {% for block in page.cta_list %}
       <div class="row">
         {% if block.block_type == 'connection' %}
-          <div class="home-item blue span12">
-            <div class="home-item-cntr about">
-              <div class="home-item-label inverse clearfix">
+          <div class="home-item span12">
+            <div class="home-item-cntr">
+              <div class="clearfix">
                 <div>{{ block.value.cta_title }}</div>
               </div>
               <div>
@@ -48,7 +48,7 @@
             </div>
           </div>
         {% else %}
-          <div class="home-item white span12">
+          <div class="home-item span12">
             <div class="home-item-cntr learn-more">
               <p>{% include_block block %}</p>
               <hr />
