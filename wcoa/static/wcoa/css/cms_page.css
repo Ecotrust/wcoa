@@ -37,6 +37,17 @@ html * {
 
 }
 
+.cta-content h3 {
+  color: #fff;
+  font-family: OpenSans, sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 45px;
+  margin: 0;
+  word-wrap: break-word;
+}
+
 .home-item,
 .cta-item-wrap {
   background-size: cover;

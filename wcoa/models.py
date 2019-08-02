@@ -10,8 +10,8 @@ from portal.base.models import PortalImage
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
-        external_url = self.get('external_url')
-        page = self.get('page')
+        external_url = self.get('cta_link')
+        page = self.get('cta_page')
         if external_url:
             return external_url
         elif page:
@@ -31,7 +31,9 @@ class BrickBlock(blocks.StructBlock):
 class CTAStreamBlock(blocks.StructBlock):
     cta_title = blocks.CharBlock(required=False)
     cta_content = blocks.RichTextBlock(required=False)
+    cta_page = blocks.PageChooserBlock(label="page", required=False)
     cta_link = blocks.URLBlock(label="URL",required=False)
+    # Width would be better as a CoiceBlock
     width = blocks.IntegerBlock(required=False,max_value=12,min_value=0,help_text="Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))")
     text_color = blocks.ChoiceBlock(choices=[
         ('white', 'White'),
@@ -54,7 +56,8 @@ class CTAStreamBlock(blocks.StructBlock):
     background_image = ImageChooserBlock(required=False)
 
     class Meta:
-        icon = 'cogs'
+        icon = 'form'
+        value_class = LinkStructValue
 
 class MasonryPage(Page):
     body = StreamField([

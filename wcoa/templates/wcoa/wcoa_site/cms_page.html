@@ -1,6 +1,8 @@
 {% extends 'cms/base.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+{% block body_class %}{{ self.get_verbose_name|slugify }}-page {{ self.slug }}{% endblock %}
+
 {% block extra_css %}
   {{block.super}}
   <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" />
