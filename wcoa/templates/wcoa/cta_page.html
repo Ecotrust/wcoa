@@ -2,34 +2,47 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-  <div class="container">
-    <div class="row">
-      {% for block in page.body %}
-        {% if block.block_type == 'item' %}
-          {% image block.value.background_image max-500x500 as bg_img %}
-          <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
-            <div class="home-item-cntr cta-item">
-              <a href="{{ block.value.url }}">
-                {% if block.value.cta_title %}
-                  <div class="home-item-label clearfix">
-                    <p><span class="title">{{ block.value.cta_title }}</span></p>
-                  </div>
-                {% endif %}
-                <div class="cta-content">
-                  {{ block.value.cta_content }}
+  <div class="row">
+    {% if self.slug == 'home' %}
+      <div class="span4 bg-red home-item cta-item-wrap" id="record-search">
+        <div class="home-item-cntr cta-item">
+          <div class="giantText">BIG {{ recordCount }}</div>
+  				<p>registered resources</p>
+          <form ng-submit="search()">
+  					<div id="search-filter">
+  						<input type="search" placeholder="SEARCH" ng-model="searchText">
+  						<img src="{% static 'wcoa/img/icons/black_search.png' %}" ng-click="search()">
+  					</div>
+  				</form>
+        </div>
+      </div>
+    {% endif %}
+
+    {% for block in page.body %}
+      {% if block.block_type == 'item' %}
+        {% image block.value.background_image max-500x500 as bg_img %}
+        <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
+          <div class="home-item-cntr cta-item">
+            <a href="{{ block.value.url }}">
+              {% if block.value.cta_title %}
+                <div class="home-item-label clearfix">
+                  <p><span class="title">{{ block.value.cta_title }}</span></p>
                 </div>
-              </a>
-            </div>
+              {% endif %}
+              <div class="cta-content">
+                {{ block.value.cta_content|richtext }}
+              </div>
+            </a>
           </div>
-        {% else %}
-          <div class="home-item span12">
-            <div class="home-item-cntr learn-more">
-              <p>{% include_block block %}</p>
-              <hr />
-            </div>
+        </div>
+      {% else %}
+        <div class="home-item span12">
+          <div class="home-item-cntr learn-more">
+            <p>{% include_block block %}</p>
+            <hr />
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 {% endblock %}
