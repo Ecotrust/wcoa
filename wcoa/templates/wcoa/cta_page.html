@@ -2,8 +2,8 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-  <div class="row">
-    {% if self.slug == 'home' %}
+  {% if self.slug == 'home' %}
+    <div class="row packery-container">
       <div class="span4 bg-red home-item cta-item-wrap" id="record-search">
         <div class="home-item-cntr cta-item">
           <div class="giantText">BIG {{ recordCount }}</div>
@@ -16,7 +16,9 @@
   				</form>
         </div>
       </div>
-    {% endif %}
+  {% else %}
+    <div class="row">
+  {% endif %}
 
     {% for block in page.body %}
       {% if block.block_type == 'item' %}

@@ -10,4 +10,20 @@
   <link rel="stylesheet" href="{% static 'wcoa/css/cms_page.css' %}" />
 {% endblock %}
 
+{% block header %}
+  <nav class="navbar navbar-default {% block navbar-extra-classes %}navbar-fixed-top{% endblock %}" role="navigation">
+      <div class="container">
+          {% include 'wcoa/wcoa_site/navbar.html' %}
+      </div>
+  </nav>
+{% endblock %}
+
 {% block content %}{% endblock %}
+
+{% block footer %}
+  <div class="container">
+      {% include 'wcoa/wcoa_site/footer.html' %}
+  </div>
+{% endblock %}
+
+{% block sticky_footer %}{% endblock %} <!-- Sticky footer -->
