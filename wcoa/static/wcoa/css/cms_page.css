@@ -2,10 +2,6 @@ html * {
   box-sizing: content-box;
 }
 
-.navbar-brand {
-  height: 100px;
-}
-
 .container {
   padding-left: 0;
   padding-right: 0;
