@@ -2,6 +2,10 @@ html * {
   box-sizing: content-box;
 }
 
+header {
+  padding-bottom: 0;
+}
+
 .container {
   padding-left: 0;
   padding-right: 0;
