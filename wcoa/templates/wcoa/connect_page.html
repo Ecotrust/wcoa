@@ -2,64 +2,63 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-  <div class="container">
-
-    <div class="row cta-row">
-      <div class="home-item cta-item-wrap bg-blue text-white span4">
-        <a href="http://network.westcoastoceans.org/blog/">
-          <h3>{{ page.grid_cta_one_title }}</h3>
-          <p>{{ page.grid_cta_one }}</p>
-        </a>
-      </div>
-      <div class="home-item cta-item-wrap bg-red text-white span4">
-        <a href="">
-          <h3>{{ page.grid_cta_two_title }}</h3>
-          <p>{{ page.grid_cta_two }}</p>
-        </a>
-      </div>
-      <div class="home-item cta-item-wrap bg-green text-white span4">
-        <a href="">
-          <h3>{{ page.grid_cta_three_title }}</h3>
-          <p>{{ page.grid_cta_three }}</p>
-        </a>
-      </div>
+  <div class="row cta-row">
+    <div class="home-item cta-item-wrap bg-blue text-white span4">
+      <a href="http://network.westcoastoceans.org/blog/">
+        <h3>{{ page.grid_cta_one_title }}</h3>
+        <p>{{ page.grid_cta_one }}</p>
+      </a>
     </div>
+    <div class="home-item cta-item-wrap bg-red text-white span4">
+      <a href="">
+        <h3>{{ page.grid_cta_two_title }}</h3>
+        <p>{{ page.grid_cta_two }}</p>
+      </a>
+    </div>
+    <div class="home-item cta-item-wrap bg-green text-white span4">
+      <a href="">
+        <h3>{{ page.grid_cta_three_title }}</h3>
+        <p>{{ page.grid_cta_three }}</p>
+      </a>
+    </div>
+  </div>
 
-    <div class="row body-image">
-      {% image page.body_image width-400 %}
+  <div class="row body-image">
+    <div class="span12">
+      {% image page.body_image width-500 %}
       {{ page.body|richtext }}
     </div>
-
-    {% for block in page.cta_list %}
-      <div class="row block-{{ block.block_type }}">
-        {% if block.block_type == 'connection' %}
-        {% image block.value.background_image max-500x500 as bg_img %}
-        <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
-            <div class="home-item-cntr cta-item">
-              {% if block.value.cta_title %}
-                <div class="home-item-label clearfix">
-                  <span class="title">{{ block.value.cta_title }}</span>
-                </div>
-              {% endif %}
-              <div class="cta-content">
-                {{ block.value.cta_content|richtext }}
-              </div>
-              <div>
-                <a href="{{ block.value.cta_link }}">{{ block.value.cta_link }}</a>
-              </div>
-            </div>
-          </div>
-        {% else %}
-          <div class="span12 bg-white text-black home-item cta-item-wrap">
-            <div class="home-item-cntr cta-item">
-              <div class="cta-content">
-                {% include_block block %}
-                <hr />
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
   </div>
+
+  {% for block in page.cta_list %}
+    <div class="row block-{{ block.block_type }}">
+      {% if block.block_type == 'connection' %}
+      {% image block.value.background_image max-500x500 as bg_img %}
+      <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
+          <div class="home-item-cntr cta-item">
+            {% if block.value.cta_title %}
+              <div class="home-item-label clearfix">
+                <span class="title">{{ block.value.cta_title }}</span>
+              </div>
+            {% endif %}
+            <div class="cta-content">
+              {{ block.value.cta_content|richtext }}
+            </div>
+            <div>
+              <a href="{{ block.value.cta_link }}">{{ block.value.cta_link }}</a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="span12 bg-white text-black home-item cta-item-wrap">
+          <div class="home-item-cntr cta-item">
+            <div class="cta-content">
+              {% include_block block %}
+              <hr />
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
 {% endblock %}

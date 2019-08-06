@@ -286,7 +286,13 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 .connect-page .body-image p {
   color: #333;
   font-family: OpenSans, sans-serif;
+  font-size: 1em;
   font-weight: 200;
+  line-height: 1.75;
+}
+
+.connect-page .body-image a {
+  color: #0070cf;
 }
 
 .connect-page .body-image .rich-text {
