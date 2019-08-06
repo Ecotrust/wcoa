@@ -20,7 +20,9 @@
   </nav>
 {% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}
+  {% block page_header_container %}{% endblock %}
+{% endblock %}
 
 {% block footer_wrap %}
   {% block footer %}

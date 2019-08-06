@@ -2,6 +2,11 @@ body {
   background-color: #fff;
 }
 
+hr {
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #eee;
+}
+
 /**
  * Header and Navbar
  * =================
@@ -236,11 +241,62 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 }
 
 /**
+ * Connect Page
+ * ============
+ */
+
+.connect-page .cta-row {
+  margin-bottom: 40px;
+}
+
+.connect-page .cta-row .cta-item-wrap {
+  text-align: center;
+  padding: 15px 10px;
+  word-spacing: 3px;
+}
+
+.connect-page .cta-row .cta-item-wrap h3 {
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.connect-page .body-image {
+  margin-bottom: 40px;
+}
+
+.connect-page .body-image img {
+  float: right;
+  margin: 20px;
+}
+
+.connect-page .body-image .rich-text {
+  overflow: visible;
+}
+
+.block-details .cta-item {
+  padding: 0 40px;
+}
+
+.block-details .cta-content {
+  padding: 30px 20px 0;
+}
+
+.block-details .cta-content a {
+  color: #0070cf;
+}
+
+.block-details p {
+  color: inherit;
+}
+
+/**
  * Variable Colors - set in CMS
  * ============================
  */
 
-.cta-item-wrap.text-white {
+.cta-item-wrap.text-white,
+.cta-item-wrap.text-white * {
   color: #fff;
 }
 
