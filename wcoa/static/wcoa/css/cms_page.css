@@ -2,9 +2,69 @@ html * {
   box-sizing: content-box;
 }
 
+body {
+  background-color: #fff;
+}
+
+/**
+ * Header and Navbar
+ * =================
+ */
+
 header {
   padding-bottom: 0;
 }
+
+.dropdown:not(.search-dropdown) .dropdown-menu {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  min-width: 0;
+}
+
+nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
+  color: #22408f;
+}
+
+@media (min-width: 992px) {
+  .navbar .nav {
+    margin-top: 80px;
+  }
+
+  .navbar-right .dropdown:not(.search-dropdown) .dropdown-menu {
+    right: auto;
+  }
+
+  nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
+    padding: 10px 15px;
+  }
+
+  nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:hover,
+  nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus {
+    background-color: transparent;
+    background-image: none;
+    color: #132451;
+  }
+
+}
+
+.nav > .dropdown:not(.search-dropdown) > a.dropdown-toggle {
+    visibility: hidden;
+}
+
+.navbar .nav > .dropdown:not(.search-dropdown) > .dropdown-menu:before,
+.navbar .nav > .dropdown:not(.search-dropdown) > .dropdown-menu:after {
+  display: none;
+}
+
+/**
+ * Core Elements
+ * =============
+ */
 
 .container {
   padding-left: 0;
