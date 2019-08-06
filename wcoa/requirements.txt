@@ -1,0 +1,1 @@
+-e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
