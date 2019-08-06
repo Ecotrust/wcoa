@@ -1,7 +1,3 @@
-html * {
-  box-sizing: content-box;
-}
-
 body {
   background-color: #fff;
 }
@@ -78,7 +74,8 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 }
 
 .packery-container {
-  padding-left: 0;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .container .row {
@@ -107,22 +104,60 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
  * ===============
  */
 
-.home #record-search {
-  float: right;
-  margin: 0 30px 0 0;
-}
 
-.home #record-search .giantText {
-  font-size: 50px;
-  line-height: 55px;
-  color: #332e1f;
-  font-weight: bold;
-}
+@media (min-width: 1200px) {
+  .home .cta-item-wrap {
+    margin-bottom: 20px;
+    padding: 15px 30px 15px 30px;
+  }
 
-.home .cta-item .title {
-  border-bottom-color: #332e1f;
-  color: #332e1f;
-  text-transform: uppercase;
+  .home .cta-item {
+    padding: 0;
+  }
+
+  .home #record-search,
+  .home .packery-container > .home-item:nth-of-type(3),
+  .home .packery-container > .home-item:nth-of-type(7) {
+    float: right;
+    margin: 0 20px 20px 0;
+  }
+
+  .home .packery-container > .home-item:nth-of-type(7) {
+    margin-top: -45px;
+  }
+
+  .home .packery-container > .home-item:nth-of-type(2) {
+    height: 320px;
+  }
+
+  .home .packery-container > .home-item:nth-of-type(6) {
+    height: 125px;
+  }
+
+  .home .packery-container > .home-item:nth-of-type(3) h3,
+  .home .packery-container > .home-item:nth-of-type(5) h3,
+  .home .packery-container > .home-item:nth-of-type(6) h3,
+  .home .packery-container > .home-item:nth-of-type(7) h3 {
+    color: #fff;
+  }
+
+  .home #record-search .giantText {
+    font-size: 50px;
+    line-height: 55px;
+    color: #332e1f;
+    font-weight: bold;
+  }
+
+  .home .cta-item .title {
+    border-bottom-color: #332e1f;
+    color: #332e1f;
+    text-transform: uppercase;
+  }
+
+  .cta-item {
+    padding: 38px 50px 40px 50px;
+  }
+
 }
 
 .cta-content h3 {
@@ -142,10 +177,6 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
   background-repeat: no-repeat;
 }
 
-.cta-item {
-  padding: 38px 50px 40px 50px;
-}
-
 .cta-item p:first-child {
   /* margin-top: 30px; */
 }
@@ -161,6 +192,10 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 
 .cta-item a {
   font-weight: normal;
+}
+
+.cta-item a:hover {
+  text-decoration: none;
 }
 
 .cta-item .title {
