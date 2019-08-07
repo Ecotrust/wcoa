@@ -315,6 +315,10 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
   color: inherit;
 }
 
+.cta-item-wrap[class*='text-'] * {
+  color: inherit;
+}
+
 /**
  * Variable Colors - set in CMS
  * ============================
