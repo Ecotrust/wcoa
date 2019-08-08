@@ -20,7 +20,7 @@ server {
         }
 
         location /media {
-                alias /usr/local/apps/ocean_portal/env/src/wcoa_master/media/;
+                alias /usr/local/apps/ocean_portal/env/src/wcoa-master/media/;
         }
 
         location / {
