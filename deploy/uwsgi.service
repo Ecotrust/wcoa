@@ -3,7 +3,7 @@ Description=uWSGI Emperor service
 After=syslog.target
 
 [Service]
-ExecStart=/usr/local/apps/ocean_planner/env/bin/uwsgi --ini /etc/uwsgi/apps-enabled/wcoa.ini
+ExecStart=/usr/local/apps/ocean_portal/env/bin/uwsgi --ini /etc/uwsgi/apps-enabled/wcoa.ini
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
