@@ -1,0 +1,37 @@
+server {
+        listen 80;
+        listen [::]:80;
+        client_max_body_size 50M;
+
+        server_name _;
+        access_log /var/log/nginx/wcoa.access.log;
+        error_log /var/log/nginx/wcoa.error.log;
+
+        location /munin/static/ {
+                alias /etc/munin/static/;
+        }
+
+        location /munin {
+                alias /var/cache/munin/www;
+        }
+
+        location /static {
+                alias /usr/local/apps/ocean_planner/marco/static;
+        }
+
+        location /media {
+                alias /usr/local/apps/ocean_planner/env/src/wcoa_master/media/;
+        }
+
+        location / {
+                include uwsgi_params;
+                uwsgi_pass unix:///tmp/wcoa-socket;
+                #uwsgi_pass django;
+                #try_files $uri $uri/ =404;
+                uwsgi_read_timeout 300;
+        }
+
+        #location = /favicon.ico {
+        #        alias /usr/local/apps/marineplanner-core/apps/FishPass/fishpass/static/fishpass/img/logo/FISHPass@2x.png;
+        #}
+}
