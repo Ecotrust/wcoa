@@ -1,148 +1,148 @@
 [
-{
-  "model": "menu.menuentry",
-  "pk": 5,
-  "fields": {
-    "sort_order": 0,
-    "title": "",
-    "url": "",
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 5,
-    "menu": 2
+  {
+    "model": "menu.menu",
+    "pk": 2,
+    "fields": {
+      "title": "Get involved",
+      "active": false,
+      "is_user_menu": false,
+      "footer": false,
+      "order": 1
+    }
+  },
+  {
+    "model": "menu.menu",
+    "pk": 3,
+    "fields": {
+      "title": "About",
+      "active": true,
+      "is_user_menu": false,
+      "footer": false,
+      "order": 1
+    }
+  },
+  {
+    "model": "menu.menu",
+    "pk": 4,
+    "fields": {
+      "title": "Discover",
+      "active": true,
+      "is_user_menu": false,
+      "footer": false,
+      "order": 1
+    }
+  },
+  {
+    "model": "menu.menu",
+    "pk": 5,
+    "fields": {
+      "title": "Connect",
+      "active": true,
+      "is_user_menu": false,
+      "footer": false,
+      "order": 1
+    }
+  },
+  {
+    "model": "menu.menu",
+    "pk": 6,
+    "fields": {
+      "title": "Inform",
+      "active": true,
+      "is_user_menu": false,
+      "footer": false,
+      "order": 1
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 5,
+    "fields": {
+      "sort_order": 0,
+      "title": "Calendar",
+      "url": "",
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": 79,
+      "menu": 2
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 6,
+    "fields": {
+      "sort_order": 1,
+      "title": "About",
+      "url": "",
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": 108,
+      "menu": 2
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 7,
+    "fields": {
+      "sort_order": 2,
+      "title": "Visit WCOA",
+      "url": "https://westcoastoceanalliance.org/",
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": null,
+      "menu": 2
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 8,
+    "fields": {
+      "sort_order": 0,
+      "title": "About",
+      "url": null,
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": 119,
+      "menu": 3
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 9,
+    "fields": {
+      "sort_order": 0,
+      "title": "Discover",
+      "url": "http://portal.westcoastoceans.org/discover/",
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": null,
+      "menu": 4
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 10,
+    "fields": {
+      "sort_order": 0,
+      "title": "Connect",
+      "url": null,
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": 117,
+      "menu": 5
+    }
+  },
+  {
+    "model": "menu.menuentry",
+    "pk": 11,
+    "fields": {
+      "sort_order": 0,
+      "title": "Inform",
+      "url": null,
+      "show_divider_underneath": false,
+      "display_options": "A",
+      "page": 118,
+      "menu": 6
+    }
   }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 6,
-  "fields": {
-    "sort_order": 1,
-    "title": "",
-    "url": "",
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 28,
-    "menu": 2
-  }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 7,
-  "fields": {
-    "sort_order": 2,
-    "title": "Visit MARCO",
-    "url": "http://midatlanticocean.org/",
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": null,
-    "menu": 2
-  }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 8,
-  "fields": {
-    "sort_order": 0,
-    "title": "About",
-    "url": null,
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 66,
-    "menu": 3
-  }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 9,
-  "fields": {
-    "sort_order": 0,
-    "title": "Discover",
-    "url": null,
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 65,
-    "menu": 4
-  }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 10,
-  "fields": {
-    "sort_order": 0,
-    "title": "Connect",
-    "url": null,
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 62,
-    "menu": 5
-  }
-},
-{
-  "model": "menu.menuentry",
-  "pk": 11,
-  "fields": {
-    "sort_order": 0,
-    "title": "Inform",
-    "url": null,
-    "show_divider_underneath": false,
-    "display_options": "A",
-    "page": 64,
-    "menu": 6
-  }
-},
-{
-  "model": "menu.menu",
-  "pk": 2,
-  "fields": {
-    "title": "Get involved",
-    "active": false,
-    "is_user_menu": false,
-    "footer": false,
-    "order": 1
-  }
-},
-{
-  "model": "menu.menu",
-  "pk": 3,
-  "fields": {
-    "title": "About",
-    "active": true,
-    "is_user_menu": false,
-    "footer": false,
-    "order": 1
-  }
-},
-{
-  "model": "menu.menu",
-  "pk": 4,
-  "fields": {
-    "title": "Discover",
-    "active": true,
-    "is_user_menu": false,
-    "footer": false,
-    "order": 1
-  }
-},
-{
-  "model": "menu.menu",
-  "pk": 5,
-  "fields": {
-    "title": "Connect",
-    "active": true,
-    "is_user_menu": false,
-    "footer": false,
-    "order": 1
-  }
-},
-{
-  "model": "menu.menu",
-  "pk": 6,
-  "fields": {
-    "title": "Inform",
-    "active": true,
-    "is_user_menu": false,
-    "footer": false,
-    "order": 1
-  }
-}
 ]
