@@ -15,7 +15,7 @@
   Place as early in the <head> as possible, as the tag
   only applies to resources that are declared after it.
   -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
 
   <!-- Name of web application (only should be used if the website is used as an app) -->
   <meta name="application-name" content="West Coast Ocean Data Portal">
@@ -34,27 +34,11 @@
   <!-- Tells Google not to show the sitelinks search box -->
   <meta name="google" content="nositelinkssearchbox">
 
-  <!-- Verify website ownership -->
-  <meta name="google-site-verification" content="verification_token"><!-- Google Search Console -->
-  <meta name="yandex-verification" content="verification_token"><!-- Yandex Webmasters -->
-  <meta name="msvalidate.01" content="verification_token"><!-- Bing Webmaster Center -->
-  <meta name="alexaVerifyID" content="verification_token"><!-- Alexa Console -->
-  <meta name="p:domain_verify" content="code_from_pinterest"><!-- Pinterest Console-->
-  <meta name="norton-safeweb-site-verification" content="norton_code"><!-- Norton Safe Web -->
-
-  <!-- Gives a general age rating based on the document's content -->
-  <meta name="rating" content="General">
-
-  <!-- Allows control over how referrer information is passed -->
-  <meta name="referrer" content="no-referrer">
 {% endblock meta %}
 
 {% block favicon %}
   <link rel="shortcut icon" href="{% static '' %}" />
 {% endblock favicon %}
-
-{% block fonts %}
-{% endblock fonts %}
 
 {% block body_class %}{{ self.get_verbose_name|slugify }}-page {{ self.slug }}{% endblock %}
 
