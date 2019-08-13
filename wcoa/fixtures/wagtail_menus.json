@@ -53,7 +53,7 @@
       "footer": false,
       "order": 1
     }
-  }
+  },
   {
     "model": "menu.menuentry",
     "pk": 5,
