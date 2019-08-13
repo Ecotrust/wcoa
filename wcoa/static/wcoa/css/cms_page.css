@@ -87,6 +87,12 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
   .search-dropdown .dropdown-menu {
     position: absolute;
   }
+
+  .home .cta-item-wrap {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 15px 30px 15px 30px;
+  }
 }
 
 /**
