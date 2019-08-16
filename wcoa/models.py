@@ -28,6 +28,12 @@ class BrickBlock(blocks.StructBlock):
         icon = 'page'
         value_class = LinkStructValue
 
+class CTARowDivider(blocks.StaticBlock):
+    class Meta:
+        icon = 'horizontalrule'
+        label = 'Row divider'
+        admin_text = 'Forces a new row to be created'
+
 class CTAStreamBlock(blocks.StructBlock):
     cta_title = blocks.CharBlock(required=False)
     cta_content = blocks.RichTextBlock(required=False)
@@ -75,6 +81,7 @@ class CTAPage(Page):
     body = StreamField([
         ('item', CTAStreamBlock()),
         ('details', blocks.RichTextBlock()),
+        ('row', CTARowDivider()),
     ])
 
     content_panels = Page.content_panels + [
