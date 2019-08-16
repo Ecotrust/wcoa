@@ -21,7 +21,10 @@
   {% endif %}
 
     {% for block in page.body %}
-      {% if block.block_type == 'item' %}
+      {% if block.block_type == 'row' %}
+        </div> <!-- end previous row -->
+        <div class="row"> <!-- start new row -->
+      {% elif block.block_type == 'item' %}
         {% image block.value.background_image max-500x500 as bg_img %}
         <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
           <div class="home-item-cntr cta-item">
