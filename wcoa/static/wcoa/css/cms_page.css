@@ -17,7 +17,7 @@ header {
 }
 
 nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
-  color: #22408f;
+  color: #132451;
 }
 
 @media (min-width: 992px) {
@@ -138,8 +138,14 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 }
 
 .cta-item .rich-text li a {
-  color: #08c;
+  color: #132451;
   font-family: PtMono,"Courier New",Courier,monospace;
+}
+
+.cta-item .rich-text li a:hover,
+.cta-item .rich-text li a:active,
+.cta-item .rich-text li a:focus {
+  color: #9ec73d;
 }
 
 /**
@@ -220,10 +226,14 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 }
 
 .cta-item a {
+  color: #132451;
   font-weight: normal;
 }
 
-.cta-item a:hover {
+.cta-item a:hover,
+.cta-item a:active,
+.cta-item a:focus {
+  color: #9ec73d;
   text-decoration: none;
 }
 
