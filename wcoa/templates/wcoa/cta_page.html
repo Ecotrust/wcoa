@@ -28,16 +28,22 @@
         {% image block.value.background_image max-500x500 as bg_img %}
         <div class="span{{ block.value.width }} bg-{{ block.value.background_color }} text-{{ block.value.text_color }} home-item cta-item-wrap" style="background-image: url({{ bg_img.url }});">
           <div class="home-item-cntr cta-item">
+            {% if block.value.url %}
             <a href="{{ block.value.url }}">
+            {% endif %}
               {% if block.value.cta_title %}
-                <div class="home-item-label clearfix">
-                  <p><span class="title">{{ block.value.cta_title }}</span></p>
-                </div>
+              <div class="home-item-label clearfix">
+                <p><span class="title">{{ block.value.cta_title }}</span></p>
+              </div>
               {% endif %}
+              {% if block.value.cta_content %}
               <div class="cta-content">
                 {{ block.value.cta_content|richtext }}
               </div>
+              {% endif %}
+            {% if block.value.url %}
             </a>
+            {% endif %}
           </div>
         </div>
       {% else %}
