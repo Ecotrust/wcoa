@@ -131,6 +131,17 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
   float: left;
 }
 
+.cta-item .rich-text li {
+  font-size: .875em;
+  font-weight: 400;
+  margin-left: 20px;
+}
+
+.cta-item .rich-text li a {
+  color: #08c;
+  font-family: PtMono,"Courier New",Courier,monospace;
+}
+
 /**
  * Page Properties
  * ===============
