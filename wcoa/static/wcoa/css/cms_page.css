@@ -68,9 +68,9 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a,
 .navbar-default .navbar-nav > li > a {
   color: #132451;
-  font-size: 13px;
+  font-size: .8125em;
   font-weight: 300;
-  line-height: 22px;
+  line-height: 1.375em;
   padding: 10px 15px;
 }
 
@@ -123,7 +123,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
 @media (min-width: 992px) {
   nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a,
   .navbar-default .navbar-nav > li > a {
-    font-size: 17px;
+    font-size: 1.0625em;
   }
 
   .top-nav li {
@@ -137,9 +137,16 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
  */
 
 .packery-container {
- padding-left: 0;
- margin: 0;
+  font-size: .75em;
+  padding-left: 0;
+  margin: 0;
  /* padding-right: 0; */
+}
+
+@media (min-width: 992px) {
+  .packery-container {
+    font-size: .875em;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -149,6 +156,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   }
 
   .packery-container {
+    font-size: 1em;
     padding-left: 5px;
     padding-right: 5px;
   }
@@ -219,7 +227,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   background: white;
   background: rgba(252, 252, 252, 0.75);
   display: block;
-  font-size: 11px;
+  font-size: .6875em;
   max-width: 350px;
   padding: 10px;
   margin: 10px;
@@ -247,10 +255,10 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
 .cta-content h3 {
   color: #fff;
   font-family: OpenSans, sans-serif;
-  font-size: 36px;
+  font-size: 1.8125em;
   font-style: normal;
   font-weight: normal;
-  line-height: 45px;
+  line-height: 1.25em;
   margin: 0;
   word-wrap: break-word;
 }
@@ -337,8 +345,8 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   }
 
   .home #record-search .giantText {
-    font-size: 50px;
-    line-height: 55px;
+    font-size: 3.125em;
+    line-height: 1.125em;
     color: #332e1f;
     font-weight: bold;
   }
@@ -366,6 +374,10 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   .home .content .container .row {
     margin: 0 -10px;
   }
+
+  .cta-content h3 {
+    font-size: 2.25em;
+  }
 }
 
 /**
@@ -387,7 +399,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
 
 .connect-page .cta-row .cta-item-wrap h3,
 .connect .cta-row .cta-item-wrap h3  {
-  font-size: 32px;
+  font-size: 2em;
   font-weight: 400;
   margin: 0;
 }
