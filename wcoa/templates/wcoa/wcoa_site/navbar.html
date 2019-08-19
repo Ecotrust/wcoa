@@ -1,19 +1,20 @@
 {% load static portal menu %}
 <!-- Brand and toggle get grouped for better mobile display -->
 <div class="navbar-header brand">
-  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
   <a href="/">
     <img src="{% static '/wcoa/img/WCODP_web_logo-15.svg' %}">
   </a>
 </div>
 
+<button type="button" class="navbar-toggle collapsed toggle-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+
 <!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse visible-desktop" id="bs-example-navbar-collapse-1">
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav navbar-right top-nav">
     <li class="{% active 'planner' %}"><a href="{% url 'planner' %}"><span class="oversized"></span>MAP</a></li>
     {% menus %}
@@ -30,3 +31,5 @@
 
   </ul>
 </div><!-- /.navbar-collapse -->
+
+<div class=""
