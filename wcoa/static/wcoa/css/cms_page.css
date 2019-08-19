@@ -105,7 +105,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
 .home .cta-item-wrap {
   margin-left: 0px;
   margin-bottom: 0px;
-  padding: 15px 30px 15px 30px;
+  padding: 10px;
 }
 
 @media (min-width: 992px) {
@@ -235,8 +235,8 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   color: black;
   text-shadow: 0px 0px 2px #ffffff;
   font-weight: bold;
-  padding-left: 27px;
-  line-height: 24px;
+  /* padding-left: 27px; */
+  line-height: 1.5em;
 }
 .home .rich-text p a[href*="/"]:hover {
   background: #eee;
@@ -250,6 +250,13 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
 
 .home .cta-item input {
   height: 28px;
+}
+
+.home #record-search .giantText {
+  font-size: 3.125em;
+  line-height: 1.125em;
+  color: #332e1f;
+  font-weight: bold;
 }
 
 .cta-content h3 {
@@ -342,13 +349,6 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   .home .packery-container > .home-item:nth-of-type(6) h3,
   .home .packery-container > .home-item:nth-of-type(7) h3 {
     color: #fff;
-  }
-
-  .home #record-search .giantText {
-    font-size: 3.125em;
-    line-height: 1.125em;
-    color: #332e1f;
-    font-weight: bold;
   }
 
   .home .cta-item .title {
