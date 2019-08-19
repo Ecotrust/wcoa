@@ -14,3 +14,8 @@ searchForm.addEventListener('submit', function(event) {
   }
   window.location.href = 'http://portal.westcoastoceans.org/discover/#?text='+searchText;
 });
+
+$(document).ready(function() {
+  var recordCount = solr.getRecordCount();
+  $('#record-count').html(recordCount);
+});
