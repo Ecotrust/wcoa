@@ -142,19 +142,19 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
  /* padding-right: 0; */
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .container {
-    /* padding-left: 0; */
-    /* padding-right: 0; */
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .packery-container {
-    /* padding-left: 5px; */
-    /* padding-right: 5px; */
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .container .row {
-    /* margin: 0 -30px; */
+    margin: 0 -20px;
     /* padding: 0; */
   }
 }
@@ -348,13 +348,15 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   .cta-item {
     padding: 38px 50px 40px 50px;
   }
+}
 
+@media (min-width: 1200px) {
   .home .span3 {
     width: 290px;
   }
 
   .home .container .row {
-    /* padding: 0 30px; */
+    padding: 0 30px;
   }
 }
 
