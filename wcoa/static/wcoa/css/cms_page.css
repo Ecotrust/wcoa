@@ -362,6 +362,10 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   .home .container .row {
     padding: 0 20px;
   }
+
+  .home .content .container .row {
+    margin: 0 -10px;
+  }
 }
 
 /**
