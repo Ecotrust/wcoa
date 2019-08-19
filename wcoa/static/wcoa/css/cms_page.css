@@ -223,6 +223,14 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a:focus,
   max-width: 30px;
 }
 
+.home form button {
+  border: none;
+  height: 28px;
+  float: right;
+  position: relative;
+  width: 20%;
+}
+
 .home .rich-text p a[href*="/"] {
   background: white;
   background: rgba(252, 252, 252, 0.75);

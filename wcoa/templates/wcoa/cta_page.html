@@ -8,10 +8,10 @@
         <div class="home-item-cntr cta-item">
           <div class="giantText">BIG {{ recordCount }}</div>
   				<p>registered resources</p>
-          <form ng-submit="search()">
+          <form action="" id="search-form">
   					<div id="search-filter">
-  						<input type="search" placeholder="SEARCH" ng-model="searchText">
-  						<img src="{% static 'wcoa/img/icons/black_search.png' %}" ng-click="search()">
+  						<input type="search" placeholder="SEARCH" id="search-text">
+  						<button type="submit"><img src="{% static 'wcoa/img/icons/black_search.png' %}" /></button>
   					</div>
   				</form>
         </div>

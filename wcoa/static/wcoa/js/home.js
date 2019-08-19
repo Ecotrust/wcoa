@@ -4,3 +4,13 @@ var pkry = $('.packery-container').packery({
   isOriginLeft: false,
   // initLayout: false,
 });
+
+var searchForm = document.querySelector('#search-form');
+searchForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  var searchText = "*";
+  if (document.querySelector('#search-text') && document.querySelector('#search-text').value.length > 0) {
+  	searchText = document.querySelector('#search-text').value;
+  }
+  window.location.href = 'http://portal.westcoastoceans.org/discover/#?text='+searchText;
+});
