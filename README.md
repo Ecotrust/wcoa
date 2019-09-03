@@ -1,10 +1,11 @@
-=====
-West Coast Ocean Alliance
+West Coast Ocean Alliance (WCOA) Data Portal
 =====
 
-WCOA is an app for the West Coast Ocean Data Portal.
+Django web application and Wagtail CMS for the West Coast Ocean Data Portal.
 
-## Install Ocean Portal
+## Install Docs 
+
+  1. [Install Ocean Portal](#)
 
 ### Local Vagrant Development Env
 
