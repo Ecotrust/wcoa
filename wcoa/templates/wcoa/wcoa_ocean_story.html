@@ -1,7 +1,9 @@
 {% extends "wcoa/cms/section.html" %}
+{% load static %}
 
 {% block extra_css %}
   {% include "ocean_stories/extra_css.html" %}
+  <link rel="stylesheet" href="{% static 'wcoa/css/ocean_story.css' %}" type="text/css">
 {% endblock %}
 
 {% block navbar-extra-classes %}navbar-fixed-top{% endblock %}
@@ -22,4 +24,6 @@
 
 {% block extra_js %}
   {% include "ocean_stories/extra_js.html" %}
+  <script type="text/javascript" src="{% static 'wcoa/js/ocean_stories/curtain.js' %}"></script>
+  <script type="text/javascript" src="{% static 'wcoa/js/ocean_stories/scroll_spy.js' %}"></script>
 {% endblock %}

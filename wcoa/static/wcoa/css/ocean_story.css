@@ -1,0 +1,114 @@
+.wcoa-ocean-story-page nav.navbar-default {
+  background-color: white;
+  border-color: transparent;
+  z-index: 1000;
+  margin-bottom: -50px;
+}
+
+header div.curtain-container {
+  margin-bottom: -80px;
+}
+
+.wcoa-ocean-story-page .intro {
+  width: 100%;
+  text-shadow: 0 0 0.1em black;
+  height: calc(100vh - 80px);
+  position: relative;
+}
+
+.wcoa-ocean-story-page .intro .center {
+  background-color: rgba(46,46,46,0.5);
+  text-align: center;
+  color: white;
+  text-shadow: 0px 0px 8px #666;
+  padding: 6em;
+}
+
+.wcoa-ocean-story-page .intro .ocean-story-n {
+    font-family: "Roboto Condensed";
+    font-size: 16pt;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+}
+
+.wcoa-ocean-story-page .intro .ocean-story-n > span {
+    border-bottom: 4px solid #eab13a;   /* TODO: replace with WCOA color underline */
+}
+
+.wcoa-ocean-story-page .intro .hook {
+    font-size: 51pt;
+    line-height: 61pt;
+    font-weight: 600;
+}
+
+.wcoa-ocean-story-page .intro a.previous-page {
+    left: 0;
+}
+
+.wcoa-ocean-story-page .intro a.next-page {
+    right: 0;
+}
+
+.wcoa-ocean-story-page .intro a.next-page,
+.wcoa-ocean-story-page .intro a.previous-page {
+    background: rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 2.5em;
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+.wcoa-ocean-story-page .view-data {
+    z-index: 900;
+    position: absolute;
+    font-size: 13px;
+    right: 8px;
+    bottom: 8px;
+}
+
+.wcoa-ocean-story-page .view-data .icon {
+    color: #00a564;
+}
+
+.clickable,
+.wcoa-ocean-story-page .view-data,
+.wcoa-ocean-story-page .intro a.next-page,
+.wcoa-ocean-story-page .intro a.previous-page {
+    pointer-events: auto;
+}
+
+.wcoa-ocean-story-page #map.full {
+    height: calc(100vh - 80px);
+}
+
+div.ol-attribution {
+  bottom: auto;
+  top: 82px;
+}
+
+div.ol-scale-line {
+  bottom: auto;
+  top: 82px;
+}
+
+.wcoa-ocean-story-page a.animate {
+  animation: bounce 3s 3s ease-out;
+}
+
+.wcoa-ocean-story-page .learn-more {
+    display: block;
+    font-size: 1.25em;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    /* font-style: italic; */
+    font-weight: bold;
+    margin-top: 0px;
+}
