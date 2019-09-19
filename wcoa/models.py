@@ -6,7 +6,8 @@ from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPan
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
-from portal.base.models import PortalImage
+from portal.base.models import PortalImage, DetailPageBase
+from portal.ocean_stories.models import OceanStory, OceanStories
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
@@ -133,3 +134,21 @@ class ConnectPage(Page):
         ImageChooserPanel('body_image'),
         StreamFieldPanel('cta_list'),
     ]
+
+
+class WcoaOceanStories(OceanStories):
+    subpage_types = ['WcoaOceanStory']
+
+    # search_fields = (index.SearchField('description'),)
+
+    def get_detail_children(self):
+        return WcoaOceanStory.objects.child_of(self)
+
+class WcoaOceanStory(OceanStory):
+    parent_page_types = ['WcoaOceanStories']
+
+WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
+    FieldPanel('display_home_page'),
+    MultiFieldPanel([FieldPanel('hook'), FieldPanel('explore_title'), FieldPanel('explore_url')], "Map overlay"),
+    InlinePanel('sections', label="Sections" ),
+]

@@ -1,0 +1,25 @@
+{% extends "wcoa/cms/section.html" %}
+
+{% block extra_css %}
+  {% include "ocean_stories/extra_css.html" %}
+{% endblock %}
+
+{% block navbar-extra-classes %}navbar-fixed-top{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    {% include "ocean_stories/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+    {% include "ocean_stories/content.html" %}
+{% endblock %}
+
+{% block nav_footer %}
+ {% include "ocean_stories/ocean_story_nav.html" %}
+{% endblock %}
+
+{% block extra_js %}
+  {% include "ocean_stories/extra_js.html" %}
+{% endblock %}

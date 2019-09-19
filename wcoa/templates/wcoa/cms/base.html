@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {% block navbar-extra-classes %}{% endblock %}
+  <nav class="navbar navbar-default header container" role="navigation">
+    {% include 'wcoa/wcoa_site/navbar.html' %}
+  </nav>
+{% endblock %}
+
+{% block body_class %}{{ self.get_verbose_name|slugify }}-page{% endblock %}

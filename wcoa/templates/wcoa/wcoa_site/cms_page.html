@@ -45,13 +45,15 @@
 {% endblock %}
 
 {% block extra_head %}
+  <link rel="stylesheet" href="{% static 'wcoa/css/header.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/cms_page.css' %}" />
 {% endblock %}
 
 {% block header %}
-  {% block navbar-extra-classes %}{% endblock %}
-  <nav class="navbar navbar-default header container" role="navigation">
-    {% include 'wcoa/wcoa_site/navbar.html' %}
+  <nav class="navbar navbar-default {% block navbar-extra-classes %}navbar-fixed-top{% endblock %}" role="navigation">
+      <div class="container">
+          {% include 'wcoa/wcoa_site/navbar.html' %}
+      </div>
   </nav>
 {% endblock %}
 
