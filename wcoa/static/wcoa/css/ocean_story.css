@@ -123,3 +123,17 @@ div.legend-well div.well {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+.wcoa-ocean-story-page .content .story-media-right {
+    padding: 8px 0 10px 20px;
+    float: right;
+}
+
+.wcoa-ocean-story-page .content .story-media-left {
+    padding: 8px 20px 10px 0;
+    float: left;
+}
+
+.wcoa-ocean-story-page div.rich-text {
+  overflow: unset;
+}
