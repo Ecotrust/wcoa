@@ -1,3 +1,6 @@
+/*
+ * Fonts, text, and icons
+ */
 .uppercase {
   text-transform: uppercase;
 }
@@ -87,6 +90,36 @@ a.subdued:hover {
 small {
   font-size: 11px;
 }
+
+
+.icon-marco {
+  background: url(/static/assets/fontawesome-free-5.8.1-web/svgs/solid/map-marker-alt.svg) center right no-repeat;
+  padding: 8px !important;
+}
+.icon-marco:before {
+    content: none !important;
+}
+a:hover .icon-marco,
+a .icon-marco:hover,
+a.icon-marco:hover {
+  background: url(/static/assets/fontawesome-free-5.8.1-web/svgs/solid/map.svg) center right no-repeat;
+}
+
+.icon-marco.icon-mp-left,
+.icon-mp-left {
+  background: url(/static/assets/fontawesome-free-5.8.1-web/svgs/solid/map-marker-alt.svg) center left no-repeat;
+  padding: 3px 15px 3px 5px !important;
+}
+
+a:hover .icon-marco.icon-mp-left,
+a .icon-marco.icon-mp-left:hover,
+a .icon-mp-left:hover {
+  background: none;
+  background-color: #9ec73d;
+  -webkit-mask: url(/static/assets/fontawesome-free-5.8.1-web/svgs/solid/map.svg) center left no-repeat;
+  mask-image: url(/static/assets/fontawesome-free-5.8.1-web/svgs/solid/map.svg) center left no-repeat;
+}
+
 /*
  * h e a d e r
  * see header.css

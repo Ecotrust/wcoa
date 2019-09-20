@@ -113,10 +113,13 @@ div.ol-scale-line {
     margin-top: 0px;
 }
 
-span.icon-marco {
-  display: none;
-}
-
 div.legend-well div.well {
   width: max-content;
+}
+
+div.thumbnail,
+div.legend-well div.well {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

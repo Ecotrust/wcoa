@@ -421,3 +421,12 @@ hr {
  .cta-item-wrap.bg-black {
    background-color: #332e1f;
  }
+
+/*
+ * grid pages
+ */
+ /* RDH: This prevents the hover style from ending underneath the header */
+ .grid-view > .detail:hover {
+     padding-top: 5px;
+     margin-top: 5px;
+ }
