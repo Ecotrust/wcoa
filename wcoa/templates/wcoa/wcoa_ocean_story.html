@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+  {{ block.super }}
   {% include "ocean_stories/extra_css.html" %}
   <link rel="stylesheet" href="{% static 'wcoa/css/ocean_story.css' %}" type="text/css">
 {% endblock %}

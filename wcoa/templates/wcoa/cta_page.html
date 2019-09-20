@@ -57,3 +57,8 @@
     {% endfor %}
   </div>
 {% endblock %}
+
+{% block extra_css %}
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" />
+{% endblock %}

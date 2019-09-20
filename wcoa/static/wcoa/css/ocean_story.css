@@ -112,3 +112,11 @@ div.ol-scale-line {
     font-weight: bold;
     margin-top: 0px;
 }
+
+span.icon-marco {
+  display: none;
+}
+
+div.legend-well div.well {
+  width: max-content;
+}
