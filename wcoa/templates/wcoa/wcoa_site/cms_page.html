@@ -33,7 +33,7 @@
 {% endblock meta %}
 
 {% block favicon %}
-  <link rel="shortcut icon" href="{% static '' %}" />
+  <link rel="shortcut icon" href="{% static 'wcoa/img/icons/favicon.png' %}" />
 {% endblock favicon %}
 
 {% block body_class %}{{ self.get_verbose_name|slugify }}-page {{ self.slug }}{% endblock %}
