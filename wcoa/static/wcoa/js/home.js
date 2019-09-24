@@ -16,6 +16,8 @@ searchForm.addEventListener('submit', function(event) {
 });
 
 $(document).ready(function() {
-  var recordCount = solr.getRecordCount();
-  $('#record-count').html(recordCount);
+  var recordCountCallback = function(numFound) {
+    $('#record-count').html(numFound);
+  }
+  solr.getRecordCount(recordCountCallback);
 });

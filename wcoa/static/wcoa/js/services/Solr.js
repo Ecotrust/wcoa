@@ -1,7 +1,7 @@
 
 
 // This is a relive URL and will work when served from staging or production servers.
-var solrUrl = 'http://portal.westcoastoceans.org/solr/collection1/select?';
+// var solrUrl = 'http://portal.westcoastoceans.org/solr/collection1/select?';
 
 // This is an absolute URL for local dev server
 //var solrUrl = 'http://portal.westcoastoceans.org/solr/collection1/select?';
@@ -215,10 +215,13 @@ var solr = {
         // Execute query.
         if (console) { console.log("Querying Solr"); }
         $.ajax({
-          url: solrUrl,
-          data: queryConfig,
+          url: SOLR_ENDPOINT,
+          data: queryConfig.params,
           crossDomain: true,
           success: function (data, status, headers, config) {
+            if (typeof(data) == "string") {
+              data = JSON.parse(data);
+            }
             data.filterVals = filterVals;
             if (successCallback) {
                 successCallback(data);

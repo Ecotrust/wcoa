@@ -1,2 +1,7 @@
 {% extends "wcoa/cms/iframe_page.html" %}
 {% load static %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'wcoa/js/catalog.js' %}"></script>
+{% endblock %}
