@@ -12,7 +12,7 @@ searchForm.addEventListener('submit', function(event) {
   if (document.querySelector('#search-text') && document.querySelector('#search-text').value.length > 0) {
   	searchText = document.querySelector('#search-text').value;
   }
-  window.location.href = 'http://portal.westcoastoceans.org/discover/#?text='+searchText;
+  window.location.href = '/catalog/?text='+searchText;
 });
 
 $(document).ready(function() {
