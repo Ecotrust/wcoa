@@ -1,0 +1,17 @@
+body {
+  overflow: hidden;
+}
+iframe {
+  width: 100vw;
+  overflow-x:hidden;
+  overflow-y: auto;
+  position: absolute;
+  left: 0;
+  border: none;
+  height: calc(100vh - 145px);
+  margin-bottom: 80px;
+}
+
+.footer.container {
+  margin-top: -20px;
+}

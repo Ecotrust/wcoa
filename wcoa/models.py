@@ -136,6 +136,14 @@ class ConnectPage(Page):
     ]
 
 
+class CatalogIframePage(Page):
+    source = models.URLField(max_length=255)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('source')
+    ]
+
+
 class WcoaOceanStories(OceanStories):
     subpage_types = ['WcoaOceanStory']
 

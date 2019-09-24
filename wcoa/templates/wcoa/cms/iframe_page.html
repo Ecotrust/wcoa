@@ -1,0 +1,17 @@
+{% extends "wcoa/cms/section.html" %}
+{% load static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'wcoa/css/iframe_full.css' %}">
+{% endblock %}
+
+{% block content %}
+  <iframe id="page_iframe" src='{{ page.source }}'></iframe>
+{% endblock %}
+
+{% block footer_wrap %}
+  {% block footer %}
+    {% include 'wcoa/wcoa_site/footer.html' %}
+  {% endblock %}
+{% endblock %}

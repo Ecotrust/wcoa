@@ -1,0 +1,35 @@
+/*
+ * f o o t e r
+ */
+
+
+.footer {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-top: #4d4d4f 1px solid;
+  padding-top: 30px;
+  font-size: 12px;
+}
+.footer a,
+.footer a:hover {
+  color: #baba27;
+}
+
+
+@media (min-width: 768px) {
+  div.footer.container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  div.footer.container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  div.footer.container {
+    width: 1170px;
+  }
+}

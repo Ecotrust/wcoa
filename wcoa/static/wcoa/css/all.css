@@ -127,18 +127,9 @@ a .icon-mp-left:hover {
 
 /*
  * f o o t e r
+ * see footer.css
  */
-.footer {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  border-top: #4d4d4f 1px solid;
-  padding-top: 30px;
-  font-size: 12px;
-}
-.footer a,
-.footer a:hover {
-  color: #baba27;
-}
+
 /*
  *  h o m e
  */
