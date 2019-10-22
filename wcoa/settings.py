@@ -11,4 +11,4 @@ GEOPORTAL_VERSION = 129
 
 SOLR_COLLECTION = 'collection129'
 
-SOLR_ENDPOINT = 'http://portal.westcoastoceans.org/solr/%s/select?' % SOLR_COLLECTION
+SOLR_ENDPOINT = 'https://portal.westcoastoceans.org/solr/%s/select?' % SOLR_COLLECTION
