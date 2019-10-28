@@ -1,9 +1,14 @@
 {% extends 'visualize/planner.html' %}
-{% load static %}
+{% load static compress %}
 
 {% block extra_head %}
   {{block.super}}
   <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
+
+  {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_base.scss' %}">
+  {% endcompress %}
+
 {% endblock %}
 
 {% block header %}{% endblock %}
