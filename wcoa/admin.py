@@ -76,18 +76,18 @@ class WCOALayerAdmin(LayerAdmin):
                 ('wms_info', 'wms_info_format'),
             )
         }),
-        ('Dynamic Layers (MDAT & CAS)', {
-            'classes': ('collapse',),
-            'fields': (
-                'search_query',
-            )
-        }),
-        ('UTF Grid Layers', {
-            'classes': ('collapse',),
-            'fields': (
-                'utfurl',
-            )
-        }),
+        # ('Dynamic Layers (MDAT & CAS)', {
+        #     'classes': ('collapse',),
+        #     'fields': (
+        #         'search_query',
+        #     )
+        # }),
+        # ('UTF Grid Layers', {
+        #     'classes': ('collapse',),
+        #     'fields': (
+        #         'utfurl',
+        #     )
+        # }),
         ('ATTRIBUTE REPORTING', {
             'classes': ('collapse',),
             'fields': (
