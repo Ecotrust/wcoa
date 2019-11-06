@@ -4,17 +4,33 @@
  */
 
 header {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
 nav.navbar-fixed-top {
-  height: 80px;
+  height: 100px;
+}
+
+.navbar .brand {
+  float: none;
+  height: 100px;
 }
 
 .navbar-brand img {
   height: auto;
-  max-height: 80px;
+  max-height: 100px;
+  position: relative;
+  margin-left: 16px;
+  margin-top: 0;
+  top: 0;
+  max-width: 250px;
 }
+
+header + div {
+  min-height: 0;
+  padding-top: 2rem;
+}
+
 
 .navbar .nav li.dropdown > .dropdown-toggle .caret {
   padding-bottom: 1rem;
@@ -94,10 +110,6 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
   color: #132451;
 }
 
-.navbar .brand img {
-  max-width: 250px;
-}
-
 .toggle-button {
   border: none;
   margin-right: 0;
@@ -109,7 +121,7 @@ nav .dropdown:not(.search-dropdown) .dropdown-menu > li > a {
 
 .navbar .nav {
   margin-right: 0;
-  margin-top: 15px;
+  margin-top: 25px;
   float: right;
   background-color: white;
 }

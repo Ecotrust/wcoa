@@ -1,3 +1,11 @@
 .collapse-button {
-  background: pink !important;
+  // background: pink !important;
+}
+
+header + div {
+  padding-top: 0;
+}
+
+#left-panel-project-logo {
+  display: none;
 }
