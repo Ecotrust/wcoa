@@ -1,16 +1,17 @@
-.collapse-button {
-  // background: pink !important;
-}
+$primaryColor: #262626;
+$secondaryColor: #BABA27;
+$ctaColor: #0070cf; // call to action. links, buttons, etc.
 
-header + div {
-  padding-top: 0;
-}
-
-#left-panel-project-logo {
-  display: none;
-}
 
 body.template-visualize {
+
+  header + div {
+    padding-top: 0;
+  }
+
+  #left-panel-project-logo {
+    display: none;
+  }
 
   #primary-content {
     height: calc(100vh - 100px);
@@ -23,6 +24,14 @@ body.template-visualize {
 
   #left-panel {
 
+    a {
+      color: $primaryColor;
+
+      &:hover {
+        color: darken($primaryColor, 1.2);
+      }
+    }
+
     form.form-search div {
       margin: 5px;
     }
@@ -30,11 +39,33 @@ body.template-visualize {
     .panel-body {
       top: 58px;
     }
+
   }
 
-  .sidebar-nav .tab-content,
-  .sidebar-nav #data-accordion {
+  .sidebar-nav {
+
+    .tab-content,
+    #data-accordion {
       background: transparent;
+    }
+
+    .nav-tabs {
+      > li {
+        &.active {
+          a {
+            border-bottom: $ctaColor;
+            color: $ctaColor;
+
+            .count,
+            &:hover,
+            &:focus {
+              color: $ctaColor;
+            }
+          }
+        }
+      }
+    }
+
   }
 
   .open > .dropdown-menu {
@@ -42,4 +73,9 @@ body.template-visualize {
     box-shadow: none;
     position: relative;
   }
+
+}
+
+.tooltip-inner {
+  background-color: $primaryColor
 }
