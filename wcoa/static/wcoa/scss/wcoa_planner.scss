@@ -9,3 +9,37 @@ header + div {
 #left-panel-project-logo {
   display: none;
 }
+
+body.template-visualize {
+
+  #primary-content {
+    height: calc(100vh - 100px);
+  }
+
+  .search-box {
+    background: transparent;
+    font-size: 1em;
+  }
+
+  #left-panel {
+
+    form.form-search div {
+      margin: 5px;
+    }
+
+    .panel-body {
+      top: 58px;
+    }
+  }
+
+  .sidebar-nav .tab-content,
+  .sidebar-nav #data-accordion {
+      background: transparent;
+  }
+
+  .open > .dropdown-menu {
+    border-top: none;
+    box-shadow: none;
+    position: relative;
+  }
+}
