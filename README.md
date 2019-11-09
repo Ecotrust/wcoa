@@ -3,11 +3,7 @@ West Coast Ocean Alliance (WCOA) Data Portal
 
 Django web application and Wagtail CMS for the West Coast Ocean Data Portal.
 
-## Install Docs 
-
-  1. [Install Ocean Portal](#)
-
-### Local Vagrant Development Env
+## Local Vagrant Development Env
 
 requirements:
   - git
@@ -19,7 +15,6 @@ requirements:
   git clone https://github.com/Ecotrust/marco-portal2.git
   mv marco-portal2 ocean_portal
   cd ocean_portal
-  git checkout origin/wcoa
   vagrant up
   vagrant ssh
   ```

@@ -6,13 +6,14 @@ Home-page: https://www.wcoa.com/
 Author: Your Name
 Author-email: yourname@example.com
 License: BSD License
-Description: =====
-        West Coast Ocean Alliance
+Description: West Coast Ocean Alliance (WCOA) Data Portal
         =====
         
-        WCOA is an app for the West Coast Ocean Data Portal.
+        Django web application and Wagtail CMS for the West Coast Ocean Data Portal.
         
-        ## Install Ocean Portal
+        ## Install Docs 
+        
+          1. [Install Ocean Portal](#)
         
         ### Local Vagrant Development Env
         
@@ -171,12 +172,11 @@ Description: =====
         
             path('wcoa/', include('wcoa.urls')),
         
-        3. Run `python manage.py migrate` to create the polls models.
+        3. Run `python manage.py migrate` to create the wcoa models.
         
-        4. Start the development server and visit http://127.0.0.1:8000/admin/
-           to create a poll (you'll need the Admin app enabled).
+        4. Start the development server and visit http://localhost:8000/admin/
         
-        5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
+        5. Visit http://localhost:8000/wcoa/ to participate in the poll.
         
 Platform: UNKNOWN
 Classifier: Environment :: Web Environment
