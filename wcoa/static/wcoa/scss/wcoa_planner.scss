@@ -1,7 +1,7 @@
 $primaryColor: #262626;
 $secondaryColor: #BABA27;
 $ctaColor: #0070cf; // call to action. links, buttons, etc.
-
+$textColor: #58585b;
 
 body.template-visualize {
 
@@ -50,8 +50,10 @@ body.template-visualize {
     }
 
     .nav-tabs {
+
       > li {
         &.active {
+
           a {
             border-bottom: $ctaColor;
             color: $ctaColor;
@@ -65,7 +67,6 @@ body.template-visualize {
         }
       }
     }
-
   }
 
   .open > .dropdown-menu {
@@ -74,22 +75,34 @@ body.template-visualize {
     position: relative;
   }
 
-  #map-controls #get-link-button {
-    border: 4px solid rgba(255,255,255,0.4);
-    border-radius: 0;
-    height: 36px;
-    line-height: 32px;
-    margin: 0;
-    right: 0;
-    padding: 2px 0px 0px 2px;
-    width: 36px;
+  #map-controls {
+    top: 20px;
+
+    .btn-group {
+      background: rgba(255,255,255,0.4);
+      padding: 3px;
+    }
+
+    #get-link-button {
+      border: 1px solid $textColor;
+      border-radius: 0;
+      height: 30px;
+      line-height: 30px;
+      margin: 0;
+      right: 0;
+      padding: 0;
+      width: 30px;
+    }
   }
 
-  .ol-zoom {
-    bottom: auto;
-    left: auto;
-    right: 32px;
-    top: 72px;
+  #map {
+
+    .ol-zoom {
+      bottom: auto;
+      left: auto;
+      right: 32px;
+      top: 72px;
+    }
   }
 }
 
