@@ -104,6 +104,15 @@ body.template-visualize {
       top: 72px;
     }
   }
+
+  .feedback-button {
+    background: rgba(255,255,255,0.8);
+    border-radius: 0;
+    color: $textColor;
+    font-size: .8125em;
+    line-height: 2;
+    padding: 3px 12px 1px;
+  }
 }
 
 .tooltip-inner {
