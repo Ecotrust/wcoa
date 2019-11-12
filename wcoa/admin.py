@@ -91,30 +91,37 @@ class WCOALayerAdmin(LayerAdmin):
         ('ATTRIBUTE REPORTING', {
             'classes': ('collapse',),
             'fields': (
-                ('attribute_event', 'attribute_fields'),
-                ('lookup_field', 'lookup_table'),
-                ('mouseover_field'),
-                ('is_annotated', 'compress_display'),
+                # ('attribute_event', 'attribute_fields'),
+                'attribute_fields',
+                # ('mouseover_field'),
+                # 'is_annotated',           # used for popovers, not implemented since OL2
+                # 'compress_display',
             )
         }),
         ('STYLE', {
             'classes': ('collapse',),
             'fields': (
-                ('opacity'),
-                ('vector_outline_color', 'vector_outline_opacity'),
-                ('vector_color', 'vector_fill'),
-                ('vector_graphic'),
-                ('point_radius'),
-                'thumbnail',
+                'opacity',
+                'vector_outline_color',
+                # 'vector_outline_opacity',
+                'vector_outline_width',
+                'vector_color',
+                # 'vector_fill',
+                'point_radius',
+                'vector_graphic',
+                'vector_graphic_scale',
+                'lookup_field',
+                'lookup_table',
+                # 'thumbnail',
             )
         }),
-        ('ESPIS', {
-            'classes': ('collapse',),
-            'fields': (
-                ('espis_enabled', 'espis_region'),
-                ('espis_search' ),
-            )
-        }),
+        # ('ESPIS', {
+        #     'classes': ('collapse',),
+        #     'fields': (
+        #         ('espis_enabled', 'espis_region'),
+        #         ('espis_search' ),
+        #     )
+        # }),
     )
 
 if not settings.DATA_MANAGER_ADMIN:
