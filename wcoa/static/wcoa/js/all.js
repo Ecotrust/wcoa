@@ -1,6 +1,3 @@
----
----
-
 // Avoid `console` errors in browsers that lack a console. From HTML5 Boilerplate: https://github.com/h5bp/html5-boilerplate/blob/master/js/plugins.js
 (function() {
     var method;

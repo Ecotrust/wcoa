@@ -39,7 +39,7 @@ body.template-visualize #map-controls #linear-measurement {
 
 body.template-visualize #primary-content,
 header + div {
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 body.template-visualize #left-panel {
@@ -96,7 +96,7 @@ body.template-visualize #left-panel .panel-title > a {
     text-align: unset;
 }
 
-body.template-visualize #left-panel .panel-title > a.collapse-button {
+/* body.template-visualize #left-panel .panel-title > a.collapse-button {
     float: right;
     color: white;
     background-color: #00a564;
@@ -106,7 +106,7 @@ body.template-visualize #left-panel .panel-title > a.collapse-button {
     padding-left: 1px;
     padding-top: 2px;
     text-align: center;
-}
+} */
 
 #left-panel-project-logo {
   width: 252px;
