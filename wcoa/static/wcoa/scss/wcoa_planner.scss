@@ -1,5 +1,6 @@
 $primaryColor: #262626;
 $secondaryColor: #BABA27;
+$tertiaryColor: #FF3817;
 $ctaColor: #0070cf; // call to action. links, buttons, etc.
 $textColor: #58585b;
 
@@ -34,6 +35,17 @@ body.template-visualize {
       &:hover {
         color: darken($primaryColor, 1.2);
       }
+
+      &.btn-slider {
+        background-color: $secondaryColor;
+        border-color: $primaryColor;
+
+        &:hover {
+          color: $secondaryColor;
+          background-color: $primaryColor;
+          border-color: $secondaryColor;
+        }
+      }
     }
 
     form.form-search div {
@@ -56,13 +68,22 @@ body.template-visualize {
     .nav-tabs {
 
       > li {
+        a {
+          .count,
+          .count:active {
+            color: $primaryColor;
+            background-color: $secondaryColor;
+            border: 1px solid $primaryColor;
+            border-radius: 3px;
+            padding: 0.5rem;
+          }
+        }
         &.active {
 
           a {
             border-bottom: $ctaColor;
             color: $ctaColor;
 
-            .count,
             &:hover,
             &:focus {
               color: $ctaColor;
@@ -71,6 +92,16 @@ body.template-visualize {
         }
       }
     }
+
+    .animate-checkmark ~ label i {
+      color: $primaryColor;
+    }
+
+    td.animation-check-container:hover {
+      background-color: $secondaryColor;
+    }
+
+
   }
 
   .open > .dropdown-menu {
