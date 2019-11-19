@@ -49,8 +49,10 @@ class WCOALayerAdmin(LayerAdmin):
         ('LEGEND', {
             'classes': ('collapse',),
             'fields': (
+                'show_legend',
                 'legend',
-                ('legend_title','legend_subtitle')
+                'legend_title',
+                'legend_subtitle',
             )
         }),
         # ('SHARING', {
