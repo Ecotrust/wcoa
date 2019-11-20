@@ -217,10 +217,10 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   	  STATIC_ROOT = /usr/local/apps/ocean_portal/marco/static
       EMAIL_SUBJECT_PREFIX = [WCOA]
     ```
-  - Add the following under [DATABASE] (replacing `{DBPASSWORD}` with the password you created above):
+  - Add the following under [DATABASE] (replacing `{DBUSER}` and `{DBPASSWORD}` with the database user and password you created above):
     ```
   	  NAME = ocean_portal
-      USER = postgres
+      USER = {DBUSER}
       PASSWORD = {DBPASSWORD}
     ```
 
