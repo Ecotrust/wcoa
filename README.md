@@ -141,7 +141,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  Upgrading to Wagtail 2.0+: https://wagtail.io/blog/upgrading-to-wagtail-2/
  
  ## Production Installation (Ubuntu 18.04 LTS)
- 1. set up new server
+ #### set up new server
  ```
  sudo apt update
  sudo apt upgrade -y
@@ -160,7 +160,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  git pull
  ```
  
- 2. Set up virtualenv
+ #### Set up virtualenv
   ```
   python3 -m pip install --user virtualenv
   cd /usr/local/apps/ocean_portal/
@@ -170,7 +170,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   pip install -e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
   ```
   
-3. Install PyGDAL
+#### Install PyGDAL
   ```
   pip uninstall numpy
   gdal-config --version
@@ -182,7 +182,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  
   You should see a new version of numpy installed as well.
 
-4. Install database
+#### Install database
   Create a Database user. Come up with a meaningful username and a secure password. You will use the username in place of `{DBUSER}` below and you will be prompted to create the new user's password immediately.
   ```
   sudo -u postgres createuser -s -P {DBUSER}
@@ -199,7 +199,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   sudo service postgresql restart
   ```
 
-5. Configure project
+#### Configure project
   ```
   cd /usr/local/apps/ocean_portal/marco
   mkdir media
@@ -208,7 +208,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   vim config.ini
   ```
 
-6. Edit config.ini
+#### Edit config.ini
   - Add the following lines under `[App]`:
     ```
       PROJECT_APP = wcoa
@@ -224,7 +224,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
       PASSWORD = {DBPASSWORD}
     ```
 
-7. Add shortcuts
+#### Add Django shortcuts
   ```
   vim ~/.bashrc
   #----------
@@ -233,21 +233,41 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   ```
   Exit your terminal session and re-SSH in to the server to load your updates
 
-8. Set up Django
+#### Django Initialization
   ```
   dj migrate
   dj compress
   dj collectstatic
   ```
   
-9. Load in initial data
+#### Load in initial data
+  There is no prescribed method for this. If you have access to existing servers, you have the following two options.
+  If you don't have access to existing servers, you'll need to just try to build from scratch.
+  ##### With pg_dump
+  You can use pg_dump to generate a .sql file representing the database. You can use scp to copy that onto your new server then do the following:
+  ```
+  sudo -u postgres dropdb ocean_portal
+  sudo -u postgres createdb -O {DBUSER} ocean_portal
+  sudo -u postgres psql ocean_portal < {YOUR_DUMP_FILE}
+  dj migrate
+  ```
+  ##### With fixtures
+  * on the source (old) server
+  ```
+  dj dumpdata --indent=2 {your app_models} > /usr/local/apps/ocean_portal/marco/marco/fixtures/initial_data.json
+  ```
+  * Use scp to copy that to your new server
+  * on the target (new) server
+  ```
+  dj loaddata /usr/local/apps/ocean_portal/marco/marco/fixtures/initial_data.json
+  ```
 
-10. Configure and enable webapplication server stack: Nginx + uWSGI
+#### Configure and enable webapplication server stack: Nginx + uWSGI
 
-11. Install munin
+#### Install munin
 
-12. Configure unattended upgrades
+#### Configure unattended upgrades
 
-13. Install Certbox and configure SSL Certs
+#### Install Certbox and configure SSL Certs
 
-14. Restart your server and test
+#### Restart your server and test
