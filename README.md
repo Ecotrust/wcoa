@@ -285,9 +285,32 @@ From inside your virualenv:
 * In a few minutes, test your URL in a browser to see that everything came up as expected
 
 #### Install munin
+`sudo apt install munin munin-node -y`
 
 #### Configure unattended upgrades
+* `sudo apt install unattended-upgrades`
+* `sudo vim /etc/apt/apt.conf.d/50unattended-upgrades`
+   * Uncomment the "...-updates" line
+   * Uncomment and configure:
+      * Mail
+      * MailOnlyOnError
+   * Remove-Unused-Kernel-Packages "true";
+   * Remove-Unused-Dependencies "true";
+   * Automatic-Reboot "true";
+   * Automatic-Reboot-Time "8:00";
+      * The above assumes a UTC server with assumed 1 or 2 AM Pacific time downtime
+* `sudo vim /etc/apt/apt.conf.d/20auto-upgrades`
+```
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+```
+* `sudo unattended-upgrades --dry-run --debug`
 
 #### Install Certbox and configure SSL Certs
+
+#### Set up external uptime monitoring
+recommended: https://uptimerobot.com
 
 #### Restart your server and test
