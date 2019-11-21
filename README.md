@@ -145,7 +145,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  ```
  sudo apt update
  sudo apt upgrade -y
- sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-10 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev -y
+ sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-10 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev redis -y
  sudo mkdir /usr/local/apps
  ```
  change ownership of /usr/local/apps to be your primary sudo user:
@@ -213,7 +213,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
     ```
       PROJECT_APP = wcoa
       PROJECT_SETTINGS_FILE = True
-      MEDIA_ROOT = /usr/local/apps/ocean_portal/marco/media
+      MEDIA_ROOT = /usr/local/apps/ocean_portal/env/src/wcoa-master/media
   	  STATIC_ROOT = /usr/local/apps/ocean_portal/marco/static
       EMAIL_SUBJECT_PREFIX = [WCOA]
     ```
@@ -263,6 +263,26 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   ```
 
 #### Configure and enable webapplication server stack: Nginx + uWSGI
+For reference [go here](http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html)
+
+From inside your virualenv:
+* `sudo apt-get install nginx uwsgi uwsgi-plugin-python3 -y`
+* `pip install uwsgi`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/nginx_config /etc/nginx/sites-available/wcoa`
+* `sudo rm /etc/nginx/sites-enabled/default`
+* `sudo ln -s /etc/nginx/sites-available/wcoa /etc/nginx/sites-enabled/wcoa`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/emperor.ini /etc/uwsgi/`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/uwsgi.service /etc/systemd/system/`
+* `sudo systemctl enable uwsgi.service`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/wcoa.ini /etc/uwsgi/apps-enabled/wcoa.ini`
+* `sudo service nginx start`
+   * If this fails, apache2 may already be running and hogging port 80.
+      * you can stop apache2 with `sudo service apache2 stop` - but it will restart on reboot.
+         * prevent it from launching on reboot with `sudo update-rc.d apache2 disable` OR
+         * update your apache2 configuration to run on another port
+* `sudo service nginx restart`
+* `sudo reboot`
+* In a few minutes, test your URL in a browser to see that everything came up as expected
 
 #### Install munin
 
