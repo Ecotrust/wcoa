@@ -73,7 +73,7 @@ requirements:
   - Add the following lines under `[App]`:
     ```
       PROJECT_APP = wcoa
-      ?? * [ ] PROJECT_SETTINGS_FILE = True
+      PROJECT_SETTINGS_FILE = True
       MEDIA_ROOT = /usr/local/apps/ocean_portal/marco/media
   	  STATIC_ROOT = /usr/local/apps/ocean_portal/marco/static
     ```
@@ -103,8 +103,8 @@ requirements:
   ```
   dj makemigrations
   dj migrate
-  dj collectstatic
   dj compress
+  dj collectstatic
   dj loaddata /usr/local/apps/ocean_portal/marco/marco_site/fixtures/content.json
   djrun
   ```
@@ -139,28 +139,222 @@ The Compass install docs were a nice guideline for setting up MP, perhaps they w
 https://github.com/Ecotrust/COMPASS/wiki/install
 
  Upgrading to Wagtail 2.0+: https://wagtail.io/blog/upgrading-to-wagtail-2/
+ 
+ ## Production Installation (Ubuntu 18.04 LTS)
+ #### set up new server
+ ```
+ sudo apt update
+ sudo apt upgrade -y
+ sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-10 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev redis -y
+ sudo mkdir /usr/local/apps
+ ```
+ change ownership of /usr/local/apps to be your primary sudo user:
+ `sudo chown {USERNAME} /usr/local/apps`
+ 
+ ```
+ cd /usr/local/apps/
+ git clone https://github.com/Ecotrust/marco-portal2.git
+ mv marco-portal2 ocean_portal
+ cd ocean_portal
+ git checkout wcoa
+ git pull
+ ```
+ 
+ #### Set up virtualenv
+  ```
+  python3 -m pip install --user virtualenv
+  cd /usr/local/apps/ocean_portal/
+  python3 -m virtualenv env
+  source /usr/local/apps/ocean_portal/env/bin/activate
+  pip install -r /usr/local/apps/ocean_portal/requirements.txt
+  pip install -e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
+  ```
+  
+#### Install PyGDAL
+  ```
+  pip uninstall numpy
+  gdal-config --version
+  ```
+  Note what version is printed. You will want to intall the correct pygdal for your system's GDAL.
+  
+  For example, if the printed version is '2.2.3', then you will want the latest pyGDAL in the 2.2.3 family:
+  `pip install "pygdal<2.2.4"`
+ 
+  You should see a new version of numpy installed as well.
+
+#### Install database
+  Create a Database user. Come up with a meaningful username and a secure password. You will use the username in place of `{DBUSER}` below and you will be prompted to create the new user's password immediately.
+  ```
+  sudo -u postgres createuser -s -P {DBUSER}
+  sudo -u postgres createdb -O {DBUSER} ocean_portal
+  sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" ocean_portal
+  sudo vim /etc/postgresql/10/main/pg_hba.conf
+  ```
+  Add the following line to the bottom of the pg_hba.conf file, replacing `{DBUSER}` with the username you created:
+  ```
+  local   ocean_portal    {DBUSER}                               md5
+  ```
+  Finally, restart postgres so your updated configuration can be implemented.
+  ```
+  sudo service postgresql restart
+  ```
+
+#### Configure project
+  ```
+  cd /usr/local/apps/ocean_portal/marco
+  mkdir media
+  mkdir static
+  cp config.ini.template config.ini
+  vim config.ini
+  ```
+
+#### Edit config.ini
+  - Add the following lines under `[App]`:
+    ```
+      PROJECT_APP = wcoa
+      PROJECT_SETTINGS_FILE = True
+      MEDIA_ROOT = /usr/local/apps/ocean_portal/env/src/wcoa-master/media
+  	  STATIC_ROOT = /usr/local/apps/ocean_portal/marco/static
+      EMAIL_SUBJECT_PREFIX = [WCOA]
+    ```
+    - If you already know your URL, you can put that in for `ALLOWED_HOSTS`
+  - Add the following under [DATABASE] (replacing `{DBUSER}` and `{DBPASSWORD}` with the database user and password you created above):
+    ```
+  	  NAME = ocean_portal
+      USER = {DBUSER}
+      PASSWORD = {DBPASSWORD}
+    ```
+
+#### Add Django shortcuts
+  ```
+  vim ~/.bashrc
+  #----------
+  alias dj="/usr/local/apps/ocean_portal/env/bin/python3 /usr/local/apps/ocean_portal/marco/manage.py"
+  #----------
+  ```
+  Exit your terminal session and re-SSH in to the server to load your updates
+
+#### Django Initialization
+  ```
+  dj migrate
+  dj compress
+  dj collectstatic
+  ```
+  
+#### Load in initial data
+  There is no prescribed method for this. If you have access to existing servers, you have the following two options.
+  If you don't have access to existing servers, you'll need to just try to build from scratch.
+  ##### With pg_dump
+  You can use pg_dump to generate a .sql file representing the database. You can use scp to copy that onto your new server then do the following:
+  ```
+  sudo -u postgres dropdb ocean_portal
+  sudo -u postgres createdb -O {DBUSER} ocean_portal
+  sudo -u postgres psql ocean_portal < {YOUR_DUMP_FILE}
+  dj migrate
+  ```
+  ##### With fixtures
+  * on the source (old) server
+  ```
+  dj dumpdata --indent=2 {your app_models} > /usr/local/apps/ocean_portal/marco/marco/fixtures/initial_data.json
+  ```
+  * Use scp to copy that to your new server
+  * on the target (new) server
+  ```
+  dj loaddata /usr/local/apps/ocean_portal/marco/marco/fixtures/initial_data.json
+  ```
+
+#### Configure and enable webapplication server stack: Nginx + uWSGI
+For reference [go here](http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html)
+
+From inside your virualenv:
+* `sudo apt-get install nginx uwsgi uwsgi-plugin-python3 -y`
+* `pip install uwsgi`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/nginx_config /etc/nginx/sites-available/wcoa`
+* `sudo rm /etc/nginx/sites-enabled/default`
+* `sudo ln -s /etc/nginx/sites-available/wcoa /etc/nginx/sites-enabled/wcoa`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/emperor.ini /etc/uwsgi/`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/uwsgi.service /etc/systemd/system/`
+* `sudo systemctl enable uwsgi.service`
+* `sudo cp /usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/wcoa.ini /etc/uwsgi/apps-enabled/wcoa.ini`
+* `sudo service nginx start`
+   * If this fails, apache2 may already be running and hogging port 80.
+      * you can stop apache2 with `sudo service apache2 stop` - but it will restart on reboot.
+         * prevent it from launching on reboot with `sudo update-rc.d apache2 disable` OR
+         * update your apache2 configuration to run on another port
+* `sudo service nginx restart`
+* `sudo reboot`
+* In a few minutes, test your URL in a browser to see that everything came up as expected
+
+#### Install munin
+`sudo apt install munin munin-node -y`
+
+#### Configure unattended upgrades
+* `sudo apt install unattended-upgrades`
+* `sudo vim /etc/apt/apt.conf.d/50unattended-upgrades`
+   * Uncomment the "...-updates" line
+   * Uncomment and configure:
+      * Mail
+      * MailOnlyOnError
+   * Remove-Unused-Kernel-Packages "true";
+   * Remove-Unused-Dependencies "true";
+   * Automatic-Reboot "true";
+   * Automatic-Reboot-Time "8:00";
+      * The above assumes a UTC server with assumed 1 or 2 AM Pacific time downtime
+* `sudo vim /etc/apt/apt.conf.d/20auto-upgrades`
+```
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+```
+* `sudo unattended-upgrades --dry-run --debug`
+
+#### Install Certbox and configure SSL Certs
+Requirements:
+   * URL for your site with DNS configured
+   * external access to port 80
+   * external access to port 443
+   * access to a preferred email address to receive any alerts about your SSL certificates
+   
+If you have not already done so, edit /usr/local/apps/ocean_portal/marco/config.ini in the [APP] section:
+   * `ALLOWED_HOSTS = {SITE_URL}` where `{SITE_URL}` is your site's intended address
+Then restart uWSGI: `sudo service uwsgi restart`
+
+Install certbot:
+* `sudo apt install software-properties-common -y`
+* `sudo add-apt-repository ppa:certbot/certbot`
+   * press Enter to continue
+* `sudo apt update`
+* `sudo apt install python-certbot-nginx -y`
+
+Configure NGINX:
+```
+sudo cp /etc/nginx/sites-available/wcoa /etc/nginx/sites-available/wcoa.http_only
+sudo vim /etc/nginx/sites-available/wcoa
+```
+* Replace the line `server_name _;`  with `server_name {SITE_URL}` where `{SITE_URL}` is your site's URL address
+* Save
+* Test your NGINX configuration: `sudo nginx -t`
+* Restart NGINX: `sudo service nginx restart`
+* Test your website out in a browser to be sure your DNS is resolving correctly.
+
+Get your SSL Certificate, replace `{SITE_URL}` with your URL address:
+```
+sudo certbot --nginx -d {SITE_URL}
+```
+* provide your email address
+* agree to their terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf 
+* choose whether or not to have your email address shared with eff.org
+* select if you want users hitting the site using HTTP to be automatically redirected to HTTPS
+
+Test your SSL Cert installation:
+* hit your site using HTTPS (or HTTP if you chose to have automatic redirection)
+* Inspect your URL using https://www.ssllabs.com/ssltest/ 
+* Check that Certbot auto-renew is properly configured:
+   * `sudo certbot renew --dry-run`
 
 
-Quick start
------------
+#### Set up external uptime monitoring
+recommended: https://uptimerobot.com
 
-1. Create an 'apps' directory (dir), if you do not already have one, in your project's top dir (*e.g.*, ocean_portal/apps/)
-
-2. Clone this repo into the apps dir
-
-3. INSTALLED_APPS setting like this::
-
-    INSTALLED_APPS = [
-        ...
-        'wcoa',
-    ]
-
-2. Include the polls URLconf in your project urls.py like this::
-
-    path('wcoa/', include('wcoa.urls')),
-
-3. Run `python manage.py migrate` to create the wcoa models.
-
-4. Start the development server and visit http://localhost:8000/admin/
-
-5. Visit http://localhost:8000/wcoa/ to participate in the poll.
+#### Restart your server and test
