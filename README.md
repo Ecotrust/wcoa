@@ -217,6 +217,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   	  STATIC_ROOT = /usr/local/apps/ocean_portal/marco/static
       EMAIL_SUBJECT_PREFIX = [WCOA]
     ```
+    - If you already know your URL, you can put that in for `ALLOWED_HOSTS`
   - Add the following under [DATABASE] (replacing `{DBUSER}` and `{DBPASSWORD}` with the database user and password you created above):
     ```
   	  NAME = ocean_portal
@@ -309,6 +310,49 @@ APT::Periodic::Unattended-Upgrade "1";
 * `sudo unattended-upgrades --dry-run --debug`
 
 #### Install Certbox and configure SSL Certs
+Requirements:
+   * URL for your site with DNS configured
+   * external access to port 80
+   * external access to port 443
+   * access to a preferred email address to receive any alerts about your SSL certificates
+   
+If you have not already done so, edit /usr/local/apps/ocean_portal/marco/config.ini in the [APP] section:
+   * `ALLOWED_HOSTS = {SITE_URL}` where `{SITE_URL}` is your site's intended address
+Then restart uWSGI: `sudo service uwsgi restart`
+
+Install certbot:
+* `sudo apt install software-properties-common -y`
+* `sudo add-apt-repository ppa:certbot/certbot`
+   * press Enter to continue
+* `sudo apt update`
+* `sudo apt install python-certbot-nginx -y`
+
+Configure NGINX:
+```
+sudo cp /etc/nginx/sites-available/wcoa /etc/nginx/sites-available/wcoa.http_only
+sudo vim /etc/nginx/sites-available/wcoa
+```
+* Replace the line `server_name _;`  with `server_name {SITE_URL}` where `{SITE_URL}` is your site's URL address
+* Save
+* Test your NGINX configuration: `sudo nginx -t`
+* Restart NGINX: `sudo service nginx restart`
+* Test your website out in a browser to be sure your DNS is resolving correctly.
+
+Get your SSL Certificate, replace `{SITE_URL}` with your URL address:
+```
+sudo certbot --nginx -d {SITE_URL}
+```
+* provide your email address
+* agree to their terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf 
+* choose whether or not to have your email address shared with eff.org
+* select if you want users hitting the site using HTTP to be automatically redirected to HTTPS
+
+Test your SSL Cert installation:
+* hit your site using HTTPS (or HTTP if you chose to have automatic redirection)
+* Inspect your URL using https://www.ssllabs.com/ssltest/ 
+* Check that Certbot auto-renew is properly configured:
+   * `sudo certbot renew --dry-run`
+
 
 #### Set up external uptime monitoring
 recommended: https://uptimerobot.com
