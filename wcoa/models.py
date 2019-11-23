@@ -66,18 +66,6 @@ class CTAStreamBlock(blocks.StructBlock):
         icon = 'form'
         value_class = LinkStructValue
 
-class MasonryPage(Page):
-    body = StreamField([
-        ('heading', blocks.CharBlock(classname="block-title", required=False)),
-        ('text', blocks.RichTextBlock(required=False)),
-        ('brick', BrickBlock()),
-        ('image', ImageChooserBlock(required=False)),
-    ])
-
-    content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
-    ]
-
 class CTAPage(Page):
     body = StreamField([
         ('item', CTAStreamBlock()),
@@ -87,6 +75,17 @@ class CTAPage(Page):
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
+    ]
+
+    subpage_types = [
+        'wcoa.CTAPage',
+        'grid_pages.GridPage',
+        'calendar.Calendar',
+        'news.News',
+        'wcoa.WcoaOceanStories',
+        'wcoa.ConnectPage',
+        'wcoa.CatalogIframePage',
+        'pages.Page',
     ]
 
     def get_context(self, request):
