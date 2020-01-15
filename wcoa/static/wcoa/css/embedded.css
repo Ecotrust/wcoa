@@ -1,0 +1,91 @@
+.navbar-default .navbar-toggle,
+.navbar .nav,
+.navbar-default .navbar-collapse,
+body.template-visualize #map-controls,
+body.template-visualize #baselayers,
+body.template-visualize #left-panel,
+/* body.template-visualize #left-panel .panel-heading,
+body.template-visualize .sidebar-nav .nav-tabs,
+body.template-visualize .tab-content #active,
+body.template-visualize .tab-content #data,
+body.template-visualize .tab-content #designs, */
+/* #embedded-legend-content div:first-child>div:first-child, */
+body.template-visualize .feedback-button {
+  display: none;
+}
+
+/* #embedded-legend-content div:first-child div:first-child {
+  display: none;
+} */
+
+body.template-visualize #left-panel {
+    background-color: transparent !important;
+    border: none;
+}
+
+#embedded-legend-content {
+  display: block;
+  top: 50px;
+  background-color: rgba(255,255,255,0.7);
+  position: absolute;
+  border-radius: 3rem;
+}
+
+#embedded-legend-content:first-child {
+  padding: 0 !important;
+}
+
+nav.navbar-fixed-top {
+  background-color: transparent;
+}
+
+header {
+  position: absolute;
+}
+
+body.template-visualize #primary-content {
+  height: 100vh !important;
+}
+
+.navbar-brand img {
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 2rem;
+  margin-top: 1rem;
+  margin-left: 0 !important;
+}
+
+body.template-visualize .navbar,
+.container > .navbar-header,
+.navbar .brand {
+  width: fit-content;
+  margin-left: 0;
+}
+
+.container > .navbar-header {
+  left: 1.5rem !important;
+  position: absolute;
+}
+
+body.template-visualize .container {
+    top: 1rem;
+    left: 1rem;
+    position: absolute;
+}
+
+body.template-visualize #map .ol-zoom {
+  top: 1rem !important;
+  right: 1rem !important;
+}
+
+.ol-scale-line {
+  right: 1rem;
+}
+
+.ol-attribution:not(.ol-collapsed) {
+  max-width: calc(100vw - 165px);
+}
+
+body.template-visualize .olControlMousePosition {
+  bottom: 0 !important;
+  right: calc(50vw - 60px) !important;
+}

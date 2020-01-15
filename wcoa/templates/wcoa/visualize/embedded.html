@@ -1,0 +1,14 @@
+{% extends "wcoa/visualize/planner.html" %}
+{% load static %}
+
+{% block title %}West Coast Ocean Data Portal - Marine Planner{% endblock %}
+
+{% block extra_css %}
+        {{ block.super }}
+        <link href='{% static "wcoa/css/embedded.css" %}' rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+        {{ block.super }}
+        <script src='{% static "wcoa/js/embedded.js" %}'></script>
+{% endblock %}
