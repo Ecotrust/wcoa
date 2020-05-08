@@ -16,3 +16,5 @@ SOLR_ENDPOINT = 'https://portal.westcoastoceans.org/solr/%s/select?' % SOLR_COLL
 DATA_MANAGER_ADMIN = False
 
 DATA_CATALOG_ENABLED = False
+
+HANDLER_404 = 'wcoa.views.page_not_found'
