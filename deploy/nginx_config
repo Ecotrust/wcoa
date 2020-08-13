@@ -31,6 +31,45 @@ server {
                 uwsgi_read_timeout 300;
         }
 
+	location ~ ^/(manager|host-manager|semantix|solr|gc|geoportal).*$ {
+        	#proxy_pass http://192.168.1.121:8080; # hit Stage GeoPortal server directly
+        	#proxy_pass http://192.168.1.21:8080; # hit Prod GeoPortal server directly
+        	proxy_pass http://192.168.0.56:8081; # hit Prod GeoPortal server directly
+        	#proxy_pass http://192.168.1.22; # hit old Portal server to get in back door
+        	proxy_redirect off;
+        	proxy_connect_timeout 5s;
+        	proxy_read_timeout 60s;
+        	proxy_set_header Host $http_host;
+        	proxy_set_header X-Real-IP $remote_addr;
+        	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	
+        	# ENABLE CORS
+        	if ($request_method = 'OPTIONS') {
+                	add_header 'Access-Control-Allow-Origin' '*';
+                	add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                	# Custom headers and headers various browsers *should* be OK with but are not
+                	add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+                	# Tell client that this pre-flight info is valid for 20 days
+                	add_header 'Access-Control-Max-Age' 1728000;
+                	add_header 'Content-Type' 'text/plain; charset=utf-8';
+                	add_header 'Content-Length' 0;
+                	return 204;
+        	}
+        	if ($request_method = 'POST') {
+        	        add_header 'Access-Control-Allow-Origin' '*';
+                	add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                	add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+                	add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        	}
+        	if ($request_method = 'GET') {
+                	add_header 'Access-Control-Allow-Origin' '*';
+                	add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                	add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+                	add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+        	}
+    	}
+
+
         #location = /favicon.ico {
         #        alias /usr/local/apps/marineplanner-core/apps/FishPass/fishpass/static/fishpass/img/logo/FISHPass@2x.png;
         #}
