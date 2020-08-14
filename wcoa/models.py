@@ -8,6 +8,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from portal.base.models import PortalImage, DetailPageBase
 from portal.ocean_stories.models import OceanStory, OceanStories
+from django.conf import settings
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
@@ -89,10 +90,8 @@ class CTAPage(Page):
     ]
 
     def get_context(self, request):
-        from django.conf import settings
         context = super().get_context(request)
-
-        context['SOLR_ENDPOINT'] = settings.SOLR_ENDPOINT
+        context['CATALOG_QUERY_ENDPOINT'] = settings.CATALOG_QUERY_ENDPOINT
 
         return context
 

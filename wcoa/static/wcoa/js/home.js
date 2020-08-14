@@ -16,8 +16,24 @@ searchForm.addEventListener('submit', function(event) {
 });
 
 $(document).ready(function() {
-  var recordCountCallback = function(numFound) {
+  var recordCountCallback = function(data) {
+    numFound = data.hits.total.value;
     $('#record-count').html(numFound);
   }
-  solr.getRecordCount(recordCountCallback);
+  // solr.getRecordCount(recordCountCallback);
+  var getRecordCount = function(callback) {
+    $.ajax({
+      type:"POST",
+      url: CATALOG_QUERY_ENDPOINT,
+      data:  {"query":{"match_all":{}}},
+      success: callback,
+      dataType: 'json'
+    }).fail(function(){
+      $('#record-count').html('');
+      console.log('Failed to retrieve number of records from catalog.')
+    })
+  }
+  if (CATALOG_QUERY_ENDPOINT){
+    getRecordCount(recordCountCallback);
+  }
 });

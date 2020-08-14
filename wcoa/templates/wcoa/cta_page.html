@@ -6,7 +6,7 @@
     <div class="row packery-container">
       <div class="span4 bg-red home-item cta-item-wrap" id="record-search">
         <div class="home-item-cntr cta-item">
-          <div class="giantText" id="record-count"></div>
+          <div class="giantText" id="record-count">Loading...</div>
   				<p>registered resources</p>
           <form action="" id="search-form">
   					<div id="search-filter">
@@ -16,7 +16,13 @@
   				</form>
         </div>
       </div>
+      <script type="text/javascript">
+        CATALOG_QUERY_ENDPOINT="{{CATALOG_QUERY_ENDPOINT}}";
+      </script>
   {% else %}
+    <script type="text/javascript">
+      CATALOG_QUERY_ENDPOINT=false;
+    </script>
     <div class="row">
   {% endif %}
 

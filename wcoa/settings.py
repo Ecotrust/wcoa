@@ -7,11 +7,7 @@ PROJECT_REGION = {
     'map': 'ocean',
 }
 
-GEOPORTAL_VERSION = 129
-
-SOLR_COLLECTION = 'collection129'
-
-SOLR_ENDPOINT = 'https://portal.westcoastoceans.org/solr/%s/select?' % SOLR_COLLECTION
+CATALOG_QUERY_ENDPOINT = '/_search'
 
 DATA_MANAGER_ADMIN = False
 
