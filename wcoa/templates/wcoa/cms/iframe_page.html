@@ -6,9 +6,20 @@
   <link rel="stylesheet" href="{% static 'wcoa/css/iframe_full.css' %}">
 {% endblock %}
 
-{% block content %}
-  <iframe id="page_iframe" src='{{ page.source }}'></iframe>
+{% block all_content %}
+<div class="content">
+    <div>
+        {% block content %}
+        <div class="iframe-wrapper">
+          <iframe id="page_iframe" src='{{ page.source }}'></iframe>
+        </div>
+        {% endblock %}
+        {% block nav_footer %}{{ block.super }}{% endblock %}
+    </div>
+    {% block containerless_content %}{% endblock %}
+</div>
 {% endblock %}
+
 
 {% block footer_wrap %}
   {% block footer %}
