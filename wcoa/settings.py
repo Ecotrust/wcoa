@@ -7,7 +7,7 @@ PROJECT_REGION = {
     'map': 'ocean',
 }
 
-CATALOG_QUERY_ENDPOINT = '/_search/'
+CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/item/_search/'
 
 DATA_MANAGER_ADMIN = False
 
