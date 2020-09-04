@@ -49,6 +49,7 @@ var assign_iframed_classes = function() {
 
 var on_geoportal_search_loaded = function(iframe_contents) {
   assign_iframed_classes(iframe_contents);
+  handle_zero_results(iframe_contents);
 }
 
 var detect_geoportal_search_load = function() {
@@ -58,6 +59,13 @@ var detect_geoportal_search_load = function() {
     on_geoportal_search_loaded(iframe_contents);
   } else {
     setTimeout(detect_geoportal_search_load, 500);
+  }
+}
+
+var handle_zero_results = function(iframe_contents) {
+  if ($('.g-paging-count', iframe_contents).length > 0 && $('.g-paging-count', iframe_contents).html().indexOf('null') >= 0) {
+    var zero_count_html = '0 items found. <a href="/geoportal/">View All Records</a>';
+    $('.g-paging-count', iframe_contents).html(zero_count_html);
   }
 }
 
