@@ -39,8 +39,16 @@ var detect_iframe_load = function() {
   }
 }
 
+var assign_iframed_classes = function() {
+  if ($('div.g-entry-links > div', iframe_contents).length > 0){
+    $('div.g-entry-links > div', iframe_contents).addClass('iframed');
+  } else {
+    setTimeout(assign_iframed_classes, 500);
+  }
+}
+
 var on_geoportal_search_loaded = function(iframe_contents) {
-  $('div.g-entry-links > div > a', iframe_contents).addClass('iframed');
+  assign_iframed_classes(iframe_contents);
 }
 
 var detect_geoportal_search_load = function() {
