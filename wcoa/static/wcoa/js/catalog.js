@@ -24,4 +24,35 @@ var set_iframe_height = function() {
   }
   setTimeout(set_iframe_height, 200);
 }
+
+var on_iframe_loaded = function(iframe_contents) {
+
+}
+
+var detect_iframe_load = function() {
+  iframe_contents = $('#page_iframe').contents();
+  if ($('body', iframe_contents).length > 0) {
+    console.log('Iframe loaded.');
+    on_iframe_loaded(iframe_contents);
+  } else {
+    setTimeout(detect_iframe_load, 500);
+  }
+}
+
+var on_geoportal_search_loaded = function(iframe_contents) {
+  $('div.g-entry-links > div > a', iframe_contents).addClass('iframed');
+}
+
+var detect_geoportal_search_load = function() {
+  iframe_contents = $('#page_iframe').contents();
+  if ($('.g-search-pane', iframe_contents).length > 0) {
+    console.log('GeoPortal Search loaded.');
+    on_geoportal_search_loaded(iframe_contents);
+  } else {
+    setTimeout(detect_geoportal_search_load, 500);
+  }
+}
+
 $('#page_iframe').on('load', set_iframe_height);
+// $('#page_iframe').on('load', detect_iframe_load);
+$('#page_iframe').on('load', detect_geoportal_search_load);
