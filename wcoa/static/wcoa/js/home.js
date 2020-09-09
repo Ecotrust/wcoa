@@ -12,7 +12,7 @@ searchForm.addEventListener('submit', function(event) {
   if (document.querySelector('#search-text') && document.querySelector('#search-text').value.length > 0) {
   	searchText = document.querySelector('#search-text').value;
   }
-  
+
   var term_search_prefix = 'esdsl=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22';
   var term_serch_suffix = '%22%7D%7D%7D';
   window.location.href = '/catalog/?'+ term_search_prefix + searchText + term_serch_suffix;
@@ -28,7 +28,8 @@ $(document).ready(function() {
     $.ajax({
       type:"POST",
       url: CATALOG_QUERY_ENDPOINT,
-      data:  {"query":{"match_all":{}}},
+      data:  JSON.stringify({"query":{"bool":{"must":[{"term":{"sys_approval_status_s":"approved"}}]}}}),
+      contentType: "application/json",
       success: callback,
       dataType: 'json'
     }).fail(function(){
