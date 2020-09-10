@@ -55,11 +55,9 @@ var on_geoportal_search_loaded = function(iframe_contents) {
 var detect_geoportal_search_load = function() {
   iframe_contents = $('#page_iframe').contents();
   if ($('.g-search-pane', iframe_contents).length > 0) {
-    console.log('GeoPortal Search loaded.');
     on_geoportal_search_loaded(iframe_contents);
-  } else {
-    setTimeout(detect_geoportal_search_load, 500);
   }
+  setTimeout(detect_geoportal_search_load, 500);
 }
 
 var handle_zero_results = function(iframe_contents) {
