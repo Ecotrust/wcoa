@@ -19,6 +19,7 @@ class WCOALayerAdmin(LayerAdmin):
     fieldsets = (
         ('BASIC INFO', {
             'fields': (
+                'catalog_id',
                 ('name','layer_type'),
                 'url',
                 'site'

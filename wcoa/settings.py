@@ -1,3 +1,6 @@
+from visualize.settings import *
+from data_manager.settings import *
+
 PROJECT_REGION = {
     'name': 'West Coast',
     'init_zoom': 5,
@@ -7,11 +10,15 @@ PROJECT_REGION = {
     'map': 'ocean',
 }
 
+CATALOG_SOURCE = 'http://192.168.0.3:9200'
+
 CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/item/_search/'
 
 DATA_MANAGER_ADMIN = False
 
 DATA_CATALOG_ENABLED = False
+
+CATALOG_TECHNOLOGY = 'GeoPortal2'
 
 HANDLER_404 = 'wcoa.views.page_not_found'
 
