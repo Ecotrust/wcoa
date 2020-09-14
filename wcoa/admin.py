@@ -16,11 +16,15 @@ class WCOAThemeAdmin(ThemeAdmin):
 
 class WCOALayerAdmin(LayerAdmin):
     list_display = ('name', 'layer_type', 'Theme_', 'order', 'data_source', 'primary_site', 'preview_site', 'url')
+    if settings.CATALOG_TECHNOLOGY not in ['Madrona', None]:
+        catalog_fields = ('catalog_name', 'catalog_id',)
+    else:
+        catalog_fields = None
     fieldsets = (
         ('BASIC INFO', {
             'fields': (
-                'catalog_id',
-                ('name','layer_type'),
+                catalog_fields,
+                ('name','layer_type',),
                 'url',
                 'site'
             )
