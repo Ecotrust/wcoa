@@ -31,7 +31,7 @@ class WCOALayerAdmin(LayerAdmin):
             )
         }),
         ('LAYER ORGANIZATION', {
-            'classes': ('collapse',),
+            # 'classes': ('collapse','open',),
             'fields': (
                 ('order','themes'),
                 ('is_sublayer','sublayers'),
