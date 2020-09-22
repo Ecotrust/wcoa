@@ -143,7 +143,9 @@ class ConnectPage(Page):
 
 
 class CatalogIframePage(Page):
-    source = models.URLField(max_length=255)
+    # 255 is too short for much "DSL" queries to support GP2 + Elasticsearch
+    # SO says <2000 is a good guideline: https://stackoverflow.com/a/417184/706797
+    source = models.URLField(max_length=1999)
 
     content_panels = Page.content_panels + [
         FieldPanel('source')
