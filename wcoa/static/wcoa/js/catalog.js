@@ -25,21 +25,29 @@ var set_iframe_height = function() {
   setTimeout(set_iframe_height, 200);
 }
 
-var on_iframe_loaded = function(iframe_contents) {
+var quarter_second_loop = function() {
 
+  iframe_contents = $('#page_iframe').contents();
+  $('.g-item-actions', iframe_contents).children('div.dropdown').each(function(){
+    if (!$(this).is(':first-child')) {
+      $(this).parent().prepend($(this));
+    }
+  });
+  $('.g-item-actions', iframe_contents).children('a:contains("Download (HTTP)")').each(function(){
+    $(this).html('Download');
+  });
+  setTimeout(quarter_second_loop, 250);
 }
 
 var detect_iframe_load = function() {
   iframe_contents = $('#page_iframe').contents();
-  if ($('body', iframe_contents).length > 0) {
-    console.log('Iframe loaded.');
-    on_iframe_loaded(iframe_contents);
-  } else {
+  if ($('body', iframe_contents).length == 0) {
     setTimeout(detect_iframe_load, 500);
   }
 }
 
 var assign_iframed_classes = function() {
+  $('body', iframe_contents).addClass('iframed');
   if ($('div.g-entry-links > div', iframe_contents).length > 0){
     $('div.g-entry-links > div', iframe_contents).addClass('iframed');
   } else {
@@ -50,6 +58,7 @@ var assign_iframed_classes = function() {
 var on_geoportal_search_loaded = function(iframe_contents) {
   assign_iframed_classes(iframe_contents);
   handle_zero_results(iframe_contents);
+  quarter_second_loop();
 }
 
 var detect_geoportal_search_load = function() {
