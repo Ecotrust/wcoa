@@ -36,6 +36,7 @@ var quarter_second_loop = function() {
   $('.g-item-actions', iframe_contents).children('a:contains("Download (HTTP)")').each(function(){
     $(this).html('Download');
   });
+  $('.g-item-actions', iframe_contents).children('a:contains("Website")').remove();
   setTimeout(quarter_second_loop, 250);
 }
 
