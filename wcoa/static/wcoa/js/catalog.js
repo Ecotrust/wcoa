@@ -60,14 +60,17 @@ var on_geoportal_search_loaded = function(iframe_contents) {
   assign_iframed_classes(iframe_contents);
   handle_zero_results(iframe_contents);
   quarter_second_loop();
+  // Hide Approval Status Facet
+  $('span.dijitTitlePaneTextNode:contains("Approval Status")', iframe_contents).parents('div.g-filter-collapse').hide();
 }
 
 var detect_geoportal_search_load = function() {
   iframe_contents = $('#page_iframe').contents();
   if ($('.g-search-pane', iframe_contents).length > 0) {
     on_geoportal_search_loaded(iframe_contents);
+  } else {
+    setTimeout(detect_geoportal_search_load, 500);
   }
-  setTimeout(detect_geoportal_search_load, 500);
 }
 
 var handle_zero_results = function(iframe_contents) {
