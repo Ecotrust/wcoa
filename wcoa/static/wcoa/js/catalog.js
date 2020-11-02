@@ -38,6 +38,18 @@ var quarter_second_loop = function() {
   });
   $('.g-item-actions', iframe_contents).children('a:contains("Website")').remove();
   setTimeout(quarter_second_loop, 250);
+
+  $('div.g-item-title a:contains("/")', iframe_contents).each(function(){
+    label = $(this).html();
+    path = label.split('/');
+    if (path[path.length-1].toLowerCase() == 'layers' && path.length > 1){
+      var out = path[path.length-2] + " (" + path[path.length - 1] + ")";
+    } else {
+      var out = path[path.length-1];
+    }
+    out = out.split('_').join(' ');
+    $(this).html(out);
+  })
 }
 
 var detect_iframe_load = function() {
