@@ -1,8 +1,58 @@
 $( document ).ready(function() {
   var iframe_url = $('iframe').attr('src');
-  var new_iframe_url = iframe_url + window.location.search;
+  if (iframe_url.indexOf('?') >= 0 && iframe_url.toLowerCase().indexOf('esdsl=') >= 0 && window.location.search.toLowerCase().indexOf('esdsl=') >= 0) {
+    split_url = iframe_url.split('?');
+    url_query = split_url.pop(split_url.length-1);
+    url_root = split_url.join('?'); // does it make sense that there'd be more than 1 '?'? No, but this should work, too.
+    split_search = window.location.search.split('?');
+    var new_iframe_url = merge_esdsl_queries(url_root, url_query, split_search[split_search.length - 1])
+  } else {
+    var new_iframe_url = iframe_url + window.location.search;
+  }
   $('iframe').attr('src', new_iframe_url);
 });
+
+var merge_esdsl_queries = function(url, query1, query2) {
+  var query1_list = query1.split('&');
+  var esdsl1 = '';
+  for (var i = 0; i < query1_list.length; i++) {
+    if (query1_list[i].toLowerCase().indexOf('esdsl=') >= 0){
+      var esdsl1_raw = query1_list.pop(i);
+      esdsl1 = esdsl1_raw.split('esdsl=')[1];
+      break;
+    }
+  }
+  var query2_list = query2.split('&');
+  var esdsl2 = '';
+  for (var i = 0; i < query2_list.length; i++) {
+    if (query2_list[i].toLowerCase().indexOf('esdsl=') >= 0){
+      var esdsl2_raw = query2_list.pop(i);
+      esdsl2 = esdsl2_raw.split('esdsl=')[1];
+      break;
+    }
+  }
+  if (esdsl1.length > 0 && esdsl2.length > 0) {
+    var query_json = {'query':{"bool":{"must":[]}}};
+    var query1_json = JSON.parse(decodeURIComponent(esdsl1));
+    var query2_json = JSON.parse(decodeURIComponent(esdsl2));
+    var query_json_list = [query1_json, query2_json];
+    for (var query_idx = 0; query_idx < query_json_list.length; query_idx++) {
+      query = query_json_list[query_idx];
+      if (query.query.hasOwnProperty('bool') && query.query.bool.hasOwnProperty('must')) {
+        for (var filter_idx = 0; filter_idx < query.query.bool.must.length; filter_idx++) {
+          query_json.query.bool.must.push(query.query.bool.must[filter_idx]);
+        }
+      } else {
+        query_json.query.bool.must.push(query.query);
+      }
+    }
+    var esdsl_merge = JSON.stringify(query_json);
+  } else {
+    var esdsl_merge = esdsl1 + esdsl2;
+  }
+  var query_string = [query1_list.join('&'), query2_list.join('&'), 'esdsl='+encodeURIComponent(esdsl_merge)].join('&');
+  return url + '?' + query_string;
+}
 
 var set_iframe_height = function() {
   var iframe = $('#page_iframe');
