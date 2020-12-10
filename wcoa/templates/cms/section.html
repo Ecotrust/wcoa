@@ -1,0 +1,15 @@
+{% extends "wcoa/wcoa_site/cms_page.html" %}
+{% load wagtailcore_tags%}
+
+{% block layout %}section{% endblock %}
+{% block page_header %}
+  {% include "wcoa/wcoa_site/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+  {% if self.body %}
+  <div class="page-body">
+    {{ self.body|richtext }}
+  </div>
+  {% endif %}
+{% endblock %}
