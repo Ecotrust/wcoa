@@ -100,6 +100,15 @@ var quarter_second_loop = function() {
     out = out.split('_').join(' ');
     $(this).html(out);
   })
+
+  // Fix WEB Link:
+  var web_link = $('a:contains("WEB")',iframe_contents);
+  web_link.attr("href", function() {
+    if ($(this).attr("href").indexOf(window.location.pathname) < 0) {
+      return window.location.origin + window.location.pathname + $(this).attr("href");
+    }
+    return $(this).attr("href");
+  });
 }
 
 var detect_iframe_load = function() {
@@ -121,13 +130,6 @@ var assign_iframed_classes = function(iframe_contents) {
 var customize_initial_content = function(iframe_contents) {
   // Hide Approval Status Facet
   $('span.dijitTitlePaneTextNode:contains("Approval Status")', iframe_contents).parents('div.g-filter-collapse').hide();
-  setTimeout(function(){
-    var iframe_contents = $('#page_iframe').contents();
-    // Fix WEB Link:
-    var web_link = $('a:contains("WEB")',iframe_contents);
-    web_link.attr("href", function() { return window.location.origin + window.location.pathname + $(this).attr("href") });
-
-  }, 300);
 }
 
 var on_geoportal_search_loaded = function(iframe_contents) {
