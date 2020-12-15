@@ -6,7 +6,10 @@ from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPan
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
+from portal.home.models import HomePage
 from portal.base.models import PortalImage, DetailPageBase
+from portal.calendar.models import Calendar
+from portal.news.models import News
 from portal.ocean_stories.models import OceanStory, OceanStories
 from django.conf import settings
 
@@ -168,3 +171,19 @@ WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
     MultiFieldPanel([FieldPanel('hook'), FieldPanel('explore_title'), FieldPanel('explore_url')], "Map overlay"),
     InlinePanel('sections', label="Sections" ),
 ]
+
+wcoa_appropriate_subpage_types = [
+    # removes Ocean Stories, Data Catalog, and Data Gaps from defaultm adds wcoa pages
+    'calendar.Calendar',
+    'wcoa.CatalogIframePage',
+    'wcoa.ConnectPage',
+    'wcoa.CTAPage',
+    'grid_pages.GridPage',
+    'news.News',
+    'pages.Page',
+    'wcoa.WcoaOceanStories',
+]
+Page.subpage_types = wcoa_appropriate_subpage_types
+# These should not be viable Root Pages
+Calendar.parent_page_types = ['wcoa.CTAPage','pages.Page',]
+News.parent_page_types = ['wcoa.CTAPage','pages.Page',]
