@@ -38,13 +38,14 @@
 
 {% block body_class %}{{ self.get_verbose_name|slugify }}-page {{ self.slug }}{% endblock %}
 
-{% block extra_css %}
-  {{block.super}}
-  <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" />
-  <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" />
+{% block thirdparty_css %}
+  {{ block.super }}
+  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" /> -->
 {% endblock %}
 
-{% block extra_head %}
+{% block extra_css %}
+  {{block.super}}
+  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" /> -->
   <link rel="stylesheet" href="{% static 'wcoa/css/header.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/cms_page.css' %}" />

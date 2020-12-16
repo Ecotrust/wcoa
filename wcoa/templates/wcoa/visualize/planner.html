@@ -5,19 +5,14 @@
   {{block.super}}
   <!-- <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" /> -->
   <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" />
-{% endblock %}
-
-{% block extra_head %}
-  {{block.super}}
   <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/header.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" />
-
   {% compress css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_planner.scss' %}">
+  <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_planner.scss' %}">
   {% endcompress %}
-
 {% endblock %}
+
 
 {% block header %}
   <nav class="navbar navbar-default {% block navbar-extra-classes %}navbar-fixed-top{% endblock %}" role="navigation">
