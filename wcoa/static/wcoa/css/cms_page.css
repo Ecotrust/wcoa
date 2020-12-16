@@ -428,3 +428,9 @@ hr {
      padding-top: 5px;
      margin-top: 5px;
  }
+
+ div.grid-view div.badge {
+   background-color: #0070cf;
+   border: 2px solid #22408f; /* carryover from MidA styles, looks nice! */
+   color: white;
+ }
