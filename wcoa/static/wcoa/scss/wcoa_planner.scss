@@ -3,6 +3,7 @@ $secondaryColor: #BABA27;
 $tertiaryColor: #FF3817;
 $ctaColor: #0070cf; // call to action. links, buttons, etc.
 $textColor: #58585b;
+$wcoaBlue: #0070cf;
 
 body.template-visualize {
 
@@ -132,9 +133,32 @@ body.template-visualize {
 
     #linear-measurement:hover,
     #get-link-button:hover {
-      border: 2px solid #00a564;
+      border: 2px solid $wcoaBlue;
+      color: $wcoaBlue;
+      i.fas.fa-ruler-vertical.outline {
+        background-color: $wcoaBlue;
+      }
     }
 
+  }
+
+  .ol-zoom.ol-control {
+    button:hover {
+      background-color: unset;
+      border: 2px solid $wcoaBlue;
+      color: $wcoaBlue;
+    }
+    button:focus {
+      border:1px solid rgb(88, 88, 91);
+    }
+    button.ol-zoom-in:focus {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
+    button.ol-zoom-out:focus {
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
   }
 
   #map {
