@@ -1,6 +1,20 @@
 /*
  * Fonts, text, and icons
  */
+
+ h1, h2, h3, h4 {
+   color: #0070CF;
+ }
+
+ /* h1 a, h1 a:hover, h2 a, h2 a:hover, h3 a, h3 a:hover, h4 a, h4 a:hover { */
+ h1 a, h2 a, h3 a, h4 a {
+   color: #0070CF;
+ }
+
+ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover {
+   color: #9ec73d;
+ }
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -129,6 +143,20 @@ a .icon-mp-left:hover {
  * f o o t e r
  * see footer.css
  */
+
+/*
+ * Buttons and such
+ */
+.btn-success {
+  border-color: #0070CF;
+}
+.btn-success:hover {
+  border-color: #9ec73d;
+}
+.btn-success .icon {
+  color: #0070CF;
+}
+
 
 /*
  *  h o m e
