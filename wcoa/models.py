@@ -179,12 +179,6 @@ class CatalogThemeGridPageDetail(GridPageDetail):
         FieldPanel('theme')
     ]
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        context['CATALOG_ENDPOINT'] = settings.CATALOG_ENDPOINT
-        return context
-
 class WcoaOceanStories(OceanStories):
     subpage_types = ['WcoaOceanStory']
 

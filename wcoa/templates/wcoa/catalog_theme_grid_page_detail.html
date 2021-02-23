@@ -16,6 +16,6 @@
         {% block content %}
         <h2>{{ page.theme|title }}</h2>
         <div class="iframe-wrapper">
-          <iframe id="page_iframe" src='{{ CATALOG_ENDPOINT }}?esdsl=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%5B%7B%22bool%22%3A%7B%22must%22%3A%5B%7B%22term%22%3A%7B%22sys_approval_status_s%22%3A%22approved%22%7D%7D%5D%7D%7D%2C%7B%22term%22%3A%7B%22user_wcodpcategory_cat.tree%22%3A%22{{ page.theme|lower|urlencode }}%22%7D%7D%5D%7D%7D%7D#searchPanel'></iframe>
+          <iframe id="page_iframe" src='/geoportal/?esdsl=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%5B%7B%22bool%22%3A%7B%22must%22%3A%5B%7B%22term%22%3A%7B%22sys_approval_status_s%22%3A%22approved%22%7D%7D%5D%7D%7D%2C%7B%22term%22%3A%7B%22user_wcodpcategory_cat.tree%22%3A%22{{ page.theme|lower|urlencode }}%22%7D%7D%5D%7D%7D%7D#searchPanel'></iframe>
         </div>
         {% endblock %}
