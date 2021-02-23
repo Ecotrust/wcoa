@@ -1,0 +1,13 @@
+{% extends "grid_pages/grid_page.html" %}
+{% load static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <!-- CATALOG THEME PAGE -->
+{% endblock %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <!-- TODO: Hide left panel, stretch results panel -->
+  <!-- <script type="text/javascript" src="{% static 'wcoa/js/catalog_theme.js' %}"></script> -->
+{% endblock %}

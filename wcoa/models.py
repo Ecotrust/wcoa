@@ -1,4 +1,5 @@
 from django.db import models
+from modelcluster.fields import ParentalKey
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core import blocks
@@ -6,11 +7,13 @@ from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPan
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.search import index
 from portal.home.models import HomePage
-from portal.base.models import PortalImage, DetailPageBase
+from portal.base.models import PortalImage, DetailPageBase, PageBase, DetailPageBase, MediaItem
 from portal.calendar.models import Calendar
 from portal.news.models import News
 from portal.ocean_stories.models import OceanStory, OceanStories
+from portal.grid_pages.models import GridPage, GridPageDetail, GridPageSection, GridPageSectionBase
 from django.conf import settings
 
 class LinkStructValue(blocks.StructValue):
@@ -89,6 +92,7 @@ class CTAPage(Page):
         'wcoa.WcoaOceanStories',
         'wcoa.ConnectPage',
         'wcoa.CatalogIframePage',
+        'wcoa.CatalogThemeGridPage',
         'pages.Page',
     ]
 
@@ -154,6 +158,32 @@ class CatalogIframePage(Page):
         FieldPanel('source')
     ]
 
+class CatalogThemeGridPage(GridPage):
+    subpage_types = ['CatalogThemeGridPageDetail']
+
+    def get_detail_children(self):
+        return CatalogThemeGridPageDetail.objects.child_of(self)
+
+class CatalogThemeGridPageDetail(GridPageDetail):
+    parent_page_types = ['CatalogThemeGridPage']
+    theme = models.CharField(max_length=255, blank=True, null=True)
+
+    search_fields = DetailPageBase.search_fields + (
+        index.SearchField('description'),
+        index.FilterField('metric'),
+        index.SearchField('theme')
+    )
+
+    content_panels = DetailPageBase.content_panels + [
+        FieldPanel('metric'),
+        FieldPanel('theme')
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        context['CATALOG_ENDPOINT'] = settings.CATALOG_ENDPOINT
+        return context
 
 class WcoaOceanStories(OceanStories):
     subpage_types = ['WcoaOceanStory']
@@ -176,6 +206,7 @@ wcoa_appropriate_subpage_types = [
     # removes Ocean Stories, Data Catalog, and Data Gaps from defaultm adds wcoa pages
     'calendar.Calendar',
     'wcoa.CatalogIframePage',
+    'wcoa.CatalogThemeGridPage',
     'wcoa.ConnectPage',
     'wcoa.CTAPage',
     'grid_pages.GridPage',
