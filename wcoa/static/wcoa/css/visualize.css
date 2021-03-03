@@ -144,3 +144,9 @@ body.template-visualize .feedback-button {
   border-top-right-radius: 1rem;
   border-bottom: none;
 }
+
+body.template-visualize .dropdown-menu > li > a span.deep-blue {
+  display: block;
+  padding-left: 2rem;
+  margin-top: -2rem;
+}
