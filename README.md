@@ -23,7 +23,7 @@ requirements:
   ```
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-10 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev -y
+  sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-12 libjpeg-dev gdal-bin python3-gdal libgdal-dev -y
   ```
 
 3. Edit requirements.txt
@@ -47,12 +47,16 @@ requirements:
   gdal-config --version
   pip install "pygdal<2.2.4"
   ```
+  if any of your packages were copied locally rather than pulled via requirements.txt, use pip to install them now:
+  ```
+  pip install -e /usr/local/apps/ocean_portal/apps/...
+  ```
 
 6. Install database
   ```
   sudo -u postgres createdb -O postgres ocean_portal
   sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" ocean_portal
-  sudo vim /etc/postgresql/10/main/pg_hba.conf
+  sudo vim /etc/postgresql/12/main/pg_hba.conf
   #--------
   	<update line near bottom regarding ‘local   all   postgres’
   		Change ‘peer’ to ‘trust’ >
@@ -139,7 +143,7 @@ The Compass install docs were a nice guideline for setting up MP, perhaps they w
 https://github.com/Ecotrust/COMPASS/wiki/install
 
  Upgrading to Wagtail 2.0+: https://wagtail.io/blog/upgrading-to-wagtail-2/
- 
+
  ## Production Installation (Ubuntu 18.04 LTS)
  #### set up new server
  ```
@@ -150,7 +154,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  ```
  change ownership of /usr/local/apps to be your primary sudo user:
  `sudo chown {USERNAME} /usr/local/apps`
- 
+
  ```
  cd /usr/local/apps/
  git clone https://github.com/Ecotrust/marco-portal2.git
@@ -159,7 +163,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  git checkout wcoa
  git pull
  ```
- 
+
  #### Set up virtualenv
   ```
   python3 -m pip install --user virtualenv
@@ -169,17 +173,17 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   pip install -r /usr/local/apps/ocean_portal/requirements.txt
   pip install -e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
   ```
-  
+
 #### Install PyGDAL
   ```
   pip uninstall numpy
   gdal-config --version
   ```
   Note what version is printed. You will want to intall the correct pygdal for your system's GDAL.
-  
+
   For example, if the printed version is '2.2.3', then you will want the latest pyGDAL in the 2.2.3 family:
   `pip install "pygdal<2.2.4"`
- 
+
   You should see a new version of numpy installed as well.
 
 #### Install database
@@ -240,7 +244,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
   dj compress
   dj collectstatic
   ```
-  
+
 #### Load in initial data
   There is no prescribed method for this. If you have access to existing servers, you have the following two options.
   If you don't have access to existing servers, you'll need to just try to build from scratch.
@@ -315,7 +319,7 @@ Requirements:
    * external access to port 80
    * external access to port 443
    * access to a preferred email address to receive any alerts about your SSL certificates
-   
+
 If you have not already done so, edit /usr/local/apps/ocean_portal/marco/config.ini in the [APP] section:
    * `ALLOWED_HOSTS = {SITE_URL}` where `{SITE_URL}` is your site's intended address
 Then restart uWSGI: `sudo service uwsgi restart`
@@ -343,13 +347,13 @@ Get your SSL Certificate, replace `{SITE_URL}` with your URL address:
 sudo certbot --nginx -d {SITE_URL}
 ```
 * provide your email address
-* agree to their terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf 
+* agree to their terms: https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf
 * choose whether or not to have your email address shared with eff.org
 * select if you want users hitting the site using HTTP to be automatically redirected to HTTPS
 
 Test your SSL Cert installation:
 * hit your site using HTTPS (or HTTP if you chose to have automatic redirection)
-* Inspect your URL using https://www.ssllabs.com/ssltest/ 
+* Inspect your URL using https://www.ssllabs.com/ssltest/
 * Check that Certbot auto-renew is properly configured:
    * `sudo certbot renew --dry-run`
 

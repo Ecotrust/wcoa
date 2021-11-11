@@ -34,4 +34,7 @@ wcoa/migrations/0014_auto_20190816_2348.py
 wcoa/migrations/0015_merge_20190910_2111.py
 wcoa/migrations/0016_auto_20190919_0015.py
 wcoa/migrations/0017_catalogiframepage.py
+wcoa/migrations/0018_delete_masonrypage.py
+wcoa/migrations/0019_auto_20200922_1837.py
+wcoa/migrations/0020_catalogthemegridpage_catalogthemegridpagedetail.py
 wcoa/migrations/__init__.py
