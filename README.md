@@ -39,13 +39,14 @@ requirements:
 5. Set up virtualenv
   ```
   python3 -m pip install --user virtualenv
-  cd /usr/local/apps/ocean_portal/
+  cd /usr/local/apps/
+  sudo chown ${USER}:${USER} ./
   python3 -m virtualenv env
-  source /usr/local/apps/ocean_portal/env/bin/activate
+  source /usr/local/apps/env/bin/activate
   pip install -r /usr/local/apps/ocean_portal/requirements.txt
   pip uninstall numpy
   gdal-config --version
-  pip install "pygdal<2.2.4"
+  pip install "pygdal<3.0.5"
   ```
   if any of your packages were copied locally rather than pulled via requirements.txt, use pip to install them now:
   ```
@@ -69,6 +70,7 @@ requirements:
   cd /usr/local/apps/ocean_portal/marco
   mkdir media
   mkdir static
+  mkdir /usr/local/apps/marco_portal_static/
   cp config.ini.template config.ini
   vim config.ini
   ```
@@ -91,7 +93,7 @@ requirements:
   ```
   vim ~/.bashrc
   #----------
-  alias dj="/usr/local/apps/ocean_portal/env/bin/python3 /usr/local/apps/ocean_portal/marco/manage.py"
+  alias dj="/usr/local/apps/env/bin/python3 /usr/local/apps/ocean_portal/marco/manage.py"
 
   alias djrun="dj runserver 0:8000"
   #----------
@@ -149,7 +151,7 @@ https://github.com/Ecotrust/COMPASS/wiki/install
  ```
  sudo apt update
  sudo apt upgrade -y
- sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-10 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev redis -y
+ sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-12 libjpeg-dev gdal-bin python-gdal python3-gdal libgdal-dev redis -y
  sudo mkdir /usr/local/apps
  ```
  change ownership of /usr/local/apps to be your primary sudo user:

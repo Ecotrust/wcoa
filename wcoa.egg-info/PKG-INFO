@@ -47,17 +47,18 @@ Description: West Coast Ocean Alliance (WCOA) Data Portal
         5. Set up virtualenv
           ```
           python3 -m pip install --user virtualenv
-          cd /usr/local/apps/ocean_portal/
+          cd /usr/local/apps/
+          sudo chown ${USER}:${USER} ./
           python3 -m virtualenv env
-          source /usr/local/apps/ocean_portal/env/bin/activate
+          source /usr/local/apps/env/bin/activate
           pip install -r /usr/local/apps/ocean_portal/requirements.txt
           pip uninstall numpy
           gdal-config --version
-          pip install "pygdal<2.2.4"
+          pip install "pygdal<3.0.5"
           ```
           if any of your packages were copied locally rather than pulled via requirements.txt, use pip to install them now:
           ```
-          pip install -e /usr/local/apps/ocean_portal/apps/*
+          pip install -e /usr/local/apps/ocean_portal/apps/...
           ```
         
         6. Install database
@@ -99,7 +100,7 @@ Description: West Coast Ocean Alliance (WCOA) Data Portal
           ```
           vim ~/.bashrc
           #----------
-          alias dj="/usr/local/apps/ocean_portal/env/bin/python3 /usr/local/apps/ocean_portal/marco/manage.py"
+          alias dj="/usr/local/apps/env/bin/python3 /usr/local/apps/ocean_portal/marco/manage.py"
         
           alias djrun="dj runserver 0:8000"
           #----------
