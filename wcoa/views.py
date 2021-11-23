@@ -4,6 +4,8 @@ from django.views.defaults import page_not_found as dj_page_not_found
 from portal.base.views import search as portal_seach
 from visualize.views import show_planner
 from django.views.decorators.clickjacking import xframe_options_exempt
+from accounts.views import index as accounts_index
+from mapgroups.views import MapGroupListView as mapgroups_index 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the wcoa index.")
@@ -20,3 +22,6 @@ def page_not_found(request, exception=None, template='wcoa_404.html'):
 
 def search(request, template='wcoa_search_results.html'):
     return portal_seach(request, template)
+
+def show_wcoa_account_index(request, template='wcoa/account/index.html'):
+    return accounts_index(request, template_name=template)

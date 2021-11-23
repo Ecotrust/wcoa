@@ -1,0 +1,61 @@
+{% extends "wcoa/cms/base.html" %}
+
+{% block content %}
+
+<div class="mapgroup">
+    <!-- left column - profile image -->
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+        <h1 style="margin-top: 0; width: initial; border-left: 1px solid #b1b3b5; margin-left: -12px; padding-left: 12px">Hello, {{ user.first_name }}. </h1>
+        <p><!-- user description --> </p>
+
+        <h3>Profile Information</h3>
+        <p>Name: {{ user.get_full_name }}</p>
+        <p>Preferred Name: {{ user.get_short_name }}</p>
+        <p>email: {{ user.email|default:"<i style='color:yellow'>No Email Address</i>" }}</p>
+        <p>
+        <a class="btn btn-success" href="{% url 'account:edit' %}">Edit my info</a>
+        {% if can_change_password %}
+        <a class="btn btn-success" href="{% url 'account:change_password' %}">Change my password</a>
+        {% endif %}
+        </p>
+        <p>
+        {% if user.is_superuser %}
+            <a class="btn btn-success" href="/django-admin">Go to the Django admin page</a>
+        {% endif %}
+        {% if user.is_staff %}
+            <a class="btn btn-success" href="/admin">Go to the CMS admin page</a>
+        {% endif %}
+        </p>
+
+        <!-- no need to verify anymore
+        {% if not user.userdata.email_verified %}
+        <blockquote class="warn" style="border-left-color: #ea3a54; background-color: #eee">
+            <p>Your email address has not been verified. </p>
+            <p>Please verify your email address to complete your registration.</p>
+            <form style="display:inline;" method="POST" action="{% url 'account:verify_new_email' %}">{% csrf_token %}
+                <button class='btn btn-success' onclick="this.form.submit()">Verify email</button>
+            </form>
+        </blockquote>
+        {% endif %}
+        --> 
+
+
+        <h3>Map Groups</h3>
+        <ul style="padding-left: 0">
+            {% for membership in request.user.mapgroupmember_set.all %}
+            <li style="float:left; width: 150px; height: 120px; text-align: center; list-style-type: none; margin-left: 0">
+                 <a href="{{ membership.map_group.get_absolute_url }}">
+                     <img src="{{ membership.map_group.image_url }}" width="124" height="70" style="margin-bottom: 1em;"><br>
+                     {{ membership.map_group.name }}
+                 </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-success" href="{% url 'account:logout' %}">Log out</a><br />
+    </div>
+</div>
+
+{% endblock %}
