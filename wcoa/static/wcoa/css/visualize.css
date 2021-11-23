@@ -136,6 +136,11 @@ body.template-visualize #left-panel .panel-body {
   display: none;
 }
 
+body.template-visualize #map .ol-zoom {
+  bottom: 42px;
+  top: auto;
+}
+
 body.template-visualize .feedback-button {
   background-color: rgba(217, 237, 255, .85);
   border-color: rgba(117, 137, 155, 1);
