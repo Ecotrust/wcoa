@@ -1,0 +1,15 @@
+Hi {{ user_preferred_name }},
+
+Your membership in the {{ app_name }} group "{{ group_name }}" has been {{ status }}.
+
+{% if status == 'Accepted' %}
+  You may now view the group details at {{ group_url }}
+{% else %}
+  If you believe this was in error, you may request to join again at {{ group_url }}
+{% endif %}
+
+Best regards,
+
+  {{ team_name }}
+  {{ team_email|safe }}
+  {{ app_url }}

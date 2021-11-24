@@ -1,0 +1,27 @@
+Hi {{ user_preferred_name }},
+
+Your membership in the {{ app_name }} group "{{ group_name }}" has been {% if is_manager %}promoted to{% else %}demoted from{% endif %} "manager".
+
+{% if is_manager %}
+  As a manager, you:
+  * will be emailed whenever a user requests to join the group.
+  * can now approve or decline new membership requests.
+  * can promote other users to 'manager' status.
+  * can demote other users from 'manager' status.
+  * can remove users from the group.
+
+  If you do not want these responsibilities, you may 'demote' yourself from 'manager'.
+
+  Please use your powers responsibly.
+{% else %}
+ You will no longer be able to approve or reject requests, or promote, demote, or remove members from the group.
+ You will also no longer be emailed about requests to join the group.
+{% endif %}
+
+You can visit the group's details page here: {{ group_url }}
+
+Best regards,
+
+  {{ team_name }}
+  {{ team_email|safe }}
+  {{ app_url }}

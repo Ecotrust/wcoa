@@ -1,0 +1,21 @@
+<div class="detail">
+    <div class="feature">
+        <a style="width: 345px; height:194px" href="{% url 'mapgroups:detail' mapgroup.pk mapgroup.slug %}">
+            <img src="{{ mapgroup.image_url }}" >
+        </a>
+    </div>
+    <div class="media">
+        <div class="media-left media-detail">
+            <div class="media-inner">
+                <a href="{{ item.url }}" style="padding:0;">
+                    <div class="month" title="Date Created">{{ mapgroup.creation_date|date:"m.Y" }}</div>
+                    <div class="badge" title="Number of Members">{{ mapgroup.mapgroupmember_set.count }}</div>
+                </a>
+            </div>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="{% url 'mapgroups:detail' mapgroup.pk mapgroup.slug %}">{{ mapgroup.name }}</a></h4>
+            <div class="item-text">{{ mapgroup.blurb }}</div>
+        </div>
+    </div>
+</div>

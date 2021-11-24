@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>{{ group_name }} requires approval to become a member. Send your request
+here.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send request" />
+</form>
+
+<p>You will be notified via Email when your request has been approved.</p>
+
+{% endblock %}
