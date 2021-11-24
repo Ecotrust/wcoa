@@ -32,3 +32,8 @@ def show_wcoa_mapgroups(request, template='wcoa/mapgroups/mapgroup_list.html'):
 def create_wcoa_mapgroup(request, template='wcoa/mapgroups/mapgroup_form.html'):
     from mapgroups.views import MapGroupCreate
     return MapGroupCreate.as_view(template_name=template)(request)
+
+def show_wcoa_edit_mapgroups(request, *args, **kwargs):
+    template='wcoa/mapgroups/mapgroup_edit.html'
+    from mapgroups.views import MapGroupEditView
+    return MapGroupEditView.as_view(template_name=template)(request, *args, **kwargs)
