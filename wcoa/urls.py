@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path, re_path
-from .views import create_wcoa_mapgroup, show_wcoa_planner, show_wcoa_embedded_map, search, show_wcoa_account_index, show_wcoa_mapgroups, show_wcoa_edit_mapgroups
+from .views import create_wcoa_mapgroup, show_wcoa_planner, show_wcoa_embedded_map, search, show_wcoa_account_index, show_wcoa_mapgroups, show_wcoa_edit_mapgroups, show_wcoa_detail_mapgroups
 from . import views
 
 app_name = 'wcoa'
@@ -18,7 +18,7 @@ urlpatterns = [
     re_path(r'^groups/', show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit$', show_wcoa_edit_mapgroups, name='edit'),
     re_path(r'^groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit$', show_wcoa_edit_mapgroups, name='edit'),
-    # re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/', MapGroupDetailView.as_view(template='wcoa/mapgroups/mapgroup_edit.html')(request), name='detail'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/', show_wcoa_detail_mapgroups, name='detail'),
     
     # re_path(r'^(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/remove-image$',
     #     RemoveMapGroupImageActionView.as_view(), name='remove-image'),
