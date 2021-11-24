@@ -27,5 +27,5 @@ def show_wcoa_account_index(request, template='wcoa/account/index.html'):
     return accounts_index(request, template_name=template)
 
 def show_wcoa_mapgroups(request, template='wcoa/mapgroups/mapgroup_list.html'):
-    mapgroups = MapGroup.objects.all()
-    return render(request, template, {'mapgroups': mapgroups})
+    from mapgroups.views import MapGroupListView
+    return MapGroupListView.as_view(template_name=template)(request)
