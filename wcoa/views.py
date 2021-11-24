@@ -5,7 +5,6 @@ from portal.base.views import search as portal_seach
 from visualize.views import show_planner
 from django.views.decorators.clickjacking import xframe_options_exempt
 from accounts.views import index as accounts_index
-from mapgroups.views import MapGroupListView as mapgroups_index 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the wcoa index.")
@@ -25,3 +24,7 @@ def search(request, template='wcoa_search_results.html'):
 
 def show_wcoa_account_index(request, template='wcoa/account/index.html'):
     return accounts_index(request, template_name=template)
+
+def show_wcoa_mapgroups(request, template='wcoa/mapgroups/mapgroup_list.html'):
+    mapgroups = MapGroup.objects.all()
+    return render(request, template, {'mapgroups': mapgroups})
