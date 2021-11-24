@@ -47,6 +47,14 @@
   </div>
 {% endblock left_panel_heading %}
 
+{% block catalog_layer_row %}
+<ul  class="unstyled" data-bind="foreach: layers ">
+    <li class="layer dropdown" data-bind="css: {'open': showSublayers() }, attr: {name: name}">
+        {% include "wcoa/visualize/includes/catalog-layer-row.html" %}
+    </li>
+</ul>
+{% endblock %}
+
 {% block APP_MAP_JAVASCRIPT %}
   {% if MAP_LIBRARY == 'ol2' %}
     <script src="{% static 'js/wrappers/ol2/ol2_controls.js' %}"></script>
