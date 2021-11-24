@@ -5,6 +5,7 @@ from portal.base.views import search as portal_seach
 from visualize.views import show_planner
 from django.views.decorators.clickjacking import xframe_options_exempt
 from accounts.views import index as accounts_index
+from mapgroups.models import MapGroup
 
 def index(request):
     return HttpResponse("Hello, world. You're at the wcoa index.")
