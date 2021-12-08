@@ -161,11 +161,7 @@ body.template-visualize #left-panel .panel-body {
   display: none;
 }
 
-body.template-visualize #map-controls #btn-print,
-body.template-visualize #map-controls #get-link-button,
-body.template-visualize #map-controls #linear-measurement,
-body.template-visualize #map-controls #draw-button,
-body.template-visualize #map-controls #wms-button {
+body.template-visualize #map-controls .quick-button{
   border: 1px solid #58585b;
   border-radius: 2px;
   height: 30px;
