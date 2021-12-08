@@ -76,9 +76,6 @@ body.template-visualize #left-panel .panel-title{
   text-align: center;
   margin-bottom: -1.5rem;
 }
-body.template-visualize #left-panel form.form-search div {
-  margin: auto;
-}
 
 body.template-visualize #left-panel .panel-title > a {
     float: unset;
@@ -90,6 +87,36 @@ body.template-visualize #left-panel .panel-title > a {
     padding-left: unset;
     padding-top: unset;
     text-align: unset;
+}
+
+body.template-visualize .open > .dropdown-menu {
+  border-top: 1px solid rgba(0,0,0,0.15);
+  box-shadow: rgba(0,0,0,0.176) 0px 6px 12px 0px;
+  position: absolute;
+}
+
+body.template-visualize .sublayer-dropdown {
+  width: 96%;
+}
+
+body.template-visualize .checkbox-sublayer-toggle-title {
+  padding-left: 0;
+}
+
+body.template-visualize .sublayer-status {
+  /* position: relative; */
+  right: auto;
+}
+
+/* ul.filter-options li > i, span > i */
+body.template-visualize .sublayer-status i {
+  margin-right: 0.1rem;
+}
+
+body.template-visualize .sublayer-title {
+  padding-left: 2rem;
+  text-indent: 0;
+  padding-right: 0;
 }
 
 /* body.template-visualize #left-panel .panel-title > a.collapse-button {
@@ -127,8 +154,6 @@ body.template-visualize #left-panel .panel-body {
     padding: 0px;
     position: absolute;
     bottom: 0;
-    /* top: 198px; */
-    top: 180px;
     width: 100%;
 }
 
@@ -136,17 +161,35 @@ body.template-visualize #left-panel .panel-body {
   display: none;
 }
 
-body.template-visualize .feedback-button {
-  background-color: rgba(217, 237, 255, .85);
-  border-color: rgba(117, 137, 155, 1);
-  color: black;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border-bottom: none;
+body.template-visualize #map-controls .quick-button{
+  border: 1px solid #58585b;
+  border-radius: 2px;
+  height: 30px;
+  line-height: 30px;
+  margin: 1px;
+  right: 0;
+  padding: 0;
+  width: 30px;
 }
 
-body.template-visualize .dropdown-menu > li > a span.deep-blue {
-  display: block;
-  padding-left: 2rem;
-  margin-top: -2rem;
+body.template-visualize #map .ol-zoom {
+  bottom: 42px;
+  top: auto;
+}
+
+.ol-scale-line {
+  background-color: rgba(0,60,136,0.3);
+}
+
+.ol-scale-line-inner {
+  color: rgb(238,238,238);
+  /* border-color: currentcolor; */
+  border: 2px solid currentcolor;
+  border-top: none;
+  font-weight: bold;
+}
+
+body.template-visualize .feedback-button {
+  border-color: rgba(117, 137, 155, 1);
+  border-bottom: none;
 }

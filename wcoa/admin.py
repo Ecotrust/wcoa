@@ -71,7 +71,7 @@ class WCOALayerAdmin(LayerAdmin):
         ('ArcGIS DETAILS', {
             'classes': ('collapse',),
             'fields': (
-                ('arcgis_layers', 'disable_arcgis_attributes'),
+                ('arcgis_layers', 'query_by_point', 'disable_arcgis_attributes'),
             )
         }),
         ('WMS DETAILS', {
@@ -100,8 +100,10 @@ class WCOALayerAdmin(LayerAdmin):
         ('ATTRIBUTE REPORTING', {
             'classes': ('collapse',),
             'fields': (
+                ('label_field'),
                 # ('attribute_event', 'attribute_fields'),
                 'attribute_fields',
+                ('lookup_field', 'lookup_table'),
                 # ('mouseover_field'),
                 # 'is_annotated',           # used for popovers, not implemented since OL2
                 # 'compress_display',
@@ -111,17 +113,15 @@ class WCOALayerAdmin(LayerAdmin):
             'classes': ('collapse',),
             'fields': (
                 'opacity',
-                'vector_outline_color',
-                # 'vector_outline_opacity',
+                ('vector_outline_color', 'vector_outline_opacity'),
+                ('vector_color', 'vector_fill'),
                 'vector_outline_width',
-                'vector_color',
-                # 'vector_fill',
-                'point_radius',
                 'vector_graphic',
                 'vector_graphic_scale',
-                'lookup_field',
-                'lookup_table',
+                'point_radius',
                 # 'thumbnail',
+                # 'lookup_field',
+                # 'lookup_table',
             )
         }),
         # ('ESPIS', {

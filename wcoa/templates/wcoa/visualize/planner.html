@@ -3,14 +3,14 @@
 
 {% block extra_css %}
   {{block.super}}
+  {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_planner.scss' %}">
+  {% endcompress %}
   <!-- <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" /> -->
   <link rel="stylesheet" href="{% static 'wcoa/css/all.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/header.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" />
-  {% compress css %}
-  <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_planner.scss' %}">
-  {% endcompress %}
 {% endblock %}
 
 
@@ -46,6 +46,14 @@
       </form>
   </div>
 {% endblock left_panel_heading %}
+
+{% block catalog_layer_row %}
+<ul  class="unstyled" data-bind="foreach: layers ">
+    <li class="layer dropdown" data-bind="css: {'open': showSublayers() }, attr: {name: name}">
+        {% include "wcoa/visualize/includes/catalog-layer-row.html" %}
+    </li>
+</ul>
+{% endblock %}
 
 {% block APP_MAP_JAVASCRIPT %}
   {% if MAP_LIBRARY == 'ol2' %}

@@ -1,0 +1,45 @@
+{% extends "visualize/includes/layer-row.html" %}
+
+{% block "after" %}
+      <ul class="dropdown-menu dropdown-menu-right layer-menu sublayer-dropdown" data-bind="foreach: subLayers">
+        <li>
+        <!-- ko if: !$parent.isCheckBoxLayer() -->
+              <!-- ko if: $data instanceof layerModel -->
+                <span class="slider-button" data-bind="visible: (active() && app.viewModel.showSliderButtons() && $data.hasOwnProperty('is_multilayer_parent') && $data.is_multilayer_parent())">
+                  <a class="btn btn-primary btn-planner btn-slider" data-bind="click: showSlider" data-toggle="tooltip" data-placement="right" data-title="Toggle slider in Active tab">
+                    View Slider&nbsp;
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                  </a>
+                </span>
+              <!-- /ko -->
+                <a data-bind="click: toggleActive" class="sublayer-toggle-title">
+                    <span class="sublayer-status">
+                      <!-- <i class="far green" data-bind="css: { 'fa-check-circle': visible(), 'fa-circle': ! visible() }"></i> -->
+                      <i style="color:red" title="error loading layer" class="fas fa-times-circle"  data-bind="visible: $data.loadStatus()=='error'"></i>
+                      <i class="far green" data-bind="visible: !loadStatus(), css: { 'fa-check-circle': visible(), 'fa-circle': ! visible() }"></i>
+                      <i class="fas fa-spinner fa-spin"  data-bind="visible: $data.loadStatus()=='loading'"></i>
+                    </span>
+                    <span class="deep-blue uppercase sublayer-title" data-bind="text: name"></span>
+                </a>
+        <!-- /ko -->
+        <!-- ko if: $parent.isCheckBoxLayer() -->
+              <!-- ko if: $data instanceof layerModel -->
+                <span class="slider-button" data-bind="visible: (active() && app.viewModel.showSliderButtons() && $data.hasOwnProperty('is_multilayer_parent') && $data.is_multilayer_parent())">
+                  <a class="btn btn-primary btn-planner btn-slider" data-bind="click: showSlider" data-toggle="tooltip" data-placement="right" data-title="Toggle slider in Active tab">
+                    View Slider&nbsp;
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                  </a>
+                </span>
+              <!-- /ko -->
+              <a data-bind="click: toggleActive" class="sublayer-toggle-title checkbox-sublayer-toggle-title">
+                  <span class="sublayer-status">
+                    <i class="far green" data-bind="visible: !$data.loadStatus(), css: { 'fa-check-square': visible(), 'fa-square': ! visible() }"></i>
+                    <i class="fas fa-spinner fa-spin"  data-bind="visible: $data.loadStatus()=='loading'"></i>
+                    <i style="color:red" title="error loading layer" class="fas fa-times-circle"  data-bind="visible: $data.loadStatus()=='error'"></i>
+                  </span>
+                  <span class="deep-blue uppercase sublayer-title" data-bind="text: name"></span>
+              </a>
+        <!-- /ko -->
+        </li>
+      </ul>
+{% endblock %}
