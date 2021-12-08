@@ -1,0 +1,12 @@
+{% extends "wcoa/accounts/base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/x-scss" href="{% static 'accounts/accounts.scss' %}" />
+{% endblock %}
+
+{% block content %}
+
+  {% include "accounts/login_content.html" %}
+
+{% endblock %}
