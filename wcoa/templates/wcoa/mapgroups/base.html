@@ -1,0 +1,29 @@
+{% extends "wcoa/cms/base.html" %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <style>
+    header {
+      padding-bottom: 0;
+    }
+
+    table.group-membership-list td img {
+      max-width: 32px;
+      max-height: 32px;
+    }
+
+    /* Bootstrap 2.3.2 is dumb */
+    .modal {
+      width: auto;
+      z-index: 1041;
+      left: 50%;
+      bottom: unset;
+      right: unset;
+      padding: 0 !important;
+    }
+
+    .modal.in .modal-dialog {
+      margin: 0;
+    }
+  </style>
+{% endblock %}
