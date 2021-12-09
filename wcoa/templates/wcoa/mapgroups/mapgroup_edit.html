@@ -1,0 +1,146 @@
+{% extends "wcoa/mapgroups/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <link href="{% static '/mapgroups/assets/bootstrap-toggle-master/css/bootstrap-toggle.min.css' %}" rel="stylesheet">
+  <link href="{% static '/mapgroups/css/create_map_group_form.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_header %}
+    <a class="btn btn-success" href="{% url 'mapgroups:detail' mapgroup.pk mapgroup.slug %}">&larr; {{ mapgroup.name }}</a>
+{% endblock %}
+
+{% block content %}
+
+            <style>
+            .login-form {
+                margin-bottom: 1em;
+            }
+            .login-form > div {
+                width: 30em;
+                margin: 0 auto;
+            }
+            .login-form div + div {
+                padding-top: 1ex;
+            }
+            .login-form .form-control {
+                color: black;
+            }
+            .login-form .left-inner-addon { position: relative; }
+            .login-form .left-inner-addon input { padding-left: 30px; }
+            .login-form .left-inner-addon i {
+                position: absolute; padding: 10px 12px; cursor: default;
+            }
+            </style>
+<div style=" margin: 0 10em 1em 10em; padding: 0 3em">
+    <h2 style="text-align: center;">Manage map group</h2>
+    <div>
+        <hr />
+
+        <form class="login-form" method="POST" enctype="multipart/form-data" action="{% url 'mapgroups:edit' mapgroup.pk mapgroup.slug %}">
+            {% csrf_token %}
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}" class="col-md-3">{{ form.name.label }}</label>
+                        <div class="col-md-9">
+                            {{ form.name }}
+                            {{ form.name.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ form.is_open.id_for_label}}" class="col-md-3">Group Type</label>
+                        <div class="col-md-9">
+                            {{ form.is_open }}
+                            {{ form.is_open.errors }}
+                            <p>Tip: Anyone can join a public group. Group owners
+                            approve private group membership requests.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ form.blurb.id_for_label }}" class="col-md-3" class="form-control">Description</label>
+                        <div class="col-md-9">
+                            {{ form.blurb }}
+                            {{ form.blurb.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ form.image.id_for_label }}" class="col-md-3">{{ form.image.label }}</label>
+                        <div class="col-md-9">
+                            <div class="well">
+                                {% if mapgroup.image %}
+                                <label for=remove-image-submit class="btn btn-default btn-sm" style="position: absolute; right: 35px">
+                                    Remove Image
+                                </label>
+                                {% endif %}
+                                <img src="{{ mapgroup.image_url }}" style="width: 100%">
+                            </div>
+
+                            {{ form.image }}<br>
+                            {{ form.image.errors }}
+                            Tip: the best image sizes are 345x195 or larger.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="text-right">
+                    <a class="btn btn-inline" href="{% url 'mapgroups:detail' mapgroup.pk mapgroup.slug %}">Cancel changes</a>
+                    <label class="btn btn-success">
+                        <input style="display:none" type="submit">
+                        Save Changes
+                    </label>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+        <h3>Other options</h3>
+        <h4>Delete your group</h4>
+        <style>
+            blockquote.warn {
+                border-left-color: #ea3a54;
+                background-color: #eee;
+            }
+        </style>
+        <form method="POST" style="display: inline" action="{% url 'mapgroups:delete' mapgroup.pk mapgroup.slug %}">
+            {% csrf_token %}
+            {# <button class="btn btn-success" onclick="$('#delete_group').toggle(); return false; ">Delete this group…</button> #}
+            <div id="delete_group">
+                <blockquote class="warn">
+                    <p>Deleting a group is permanent, and cannot be undone.</p>
+
+                    <p class="text-center">
+                    <button class="btn btn-danger" type="submit"  onclick='return confirm("Are you sure you want to delete your map group “{{ mapgroup.name }}”?")'>Delete group</button>
+                    </p>
+                </blockquote>
+            </div>
+        </form>
+    </div>
+</div>
+
+<form style="display: none" method="POST" action="{% url 'mapgroups:remove-image' mapgroup.pk mapgroup.slug %}">
+    {% csrf_token %}
+    <input type="submit" id="remove-image-submit">
+</form>
+
+{% endblock %}
+{% block extra_js %}
+  {{ block.super }}
+  <script>
+    $('#id_is_open').attr('data-toggle', 'toggle');
+    $('#id_is_open').attr('data-on', 'Public');
+    $('#id_is_open').attr('data-off', 'Private');
+    $('#id_is_open').attr('data-onstyle', 'success');
+    $('#id_is_open').attr('data-offstyle', 'danger');
+  </script>
+  <script src="{% static '/mapgroups/assets/bootstrap-toggle-master/js/bootstrap-toggle.min.js' %}"></script>
+{% endblock %}

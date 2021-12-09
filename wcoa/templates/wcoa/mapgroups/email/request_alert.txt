@@ -1,0 +1,12 @@
+Hi {{ manager_name }},
+
+{{ user_preferred_name }} ({{ user_full_name }}) has requested to join {{ group_name }},
+a private group on the {{ app_name }} that you manage.
+
+Please log in and approve or decline this membership status at {{ group_url }}.
+
+Best regards,
+
+  {{ team_name }}
+  {{ team_email|safe }}
+  {{ app_url }}

@@ -1,0 +1,42 @@
+{% extends "wcoa/mapgroups/base.html" %}
+
+{% block title %}Join a map group{% endblock %}
+{% block page_title %}Join a map group{% endblock %}
+
+{% block content %}
+<div class="page-body">
+
+    <div class="description">
+        <p class="rich-text">Groups are an opportunity to share information and
+            resources with like-minded ocean users. Create or join a map group
+            that interests you &mdash; and invite your colleagues! Maps and drawings
+            can be saved and shared through your group with other registered
+            Portal users.</p>
+    </div>
+
+    <a class="btn btn-success btn-lg" href="{% url 'mapgroups:create' %}">To create your own map group, click here.</a>
+    <br />
+    <br />
+
+    <div class="group-form-disclaimer">
+      <p><i>*Note: The West Coast Ocean Alliance reserves the right to review and remove Groups and content shared within them due to inactivity, inappropriate content or other misuse.</i></p>
+    </div>
+
+    {% if featured_mapgroups %}
+    <h3>Featured Map Groups</h3>
+    <div class="grid-view">
+        {% for featured in featured_mapgroups %}
+            {% include 'mapgroups/mapgroup_list_one.html' with mapgroup=featured.map_group %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h3>Member Groups</h3>
+    <div class="grid-view">
+        {% for mg in mapgroups %}
+            {% include 'mapgroups/mapgroup_list_one.html' with mapgroup=mg %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

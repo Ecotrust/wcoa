@@ -1,0 +1,399 @@
+{% extends "wcoa/mapgroups/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <link href="{% static '/mapgroups/css/map_group_details.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_header %}
+    <a class="btn btn-success" href="{% url 'mapgroups:list' %}">&larr; Groups</a>
+{% endblock %}
+
+
+{% block content %}
+<style type="text/css">
+    .well > img { width: 345px; height: 194px; }
+    .well { display: inline-block; background-color: #b1b3b5; }
+    li { list-style-type: none; }
+</style>
+
+<div class="mapgroup">
+    <!-- left column - profile image -->
+    <div class="col-md-1">
+        <img src="{{ mapgroup.image_url }}" width="124" height="70" style="position: absolute; right: 8px">
+    </div>
+
+    <div class="col-md-8">
+        <h1 style="margin-top: 0; width: initial; border-left: 1px solid #b1b3b5; margin-left: -12px; padding-left: 12px">{{ mapgroup.name }}</h1>
+        <div class="description">
+            <p class='rich-text'>{{ mapgroup.blurb }}</p>
+        </div>
+
+        {% if mapgroup.is_open or user_is_member or user.is_superuser %}
+          <h3>Group Information</h3>
+          <p><strong>Group since:</strong> {{ mapgroup.creation_date|date }}</p>
+          <p><strong>Owned by:</strong> {% if user_is_member %}
+                          {{ owner.user_name_for_group }}
+                       {% else %}
+                          {{ owner.user.get_short_name }}
+                      {% endif %}
+          </p>
+        {% endif %}
+
+        <div>
+            {# Group action buttons #}
+
+            {% if user_is_member %}
+                {% if request.user != mapgroup.owner %}
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#rus-leave">Leave group</button>
+                {% endif %}
+
+            {% else %}
+                {% if mapgroup.is_open %}
+                    {# Anonymous users must use GET, otherwise the request will #}
+                    {# be lost in the all the login redirects #}
+                    <form method="{% if request.user.is_anonymous %}GET{% else %}POST{% endif %}" style="display: inline" action="{% url 'mapgroups:join' mapgroup.pk mapgroup.slug %}">
+                        {% csrf_token %}
+                        <p>Welcome! This group is open for anyone to join.</p>
+                        <button class="btn btn-success" type="submit">Join Group</button>
+                    </form>
+                {% else %}
+                    {% if membership and membership.status == 'Pending' %}
+                      <div class='well'>Your membership request is submitted and up for review.</div>
+                    {% elif membership and membership.status == 'Banned' %}
+                      <div class='well'>You may not join this group.</div>
+                    {% else %}
+                      <form method="POST" style="display: inline" action="{% url 'mapgroups:request-join' mapgroup.pk mapgroup.slug %}">
+                          {% csrf_token %}
+                          <p>Request to join this group.</p>
+                          <button class="btn btn-success" type="submit">Join Group</button>
+                      </form>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            {% if request.user == mapgroup.owner %}
+                <a class="btn btn-success" href="{% url 'mapgroups:edit' mapgroup.pk mapgroup.slug %}">Manage map group</a>
+            {% endif %}
+        </div>
+
+        {% if user_is_member %}
+            <h3>Preferences</h3>
+
+            <form method="POST"
+                  action="{% url 'mapgroups:preferences' mapgroup.pk mapgroup.slug %}">
+                {% csrf_token %}
+                <!--{{ preferences_form.as_div }}-->
+
+                <label>
+                {{ preferences_form.show_real_name }} Share my real name with this group.
+                </label>
+
+                <script>
+                    document.querySelector('#id_show_real_name').onclick = function() {
+                        this.form.submit();
+                    };
+                </script>
+            </form>
+        {% endif %}
+
+        {% if shared_items %}
+          {% if mapgroup.is_open or user_is_member or user.is_superuser %}
+            <h3>Shared Items</h3>
+
+            {% if shared_items.bookmarks %}
+            <h4>Map Bookmarks</h4>
+            <ul>
+                {% for object in shared_items.bookmarks %}
+                    <li>
+                      {% if user_is_member %}
+                        <a href="/visualize/#bookmark={{ object.pk }}" target="_blank">{{ object.name }}</a>
+                      {% else %}
+                        {{ object.name }}
+                      {% endif %}
+                      {% if user.is_superuser %}
+                        <i class="fa fa-info-circle" data-toggle="modal"
+                          data-target="#bookmark-audit-modal"
+                          data-bookmark_id="{{ object.pk }}"
+                          data-bookmark_name="{{ object.name }}"></i>
+                      {% endif %}
+
+                    </li>
+                {% empty %}
+                    <li>No shared maps.</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if shared_items.scenarios %}
+            <h4>Scenarios</h4>
+            <ul>
+                {% for object in shared_items.scenarios %}
+                    <li>{{ object.name }}</li>
+                {% empty %}
+                    <li>No shared scenarios.</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if shared_items.leaseblock_selections %}
+            <h4>Lease Block Selections</h4>
+            <ul>
+                {% for object in shared_items.leaseblock_selections %}
+                    <li>{{ object.name }}</li>
+                {% empty %}
+                    <li>No shared lease block selections.</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if shared_items.drawings %}
+            <h4>Drawings</h4>
+            <ul>
+                {% for object in shared_items.drawings %}
+                    <li>
+                      {{ object.name }}
+                      {% if user.is_superuser %}
+                        <i class="fa fa-info-circle" data-toggle="modal"
+                          data-target="#drawing-audit-modal"
+                          data-drawing_id="{{ object.pk }}"
+                          data-drawing_name="{{ object.name }}"
+                          data-drawing_owner_id="{{ object.user.pk }}"
+                          data-drawing_owner_name="{{ object.user.username }}"
+                          data-drawing_description="{{ object.description }}"
+                          data-user_admin_url="{{ user_admin_root_url }}"
+                          data-drawing_admin_url="{{ drawing_admin_root_url }}"></i>
+                      {% endif %}
+                    </li>
+
+                {% empty %}
+                    <li>No shared drawings.</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if shared_items.windenergysites %}
+            <h4>Wind Energy Sites</h4>
+            <ul>
+                {% for object in shared_items.windenergysites %}
+                    <li>{{ object.name }}</li>
+                {% empty %}
+                    <li>No shared wind energy sites.</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="col-md-3">
+        {% if not mapgroup_is_open and user_is_manager and member_requests|length > 0 %}
+          <h3>Manage Group</h3>
+          <h4>Join Requests</h4>
+          <table class="group-membership-list">
+            {% for member_request in member_requests %}
+              <tr>
+                  <td>
+                      <img src="{{ member_request.user.userdata.profile_image }}" width="32" height="32" />
+                  </td>
+                  <td>
+                      <b>{{ member_request.user.get_short_name }}</b>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                      data-target="#rus-membership-approval"
+                      data-member_id="{{ member_request.pk }}"
+                      data-member_name="{{ member_request.user.get_short_name }}"
+                      data-act="approve"
+                      data-title="Confirm Membership Approval"
+                    >Approve</button>
+
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                      data-target="#rus-membership-approval"
+                      data-member_id="{{ member_request.pk }}"
+                      data-member_name="{{ member_request.user.get_short_name }}"
+                      data-act="deny"
+                      data-title="Confirm Membership Rejection"
+                    >Deny</button>
+                  </td>
+              </tr>
+            {% endfor %}
+          </table>
+        {% endif %}
+        {% if mapgroup.is_open or user_is_member or user.is_superuser %}
+          <h3>Group Members</h3>
+          <table class="group-membership-list">
+              {% for member in sorted_member_list %}
+              <tr>
+                  <td><img src="{{ member.user.userdata.profile_image }}" width="32" height="32" /></td>
+
+                  <td>
+                    {% if membership %}
+                        <b>{{ member.user_name_for_group }}</b> <!-- Show real name -->
+                    {% else %}
+                        <b>{{ member.user.get_short_name }}</b> <!-- Show pref name -->
+                    {% endif %}
+
+                    {# call out the current user and owner of the group #}
+                    {% if request.user == member.user %}
+                        (you{% if request.user == mapgroup.owner %}, owner{% elif member.is_manager %}, manager{% endif %})
+                    {% else %}
+                        {% if member.user == mapgroup.owner %}
+                            (owner)
+                        {% elif member.is_manager %}
+                            (manager)
+                        {% endif %}
+                    {% endif %}
+                  </td>
+                  {% if not mapgroup_is_open and user_is_manager %}
+                    <td>
+                      {% if not member.is_manager %}
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                          data-target="#rus-membership-status"
+                          data-member_id="{{ member.pk }}"
+                          data-member_name="{{ member.user.get_short_name }}"
+                          data-act="promote"
+                          data-title="Confirm Member Promotion"
+                        >Promote</button>
+                      {% else %}
+                        {% if not member.user == mapgroup.owner %}
+                          <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#rus-membership-status"
+                            data-member_id="{{ member.pk }}"
+                            data-member_name="{{ member.user.get_short_name }}"
+                            data-act="demote"
+                            data-title="Confirm Member Demotion"
+                          >Demote</button>
+                        {% endif %}
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if member.user != mapgroup.owner %}
+                        {% if member.user == request.user %}
+                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#rus-leave">Leave group</button>
+                        {% else %}
+                          <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#rus-membership-status"
+                            data-member_id="{{ member.pk }}"
+                            data-member_name="{{ member.user.get_short_name }}"
+                            data-act="remove"
+                            data-title="Confirm Member Removal"
+                          >Remove</button>
+                        {% endif %}
+                      {% endif %}
+
+                    </td>
+                  {% endif %}
+              </tr>
+              {% endfor %}
+          </table>
+        {% endif %}
+    </div>
+</div>
+
+<div class="modal fade" id="rus-leave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirm Leave Group
+            </div>
+            <div class="modal-body">
+                Are you sure you want to leave this group?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <form method="POST" style="display: inline" action="{% url 'mapgroups:leave' mapgroup.pk mapgroup.slug %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success" type="submit">Leave group</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="bookmark-audit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header" id="bookmark-modal-title">
+              Bookmark Details
+          </div>
+          <div class="modal-body" id="bookmark-modal-content">
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="drawing-audit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header" id="drawing-modal-title">
+              Drawing Details
+          </div>
+          <div class="modal-body" id="drawing-modal-content">
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="rus-membership-approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="approve-title">
+                Confirm Membership Approval
+            </div>
+            <div class="modal-body">
+                Are you sure you want to <span id='approval-act'>approve</span>
+                the membership request from <span id="approve-username"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <form method="POST" id="approve-member-button-form" style="display: inline" action="">
+                    {% csrf_token %}
+                    <button class="btn btn-success" type="submit">I'm sure</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rus-membership-status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="rus-status-title">
+                Confirm Member Removal
+            </div>
+            <div class="modal-body">
+                Are you sure you want to <span id='status-act'>remove</span>
+                member <span id="status-username"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <form method="POST" id="status-member-button-form" style="display: inline" action="">
+                    {% csrf_token %}
+                    <button class="btn btn-success rus-submit" type="submit">I'm sure</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'mapgroups/js/mapgroup_modal_munging.js' %}"></script>
+
+{% endblock %}
