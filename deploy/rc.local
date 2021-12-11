@@ -4,6 +4,6 @@ TIME=`/bin/date +20%y/%m/%d-%H:%M:%S`
 
 /usr/sbin/service uwsgi start
 
-/usr/local/apps/ocean_portal/env/src/wcoa-master/deploy/restart_nginx.sh &
+/usr/local/apps/ocean_portal/apps/wcoa/deploy/restart_nginx.sh &
 
 exit 0
