@@ -1,0 +1,18 @@
+{% extends "wcoa/accounts/base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/x-scss" href="{% static 'accounts/accounts.scss' %}" />
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div style="border: 5px solid #22408f; margin: 1em auto; padding: 3em; display: block; text-align: center; width: 50%; margin-bottom: 50px;">
+    <h2 style="text-align: center;">Your account has been created successfully.</h2>
+    <a class="btn btn-success btn-lg" style="border-width: 3px; font-size:1.25; font-weight:700; margin: 3rem auto 0; padding: 1.25rem 3.25rem;" href="{% url 'account:index' %}">Sign in</a>
+</div>
+
+{% load welcome_entry %}
+{% welcome_entry %}
+{% endblock %}
