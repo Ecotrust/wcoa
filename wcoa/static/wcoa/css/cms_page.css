@@ -138,6 +138,9 @@ hr {
   margin-left: -15px;
 }
 
+.base-layout input {
+  height: 35px;
+}
 .home .cta-item input {
   height: 28px;
 }
