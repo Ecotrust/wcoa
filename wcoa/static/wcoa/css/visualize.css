@@ -77,6 +77,10 @@ body.template-visualize #left-panel .panel-title{
   margin-bottom: -1.5rem;
 }
 
+body.template-visualize #left-panel #myTab h4 {
+  font-size: 16px;
+}
+
 body.template-visualize #left-panel .panel-title > a {
     float: unset;
     color: unset;
@@ -157,8 +161,13 @@ body.template-visualize #left-panel .panel-body {
     width: 100%;
 }
 
+/*
 #myTab li[data-tab='designs'] {
   display: none;
+}
+*/
+body.template-visualize .sidebar-nav .nav-tabs > li {
+  padding: 0px 10px 0px 10px;
 }
 
 body.template-visualize #map-controls .quick-button{
