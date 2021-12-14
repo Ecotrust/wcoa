@@ -3,6 +3,7 @@ from django.urls import include, path, re_path
 from django.views.generic import RedirectView
 
 from . import views
+from mapgroups import views as groupviews
 
 app_name = 'wcoa'
 handler404 = 'wcoa.views.page_not_found'
@@ -24,6 +25,11 @@ urlpatterns = [
     # Map Groups
     re_path(r'^collaborate/groups/?$', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^collaborate/groups/create/?', views.create_wcoa_mapgroup, name='create_wcoa_mapgroup'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/approve/?$', groupviews.ApproveMapGroupActionView.as_view(), name='request-approve'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/deny/?$', groupviews.DenyMapGroupActionView.as_view(), name='request-deny'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/promote/?$', groupviews.PromoteMapGroupMemberActionView.as_view(), name='promote-member'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/demote/?$', groupviews.DemoteMapGroupMemberActionView.as_view(), name='demote-member'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/remove/?$', groupviews.RemoveMapGroupMemberActionView.as_view(), name='remove-member'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/?$', views.show_wcoa_detail_mapgroups, name='detail'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit$', views.show_wcoa_edit_mapgroups, name='edit'),
     re_path(r'^groups/?', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
