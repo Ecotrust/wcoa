@@ -434,3 +434,17 @@ hr {
    border: 2px solid #22408f; /* carryover from MidA styles, looks nice! */
    color: white;
  }
+
+ /* Bootstrap 2.3.2 is dumb */
+ .modal {
+   width: auto;
+   z-index: 1041;
+   left: 50%;
+   bottom: unset;
+   right: unset;
+   padding: 0 !important;
+ }
+
+ .modal.in .modal-dialog {
+   margin: 0;
+ }
