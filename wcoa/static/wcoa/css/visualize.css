@@ -81,6 +81,11 @@ body.template-visualize #left-panel #myTab h4 {
   font-size: 16px;
 }
 
+body.template-visualize #left-panel btn-primary {
+  color: white;
+  font-weight: bold;
+}
+
 body.template-visualize #left-panel .panel-title > a {
     float: unset;
     color: unset;
