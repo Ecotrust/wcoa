@@ -31,6 +31,10 @@ server {
                 uwsgi_read_timeout 300;
         }
 
+        location = /favicon.ico {
+                alias /usr/local/apps/ocean_portal/apps/wcoa/wcoa/static/favicon.ico;
+        }
+
 	location ~ ^(/_search/|/_doc/|/metadata).*$ {
         	proxy_pass http://192.168.0.56:9200; # hit Prod GeoPortal server directly
         	proxy_redirect off;
