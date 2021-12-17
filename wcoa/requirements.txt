@@ -1,4 +1,4 @@
--e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
+#-e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
 
 # pip3 install selenium
 
