@@ -1,6 +1,6 @@
 Hi {{ user_preferred_name }},
 
-Your membership in the {{ app_name }} group "{{ group_name }}" has been {% if is_manager %}promoted to{% else %}demoted from{% endif %} "manager".
+Your membership in the {{ app_name }} group "{{ group_name|safe }}" has been {% if is_manager %}promoted to{% else %}demoted from{% endif %} "manager".
 
 {% if is_manager %}
   As a manager, you:

@@ -1,6 +1,6 @@
 Hi {{ user_preferred_name }},
 
-Your membership in the {{ app_name }} group "{{ group_name }}" has been {{ status }}.
+Your membership in the {{ app_name }} group "{{ group_name|safe }}" has been {{ status }}.
 
 {% if status == 'Accepted' %}
   You may now view the group details at {{ group_url }}
