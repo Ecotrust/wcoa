@@ -32,7 +32,7 @@
         <div class="row"> <!-- start new row -->
       {% elif block.block_type == 'item' %}
         {% image block.value.background_image max-500x500 as bg_img %}
-        <div class="{% if block.value.width %}span{{ block.value.width }}{% endif %} {% if block.value.background_color %}bg-{{ block.value.background_color }}{% endif %} {% if block.value.text_color %}text-{{ block.value.text_color }}{% endif %} home-item cta-item-wrap" style="{% if block.value.background_image %}background-image: url({{ bg_img.url }});{% endif %}">
+        <div class="{% if block.value.width %}span{{ block.value.width }}{% endif %} {% if block.value.background_color %}bg-{{ block.value.background_color }}{% endif %} {% if block.value.text_color %}text-{{ block.value.text_color }}{% endif %} home-item cta-item-wrap" {% if block.value.background_image %}style="background-image: url({{ bg_img.url }});"{% endif %}>
           {% if block.value.url %}
             <a href="{{ block.value.url }}">
           {% endif %}
