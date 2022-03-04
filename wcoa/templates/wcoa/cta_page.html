@@ -33,10 +33,10 @@
       {% elif block.block_type == 'item' %}
         {% image block.value.background_image max-500x500 as bg_img %}
         <div class="{% if block.value.width %}span{{ block.value.width }}{% endif %} {% if block.value.background_color %}bg-{{ block.value.background_color }}{% endif %} {% if block.value.text_color %}text-{{ block.value.text_color }}{% endif %} home-item cta-item-wrap" style="{% if block.value.background_image %}background-image: url({{ bg_img.url }});{% endif %}">
-          <div class="home-item-cntr cta-item">
-            {% if block.value.url %}
+          {% if block.value.url %}
             <a href="{{ block.value.url }}">
-            {% endif %}
+          {% endif %}
+            <div class="home-item-cntr cta-item">
               {% if block.value.cta_title %}
               <div class="home-item-label clearfix">
                 <p><span class="title">{{ block.value.cta_title }}</span></p>
@@ -47,10 +47,10 @@
                 {{ block.value.cta_content|richtext }}
               </div>
               {% endif %}
-            {% if block.value.url %}
+            </div>
+          {% if block.value.url %}
             </a>
-            {% endif %}
-          </div>
+          {% endif %}
         </div>
       {% else %}
         <div class="home-item span12">
