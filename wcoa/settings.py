@@ -66,6 +66,8 @@ TEMPLATES = [
     },
 ]
 
+DISCLAIMER_BUTTON_DEFAULT = 'Continue'
+
 
 try:
     from .local_settings import *
