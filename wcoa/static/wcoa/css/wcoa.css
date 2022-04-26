@@ -1,3 +1,10 @@
+:root {
+    --badge_border: black;
+    --warning_icon: darkorange;
+    --dark_blue: #132451;
+    --light_blue: #0070cf;
+}
+
 /* Header Overrides */
 /* when hovering over a nav item, desaturate all others */
 .top-nav ul:hover a {
@@ -35,4 +42,43 @@
   
 .cta-item-wrap[class*='text-'] * {
     color: inherit;
+}
+
+.tooltip.fade.right.in .tooltip-arrow {
+    border-right-color: var(--badge_border);
+}
+
+.tooltip.fade.left.in .tooltip-arrow {
+    border-left-color: var(--badge_border);
+}
+
+.tooltip.fade.top.in .tooltip-arrow {
+    border-top-color: var(--badge_border);
+}
+
+.tooltip.fade.bottom.in .tooltip-arrow {
+    border-bottom-color: var(--badge_border);
+}
+
+.tooltip-inner {
+    background-color: var(--badge_border);
+}
+
+i.btn-user-gen {
+    color: var(--warning_icon);
+}
+
+#user-content-notice {
+    background-color: var(--dark_blue);
+    opacity: 85%;
+}
+
+body.template-visualize #map-controls #linear-measurement:hover,
+body.template-visualize #map-controls .quick-button:hover {
+    border: 2px solid var(--light_blue);
+    color: var(--light_blue);
+}
+
+body.template-visualize #left-panel a:hover {
+    color: var(--light_blue);
 }
