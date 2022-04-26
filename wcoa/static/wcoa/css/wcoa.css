@@ -93,12 +93,12 @@ div#user-content-notice a {
     color: white;
     font-weight: bold;
     text-decoration: underline;
-  }
-  
-  div#user-content-notice a:hover {
+}
+
+div#user-content-notice a:hover {
     color: var(--light_blue);
-  }
-  
-  body.template-visualize #map-controls a.img-icon:hover img.quick-launch-icon, body.template-visualize #map-controls a.img-icon img.quick-launch-icon:hover {
+}
+
+body.template-visualize #map-controls a.img-icon:hover img.quick-launch-icon, body.template-visualize #map-controls a.img-icon img.quick-launch-icon:hover {
     filter: invert(42%) sepia(73%) saturate(6481%) hue-rotate(192deg) brightness(91%) contrast(102%);
-  }
+}
