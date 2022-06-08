@@ -26,7 +26,7 @@ class WCOALayerAdmin(LayerAdmin):
             'fields': (
                 catalog_fields,
                 ('name','layer_type',),
-                'url',
+                ('url', 'proxy_url'),
                 'site'
             )
         }),
