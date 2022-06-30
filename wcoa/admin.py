@@ -26,7 +26,7 @@ class WCOALayerAdmin(LayerAdmin):
             'fields': (
                 catalog_fields,
                 ('name','layer_type',),
-                'url',
+                ('url', 'proxy_url'),
                 'site'
             )
         }),
@@ -103,7 +103,7 @@ class WCOALayerAdmin(LayerAdmin):
                 ('label_field'),
                 # ('attribute_event', 'attribute_fields'),
                 'attribute_fields',
-                ('lookup_field', 'lookup_table'),
+                # ('lookup_field', 'lookup_table'),
                 # ('mouseover_field'),
                 # 'is_annotated',           # used for popovers, not implemented since OL2
                 # 'compress_display',
@@ -113,15 +113,26 @@ class WCOALayerAdmin(LayerAdmin):
             'classes': ('collapse',),
             'fields': (
                 'opacity',
-                ('vector_outline_color', 'vector_outline_opacity'),
-                ('vector_color', 'vector_fill'),
-                'vector_outline_width',
-                'vector_graphic',
-                'vector_graphic_scale',
-                'point_radius',
+                'custom_style',
+                (
+                    'vector_outline_width',
+                    'vector_outline_color', 
+                    # 'vector_outline_opacity',
+                ),
+                (
+                    'vector_fill',
+                    'vector_color', 
+                ),
+                (
+                    'point_radius',
+                    'vector_graphic',
+                    'vector_graphic_scale',
+                ),
+                (
+                    'lookup_field',
+                    'lookup_table',
+                ),
                 # 'thumbnail',
-                # 'lookup_field',
-                # 'lookup_table',
             )
         }),
         # ('ESPIS', {
