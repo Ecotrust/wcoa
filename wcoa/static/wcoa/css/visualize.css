@@ -207,3 +207,7 @@ body.template-visualize .feedback-button {
   border-color: rgba(117, 137, 155, 1);
   border-bottom: none;
 }
+
+#user-layer-help-modal {
+  margin-top: 75px;
+}
