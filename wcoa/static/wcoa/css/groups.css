@@ -6,3 +6,15 @@ table.group-membership-list td img {
   max-width: 32px;
   max-height: 32px;
 }
+
+.btn-lg {
+  font-size: 18px;
+  word-spacing: 0.4rem;
+  font-family: var(--bold_font_family);
+}
+
+.group-form-disclaimer p {
+  font-size: 16px;
+  line-height: 2.3rem;
+  letter-spacing: 0.2rem;
+}

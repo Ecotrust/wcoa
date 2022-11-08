@@ -3,6 +3,35 @@
     --warning_icon: darkorange;
     --dark_blue: #132451;
     --light_blue: #0070cf;
+    --default_font_family: "Rajdhani", "Open Sans", sans-serif;
+    --bold_font_family: "Rajdhani SemiBold", "Rajdani Bold", "Open Sans", sans-serif;
+    --generic_font_family: "Open Sans", sans-serif;
+}
+
+@font-face {
+    font-family: 'Rajdhani';
+    src: url('../fonts/Rajdhani/Rajdhani-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Rajdhani Bold';
+    src: url('../fonts/Rajdhani/Rajdhani-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Rajdhani SemiBold';
+    src: url('../fonts/Rajdhani/Rajdhani-SemiBold.ttf');
+}
+
+*,
+p,
+p span,
+input {
+    font-family: var(--generic_font_family);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--bold_font_family);
 }
 
 /* Header Overrides */
@@ -24,7 +53,7 @@ div.login h2 {
 /* CMS_PAGE OVERRIDES */
 
 .cta-item .rich-text li a {
-    font-family: PtMono,"Courier New",Courier,monospace !important;
+    font-family: var(--default_font_family) !important;
 }
 
 .cta-item a {
@@ -41,13 +70,26 @@ div.login h2 {
 
 .cta-item .title {
     border-bottom: #9ec73d 2px solid;
-    font-family: "PtMono", "Courier New", Courier, monospace;
-    font-size: 1em;
+    font-family: var(--default_font_family);
+    font-size: 1.2em;
     line-height: 1.75;
 }
   
 .cta-item-wrap[class*='text-'] * {
     color: inherit;
+}
+
+.cta-content h3 {
+    font-size: 1.9rem;
+}
+
+#search-filter input {
+    font-size: 15px;
+}
+
+.packery-container .cta-item p,
+.packery-container .cta-content p {
+    font-size: 1.3rem;
 }
 
 .tooltip.fade.right.in .tooltip-arrow {
@@ -101,4 +143,11 @@ div#user-content-notice a:hover {
 
 body.template-visualize #map-controls a.img-icon:hover img.quick-launch-icon, body.template-visualize #map-controls a.img-icon img.quick-launch-icon:hover {
     filter: invert(42%) sepia(73%) saturate(6481%) hue-rotate(192deg) brightness(91%) contrast(102%);
+}
+
+button.feedback-button.btn-warning {
+    font-size: 1.3rem;
+    letter-spacing: 0.02rem;
+    font-weight: bold;
+    line-height: 1.8rem;
 }
