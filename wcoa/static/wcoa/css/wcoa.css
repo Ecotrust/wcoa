@@ -38,17 +38,22 @@ h1, h2, h3, h4 {
 /* when hovering over a nav item, desaturate all others */
 .top-nav ul:hover a {
     color: #999999;
-  }
-  .top-nav ul a:hover {
+}
+.top-nav ul a:hover {
     color: #332e1f;
-  }
+}
 
+
+.navbar-default .navbar-nav > li > a {
+    font-size: 1.8rem;
+    font-family: var(--bold_font_family);
+}
 
   /******** Login PAGE ************/
 
 div.login h2 {
     color: var(--light_blue);
-  }
+}
 
 /* CMS_PAGE OVERRIDES */
 
