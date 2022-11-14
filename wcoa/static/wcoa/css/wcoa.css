@@ -156,3 +156,14 @@ button.feedback-button.btn-warning {
     font-weight: bold;
     line-height: 1.8rem;
 }
+
+.feedback-button,
+.feedback-button.btn-warning,
+button.feedback-button.btn-warning {
+    border-color: rgba(117, 137, 155, 1);
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0;
+    color: #58585b;
+    padding: 3px 12px 1px;
+}
