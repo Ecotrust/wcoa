@@ -63,6 +63,7 @@
   {% else %}
       <script src="{% static 'js/wrappers/wrapper_init.js' %}"></script>
       <!-- LOAD MAP WRAPPERS -->
+      <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_map_library.js"></script>
       <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_layers.js"></script>
       <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_wrapper.js"></script>
       <script src="{% static 'js/' %}wrappers/{{ MAP_LIBRARY }}/{{ MAP_LIBRARY }}_map.js"></script>
