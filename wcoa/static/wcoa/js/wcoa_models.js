@@ -36,7 +36,7 @@ var callback = function(){
     }
 
     $.ajax({
-          url: "https://api-ssl.bitly.com/v4/shorten?long_url=http%3A%2F%2Fcompass2019.ecotrust.org%2Fvisualize%2F&_=1572541860009",
+          url: "https://api-ssl.bitly.com/v4/shorten?",
           cache: false,
           dataType: "json",
           method: "POST",
