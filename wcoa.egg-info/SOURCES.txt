@@ -5,7 +5,6 @@ setup.py
 wcoa/__init__.py
 wcoa/admin.py
 wcoa/apps.py
-wcoa/local_settings.py
 wcoa/models.py
 wcoa/project_urls.py
 wcoa/settings.py
