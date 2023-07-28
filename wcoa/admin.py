@@ -71,7 +71,7 @@ class WCOALayerAdmin(LayerAdmin):
         ('ArcGIS DETAILS', {
             'classes': ('collapse',),
             'fields': (
-                ('arcgis_layers', 'query_by_point', 'disable_arcgis_attributes'),
+                ('arcgis_layers', 'password_protected', 'query_by_point', 'disable_arcgis_attributes'),
             )
         }),
         ('WMS DETAILS', {
