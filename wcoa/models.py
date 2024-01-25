@@ -1,11 +1,10 @@
 from django.db import models
 from modelcluster.fields import ParentalKey
-from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel, PageChooserPanel
+from wagtail.models import Page, Orderable
+from wagtail.fields import RichTextField, StreamField
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 from wagtail.images.models import Image
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 from portal.home.models import HomePage
@@ -74,14 +73,17 @@ class CTAStreamBlock(blocks.StructBlock):
         value_class = LinkStructValue
 
 class CTAPage(Page):
-    body = StreamField([
-        ('item', CTAStreamBlock()),
-        ('details', blocks.RichTextBlock()),
-        ('row', CTARowDivider()),
-    ])
+    body = StreamField(
+        [
+            ('item', CTAStreamBlock()),
+            ('details', blocks.RichTextBlock()),
+            ('row', CTARowDivider()),
+        ],
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
 
     subpage_types = [
@@ -123,10 +125,13 @@ class ConnectPage(Page):
         related_name='+'
     )
 
-    cta_list = StreamField([
-        ('connection', CTAStreamBlock()),
-        ('details', blocks.RichTextBlock()),
-    ])
+    cta_list = StreamField(
+        [
+            ('connection', CTAStreamBlock()),
+            ('details', blocks.RichTextBlock()),
+        ],
+        use_json_field=True,
+    )
 
     # Editor panels configuration
 
@@ -144,8 +149,8 @@ class ConnectPage(Page):
             classname="collapsible",
         ),
         FieldPanel('body'),
-        ImageChooserPanel('body_image'),
-        StreamFieldPanel('cta_list'),
+        FieldPanel('body_image'),
+        FieldPanel('cta_list'),
     ]
 
 
