@@ -22,6 +22,8 @@ CATALOG_TECHNOLOGY = 'GeoPortal2'
 
 HANDLER_404 = 'wcoa.views.page_not_found'
 
+WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
+
 WAGTAILEMBEDS_FINDERS = [
     {
         'class': 'wagtail.embeds.finders.oembed',
