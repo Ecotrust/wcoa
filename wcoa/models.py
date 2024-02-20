@@ -195,6 +195,25 @@ class WcoaOceanStories(OceanStories):
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
+class IndicatorPage(StreamFieldPage):
+    body = StreamField(
+        [
+            ('Content Block', CTAStreamBlock()),
+            ('Rich Text Block', blocks.RichTextBlock()),
+            ('Row Divider', CTARowDivider()),
+        ],
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+    ]
+
+    parent_page_types = ['IndicatorCategory']
+
+class IndicatorCategory(StreamFieldPage):
+    subpage_types = ['IndicatorPage']
+
 WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
     FieldPanel('display_home_page'),
     MultiFieldPanel([FieldPanel('hook'), FieldPanel('explore_title'), FieldPanel('explore_url')], "Map overlay"),
