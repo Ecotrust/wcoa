@@ -195,24 +195,61 @@ class WcoaOceanStories(OceanStories):
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
-class IndicatorPage(StreamFieldPage):
+class IndicatorScore(blocks.StructBlock):
+    state = blocks.ChoiceBlock(choices=[
+        ('West Coast', 'West Coast'),
+        ('CA', 'California'),
+        ('OR', 'Oregon'),
+        ('WA', 'Washington'),
+    ])
+    image = ImageChooserBlock(required=False)
+    year = models.IntegerField(null=True, blank=True)
+    report = models.URLField()
+    indicator_page = ParentalKey('IndicatorPage', on_delete=models.CASCADE, related_name='indicator_scores')
+
+    panels = [
+        FieldPanel('state'),
+        FieldPanel('image'),
+        FieldPanel('year'),
+        FieldPanel('report'),
+    ]
+
+
+class IndicatorPage(Page):
+    page_description = "Use the to create a page for an indicator."
+    name = models.CharField(max_length=255)
+    icon = ImageChooserBlock(required=False)
+    description = RichTextField()
+
     body = StreamField(
         [
-            ('Content Block', CTAStreamBlock()),
-            ('Rich Text Block', blocks.RichTextBlock()),
-            ('Row Divider', CTARowDivider()),
+            ('Score', IndicatorScore()),
+            ('WYSIWYG', blocks.RichTextBlock()),
+            ('border', CTARowDivider()),
         ],
         use_json_field=True,
     )
 
     content_panels = Page.content_panels + [
         FieldPanel('body'),
+        FieldPanel('name'),
+        FieldPanel('description'),
     ]
 
-    parent_page_types = ['IndicatorCategory']
+    def indicator_category(self):
+        # Find the indicator category that is an ancestor of this page
+        return self.get_ancestors().type(IndicatorCategory).last()
 
-class IndicatorCategory(StreamFieldPage):
-    subpage_types = ['IndicatorPage']
+class IndicatorCategory(Page):
+    page_description = "This page will display a list of indicators for the selected category."
+    
+    # subpage_types = ['IndicatorPage']
+
+    def indicators(self):
+        # Get list of indicators in this category
+        indicators = IndicatorPage.objects.live().descendant_of(self)
+
+        return indicators
 
 WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
     FieldPanel('display_home_page'),
