@@ -79,7 +79,7 @@ var quarter_second_loop = function() {
 
   iframe_contents = $('#page_iframe').contents();
   $('.g-item-actions', iframe_contents).children('div.dropdown').each(function(){
-    if (!$(this).is(':first-child')) {
+    if (!$(this).is(':first-child') && this.innerText=="Links") {
       $(this).parent().prepend($(this));
     }
   });
