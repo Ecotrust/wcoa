@@ -6,29 +6,37 @@ from wcoa import models
 class IndicatorCategoryTest(WagtailPageTestCase):
     @classmethod
     def setUpTestData(cls):
-        root = Page.ger_first_root_node()
-        Site.objcects.create(
+        root = Page.get_first_root_node()
+        Site.objects.create(
             hostname="testserver",
             root_page=root,
             is_default_site=True,
             site_name="testserver",
         )
+        
         test_category = models.IndicatorCategory(
+            name='Category',
             title='Test Category',
             slug='test-category',
         )
         root.add_child(instance=test_category)
+
         cls.page = models.IndicatorPage(
+            name='indicator-1',
             title='Indicator 1',
             slug='indicator-1',
         )
         test_category.add_child(instance=cls.page)
+        
         cls.page_two = models.IndicatorPage(
+            name='indicator-2',
             title='Indicator 2',
             slug='indicator-2',
         )
         test_category.add_child(instance=cls.page_two)
+        
         cls.page_three = models.IndicatorPage(
+            name='indicator-3',
             title='Indicator 3',
             slug='indicator-3',
         )
@@ -37,9 +45,8 @@ class IndicatorCategoryTest(WagtailPageTestCase):
     def test_indicators(self):
         # Retrieve the category from the database
         category = models.Page.objects.get(slug='test-category')
-        
         # Call the indicators() method
-        indicators = category.indicators()
+        indicators = category.specific.indicators()
 
         # Assert that the number of indicators is correct
         self.assertEqual(len(indicators), 3)
