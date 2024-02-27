@@ -42,6 +42,11 @@ class IndicatorCategoryTest(WagtailPageTestCase):
         )
         test_category.add_child(instance=cls.page_three)
 
+    def test_get(self):
+        response = self.client.get(self.page.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.name, 'Category')
+
     def test_indicators(self):
         # Retrieve the category from the database
         category = models.Page.objects.get(slug='test-category')
