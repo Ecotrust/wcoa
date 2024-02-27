@@ -219,7 +219,7 @@ class IndicatorPage(Page):
     page_description = "Use the to create a page for an indicator."
     name = models.CharField(max_length=255)
     icon = ImageChooserBlock(required=False)
-    description = RichTextField()
+    description = RichTextField(blank=True, null=True)
 
     body = StreamField(
         [
@@ -242,7 +242,7 @@ class IndicatorPage(Page):
 
 class IndicatorCategory(Page):
     page_description = "This page will display a list of indicators for the selected category."
-    
+    name = models.CharField(max_length=255)
     # subpage_types = ['IndicatorPage']
 
     def indicators(self):
