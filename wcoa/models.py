@@ -242,10 +242,18 @@ class OHIIndicatorPage(Page):
 
 class OHIClass(Page):
     page_description = "This page will display a list of indicators for the selected class."
-    name = models.CharField(max_length=255) 
+    name = models.CharField(max_length=255)
+    ohiclass_image = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('name'),
+        FieldPanel('ohiclass_image'),
     ]
 
     subpage_types = [
