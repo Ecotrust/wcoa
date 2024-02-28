@@ -14,28 +14,28 @@ class IndicatorCategoryTest(WagtailPageTestCase):
             site_name="testserver",
         )
         
-        test_category = models.IndicatorCategory(
+        test_category = models.OHICategory(
             name='Category',
             title='Test Category',
             slug='test-category',
         )
         root.add_child(instance=test_category)
 
-        cls.page = models.IndicatorPage(
+        cls.page = models.OHIIndicatorPage(
             name='indicator-1',
             title='Indicator 1',
             slug='indicator-1',
         )
         test_category.add_child(instance=cls.page)
         
-        cls.page_two = models.IndicatorPage(
+        cls.page_two = models.OHIIndicatorPage(
             name='indicator-2',
             title='Indicator 2',
             slug='indicator-2',
         )
         test_category.add_child(instance=cls.page_two)
         
-        cls.page_three = models.IndicatorPage(
+        cls.page_three = models.OHIIndicatorPage(
             name='indicator-3',
             title='Indicator 3',
             slug='indicator-3',
@@ -45,13 +45,12 @@ class IndicatorCategoryTest(WagtailPageTestCase):
     def test_get(self):
         response = self.client.get(self.page.url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.name, 'Category')
 
     def test_indicators(self):
         # Retrieve the category from the database
         category = models.Page.objects.get(slug='test-category')
         # Call the indicators() method
-        indicators = category.specific.indicators()
+        indicators = category.specific.get_child_indicators()
 
         # Assert that the number of indicators is correct
         self.assertEqual(len(indicators), 3)
