@@ -70,6 +70,9 @@ TEMPLATES = [
 
 DISCLAIMER_BUTTON_DEFAULT = 'Continue'
 
+# WAGTAIL_SITE_NAME = 'WCOA'
+# WAGTAILADMIN_BASE_URL = 'http://localhost:8001'
+# WAGTAIL_APPEND_SLASH = False
 
 try:
     from .local_settings import *
