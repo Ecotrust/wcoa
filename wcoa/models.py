@@ -1,5 +1,13 @@
+from django.conf import settings
 from django.db import models
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+from portal.home.models import HomePage
+from portal.base.models import PortalImage, DetailPageBase, PageBase, DetailPageBase, MediaItem
+from portal.calendar.models import Calendar
+from portal.news.models import News
+from portal.ocean_stories.models import OceanStory, OceanStories
+from portal.grid_pages.models import GridPage, GridPageDetail, GridPageSection, GridPageSectionBase
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField, StreamField
 from wagtail import blocks
@@ -7,13 +15,6 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, Inl
 from wagtail.images.models import Image
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
-from portal.home.models import HomePage
-from portal.base.models import PortalImage, DetailPageBase, PageBase, DetailPageBase, MediaItem
-from portal.calendar.models import Calendar
-from portal.news.models import News
-from portal.ocean_stories.models import OceanStory, OceanStories
-from portal.grid_pages.models import GridPage, GridPageDetail, GridPageSection, GridPageSectionBase
-from django.conf import settings
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
@@ -96,6 +97,7 @@ class CTAPage(Page):
         'wcoa.CatalogIframePage',
         'wcoa.CatalogThemeGridPage',
         'pages.Page',
+        'wcoa.OHICategory',
     ]
 
     def get_context(self, request):
@@ -195,7 +197,7 @@ class WcoaOceanStories(OceanStories):
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
-class IndicatorScore(blocks.StructBlock):
+class OHIIndicatorScore(blocks.StructBlock):
     state = blocks.ChoiceBlock(choices=[
         ('West Coast', 'West Coast'),
         ('CA', 'California'),
@@ -209,21 +211,19 @@ class IndicatorScore(blocks.StructBlock):
 
     panels = [
         FieldPanel('state'),
-        FieldPanel('image'),
         FieldPanel('year'),
         FieldPanel('report'),
     ]
 
 
-class IndicatorPage(Page):
+class OHIIndicatorPage(Page):
     page_description = "Use the to create a page for an indicator."
     name = models.CharField(max_length=255)
-    icon = ImageChooserBlock(required=False)
     description = RichTextField(blank=True, null=True)
 
     body = StreamField(
         [
-            ('Score', IndicatorScore()),
+            ('Score', OHIIndicatorScore()),
             ('WYSIWYG', blocks.RichTextBlock()),
             ('border', CTARowDivider()),
         ],
@@ -231,25 +231,48 @@ class IndicatorPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
         FieldPanel('name'),
+        FieldPanel('body'),
         FieldPanel('description'),
     ]
 
-    def indicator_category(self):
+    def get_indicator_category(self):
         # Find the indicator category that is an ancestor of this page
-        return self.get_ancestors().type(IndicatorCategory).last()
+        return self.get_ancestors().type(OHIClass).last()
 
-class IndicatorCategory(Page):
+class OHIClass(Page):
+    page_description = "This page will display a list of indicators for the selected class."
+    name = models.CharField(max_length=255) 
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+    ]
+
+    subpage_types = [
+        'wcoa.OHIIndicatorPage',
+    ]
+
+    def get_child_indicators(self):
+        # Get list of categories in this class
+        indicators = OHIIndicatorPage.objects.live().descendant_of(self)
+        return indicators
+
+class OHICategory(Page):
     page_description = "This page will display a list of indicators for the selected category."
     name = models.CharField(max_length=255)
-    # subpage_types = ['IndicatorPage']
 
-    def indicators(self):
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+    ]
+
+    subpage_types = [
+        'wcoa.OHIClass',
+    ]
+
+    def get_child_classes(self):
         # Get list of indicators in this category
-        indicators = IndicatorPage.objects.live().descendant_of(self)
-
-        return indicators
+        classes = OHIClass.objects.live().descendant_of(self)
+        return classes
 
 WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
     FieldPanel('display_home_page'),
@@ -268,6 +291,8 @@ wcoa_appropriate_subpage_types = [
     'news.News',
     'pages.Page',
     'wcoa.WcoaOceanStories',
+    'wcoa.OHICategory',
+    'wcoa.OHIIndicatorPage',
 ]
 Page.subpage_types = wcoa_appropriate_subpage_types
 # These should not be viable Root Pages
