@@ -236,11 +236,17 @@ class OHIStuctBlock(blocks.StructBlock):
         ('grey', 'Grey'),
     ]
 
+    # content = blocks.RichTextBlock(required=False)
+    content = blocks.StreamBlock([
+        ('Score', OHIIndicatorScore()),
+        ('WYSIWYG', blocks.RichTextBlock(required=False)),
+    ], required=False, use_json_field=True)
+
     text_color = blocks.ChoiceBlock(choices=color_choices, icon='color_palette', required=False)
-    border_color = blocks.ChoiceBlock(choices=color_choices, icon='color_palette', required=False)
-    border_width = blocks.IntegerBlock(required=False, help_text="Width of the border in pixels")
     background_color = blocks.ChoiceBlock(choices=color_choices, icon='color', required=False)
     background_image = ImageChooserBlock(required=False)
+    border_color = blocks.ChoiceBlock(choices=color_choices, icon='color_palette', required=False)
+    border_width = blocks.IntegerBlock(required=False, help_text="Width of the border in pixels")
 
 class OHIIndicatorPage(Page):
     page_description = "Use the to create a page for an indicator."
@@ -249,9 +255,7 @@ class OHIIndicatorPage(Page):
 
     body = StreamField(
         [
-            ('Score', OHIIndicatorScore()),
-            ('WYSIWYG', blocks.RichTextBlock()),
-            ('border', CTARowDivider()),
+            ('Column', OHIStuctBlock()),
         ],
         use_json_field=True,
     )
@@ -334,6 +338,7 @@ wcoa_appropriate_subpage_types = [
     'pages.Page',
     'wcoa.WcoaOceanStories',
     'wcoa.OHICategory',
+    'wcoa.OHIIndicatorPage',
 ]
 Page.subpage_types = wcoa_appropriate_subpage_types
 # These should not be viable Root Pages
