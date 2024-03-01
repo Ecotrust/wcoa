@@ -79,3 +79,71 @@ class IndicatorCategoryTest(WagtailPageTestCase):
         self.assertEqual(indicators[1].title, 'Indicator 2')
         self.assertEqual(indicators[2].title, 'Indicator 3')
 
+class OHIIndicatorClassTest(WagtailPageTestCase):
+    def setUp(self):
+        root = Page.get_first_root_node()
+        Site.objects.create(
+            hostname="testserver",
+            root_page=root,
+            is_default_site=True,
+            site_name="testserver",
+        )
+        
+        test_category = models.OHICategory(
+            name='Category',
+            title='Test Category',
+            slug='test-category',
+        )
+        root.add_child(instance=test_category)
+
+    def test_create_class_page(self):
+        test_category = models.Page.objects.get(slug='test-category')
+        self.page = models.OHIClass(
+            name='Class',
+            title='Test Class',
+            slug='test-class',
+        )
+        test_category.add_child(instance=self.page)
+
+        response = self.client.get(self.page.url)
+        
+        self.assertEqual(response.status_code, 200)
+
+class OHIIndicatorPageTest(WagtailPageTestCase):
+    def setUp(self):
+        root = Page.get_first_root_node()
+        Site.objects.create(
+            hostname="testserver",
+            root_page=root,
+            is_default_site=True,
+            site_name="testserver",
+        )
+        
+        test_category = models.OHICategory(
+            name='Category',
+            title='Test Category',
+            slug='test-category',
+        )
+        root.add_child(instance=test_category)
+
+        test_class = models.OHIClass(
+            name='Class',
+            title='Test Class',
+            slug='test-class',
+        )
+        test_category.add_child(instance=test_class)
+
+    def test_create_indicator_page(self):
+        test_class = models.Page.objects.get(slug='test-class')
+        self.page = models.OHIIndicatorPage(
+            name='indicator-1',
+            title='Indicator 1',
+            slug='indicator-1',
+        )
+        test_class.add_child(instance=self.page)
+
+        response = self.client.get(self.page.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Indicator 1')
+    
