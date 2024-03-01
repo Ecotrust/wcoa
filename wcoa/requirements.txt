@@ -5,3 +5,5 @@
 elasticsearch<8.0
 
 elasticsearch-dsl
+
+selenium
