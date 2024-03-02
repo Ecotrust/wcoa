@@ -209,6 +209,9 @@ class OHIIndicatorScore(blocks.StructBlock):
     report = blocks.URLBlock(required=False, help_text="URL to the report")
     indicator_page = ParentalKey('IndicatorPage', on_delete=models.CASCADE, related_name='indicator_scores')
 
+    class Meta:
+        template = 'wcoa/blocks/ohi_indicator_score.html'
+
 class OHIStuctBlock(blocks.StructBlock):
     # width is an int in CTA blocks, but a choice block is preferrable
     width = blocks.ChoiceBlock(choices=[
@@ -224,7 +227,7 @@ class OHIStuctBlock(blocks.StructBlock):
         ('10', '10/12'),
         ('11', '11/12'),
         ('12', '12/12'),
-    ], icon='arrow-right', required=False)
+    ], default='12', label='Width', icon='arrow-right', required=False)
 
     color_choices = [
         ('white', 'White'),
@@ -242,11 +245,14 @@ class OHIStuctBlock(blocks.StructBlock):
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
     ], required=False, use_json_field=True)
 
-    text_color = blocks.ChoiceBlock(choices=color_choices, icon='color_palette', required=False)
-    background_color = blocks.ChoiceBlock(choices=color_choices, icon='color', required=False)
+    text_color = blocks.ChoiceBlock(choices=color_choices, default='black', icon='color_palette', required=False)
+    background_color = blocks.ChoiceBlock(choices=color_choices, default='white', icon='color', required=False)
     background_image = ImageChooserBlock(required=False)
-    border_color = blocks.ChoiceBlock(choices=color_choices, icon='color_palette', required=False)
-    border_width = blocks.IntegerBlock(required=False, help_text="Width of the border in pixels")
+    border_color = blocks.ChoiceBlock(choices=color_choices, default='', icon='color_palette', required=False)
+    border_width = blocks.IntegerBlock(default='', help_text="Width of the border in pixels", required=False, min_value=0, max_value=10)
+
+    class Meta:
+        template = 'wcoa/blocks/ohi_struct_block.html'
 
 class OHIIndicatorPage(Page):
     page_description = "Use the to create a page for an indicator."
