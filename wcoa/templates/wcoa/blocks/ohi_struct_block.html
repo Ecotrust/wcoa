@@ -1,4 +1,4 @@
-<div class="span{{ self.width }}" style="background-color: {{ self.background_color }}; background-image: url('{{ self.background_image.url }}'); border-color: {{ self.border_color }}; border-width: {{ self.border_width }}px; color: {{ self.text_color }}; {% if self.border_width %}border-style: solid;{% endif %}">
+<div class="col-md-{{ self.width }}" style="background-color: {{ self.background_color }}; background-image: url('{{ self.background_image.url }}'); border-color: {{ self.border_color }}; border-width: {{ self.border_width }}px; color: {{ self.text_color }}; {% if self.border_width %}border-style: solid;{% endif %}">
     {% for block in self.content %}
         {{ block }}
     {% endfor %}

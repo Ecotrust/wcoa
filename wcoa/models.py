@@ -261,6 +261,7 @@ class OHIIndicatorPage(Page):
 
     body = StreamField(
         [
+            ('Clear', CTARowDivider()),
             ('Column', OHIStuctBlock()),
         ],
         use_json_field=True,
