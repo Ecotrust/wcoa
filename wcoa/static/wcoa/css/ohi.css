@@ -3,3 +3,8 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 
+/* for columns with a background image and link */
+.link-bg {
+    height: 600px; 
+    width: 100%;
+}

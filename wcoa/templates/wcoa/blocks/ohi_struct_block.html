@@ -1,5 +1,21 @@
-<div class="col-md-{{ self.width }}" style="background-color: {{ self.background_color }}; background-image: url('{{ self.background_image.url }}'); border-color: {{ self.border_color }}; border-width: {{ self.border_width }}px; color: {{ self.text_color }}; {% if self.border_width %}border-style: solid;{% endif %}">
+{% load wagtailimages_tags %}
+
+{% if self.link %}
+    <a href="{{ self.link }}">
+{% endif %}
+
+{% image self.background_image max-1000x1000 as bg_img %}
+
+<div class="col-md-{{ self.width }}" style="background-color: {{ self.background_color }}; background-image: url('{{ bg_img.url }}'); border-color: {{ self.border_color }}; border-width: {{ self.border_width }}px; color: {{ self.text_color }}; {% if self.border_width %}border-style: solid;{% endif %}">
     {% for block in self.content %}
         {{ block }}
     {% endfor %}
+    {% if self.background_image and self.link %}
+        <div class="link-bg"></div>
+    {% endif %}
+
 </div>
+
+{% if self.link %}
+    </a>
+{% endif %}
