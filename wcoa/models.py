@@ -259,6 +259,13 @@ class OHIIndicatorPage(Page):
     page_description = "Use the to create a page for an indicator."
     name = models.CharField(max_length=255)
     description = RichTextField(blank=True, null=True)
+    indicator_image = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     body = StreamField(
         [
@@ -270,6 +277,7 @@ class OHIIndicatorPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('name'),
+        FieldPanel('indicator_image'),
         FieldPanel('body'),
         FieldPanel('description'),
     ]
