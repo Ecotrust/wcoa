@@ -9,7 +9,8 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 install_requires = [
     'elasticsearch',
-    'elasticsearch-dsl'
+    'elasticsearch-dsl',
+    'selenium',
 ]
 
 setup(
