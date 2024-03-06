@@ -2,9 +2,3 @@ h1, h2, h3, h4 {
     text-align: center;
     width: 100%;
 }
-
-/* for columns with a background image and link */
-.link-bg {
-    height: 600px; 
-    width: 100%;
-}
