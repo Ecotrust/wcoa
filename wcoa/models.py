@@ -41,7 +41,7 @@ class CTAPage(Page):
         'wcoa.CatalogIframePage',
         'wcoa.CatalogThemeGridPage',
         'pages.Page',
-        'wcoa.OHICategory',
+        'wcoa.OHIDashboard',
     ]
 
     def get_context(self, request):
@@ -315,8 +315,7 @@ wcoa_appropriate_subpage_types = [
     'news.News',
     'pages.Page',
     'wcoa.WcoaOceanStories',
-    'wcoa.OHICategory',
-    'wcoa.OHIIndicatorPage',
+    'wcoa.OHIDashboard',
 ]
 Page.subpage_types = wcoa_appropriate_subpage_types
 # These should not be viable Root Pages
