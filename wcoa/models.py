@@ -265,6 +265,38 @@ class OHICategory(Page):
         classes = OHIClass.objects.live().descendant_of(self)
         return classes
 
+class OHIDashboard(Page):
+    page_description = "Use this for the root Ocean Health dashboard page."
+    name = models.CharField(max_length=255)
+    description = RichTextField(blank=True, null=True)
+    ohi_logo = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    body = blocks.StreamBlock([
+        ('WYSIWYG', blocks.RichTextBlock(required=False)),
+    ], required=False, use_json_field=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('ohi_logo'),
+        FieldPanel('description'),
+        
+    ]
+
+    subpage_types = [
+        'wcoa.OHICategory',
+    ]
+
+    def get_child_categories(self):
+        # Get list of categories in this dashboard
+        categories = OHICategory.objects.live().descendant_of(self)
+        return categories
+
 
 WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
     FieldPanel('display_home_page'),
