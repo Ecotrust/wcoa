@@ -20,8 +20,9 @@
                 {% for block in page.body %}
                     {% if block.block_type == 'Clear' %}
                         <div class="clearfix"></div>
+                    {% else %}
+                        {{ block }}
                     {% endif %}
-                    {{ block }}
                 {% endfor %}
             </div>
         </div>
