@@ -4,7 +4,7 @@
     <a href="{{ self.link }}">
 {% endif %}
 
-<div class="col-md-{{ self.width }}" style="background-color: {{ self.background_color }}; border-color: {{ self.border_color }}; border-width: {{ self.border_width }}px; color: {{ self.text_color }}; {% if self.border_width %}border-style: solid;{% endif %}">
+<div class="col-md-{{ self.width }}" style="background-color: {{ self.background_color }}; color: {{ self.text_color }};  outline-color: {{ self.border_color }}; outline-width: {{ self.border_width }}px; outline-offset: -.3125vw; {% if self.border_width %}outline-style: solid;{% endif %}; padding: .5vw 1vw;">
 
     {% image self.background_image max-1000x1000 %}
     
