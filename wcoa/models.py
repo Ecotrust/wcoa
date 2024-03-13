@@ -277,15 +277,18 @@ class OHIDashboard(Page):
         related_name='+'
     )
 
-    body = blocks.StreamBlock([
-        ('WYSIWYG', blocks.RichTextBlock(required=False)),
-    ], required=False, use_json_field=True)
+    body = StreamField(
+        [
+            ('content', blocks.RichTextBlock(required=False)),
+        ],
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('ohi_logo'),
         FieldPanel('description'),
-        
+        FieldPanel('body'),
     ]
 
     subpage_types = [
