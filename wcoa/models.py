@@ -265,6 +265,13 @@ class OHICategory(Page):
         classes = OHIClass.objects.live().descendant_of(self)
         return classes
 
+    def get_class_indicators(self):
+        classes = self.get_child_classes()
+        indicators = []
+        for c in classes:
+            indicators += OHIIndicatorPage.objects.live().descendant_of(c)
+        return indicators
+
 class OHIDashboard(Page):
     page_description = "Use this for the root Ocean Health dashboard page."
     name = models.CharField(max_length=255)

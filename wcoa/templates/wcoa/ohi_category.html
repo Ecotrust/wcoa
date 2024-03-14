@@ -18,14 +18,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="ohi-category">
-                    {% for item in page.ohi_category %}
-                        <div class="ohi-category-item">
+                    {% for item in page.get_class_indicators %}
+                        <div class="ohi-category-item" style="text-align: center;">
                             <a href="{{ item.url }}">
-                                <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                                <h2>{{ item.title }}</h2>
+                                {% image item.indicator_image max-120x120 %}
+                                <h3>{{ item.title }}</h3>
                             </a>
                         </div>
                     {% endfor %}
+                    {% for item in page.get_child_classes %}
+                        <div class="ohi-category-item" style="text-align: center;">
+                            <a href="{{ item.url }}">
+                                {% image item.ohiclass_image max-120x120 %}
+                                <h3>{{ item.title }}</h3>
+                            </a>
+                        </div>
+                    {% endfor %}
+                
                 </div>
             </div>
         </div>
