@@ -1,0 +1,50 @@
+{% extends 'wcoa/wcoa_site/cms_page.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'wcoa/css/ohi.css' %}" type="text/css">
+{% endblock %}
+
+{% block body_class %}template-ohi-category{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if page.get_ancestors|length > 1 %}
+                    <ul class="breadcrumb">
+                        {% for ancestor_page in page.get_ancestors %}
+                            {% if not ancestor_page.is_root %}
+                                {% if ancestor_page.depth > 2 %}
+                                    <li class="breadcrumb-item"><a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title|truncatewords:4 }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <li class="breadcrumb-item">{{ page.title|truncatewords:4 }}</li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ page.title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ohi-category">
+                    {% for item in page.ohi_category %}
+                        <div class="ohi-category-item">
+                            <a href="{{ item.url }}">
+                                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
