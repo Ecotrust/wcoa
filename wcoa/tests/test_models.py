@@ -147,3 +147,48 @@ class OHIIndicatorPageTest(WagtailPageTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Indicator 1')
     
+
+class WcoaModelTest(TestCase):
+
+    def setUp(self):
+        self.ohi_dash = OHIDashboard()
+
+    def test_get_ohi_hierarchy_dict(self):
+        # Create test data
+        cat1 = Category.objects.create(name='Category 1')
+        cat2 = Category.objects.create(name='Category 2')
+        theme1 = Theme.objects.create(name='Theme 1', category=cat1)
+        theme2 = Theme.objects.create(name='Theme 2', category=cat2)
+        indicator1 = Indicator.objects.create(name='Indicator 1', theme=theme1)
+        indicator2 = Indicator.objects.create(name='Indicator 2', theme=theme2)
+
+        # Call the method being tested
+        result = self.wcoa_model.get_ohi_hierarchy_dict()
+
+        # Assert the expected output
+        expected_result = {
+            'name': self.wcoa_model.name,
+            'dash_dict': {
+                cat1.id: {
+                    'name': cat1.name,
+                    'img': None,  # Replace with the expected image URL for the category
+                    'indicators': {
+                        indicator1.id: {
+                            'name': indicator1.name,
+                            'img': None  # Replace with the expected image URL for the indicator
+                        }
+                    }
+                },
+                cat2.id: {
+                    'name': cat2.name,
+                    'img': None,  # Replace with the expected image URL for the category
+                    'indicators': {
+                        indicator2.id: {
+                            'name': indicator2.name,
+                            'img': None  # Replace with the expected image URL for the indicator
+                        }
+                    }
+                }
+            }
+        }
+        self.assertEqual(result, expected_result)

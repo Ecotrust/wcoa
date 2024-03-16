@@ -184,95 +184,19 @@ class OHIStuctBlock(blocks.StructBlock):
     class Meta:
         template = 'wcoa/blocks/ohi_struct_block.html'
 
-class OHIIndicatorPage(Page):
-    page_description = "Use the to create a page for an indicator."
-    name = models.CharField(max_length=255)
-    description = RichTextField(blank=True, null=True)
-    indicator_image = models.ForeignKey(
-        PortalImage,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    body = StreamField(
-        [
-            ('Clear', wcoa_blocks.CTARowDivider()),
-            ('Column', OHIStuctBlock()),
-        ],
-        use_json_field=True,
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('name'),
-        FieldPanel('indicator_image'),
-        FieldPanel('body'),
-        FieldPanel('description'),
-    ]
-
-    def get_indicator_class(self):
-        # Find the indicator category that is an ancestor of this page
-        return self.get_ancestors().type(OHIClass).last()
-
-class OHIClass(Page):
-    page_description = "Use this to create a indicator class."
-    name = models.CharField(max_length=255)
-    ohiclass_image = models.ForeignKey(
-        PortalImage,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('name'),
-        FieldPanel('ohiclass_image'),
-    ]
-
-    subpage_types = [
-        'wcoa.OHIIndicatorPage',
-    ]
-
-    def get_child_indicators(self):
-        # Get list of categories in this class
-        indicators = OHIIndicatorPage.objects.live().descendant_of(self)
-        return indicators
-
-class OHICategory(Page):
-    page_description = "Use this to create a indicator category."
-    name = models.CharField(max_length=255)
-    ohicategory_image = models.ForeignKey(
-        PortalImage,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('name'),
-        FieldPanel('ohicategory_image'),
-    ]
-
-    subpage_types = [
-        'wcoa.OHIClass',
-    ]
-
-    def get_child_classes(self):
-        # Get list of indicators in this category
-        classes = OHIClass.objects.live().descendant_of(self)
-        return classes
-
-    def get_class_indicators(self):
-        classes = self.get_child_classes()
-        indicators = []
-        for c in classes:
-            indicators += OHIIndicatorPage.objects.live().descendant_of(c)
-        return indicators
 
 class OHIDashboard(Page):
+    """
+    A page model for displaying the Ocean Health dashboard.
+
+    This model allows the creation of the root Ocean Health dashboard page.
+
+    Attributes:
+        name (str): The name of the dashboard.
+        TODO
+
+    """
+
     page_description = "Use this for the root Ocean Health dashboard page."
     name = models.CharField(max_length=255)
     description = RichTextField(blank=True, null=True)
@@ -302,10 +226,157 @@ class OHIDashboard(Page):
         'wcoa.OHICategory',
     ]
 
+    def get_ohi_hierarchy_dict(self):
+        cat_dict = {}
+        for cat in self.get_children().specific():
+            theme_dict = {}
+            for theme in cat.get_children().specific():
+                indicator_dict = {}
+                for indicator in theme.get_children().specific():
+                    indicator_dict[indicator.name] = {
+                        'img': indicator.img.file.url if indicator.img else None, 
+                        'name': indicator.name
+                    }
+                theme_dict[theme.name] = {
+                    'name': theme.name, 
+                    'img': theme.img.file.url if theme.img else None, 
+                    'indicators': indicator_dict
+                }
+            cat_dict[cat.name] = {
+                'name': cat.name,
+                'img': cat.img.file.url if cat.img else None,
+                'classes': theme_dict
+            }
+        
+        return cat_dict
+
     def get_child_categories(self):
         # Get list of categories in this dashboard
         categories = OHICategory.objects.live().descendant_of(self)
         return categories
+    
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        hierarchy_dict = self.get_ohi_hierarchy_dict()
+        context['ohi_hierarchy_dict'] = hierarchy_dict
+        return context
+
+class OHICategory(Page):
+    """
+    Represents an indicator category.
+
+    Attributes:
+        page_description (str): The description of the page.
+        TODO
+
+    Methods:
+        get_child_classes(): Returns a list of child classes (OHIClass) of this category.
+        #TODO
+    """
+
+    page_description = "Use this to create an indicator category."
+    name = models.CharField(max_length=255)
+    img = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('img'),
+    ]
+
+    subpage_types = [
+        'wcoa.OHIClass',
+    ]
+
+    def get_child_classes(self):
+        # Get list of indicators in this category
+        classes = OHIClass.objects.live().descendant_of(self)
+        return classes
+
+    def get_class_indicators(self):
+        classes = self.get_child_classes()
+        indicators = []
+        for c in classes:
+            indicators += OHIIndicatorPage.objects.live().descendant_of(c)
+        return indicators
+        
+class OHIClass(Page):
+    """
+    An indicator class.
+
+    Attributes:
+    TODO
+
+    """
+
+    page_description = "Use this to create a indicator class."
+    name = models.CharField(max_length=255)
+    img = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('img'),
+    ]
+
+    subpage_types = [
+        'wcoa.OHIIndicatorPage',
+    ]
+
+    def get_child_indicators(self):
+        # Get list of categories in this class
+        indicators = OHIIndicatorPage.objects.live().descendant_of(self)
+        return indicators
+
+
+class OHIIndicatorPage(Page):
+    """
+    OHI Indicator Page
+
+    Attributes:
+    TODO
+
+    """
+
+    page_description = "Use the to create a page for an indicator."
+    name = models.CharField(max_length=255)
+    description = RichTextField(blank=True, null=True)
+    img = models.ForeignKey(
+        PortalImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    body = StreamField(
+        [
+            ('Clear', wcoa_blocks.CTARowDivider()),
+            ('Column', OHIStuctBlock()),
+        ],
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('img'),
+        FieldPanel('body'),
+        FieldPanel('description'),
+    ]
+
+    def get_indicator_class(self):
+        # Find the indicator category that is an ancestor of this page
+        return self.get_ancestors().type(OHIClass).last()
 
 
 WcoaOceanStory.content_panels = DetailPageBase.content_panels + [
