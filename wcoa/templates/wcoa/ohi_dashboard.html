@@ -30,9 +30,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>{{ page.title }}</h1>
-                                
-                {% for cat_name, cat_dict in ohi_hierarchy_dict.items %}
-                    <h2>{{ cat_dict.name }}</h2>
+
+                {% for cat_name, cat_dict in ohi_hierarchy_dict.categories.items %}
+                    <h2>{{ cat_name }}</h2>
                     <img src="{{ cat_dict.img }}" alt="{{ cat_dict.name }}" class="icon" />
                 
                     {% for theme_name, theme_dict in cat_dict.classes.items %}
@@ -43,7 +43,7 @@
                             <h4>{{ indicator_dict.name }}</h4>
                             <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.name }}" class="icon" />
                         {% endfor %}
-                
+
                     {% endfor %}
                 
                 {% endfor %}

@@ -247,8 +247,12 @@ class OHIDashboard(Page):
                 'img': cat.img.file.url if cat.img else None,
                 'classes': theme_dict
             }
+        hierarchy_dict = {
+            'name': 'Ocean Health Index',
+            'categories': cat_dict
+        }
         
-        return cat_dict
+        return hierarchy_dict
 
     def get_child_categories(self):
         # Get list of categories in this dashboard
