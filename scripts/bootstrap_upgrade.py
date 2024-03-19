@@ -1,7 +1,7 @@
 import os
 import re
 
-# Define the patterns of breaking changes between Bootstrap 2.6 and 5
+# Patterns of breaking changes between Bootstrap 2.6 and 5
 breaking_changes = {
     'col-form-legend': 'col-form-label', 
     'input-group-addon': 'input-group-prepend',
@@ -55,12 +55,13 @@ breaking_changes = {
     '.rounded-lg': '.rounded-3',
     '.ratio-*': '',
     'data-toggle': 'data-bs-toggle',
-
 }
 
 def find_breaking_changes(directory):
     for root, dirs, files in os.walk(directory):
         for file in files:
+            if file.startswith('bootstrap_') or file.startswith('bootstrap-'):
+                continue
             if file.endswith('.html') or file.endswith('.css') or file.endswith('.js'):
                 file_path = os.path.join(root, file)
                 with open(file_path, 'r', encoding='utf-8') as f:
@@ -70,5 +71,5 @@ def find_breaking_changes(directory):
                         if re.search(old, line):
                             print(f"File: {file_path}, Line: {line_num}, Change: '{old}' to '{new}'")
 
-# Example usage, scanning a directory called 'project'
+# Point at your project directory to find breaking changes
 find_breaking_changes('../wcoa/')
