@@ -141,50 +141,6 @@ class WcoaOceanStories(OceanStories):
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
-class OHIStuctBlock(blocks.StructBlock):
-    # width is an int in CTA blocks, but a choice block is preferrable
-    width = blocks.ChoiceBlock(choices=[
-        ('1', '1/12'),
-        ('2', '2/12'),
-        ('3', '3/12'),
-        ('4', '4/12'),
-        ('5', '5/12'),
-        ('6', '6/12'),
-        ('7', '7/12'),
-        ('8', '8/12'),
-        ('9', '9/12'),
-        ('10', '10/12'),
-        ('11', '11/12'),
-        ('12', '12/12'),
-    ], default='12', label='Width', icon='arrow-right', required=False)
-
-    color_choices = [
-        ('white', 'White'),
-        ('black', 'Black'),
-        ('blue', 'Blue'),
-        ('green', 'Green'),
-        ('red', 'Red'),
-        ('purple', 'Purple'),
-        ('grey', 'Grey'),
-    ]
-
-    # content = blocks.RichTextBlock(required=False)
-    content = blocks.StreamBlock([
-        ('Score', wcoa_blocks.OHIIndicatorScore()),
-        ('WYSIWYG', blocks.RichTextBlock(required=False)),
-    ], required=False, use_json_field=True)
-
-    text_color = blocks.ChoiceBlock(choices=color_choices, default='black', icon='color_palette', required=False)
-    background_color = blocks.ChoiceBlock(choices=color_choices, default='white', icon='color', required=False)
-    background_image = ImageChooserBlock(required=False)
-    border_color = blocks.ChoiceBlock(choices=color_choices, default='', icon='color_palette', required=False)
-    border_width = blocks.IntegerBlock(default='', help_text='Width of the border in pixels', required=False, min_value=0, max_value=10)
-    link = blocks.URLBlock(required=False, help_text='Wrap column in a link')
-
-    class Meta:
-        template = 'wcoa/blocks/ohi_struct_block.html'
-
-
 class OHIDashboard(Page):
     """
     A page model for displaying the Ocean Health dashboard.
@@ -234,17 +190,20 @@ class OHIDashboard(Page):
                 indicator_dict = {}
                 for indicator in theme.get_children().specific():
                     indicator_dict[indicator.name] = {
+                        'name': indicator.name,
                         'img': indicator.img.file.url if indicator.img else None, 
-                        'name': indicator.name
+                        'url': indicator.url,
                     }
                 theme_dict[theme.name] = {
                     'name': theme.name, 
                     'img': theme.img.file.url if theme.img else None, 
+                    'url': theme.url,
                     'indicators': indicator_dict
                 }
             cat_dict[cat.name] = {
                 'name': cat.name,
                 'img': cat.img.file.url if cat.img else None,
+                'url': cat.url,
                 'classes': theme_dict
             }
         hierarchy_dict = {
@@ -366,7 +325,7 @@ class OHIIndicatorPage(Page):
     body = StreamField(
         [
             ('Clear', wcoa_blocks.CTARowDivider()),
-            ('Column', OHIStuctBlock()),
+            ('Column', wcoa_blocks.OHIStuctBlock()),
         ],
         use_json_field=True,
     )

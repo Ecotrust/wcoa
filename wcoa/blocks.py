@@ -104,7 +104,6 @@ class OHIStuctBlock(blocks.StructBlock):
         ('grey', 'Grey'),
     ]
 
-    # content = blocks.RichTextBlock(required=False)
     content = blocks.StreamBlock([
         ('Score', OHIIndicatorScore()),
         ('WYSIWYG', blocks.RichTextBlock(required=False)),

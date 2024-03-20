@@ -35,20 +35,26 @@
         <ul id="ohi-hierarchy">
             {% for cat_name, cat_dict in ohi_hierarchy_dict.categories.items %}
                 <li class="ohi-category-item">
-                    <img src="{{ cat_dict.img }}" alt="{{ cat_dict.name }}" class="icon" />
-                    <h2>{{ cat_name }}</h2>
+                    <a href="{{ cat_dict.url }}">
+                        <img src="{{ cat_dict.img }}" alt="{{ cat_dict.name }}" class="icon" />
+                        <h2>{{ cat_name }}</h2>
+                    </a>
                     <ul class="ohi-class-list">
                         
                         {% for theme_name, theme_dict in cat_dict.classes.items %}
                             <li class="ohi-class-item">
-                                <img src="{{ theme_dict.img }}" alt="{{ theme_dict.name }}" class="icon" />
-                                <h3>{{ theme_dict.name }}</h3>
+                                <a href="{{ theme_dict.url }}">
+                                    <img src="{{ theme_dict.img }}" alt="{{ theme_dict.name }}" class="icon" />
+                                    <h3>{{ theme_dict.name }}</h3>
+                                </a>
                                 <ul class="ohi-indicator-list">
                         
                                     {% for indicator_name, indicator_dict in theme_dict.indicators.items %}
                                         <li class="ohi-indicator-item">
-                                            <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.name }}" class="icon" />
-                                            <h4>{{ indicator_dict.name }}</h4>
+                                            <a href="{{ indicator_dict.url }}">
+                                                <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.name }}" class="icon" />
+                                                <h4>{{ indicator_dict.name }}</h4>
+                                            </a>
                                         </li>
                                     {% endfor %}
                         
