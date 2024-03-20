@@ -3,12 +3,13 @@
 
 {% block extra_css %}
   {{ block.super }}
+  
   <link rel="stylesheet" href="{% static 'wcoa/css/ohi.css' %}" type="text/css">
 {% endblock %}
 
 {% block body_class %}template-ohi-category{% endblock %}
 
-{% block content %}
+{% block all_content %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -26,29 +27,42 @@
                 {% endif %}
             </div>
         </div>
+    </div>
         
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ page.title }}</h1>
+    <div class="container-fluid">
+        <h1>{{ page.title }}</h1>
 
-                {% for cat_name, cat_dict in ohi_hierarchy_dict.categories.items %}
-                    <h2>{{ cat_name }}</h2>
+        <ul id="ohi-hierarchy">
+            {% for cat_name, cat_dict in ohi_hierarchy_dict.categories.items %}
+                <li class="ohi-category-item">
                     <img src="{{ cat_dict.img }}" alt="{{ cat_dict.name }}" class="icon" />
-                
-                    {% for theme_name, theme_dict in cat_dict.classes.items %}
-                        <h3>{{ theme_dict.name }}</h3>
-                        <img src="{{ theme_dict.img }}" alt="{{ theme_dict.name }}" class="icon" />
-                
-                        {% for indicator_name, indicator_dict in theme_dict.indicators.items %}
-                            <h4>{{ indicator_dict.name }}</h4>
-                            <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.name }}" class="icon" />
+                    <h2>{{ cat_name }}</h2>
+                    <ul class="ohi-class-list">
+                        
+                        {% for theme_name, theme_dict in cat_dict.classes.items %}
+                            <li class="ohi-class-item">
+                                <img src="{{ theme_dict.img }}" alt="{{ theme_dict.name }}" class="icon" />
+                                <h3>{{ theme_dict.name }}</h3>
+                                <ul class="ohi-indicator-list">
+                        
+                                    {% for indicator_name, indicator_dict in theme_dict.indicators.items %}
+                                        <li class="ohi-indicator-item">
+                                            <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.name }}" class="icon" />
+                                            <h4>{{ indicator_dict.name }}</h4>
+                                        </li>
+                                    {% endfor %}
+                        
+                                </ul>
+                            </li>
+                        
                         {% endfor %}
+                    </ul>
+                </li>
 
-                    {% endfor %}
-                
-                {% endfor %}
-            </div>
-        </div>
+            {% endfor %}
+        </ul>
+    </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="ohi-category">
@@ -64,4 +78,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock %}

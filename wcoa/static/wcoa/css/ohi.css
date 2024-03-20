@@ -6,3 +6,65 @@ h1, h2, h3, h4 {
 .icon {
     max-width: 120px;
 }
+
+#ohi-hierarchy {
+    background-color: rgba(0, 0, 255, 0.2); // placeholder light blue
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-category-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    /* width: 100%; */
+}
+
+.ohi-class-list {
+    align-items: start;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-class-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    /* width: 100%; */
+}
+
+.ohi-indicator-list {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-indicator-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+

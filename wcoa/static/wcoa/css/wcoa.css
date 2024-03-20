@@ -23,6 +23,14 @@
     src: url('../fonts/Rajdhani/Rajdhani-SemiBold.ttf');
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.col-* {
+    position: relative;
+}
+
 *,
 p,
 p span,
