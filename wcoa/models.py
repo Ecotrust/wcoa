@@ -133,14 +133,13 @@ class CatalogThemeGridPageDetail(GridPageDetail):
 class WcoaOceanStories(OceanStories):
     subpage_types = ['WcoaOceanStory']
 
-    # search_fields = (index.SearchField('description'),)
-
     def get_detail_children(self):
         return WcoaOceanStory.objects.child_of(self)
 
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
+# OCEAN HEALTH INDEX OHI PAGES 
 class OHIDashboard(Page):
     """
     A page model for displaying the Ocean Health dashboard.
@@ -148,14 +147,13 @@ class OHIDashboard(Page):
     This model allows the creation of the root Ocean Health dashboard page.
 
     Attributes:
-        name (str): The name of the dashboard.
-        TODO
+        name (str): name displayed on UI
+        description (str): meta description for SEO
+        ohilogo (ForeignKey): image for the dashboard
 
     """
 
     page_description = "Use this for the root Ocean Health dashboard page."
-    name = models.CharField(max_length=255)
-    description = RichTextField(blank=True, null=True)
     ohi_logo = models.ForeignKey(
         PortalImage,
         null=True,
@@ -169,12 +167,11 @@ class OHIDashboard(Page):
             ('content', blocks.RichTextBlock(required=False)),
         ],
         use_json_field=True,
+        blank=True,
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('ohi_logo'),
-        FieldPanel('description'),
         FieldPanel('body'),
     ]
 
@@ -189,25 +186,25 @@ class OHIDashboard(Page):
             for theme in cat.get_children().specific():
                 indicator_dict = {}
                 for indicator in theme.get_children().specific():
-                    indicator_dict[indicator.name] = {
-                        'name': indicator.name,
+                    indicator_dict[indicator.title] = {
+                        'title': indicator.title,
                         'img': indicator.img.file.url if indicator.img else None, 
                         'url': indicator.url,
                     }
-                theme_dict[theme.name] = {
-                    'name': theme.name, 
+                theme_dict[theme.title] = {
+                    'title': theme.title, 
                     'img': theme.img.file.url if theme.img else None, 
                     'url': theme.url,
                     'indicators': indicator_dict
                 }
-            cat_dict[cat.name] = {
-                'name': cat.name,
+            cat_dict[cat.title] = {
+                'title': cat.title,
                 'img': cat.img.file.url if cat.img else None,
                 'url': cat.url,
                 'classes': theme_dict
             }
         hierarchy_dict = {
-            'name': 'Ocean Health Index',
+            'title': 'Ocean Health Index',
             'categories': cat_dict
         }
         
@@ -238,7 +235,6 @@ class OHICategory(Page):
     """
 
     page_description = "Use this to create an indicator category."
-    name = models.CharField(max_length=255)
     img = models.ForeignKey(
         PortalImage,
         null=True,
@@ -248,7 +244,6 @@ class OHICategory(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('img'),
     ]
 
@@ -278,7 +273,6 @@ class OHIClass(Page):
     """
 
     page_description = "Use this to create a indicator class."
-    name = models.CharField(max_length=255)
     img = models.ForeignKey(
         PortalImage,
         null=True,
@@ -288,7 +282,6 @@ class OHIClass(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('img'),
     ]
 
@@ -312,8 +305,6 @@ class OHIIndicatorPage(Page):
     """
 
     page_description = "Use the to create a page for an indicator."
-    name = models.CharField(max_length=255)
-    description = RichTextField(blank=True, null=True)
     img = models.ForeignKey(
         PortalImage,
         null=True,
@@ -331,10 +322,8 @@ class OHIIndicatorPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('img'),
         FieldPanel('body'),
-        FieldPanel('description'),
     ]
 
     def get_indicator_class(self):
