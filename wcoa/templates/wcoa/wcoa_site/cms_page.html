@@ -45,11 +45,11 @@
 {% block extra_css %}
   {{block.super}}
   <!-- <link rel="stylesheet" href="{% static 'gp2_catalog/css/all.css' %}" /> -->
-  <!-- <link rel="stylesheet" href="{% static 'gp2_catalog/css/header.css' %}" /> -->
-  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" /> -->
+  <link rel="stylesheet" href="{% static 'gp2_catalog/css/header.css' %}" />
+  <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" />
   
-  <!-- <link rel="stylesheet" href="{% static 'gp2_catalog/css/cms_page.css' %}" /> -->
-  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/wcoa.css' %}" /> -->
+  <link rel="stylesheet" href="{% static 'gp2_catalog/css/cms_page.css' %}" />
+  <link rel="stylesheet" href="{% static 'wcoa/css/wcoa.css' %}" />
 {% endblock %}
 
 {% block header %}
@@ -60,10 +60,9 @@
   </nav>
 {% endblock %}
 
-{% block all_content %}
-  {% block content %}
-    {% block page_header_container %}{% endblock %}
-  {% endblock %}
+
+{% block content %}
+  {% block page_header_container %}{% endblock %}
 {% endblock %}
 
 {% block footer_wrap %}
