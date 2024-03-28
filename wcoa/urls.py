@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, auth
 from django.urls import include, path, re_path
 from django.views.generic import RedirectView
 
@@ -14,14 +14,14 @@ urlpatterns = [
     re_path(r'^embed/map/?', views.show_wcoa_embedded_map, name="show_wcoa_embedded_map"),
     re_path(r'^search/', views.search, name='search'),
     ### Accounts ###
-    re_path(r'^account/?', views.show_wcoa_account_index, name="show_wcoa_account_indexs"),
+    re_path(r'^account/$', views.show_wcoa_account_index, name="show_wcoa_account_indexs"),
     re_path(r'^account/edit/?', views.edit_account.as_view(), name="edit_account"),
     re_path(r'^account/change-password/?', views.ChangePasswordView.as_view(), name='change_password'),
     re_path(r'^account/register/?', views.register, name='register'),
     re_path(r'^account/forgot/?', views.forgot, name='forgot_password'),
     re_path(r'^account/forgot/(?P<code>[a-f0-9]{32})$', views.forgot_reset, name='forgot_reset'),
     re_path(r'^account/login/?', RedirectView.as_view(pattern_name='show_wcoa_account_indexs'), name='login'),
-    re_path(r'^account/logout/?', auth.views.LogoutView.as_view(next_page='/'), name='logout'),
+    # re_path(r'^account/logout/?', auth.views.LogoutView.as_view(next_page='/'), name='logout'),
     # Map Groups
     re_path(r'^collaborate/groups/?', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^collaborate/groups/create/?', views.create_wcoa_mapgroup, name='create_wcoa_mapgroup'),
