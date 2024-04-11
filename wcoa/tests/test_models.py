@@ -155,10 +155,10 @@ class WcoaModelTest(TestCase):
 
     def test_get_ohi_hierarchy_dict(self):
         # Create test data
-        cat1 = Category.objects.create(name='Category 1')
-        cat2 = Category.objects.create(name='Category 2')
-        theme1 = Theme.objects.create(name='Theme 1', category=cat1)
-        theme2 = Theme.objects.create(name='Theme 2', category=cat2)
+        cat1 = OHICategory.objects.create(name='Category 1')
+        cat2 = OHICategory.objects.create(name='Category 2')
+        theme1 = OHIClass.objects.create(name='Theme 1', category=cat1)
+        theme2 = OHIClass.objects.create(name='Theme 2', category=cat2)
         indicator1 = Indicator.objects.create(name='Indicator 1', theme=theme1)
         indicator2 = Indicator.objects.create(name='Indicator 2', theme=theme2)
 
