@@ -10,7 +10,7 @@ handler404 = 'wcoa.views.page_not_found'
 urlpatterns = [
     # path('', views.index, name='index'),
     re_path(r'^planner/?', views.show_wcoa_planner, name="planner_planner"),
-    re_path(r'^visualize/?', views.show_wcoa_planner, name="planner"),
+    re_path(r'^visualize/?$', views.show_wcoa_planner, name="planner"),
     re_path(r'^embed/map/?', views.show_wcoa_embedded_map, name="show_wcoa_embedded_map"),
     re_path(r'^search/', views.search, name='search'),
     ### Accounts ###
