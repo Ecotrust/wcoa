@@ -10,7 +10,7 @@ handler404 = 'wcoa.views.page_not_found'
 urlpatterns = [
     # path('', views.index, name='index'),
     re_path(r'^planner/?', views.show_wcoa_planner, name="planner_planner"),
-    re_path(r'^visualize/?', views.show_wcoa_planner, name="planner"),
+    re_path(r'^visualize/?$', views.show_wcoa_planner, name="planner"),
     re_path(r'^embed/map/?', views.show_wcoa_embedded_map, name="show_wcoa_embedded_map"),
     re_path(r'^search/', views.search, name='search'),
     ### Accounts ###
@@ -30,9 +30,11 @@ urlpatterns = [
     re_path(r'^collaborate/groups/(?P<pk>\d+)/promote/?', groupviews.PromoteMapGroupMemberActionView.as_view(), name='promote-member'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/demote/?', groupviews.DemoteMapGroupMemberActionView.as_view(), name='demote-member'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/remove/?', groupviews.RemoveMapGroupMemberActionView.as_view(), name='remove-member'),
-    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/?', views.show_wcoa_detail_mapgroups, name='detail'),
-    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
     re_path(r'^groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
+    # re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/preferences$', groupviews.MapGroupPreferencesView.as_view(), name='preferences'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
+    # re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/delete$', groupviews.DeleteMapGroupActionView.as_view(), name='delete'),
+    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/?$', views.show_wcoa_detail_mapgroups, name='detail'),
     re_path(r'^groups', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     # re_path(r'^(?P<pk>\d+)/(?P<slug>[\w-]+)/join$',
     #     JoinMapGroupActionView.as_view(), name='join'),
