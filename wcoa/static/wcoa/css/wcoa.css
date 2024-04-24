@@ -28,6 +28,11 @@
     font-weight: 600;
 }
 
+.nunito-sans-black {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 900;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -49,9 +54,17 @@ input {
         "YTLC" 500;
 }
 
-h1, h2, h3, h4 {
-    font-family: var(--bold_font_family);
+h1 {
+    font-weight: 900;
+}
+
+h2 {
     font-weight: 700;
+}
+
+h3,
+h4 {
+    font-weight: 600;
 }
 
 /* Header Overrides */
