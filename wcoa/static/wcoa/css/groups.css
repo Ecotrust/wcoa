@@ -11,6 +11,7 @@ table.group-membership-list td img {
   font-size: 18px;
   word-spacing: 0.4rem;
   font-family: var(--bold_font_family);
+  font-weight: 700;
 }
 
 .group-form-disclaimer p {
