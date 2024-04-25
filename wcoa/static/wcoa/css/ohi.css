@@ -1,9 +1,38 @@
-h1, h2, h3, h4 {
-    text-align: center;
-    width: 100%;
+:root {
+    --default_font_family: "Nunito Sans", "Open Sans", sans-serif;
+    --bold_font_family: var(--default_font_family);
+    --generic_font_family: var(--default_font_family);
+   
+    /* Colors */
+    --blue: rgba(48, 112, 247, 1);
+    --green: rgba(152, 171, 55, 1);
+    --red: rgba(250, 35, 18, 1);
+    --yellow: rgba(242,191,76,1);
+    --grey: rgba(77,77,79,1);
+    --gray: var(--grey);
+    --white: rgba(255,255,255,1);
+    --black: rgba(0,0,0,1);
+
+    --primary_color: var(--blue);
+    --secondary_color: var(--green);
+    --tertiary_color: var(--red);
+    --text-color: var(--grey);
 }
 
-h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+    font-family: var(--bold_font_family);
+}
+
+h1 {
+    font-weight: 900;
+}
+
+h2,  h3  {
+    font-weight: 700;
+}
+
+h4, h5 {
     font-weight: 600;
 }
 

@@ -3,34 +3,24 @@
     --warning_icon: darkorange;
     --dark_blue: #132451;
     --light_blue: #0070cf;
-    --default_font_family: "Nunito Sans", "Open Sans", sans-serif;
-    --bold_font_family: var(--default_font_family);
-    --generic_font_family: var(--default_font_family);
+    --default_font_family: "Rajdhani", "Open Sans", sans-serif;
+    --bold_font_family: "Rajdhani SemiBold", "Rajdani Bold", "Open Sans", sans-serif;
+    --generic_font_family: "Open Sans", sans-serif;
 }
 
-.nunito-sans-normal {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 400;
+@font-face {
+    font-family: 'Rajdhani';
+    src: url('../fonts/Rajdhani/Rajdhani-Regular.ttf');
 }
 
-.nunito-sans-bold {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 700;
+@font-face {
+    font-family: 'Rajdhani Bold';
+    src: url('../fonts/Rajdhani/Rajdhani-Bold.ttf');
 }
 
-.nunito-sans-light {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 300;
-}
-
-.nunito-sans-semibold {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 600;
-}
-
-.nunito-sans-black {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 900;
+@font-face {
+    font-family: 'Rajdhani SemiBold';
+    src: url('../fonts/Rajdhani/Rajdhani-SemiBold.ttf');
 }
 
 * {
@@ -46,25 +36,10 @@ p,
 p span,
 input {
     font-family: var(--generic_font_family);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100,
-        "YTLC" 500;
 }
 
-h1 {
-    font-weight: 900;
-}
-
-h2 {
-    font-weight: 700;
-}
-
-h3,
-h4 {
-    font-weight: 600;
+h1, h2, h3, h4 {
+    font-family: var(--bold_font_family);
 }
 
 /* Header Overrides */
@@ -80,7 +55,6 @@ h4 {
 .navbar-default .navbar-nav > li > a {
     font-size: 1.8rem;
     font-family: var(--bold_font_family);
-    font-weight: 700;
 }
 
   /******** Login PAGE ************/
@@ -93,7 +67,6 @@ div.login h2 {
 
 .cta-item .rich-text li a {
     font-family: var(--default_font_family) !important;
-    font-weight: 400;
 }
 
 .cta-item a {
@@ -111,7 +84,6 @@ div.login h2 {
 .cta-item .title {
     border-bottom: #9ec73d 2px solid;
     font-family: var(--default_font_family);
-    font-weight: 400;
     font-size: 1.2em;
     line-height: 1.75;
 }
