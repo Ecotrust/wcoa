@@ -95,13 +95,13 @@ class OHIStuctBlock(blocks.StructBlock):
     ], default='12', label='Width', icon='arrow-right', required=False)
 
     color_choices = [
-        ('white', 'White'),
-        ('black', 'Black'),
-        ('blue', 'Blue'),
-        ('green', 'Green'),
-        ('red', 'Red'),
-        ('purple', 'Purple'),
-        ('grey', 'Grey'),
+        ('rgba(255,255,255,0)', 'White'),
+        ('rgba(0,0,0,1)', 'Black'),
+        ('rgba(48, 112, 247, 1)', 'Blue'),
+        ('rgba(152, 171, 55, 1)', 'Green'),
+        ('rgba(242,191,76,1)', 'Yellow'),
+        ('rgba(250, 35, 18, 1)', 'Red'),
+        ('rgba(77,77,79,1)', 'Grey'),
     ]
 
     content = blocks.StreamBlock([
