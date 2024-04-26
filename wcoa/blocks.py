@@ -95,7 +95,7 @@ class OHIStuctBlock(blocks.StructBlock):
     ], default='12', label='Width', icon='arrow-right', required=False)
 
     color_choices = [
-        ('rgba(255,255,255,0)', 'White'),
+        ('rgba(255,255,255,1)', 'White'),
         ('rgba(0,0,0,1)', 'Black'),
         ('rgba(48, 112, 247, 1)', 'Blue'),
         ('rgba(152, 171, 55, 1)', 'Green'),

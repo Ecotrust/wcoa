@@ -50,6 +50,17 @@ h4, h5 {
     width: 100%;
 }
 
+.grid-item:after {
+    content: "";
+    /* TODO add overlay to soften background color */
+}
+
+.grid-sub-item a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
 @media screen and (min-width: 960px) {
 
     .grid-wrapper {
@@ -128,5 +139,4 @@ h4, h5 {
     margin: 0 auto;
     width: 100%;
 }
-
 
