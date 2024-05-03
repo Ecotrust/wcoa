@@ -13,51 +13,55 @@
 
 {% block content %}
 
-    {% block ohi_breadcrumbs %}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {% if page.get_ancestors|length > 1 %}
-                        <ul class="breadcrumb">
-                            {% for ancestor_page in page.get_ancestors %}
-                                {% if not ancestor_page.is_root %}
-                                    {% if ancestor_page.depth > 3 %}
-                                        <li class="breadcrumb-item"><a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title|truncatewords:4 }}</a></li>
+    <div id="ohi-wrap">
+
+        {% block ohi_breadcrumbs %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if page.get_ancestors|length > 1 %}
+                            <ul class="breadcrumb">
+                                {% for ancestor_page in page.get_ancestors %}
+                                    {% if not ancestor_page.is_root %}
+                                        {% if ancestor_page.depth > 3 %}
+                                            <li class="breadcrumb-item"><a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title|truncatewords:4 }}</a></li>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                            <li class="breadcrumb-item">{{ page.title|truncatewords:4 }}</li>
-                        </ul>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endblock ohi_breadcrumbs %}
-
-    {% block ohi_title %}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>{{ page.title }}</h1>
-                </div>
-            </div>
-        </div>
-    {% endblock ohi_title %}
-
-    {% block ohi_content %}
-        <div class="container">
-            <div class="row">
-                <div class="grid-wrapper">
-                    {% for block in page.body %}
-                        {% if block.block_type == 'Clear' %}
-                            <div class="grid-item clearfix"></div>
-                        {% else %}
-                            {{ block }}
+                                {% endfor %}
+                                <li class="breadcrumb-item">{{ page.title|truncatewords:4 }}</li>
+                            </ul>
                         {% endif %}
-                    {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endblock ohi_content %}
+        {% endblock ohi_breadcrumbs %}
+
+        {% block ohi_title %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{ page.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        {% endblock ohi_title %}
+
+        {% block ohi_content %}
+            <div class="container">
+                <div class="row">
+                    <div class="grid-wrapper">
+                        {% for block in page.body %}
+                            {% if block.block_type == 'Clear' %}
+                                <div class="grid-item clearfix"></div>
+                            {% else %}
+                                {{ block }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endblock ohi_content %}
+    
+    </div>
 
 {% endblock content %}
