@@ -1,4 +1,4 @@
-:root {
+#ohi-wrap {
     --default_font_family: "Nunito Sans", "Open Sans", sans-serif;
     --bold_font_family: var(--default_font_family);
     --generic_font_family: var(--default_font_family);
@@ -17,6 +17,7 @@
     --secondary_color: var(--green);
     --tertiary_color: var(--red);
     --text-color: var(--grey);
+    --link-color: var(--primary_color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -36,6 +37,11 @@ h4, h5 {
     font-weight: 600;
 }
 
+header * {
+    font-weight: inherit;
+    font-family: inherit;
+}
+
 .icon {
     max-width: 120px;
 }
@@ -50,13 +56,14 @@ h4, h5 {
     width: 100%;
 }
 
-.grid-item:after {
-    content: "";
-    /* TODO add overlay to soften background color */
+.grid-item a {
+    color: var(--link-color);
 }
 
 .grid-sub-item a {
     color: inherit;
+    color: var(--link-color);
+    font-weight: 500;
     text-decoration: none;
     opacity: 0.8;
 }
