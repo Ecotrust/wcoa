@@ -119,9 +119,9 @@ class OHIStuctBlock(blocks.StructBlock):
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
     ], required=False, use_json_field=True)
 
+    full_image = ImageChooserBlock(required=False)
     text_color = blocks.ChoiceBlock(choices=color_choices, default='black', icon='color_palette', required=False)
     background_color = blocks.ChoiceBlock(choices=background_color_choices, default='white', icon='color', required=False)
-    background_image = ImageChooserBlock(required=False)
     border_color = blocks.ChoiceBlock(choices=color_choices, default='', icon='color_palette', required=False)
     border_width = blocks.IntegerBlock(default='', help_text='Width of the border in pixels', required=False, min_value=0, max_value=10)
     link = blocks.URLBlock(required=False, help_text='Wrap column in a link')
