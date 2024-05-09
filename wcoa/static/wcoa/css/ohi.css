@@ -54,10 +54,6 @@ header * {
     font-family: inherit;
 }
 
-.icon {
-    max-width: 120px;
-}
-
 .grid-wrapper {
     display: block;
     font-size: 1.5rem;
@@ -101,6 +97,10 @@ header * {
 
 }
 
+/*
+    OHI Dashboard Styles
+*/
+
 #ohi-hierarchy {
     background-color: rgba(0, 0, 255, 0.2);
     align-items: start;
@@ -108,17 +108,28 @@ header * {
     flex-direction: row;
     justify-content: stretch;
     margin: 0 auto;
+    text-align: center;
     width: 100%;
+}
+
+#ohi-hierarchy .icon {
+    max-width: 12rem;
+    height: 12rem;
 }
 
 .ohi-category-item {
     align-items: center;
     display: flex;
+    color: var(--white);
     flex: 1;
     flex-direction: column;
     justify-content: stretch;
     margin: 0 auto;
     /* width: 100%; */
+}
+
+.ohi-category-item a {
+    color: var(--white);
 }
 
 .ohi-class-list {
@@ -161,3 +172,6 @@ header * {
     width: 100%;
 }
 
+.ohi-indicator-item a {
+    color: var(--yellow);
+}
