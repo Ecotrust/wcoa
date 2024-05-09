@@ -117,6 +117,38 @@ header * {
     height: 12rem;
 }
 
+/* Category item headings */
+#ohi-hierarchy a h2 {
+    color: var(--white);
+    font-size: 1.8rem;
+    letter-spacing: 0.25rem;
+    margin: 3rem auto 1rem;
+    text-transform: uppercase;
+}
+
+/* Class item headings */
+#ohi-hierarchy a h3 {
+    color: var(--white);
+    font-size: 1.6125rem;
+    letter-spacing: 0.25rem;
+    margin: 2rem auto 1rem;
+    text-transform: uppercase;
+}
+    #ohi-hierarchy a h3:after {
+        content: '';
+        
+    }
+
+/* Indicator item headings */
+#ohi-hierarchy a h4 {
+    color: var(--yellow);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.25rem;
+    margin: .75rem auto;
+    text-transform: none;
+}
+
 .ohi-category-item {
     align-items: center;
     display: flex;
@@ -126,10 +158,6 @@ header * {
     justify-content: stretch;
     margin: 0 auto;
     /* width: 100%; */
-}
-
-.ohi-category-item a {
-    color: var(--white);
 }
 
 .ohi-class-list {
@@ -174,4 +202,5 @@ header * {
 
 .ohi-indicator-item a {
     color: var(--yellow);
+    text-transform: none;
 }
