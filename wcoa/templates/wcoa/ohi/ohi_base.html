@@ -24,7 +24,10 @@
                                 {% for ancestor_page in page.get_ancestors %}
                                     {% if not ancestor_page.is_root %}
                                         {% if ancestor_page.depth > 3 %}
-                                            <li class="breadcrumb-item"><a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title|truncatewords:4 }}</a></li>
+                                            <li class="breadcrumb-item">
+                                                <a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title|truncatewords:4 }}</a>
+                                                <span class="divider">/</span>
+                                            </li>
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}

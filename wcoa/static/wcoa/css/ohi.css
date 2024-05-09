@@ -29,11 +29,23 @@ h1 {
     font-weight: 900;
 }
 
-h2,  h3  {
+h2 {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+h3 {
+    font-size: 2.125rem;
     font-weight: 700;
 }
 
-h4, h5 {
+h4 {
+    font-size: 2rem;
+    font-weight: 600;;
+} 
+
+h5 {
+    font-size: 1.75rem;
     font-weight: 600;
 }
 
@@ -48,6 +60,8 @@ header * {
 
 .grid-wrapper {
     display: block;
+    font-size: 1.5rem;
+    font-weight: 400;
     width: 100%;
 }
 
