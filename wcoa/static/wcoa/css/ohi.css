@@ -135,8 +135,13 @@ header * {
     text-transform: uppercase;
 }
     #ohi-hierarchy a h3:after {
+        background: var(--yellow);
         content: '';
-        
+        display: block;
+        height: 1px;
+        margin: 2rem auto 0;
+        position: relative;
+        width: 5rem;
     }
 
 /* Indicator item headings */
