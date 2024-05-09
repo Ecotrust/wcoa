@@ -102,7 +102,7 @@ header * {
 */
 
 #ohi-hierarchy {
-    background-color: rgba(0, 0, 255, 0.2);
+    background-color: var(--primary_color);
     align-items: start;
     display: flex;
     flex-direction: row;
@@ -121,7 +121,7 @@ header * {
 #ohi-hierarchy a h2 {
     color: var(--white);
     font-size: 1.8rem;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.1875rem;
     margin: 3rem auto 1rem;
     text-transform: uppercase;
 }
@@ -130,7 +130,7 @@ header * {
 #ohi-hierarchy a h3 {
     color: var(--white);
     font-size: 1.6125rem;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.1875rem;
     margin: 2rem auto 1rem;
     text-transform: uppercase;
 }
@@ -141,7 +141,7 @@ header * {
         height: 1px;
         margin: 2rem auto 0;
         position: relative;
-        width: 5rem;
+        width: 7rem;
     }
 
 /* Indicator item headings */
