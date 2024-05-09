@@ -1,4 +1,4 @@
-{% extends 'wcoa/wcoa_site/cms_page.html' %}
+{% extends 'wcoa/ohi/ohi_base.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block extra_css %}
@@ -8,15 +8,10 @@
 
 {% block body_class %}template-ohi-category{% endblock %}
 
-{% block content %}
+{% block ohi_content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1>{{ page.title }}</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="ohi-category">
                     {% for item in page.get_class_indicators %}
                         <div class="ohi-category-item" style="text-align: center;">
@@ -39,4 +34,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock ohi_content %}
