@@ -134,7 +134,7 @@ header * {
     background-color: var(--primary_color);
     align-items: start;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: stretch;
     margin: 0 auto;
     text-align: center;
@@ -149,8 +149,8 @@ header * {
 /* Category item headings */
 #ohi-hierarchy a h2 {
     color: var(--white);
-    font-size: 1.8rem;
-    letter-spacing: 0.1875rem;
+    font-size: 1.6125rem;
+    letter-spacing: 0.05rem;
     margin: 3rem auto 1rem;
     text-transform: uppercase;
 }
@@ -158,8 +158,8 @@ header * {
 /* Class item headings */
 #ohi-hierarchy a h3 {
     color: var(--white);
-    font-size: 1.6125rem;
-    letter-spacing: 0.1875rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
     margin: 2rem auto 1rem;
     text-transform: uppercase;
 }
@@ -176,9 +176,9 @@ header * {
 /* Indicator item headings */
 #ohi-hierarchy a h4 {
     color: var(--yellow);
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 400;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.075rem;
     margin: .75rem auto;
     text-transform: none;
 }
@@ -237,4 +237,57 @@ header * {
 .ohi-indicator-item a {
     color: var(--yellow);
     text-transform: none;
+}
+
+@media screen and (min-width: 960px) {
+    #ohi-hierarchy {
+        flex-direction: row;
+    }
+
+    .ohi-category-item {
+        position: relative;
+    }
+
+    .ohi-category-item:nth-of-type(2):before,
+    .ohi-category-item:nth-of-type(2):after {
+        background: var(--white);
+        content: '';
+        height: 1px;
+        position: absolute;
+        top: 60px;
+        width: 10rem;
+    }
+
+    .ohi-category-item:nth-of-type(2):before {
+        left: -5rem;
+    }
+
+    .ohi-category-item:nth-of-type(2):after {
+        right: -5rem;
+    }
+
+    .ohi-class-item {
+        position: relative;
+    }
+
+    .ohi-class-item:before {
+        background: var(--yellow);
+        content: '';
+        height: 1px;
+        position: absolute;
+        top: .25rem;
+        width: 5rem;
+    }
+
+    .ohi-class-item:nth-of-type(2n+1):before {
+        right: 0;
+        transform: rotate(330deg);
+        transform-origin: center right;
+    }
+
+    .ohi-class-item:nth-of-type(2n+2):before {
+        left: 0;
+        transform: rotate(30deg);
+        transform-origin: center left;
+    }
 }
