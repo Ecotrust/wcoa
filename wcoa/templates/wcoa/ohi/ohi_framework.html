@@ -1,0 +1,43 @@
+{% load wagtailcore_tags static %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <ul id="ohi-hierarchy">
+                {% for cat_title, cat_dict in ohi_hierarchy_dict.categories.items %}
+                    <li class="ohi-category-item">
+                        <a href="{{ cat_dict.url }}">
+                            <img src="{{ cat_dict.img }}" alt="{{ cat_dict.title }}" class="icon" />
+                            <h2>{{ cat_title }}</h2>
+                        </a>
+                        <ul class="ohi-class-list">
+                            
+                            {% for theme_title, theme_dict in cat_dict.classes.items %}
+                                <li class="ohi-class-item">
+                                    <a href="{{ theme_dict.url }}">
+                                        <img src="{{ theme_dict.img }}" alt="{{ theme_dict.title }}" class="icon" />
+                                        <h3>{{ theme_dict.title }}</h3>
+                                    </a>
+                                    <ul class="ohi-indicator-list">
+                            
+                                        {% for indicator_title, indicator_dict in theme_dict.indicators.items %}
+                                            <li class="ohi-indicator-item">
+                                                <a href="{{ indicator_dict.url }}">
+                                                    <img src="{{ indicator_dict.img }}" alt="{{ indicator_dict.title }}" class="icon" />
+                                                    <h4>{{ indicator_dict.title }}</h4>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                            
+                                    </ul>
+                                </li>
+                            
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

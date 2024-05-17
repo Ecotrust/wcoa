@@ -162,11 +162,19 @@ class OHIDashboard(Page):
         related_name='+'
     )
 
+    stream_field_content = [
+        ('Clear', wcoa_blocks.CTARowDivider()),
+        ('Column', wcoa_blocks.OHIStuctBlock()),
+    ]
+
     body = StreamField(
-        [
-            ('Clear', wcoa_blocks.CTARowDivider()),
-            ('Column', wcoa_blocks.OHIStuctBlock()),
-        ],
+        stream_field_content,
+        use_json_field=True,
+        blank=True,
+    )
+
+    body_below_framework = StreamField(
+        stream_field_content,
         use_json_field=True,
         blank=True,
     )
@@ -174,6 +182,7 @@ class OHIDashboard(Page):
     content_panels = Page.content_panels + [
         FieldPanel('ohi_logo'),
         FieldPanel('body'),
+        FieldPanel('body_below_framework'),
     ]
 
     subpage_types = [
