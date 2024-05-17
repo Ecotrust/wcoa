@@ -164,7 +164,8 @@ class OHIDashboard(Page):
 
     body = StreamField(
         [
-            ('content', blocks.RichTextBlock(required=False)),
+            ('Clear', wcoa_blocks.CTARowDivider()),
+            ('Column', wcoa_blocks.OHIStuctBlock()),
         ],
         use_json_field=True,
         blank=True,
