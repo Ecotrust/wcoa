@@ -326,6 +326,10 @@ class OHIIndicatorPage(Page):
         FieldPanel('body'),
     ]
 
+    subpage_types = [
+        'wcoa.OHIIndicatorPage',
+    ]
+
     def get_indicator_class(self):
         # Find the indicator category that is an ancestor of this page
         return self.get_ancestors().type(OHIClass).last()
