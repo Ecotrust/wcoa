@@ -128,3 +128,21 @@ class OHIStuctBlock(blocks.StructBlock):
 
     class Meta:
         template = 'wcoa/blocks/ohi_struct_block.html'
+
+# Place holder for future blocks
+# class HeroBlock(blocks.StructBlock):
+#     title = blocks.CharBlock(required=False)
+#     text = blocks.RichTextBlock(required=False)
+#     photo = ImageChooserBlock(required=False)
+
+#     class Meta:
+#         icon = 'image'
+#         template = 'wcoa/blocks/hero_block.html'
+
+# class ContentBreak(blocks.StaticBlock):
+#     text = blocks.RichTextBlock(required=False)
+
+#     class Meta:
+#         icon = 'horizontalrule'
+#         label = 'Content Break'
+#         admin_text = 'Add a break between content'
