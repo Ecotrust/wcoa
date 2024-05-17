@@ -142,8 +142,9 @@ header * {
 }
 
 #ohi-hierarchy .icon {
-    max-width: 12rem;
-    height: 12rem;
+    aspect-ratio: 1;
+    max-width: 14rem;
+    height: 14rem;
 }
 
 /* Category item headings */
