@@ -1,22 +1,35 @@
 {% load wagtailimages_tags %}
 
-<div class="grid-item" style="grid-column: span {{ self.width }}; background-color: {{ self.background_color }}; color: {{ self.text_color }};  outline-color: {{ self.border_color }}; outline-width: {{ self.border_width }}px; outline-offset: -.3125vw; {% if self.border_width %}outline-style: solid;{% endif %}; padding: .5vw 1vw;">
+<div class="grid-item" 
+     style="grid-column: span {{ self.width }};
+            {% if self.background_color %}background-color: {{ self.background_color }};{% endif %}
+            {% if self.text_color %}color: {{ self.text_color }};{% endif %}
+            {% if self.border_color %}outline-color: {{ self.border_color }};{% endif %}
+            {% if self.border_width %}outline-width: {{ self.border_width }}px;{% endif %}
+            outline-offset: -.3125vw;
+            {% if self.border_width %}outline-style: solid;{% endif %}
+            padding: .5vw 1vw;">
 
-{% if self.link %}
-    <a href="{{ self.link }}" target="_blank">
-{% endif %}
+    {% if self.link %}
+        <a href="{{ self.link }}" target="_blank">
+    {% endif %}
 
-<div class="grid-sub-item">
+    <div class="grid-sub-item">
 
-    {% image self.full_image max-1000x1000 class="full-img" %}
-    
-    {% for block in self.content %}
-        {{ block }}
-    {% endfor %}
-</div>
+        {# Check if the image exists before trying to display it #}
+        {% if self.full_image %}
+            <div class="full-img-wrap">
+                {% image self.full_image max-1000x1000 class="full-img" %}
+            </div>
+        {% endif %}
+        
+        {% for block in self.content %}
+            {{ block }}
+        {% endfor %}
+    </div>
 
-{% if self.link %}
-    </a>
-{% endif %}
+    {% if self.link %}
+        </a>
+    {% endif %}
 
 </div>

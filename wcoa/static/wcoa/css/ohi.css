@@ -80,6 +80,11 @@ header * {
     z-index: 0;
 }
 
+.full-img-wrap {
+    min-height: 250px;
+    width: 100%;
+}
+
 .grid-item .full-img {
     height: 100%;
     left: 0;
