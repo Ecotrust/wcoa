@@ -252,18 +252,40 @@ header * {
     .ohi-category-item:nth-of-type(2):after {
         background: var(--white);
         content: '';
-        height: 1px;
+        clip-path: polygon(92% 40%,
+                    92% 0,
+                    100% 50%,
+                    92% 100%,
+                    92% 60%,
+                    8% 60%,
+                    8% 0,
+                    0% 50%,
+                    8% 100%,
+                    8% 40%,
+                    90% 40%);
+        -webkit-clip-path: polygon(92% 40%,
+                92% 0,
+                100% 50%,
+                92% 100%,
+                92% 60%,
+                8% 60%,
+                8% 0,
+                0% 50%,
+                8% 100%,
+                8% 40%,
+                90% 40%);
+        height: 1rem;
         position: absolute;
         top: 60px;
-        width: 10rem;
+        width: 14rem;
     }
 
     .ohi-category-item:nth-of-type(2):before {
-        left: -5rem;
+        left: -7rem;
     }
 
     .ohi-category-item:nth-of-type(2):after {
-        right: -5rem;
+        right: -7rem;
     }
 
     .ohi-class-item {
