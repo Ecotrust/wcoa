@@ -9,29 +9,5 @@
 {% block body_class %}template-ohi-category{% endblock %}
 
 {% block ohi_content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="ohi-category">
-                    {% for item in page.get_class_indicators %}
-                        <div class="ohi-category-item" style="text-align: center;">
-                            <a href="{{ item.url }}">
-                                {% image item.indicator_image max-120x120 %}
-                                <h3>{{ item.title }}</h3>
-                            </a>
-                        </div>
-                    {% endfor %}
-                    {% for item in page.get_child_classes %}
-                        <div class="ohi-category-item" style="text-align: center;">
-                            <a href="{{ item.url }}">
-                                {% image item.ohiclass_image max-120x120 %}
-                                <h3>{{ item.title }}</h3>
-                            </a>
-                        </div>
-                    {% endfor %}
-                
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include './ohi/ohi_framework.html' %}
 {% endblock ohi_content %}

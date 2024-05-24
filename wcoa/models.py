@@ -140,7 +140,58 @@ class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
 # OCEAN HEALTH INDEX OHI PAGES 
-class OHIDashboard(Page):
+class OHIPage(Page):
+    # ...
+
+    def get_indicator_dict(self, indicator):
+        return {
+            'title': indicator.title,
+            # Maybe TODO: create a new img var to get the content of the svg or img file
+            'img_url': indicator.img.file.url if indicator.img else None,
+            'url': indicator.url,
+        }
+
+    def get_theme_dict(self, theme):
+        indicators = theme.get_children().specific()
+        return {
+            'title': theme.title,
+            # Maybe  TODO: create a new img var to get the content of the svg or img file
+            'img_url': theme.img.file.url if theme.img else None,
+            'url': theme.url,
+            'indicators': {indicator.title: self.get_indicator_dict(indicator) for indicator in indicators},
+        }
+
+    def get_category_dict(self, category):
+        themes = category.get_children().specific()
+        return {
+            'title': category.title,
+            # Maybe TODO: create a new img var to get the content of the svg or img file in str format
+            'img_url': category.img.file.url if category.img else None,
+            'url': category.url,
+            'classes': {theme.title: self.get_theme_dict(theme) for theme in themes},
+        }
+
+    def get_ohi_hierarchy_dict(self):
+        categories = self.get_children().specific()
+        cat_dict = {category.title: self.get_category_dict(category) for category in categories}
+
+        hierarchy_dict = {
+            'title': 'Ocean Health Index',
+            'categories': cat_dict
+        }
+
+        return hierarchy_dict
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        hierarchy_dict = self.get_ohi_hierarchy_dict()
+        context['ohi_hierarchy_dict'] = hierarchy_dict
+        return context
+
+    class Meta:
+        abstract = True
+
+class OHIDashboard(OHIPage):
     """
     A page model for displaying the Ocean Health dashboard.
 
@@ -189,49 +240,12 @@ class OHIDashboard(Page):
         'wcoa.OHICategory',
     ]
 
-    def get_ohi_hierarchy_dict(self):
-        cat_dict = {}
-        for cat in self.get_children().specific():
-            theme_dict = {}
-            for theme in cat.get_children().specific():
-                indicator_dict = {}
-                for indicator in theme.get_children().specific():
-                    indicator_dict[indicator.title] = {
-                        'title': indicator.title,
-                        'img': indicator.img.file.url if indicator.img else None, 
-                        'url': indicator.url,
-                    }
-                theme_dict[theme.title] = {
-                    'title': theme.title, 
-                    'img': theme.img.file.url if theme.img else None, 
-                    'url': theme.url,
-                    'indicators': indicator_dict
-                }
-            cat_dict[cat.title] = {
-                'title': cat.title,
-                'img': cat.img.file.url if cat.img else None,
-                'url': cat.url,
-                'classes': theme_dict
-            }
-        hierarchy_dict = {
-            'title': 'Ocean Health Index',
-            'categories': cat_dict
-        }
-        
-        return hierarchy_dict
-
     def get_child_categories(self):
         # Get list of categories in this dashboard
         categories = OHICategory.objects.live().descendant_of(self)
         return categories
-    
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        hierarchy_dict = self.get_ohi_hierarchy_dict()
-        context['ohi_hierarchy_dict'] = hierarchy_dict
-        return context
 
-class OHICategory(Page):
+class OHICategory(OHIPage):
     """
     Represents an indicator category.
 
