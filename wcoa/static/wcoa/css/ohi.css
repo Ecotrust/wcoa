@@ -137,6 +137,7 @@ header * {
     flex-direction: column;
     justify-content: stretch;
     margin: 0 auto;
+    padding: 4vh 0 5vh;
     text-align: center;
     width: 100%;
 }
@@ -249,8 +250,8 @@ header * {
         position: relative;
     }
 
-    .ohi-category-item:nth-of-type(2):before,
-    .ohi-category-item:nth-of-type(2):after {
+    .template-ohi-dashboard .ohi-category-item:nth-of-type(2):before,
+    .template-ohi-dashboard .ohi-category-item:nth-of-type(2):after {
         background: var(--white);
         content: '';
         clip-path: polygon(92% 40%,
