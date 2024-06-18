@@ -120,6 +120,7 @@ class OHIStuctBlock(blocks.StructBlock):
     ], required=False, use_json_field=True)
 
     full_image = ImageChooserBlock(required=False)
+    cover_image = ImageChooserBlock(required=False)
     text_color = blocks.ChoiceBlock(choices=color_choices, default='black', icon='color_palette', required=False)
     background_color = blocks.ChoiceBlock(choices=background_color_choices, default='white', icon='color', required=False)
     border_color = blocks.ChoiceBlock(choices=color_choices, default='', icon='color_palette', required=False)

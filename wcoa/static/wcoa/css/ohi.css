@@ -81,6 +81,12 @@ header * {
     width: 100%;
 }
 
+.grid-item {
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
 .grid-item a {
     color: inherit;
 }
@@ -89,10 +95,9 @@ header * {
     color: inherit;
 }
 
-.grid-item {
-    overflow: hidden;
-    position: relative;
-    z-index: 0;
+.grid-item img.full-width {
+    display: block;
+    margin: 0 auto;
 }
 
 .full-img-wrap {
@@ -104,6 +109,16 @@ header * {
     height: 100%;
     left: 0;
     object-fit: contain;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.grid-item .cover-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
     position: absolute;
     top: 0;
     width: 100%;
