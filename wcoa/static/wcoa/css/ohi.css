@@ -75,8 +75,11 @@ header * {
 }
 
 .grid-item a {
-    /* color: var(--link-color); */
+    color: inherit;
 }
+    .grid-item a:hover {
+        color: inherit;
+    }
 
 .grid-item {
     overflow: hidden;
@@ -111,6 +114,7 @@ header * {
 }
 
     .grid-sub-item a:hover {
+        color: inherit;
         opacity: 0.8;
     }
 
