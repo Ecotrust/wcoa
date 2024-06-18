@@ -2,16 +2,16 @@
     --default_font_family: "Nunito Sans", "Open Sans", sans-serif;
     --bold_font_family: var(--default_font_family);
     --generic_font_family: var(--default_font_family);
-   
+
     /* Colors */
     --blue: rgba(48, 112, 247, 1);
     --green: rgba(152, 171, 55, 1);
     --red: rgba(250, 35, 18, 1);
-    --yellow: rgba(242,191,76,1);
-    --grey: rgba(77,77,79,1);
+    --yellow: rgba(242, 191, 76, 1);
+    --grey: rgba(77, 77, 79, 1);
     --gray: var(--grey);
-    --white: rgba(255,255,255,1);
-    --black: rgba(0,0,0,1);
+    --white: rgba(255, 255, 255, 1);
+    --black: rgba(0, 0, 0, 1);
 
     --primary_color: var(--blue);
     --secondary_color: var(--green);
@@ -20,11 +20,17 @@
     --link-color: var(--primary_color);
 }
 
-*, input {
+*,
+input {
     font-weight: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: inherit;
     font-family: var(--bold_font_family);
 }
@@ -45,8 +51,9 @@ h3 {
 
 h4 {
     font-size: 2rem;
-    font-weight: 600;;
-} 
+    font-weight: 600;
+    ;
+}
 
 h5 {
     font-size: 1.75rem;
@@ -77,9 +84,10 @@ header * {
 .grid-item a {
     color: inherit;
 }
-    .grid-item a:hover {
-        color: inherit;
-    }
+
+.grid-item a:hover {
+    color: inherit;
+}
 
 .grid-item {
     overflow: hidden;
@@ -113,10 +121,10 @@ header * {
     opacity: 1;
 }
 
-    .grid-sub-item a:hover {
-        color: inherit;
-        opacity: 0.8;
-    }
+.grid-sub-item a:hover {
+    color: inherit;
+    opacity: 0.8;
+}
 
 @media screen and (min-width: 960px) {
 
@@ -176,15 +184,16 @@ header * {
     margin: 2rem auto 1rem;
     text-transform: uppercase;
 }
-    #ohi-hierarchy a h3:after {
-        background: var(--yellow);
-        content: '';
-        display: block;
-        height: 1px;
-        margin: 2rem auto 0;
-        position: relative;
-        width: 7rem;
-    }
+
+#ohi-hierarchy a h3:after {
+    background: var(--yellow);
+    content: '';
+    display: block;
+    height: 1px;
+    margin: 2rem auto 0;
+    position: relative;
+    width: 7rem;
+}
 
 /* Indicator item headings */
 #ohi-hierarchy a h4 {
@@ -266,16 +275,16 @@ header * {
         background: var(--white);
         content: '';
         clip-path: polygon(92% 40%,
-                    92% 0,
-                    100% 50%,
-                    92% 100%,
-                    92% 60%,
-                    8% 60%,
-                    8% 0,
-                    0% 50%,
-                    8% 100%,
-                    8% 40%,
-                    90% 40%);
+                92% 0,
+                100% 50%,
+                92% 100%,
+                92% 60%,
+                8% 60%,
+                8% 0,
+                0% 50%,
+                8% 100%,
+                8% 40%,
+                90% 40%);
         -webkit-clip-path: polygon(92% 40%,
                 92% 0,
                 100% 50%,
