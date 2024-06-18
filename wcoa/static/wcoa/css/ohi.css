@@ -58,6 +58,10 @@ header * {
     font-family: inherit;
 }
 
+/* 
+    OHI Page Styles
+ */
+
 .grid-wrapper {
     display: block;
     font-size: 1.5rem;
@@ -71,7 +75,7 @@ header * {
 }
 
 .grid-item a {
-    color: var(--link-color);
+    /* color: var(--link-color); */
 }
 
 .grid-item {
@@ -101,11 +105,14 @@ header * {
 
 .grid-sub-item a {
     color: inherit;
-    color: var(--link-color);
     font-weight: 500;
-    text-decoration: none;
-    opacity: 0.8;
+    text-decoration: underline;
+    opacity: 1;
 }
+
+    .grid-sub-item a:hover {
+        opacity: 0.8;
+    }
 
 @media screen and (min-width: 960px) {
 
