@@ -8,6 +8,19 @@
 
 {% block body_class %}template-ohi-indicator-page{% endblock %}
 
+{% block ohi_title %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <img src="{{ page.img.file.url }}" alt="{{ page.title }}" class="ohi-indicator-icon">
+                    <h1>{{ page.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock ohi_title %}
+
 {% block ohi_content %}
     <div class="container">
         <div class="row">

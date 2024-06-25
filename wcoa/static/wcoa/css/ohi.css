@@ -96,10 +96,25 @@ header * {
     color: inherit;
 }
 
+#ohi-wrap .page-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#ohi-wrap .page-header h1 {
+    max-width: 20%;
+}
 
 /** OHI Image Styles
 *
 */
+
+/* Indicator Page Icon */
+.ohi-indicator-icon {
+    max-height: 10em;
+    max-width: 20%;
+}
 
 /* Full grid images */
 
