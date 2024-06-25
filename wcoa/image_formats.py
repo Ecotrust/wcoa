@@ -12,18 +12,29 @@ register_image_format(
 
 register_image_format(
     Format(
-        "square-382", "Square 382", "richtext-image square square382", "fill-382x382"
+        "square-382", 
+        "Square 382", 
+        "richtext-image square square382", 
+        "fill-382x382"
     )
 )
 
 register_image_format(
     Format(
-        "square-573", "Square 573", "richtext-image square square573", "fill-573x573"
+        "square-573", 
+        "Square 573", 
+        "richtext-image square square573", 
+        "fill-573x573"
     )
 )
 
 register_image_format(
-    Format("max-573x573", "Max 573x573", "richtext-image max-573x573", "max-573x573")
+    Format(
+        "max-573x573", 
+        "Max 573x573", 
+        "richtext-image max-573x573", 
+        "max-573x573"
+    )
 )
 
 register_image_format(
@@ -36,5 +47,10 @@ register_image_format(
 )
 
 register_image_format(
-    Format("original", "Original", "richtext-image original", "original")
+    Format(
+        "original", 
+        "Original", 
+        "richtext-image original", 
+        "original"
+    )
 )
