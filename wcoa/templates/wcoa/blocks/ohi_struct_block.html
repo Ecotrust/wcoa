@@ -20,17 +20,20 @@
         {% if self.full_image %}
             {% if self.content|length < 1 %}
                 <div class="full-img-wrap">
-                    {% image self.full_image max-1000x1000 class="full-img" %}
+                    {% comment %} {% image self.full_image max-1000x1000 class="full-img" %} {% endcomment %}
+                    {% image self.full_image original class="full-img" %}
                 </div>
             {% else %}
-                {% image self.full_image max-1000x1000 class="full-img" %}
+                {% comment %} {% image self.full_image max-1000x1000 class="full-img" %} {% endcomment %}
+                {% image self.full_image original class="full-img" %}
             {% endif %}
         {% endif %}
         
         {# Check for a cover image #}
         {% if self.cover_image %}
             <div class="cover-img-wrap">
-                {% image self.cover_image max-1000x1000 class="cover-img" %}
+                {% comment %} {% image self.cover_image max-1000x1000 class="cover-img" %} {% endcomment %}
+                {% image self.cover_image original class="cover-img" %}
             </div>
         {% endif %}
 

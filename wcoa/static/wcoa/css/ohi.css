@@ -65,9 +65,10 @@ header * {
     font-family: inherit;
 }
 
-/* 
-    OHI Page Styles
- */
+
+/**
+*   OHI Page Styles
+*/
 
 .grid-wrapper {
     display: block;
@@ -94,6 +95,13 @@ header * {
 .grid-item a:hover {
     color: inherit;
 }
+
+
+/**
+*   OHI Image Styles
+*/
+
+/* Full grid images */
 
 .grid-item img.full-width {
     display: block;
@@ -124,6 +132,27 @@ header * {
     width: 100%;
     z-index: -2;
 }
+
+/* Rich Text Images */
+
+.grid-item .richtext-image {
+    width: auto;
+    max-width: 100%;
+}
+
+.grid-item .full-width {
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+
+/**
+*   OHI Grid Sub Item Styles
+*   Special styles for grid items that are nested within other grid items
+*/
 
 .grid-sub-item {
     z-index: 1;
