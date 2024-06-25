@@ -66,8 +66,8 @@ header * {
 }
 
 
-/**
-*   OHI Page Styles
+/** OHI Page Styles
+*
 */
 
 .grid-wrapper {
@@ -97,8 +97,8 @@ header * {
 }
 
 
-/**
-*   OHI Image Styles
+/** OHI Image Styles
+*
 */
 
 /* Full grid images */
@@ -133,25 +133,36 @@ header * {
     z-index: -2;
 }
 
-/* Rich Text Images */
+/** Rich Text Images */
 
 .grid-item .richtext-image {
     width: auto;
     max-width: 100%;
 }
 
-.grid-item .richtext-image.full-width {
+/** Images formats:
+        *   full-width
+        *   original
+        *   max-1146x1146
+        *   max-573x573   
+*
+*/
+.grid-item .richtext-image.full-width,
+.grid-item .richtext-image.original,
+.grid-item .richtext-image.max-1146x1146,
+.grid-item .richtext-image.max-573x573 {
     display: block;
     margin: 0 auto;
 }
 
+/** Square Image formats
+*
+*/
 .grid-item .richtext-image.square + p {
     display: none;
 }
 
-.grid-item .richtext-image.square + p ~ p {
-    display: none;
-}
+
 
 
 
