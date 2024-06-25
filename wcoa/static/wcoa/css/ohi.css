@@ -145,10 +145,6 @@ header * {
     margin: 0 auto;
 }
 
-.grid-item .richtext-image.square {
-
-}
-
 .grid-item .richtext-image.square + p {
     display: none;
 }
