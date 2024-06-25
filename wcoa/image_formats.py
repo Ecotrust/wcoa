@@ -2,23 +2,37 @@
 from wagtail.images.formats import Format, register_image_format
 
 register_image_format(
-    Format("thumbnail-120", "Thumbnail 120", "richtext-image thumbnail", "max-120x120")
+    Format(
+        "square-286.5",
+        "Square 286.5",
+        "richtext-image square squre286.5",
+        "fill-286.5x286.5",
+    )
 )
 
 register_image_format(
-    Format("square-300", "Square 300", "richtext-image square", "fill-300x300")
+    Format(
+        "square-382", "Square 382", "richtext-image square square382", "fill-382x382"
+    )
 )
 
 register_image_format(
-    Format("square-600", "Square 600", "richtext-image square", "fill-600x600")
+    Format(
+        "square-573", "Square 573", "richtext-image square square573", "fill-573x573"
+    )
 )
 
 register_image_format(
-    Format("max-600x600", "Max 600x600", "richtext-image max-600x600", "max-600x600")
+    Format("max-573x573", "Max 573x573", "richtext-image max-573x573", "max-573x573")
 )
 
 register_image_format(
-    Format("max-1000x1000", "Max 1000x1000", "richtext-image max-1000x1000", "max-1000x1000")
+    Format(
+        "max-1146x1146",
+        "Max 1146x1146",
+        "richtext-image max-1146x1146",
+        "max-1146x1146",
+    )
 )
 
 register_image_format(

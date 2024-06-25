@@ -140,11 +140,22 @@ header * {
     max-width: 100%;
 }
 
-.grid-item .full-width {
+.grid-item .richtext-image.full-width {
     display: block;
     margin: 0 auto;
 }
 
+.grid-item .richtext-image.square {
+
+}
+
+.grid-item .richtext-image.square + p {
+    display: none;
+}
+
+.grid-item .richtext-image.square + p ~ p {
+    display: none;
+}
 
 
 
