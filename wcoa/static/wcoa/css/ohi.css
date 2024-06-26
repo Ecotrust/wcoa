@@ -66,6 +66,16 @@ header * {
 }
 
 
+/** Anchor Tag Buffer
+*
+    Overrides default of -50px
+    Assumes that we will keep a fixed header of 100px 
+*/
+
+.anchor_tag_buffer {
+    top: -100px;
+}
+
 /** OHI Page Styles
 *
 */
