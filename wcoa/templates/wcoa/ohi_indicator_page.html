@@ -1,11 +1,6 @@
 {% extends 'wcoa/ohi/ohi_base.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block extra_css %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'wcoa/css/ohi.css' %}" type="text/css">
-{% endblock %}
-
 {% block body_class %}template-ohi-indicator-page{% endblock %}
 
 {% block ohi_title %}
