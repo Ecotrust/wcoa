@@ -251,11 +251,14 @@ class OHICategory(OHIPage):
 
     Attributes:
         page_description (str): The description of the page.
-        TODO
+        img (ForeignKey): The image for the category.
 
     Methods:
         get_child_classes(): Returns a list of child classes (OHIClass) of this category.
-        #TODO
+        get_class_indicators(): Returns a list of indicators (OHIIndicatorPage) in this category.
+
+    Subpages:
+        OHIClass: Classes for indicators in this category.
     """
 
     page_description = "Use this to create an indicator category."
@@ -292,8 +295,14 @@ class OHIClass(Page):
     An indicator class.
 
     Attributes:
-    TODO
+        page_description (str): The description of the page.
+        img (ForeignKey): The image for the class.
 
+    Methods:
+        get_child_indicators(): Returns a list of indicators (OHIIndicatorPage) in this class.
+    
+    Subpages:
+        OHIIndicatorPage: Pages for individual indicators in this class.
     """
 
     page_description = "Use this to create a indicator class."
