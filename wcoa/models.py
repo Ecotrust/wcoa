@@ -333,7 +333,9 @@ class OHIIndicatorPage(Page):
     OHI Indicator Page
 
     Attributes:
-    TODO
+        page_description (str): The description of the page.
+        img (ForeignKey): The image for the indicator.
+        body (StreamField): The body of the indicator page.
 
     """
 

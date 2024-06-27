@@ -8,7 +8,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <img src="{{ page.img.file.url }}" alt="{{ page.title }}" class="ohi-indicator-icon">
+                    {% if page.img.file.url %}
+                        <img src="{{ page.img.file.url }}" alt="{{ page.title }}" class="ohi-indicator-icon">
+                    {% endif %}
                     <h1>{{ page.title }}</h1>
                 </div>
             </div>
