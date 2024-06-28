@@ -3,6 +3,9 @@
     --bold_font_family: var(--default_font_family);
     --generic_font_family: var(--default_font_family);
 
+    /* Font size */
+    --font-size: 12px;
+
     /* Colors */
     --blue: rgba(48, 112, 247, 1);
     --green: rgba(152, 171, 55, 1);
@@ -18,6 +21,10 @@
     --tertiary_color: var(--red);
     --text-color: var(--grey);
     --link-color: var(--primary_color);
+}
+
+#ohi-wrap {
+    font-size: var(--font-size);
 }
 
 *,
@@ -36,27 +43,28 @@ h6 {
 }
 
 h1 {
+    font-size: 4rem;
     font-weight: 900;
 }
 
 h2 {
-    font-size: 3rem;
+    font-size: 1.375em;
     font-weight: 900;
 }
 
 h3 {
-    font-size: 2.125rem;
+    font-size: 1.2em;
     font-weight: 700;
 }
 
 h4 {
-    font-size: 2rem;
+    font-size: 1.1em;
     font-weight: 600;
     ;
 }
 
 h5 {
-    font-size: 1.75rem;
+    font-size: 1.05em;
     font-weight: 600;
 }
 
@@ -80,9 +88,10 @@ header * {
 *
 */
 
+/* Font size 20px */
 .grid-wrapper {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.7em;
     font-weight: 400;
     width: 100%;
 }
