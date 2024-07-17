@@ -117,7 +117,7 @@ class OHIStuctBlock(blocks.StructBlock):
     content = blocks.StreamBlock([
         ('Score', OHIIndicatorScore()),
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
-    ], required=False, use_json_field=True)
+    ], required=False)
 
     full_image = ImageChooserBlock(required=False)
     cover_image = ImageChooserBlock(required=False)

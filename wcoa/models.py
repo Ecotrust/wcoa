@@ -24,7 +24,6 @@ class CTAPage(Page):
             ('details', blocks.RichTextBlock()),
             ('row', wcoa_blocks.CTARowDivider()),
         ],
-        use_json_field=True,
     )
 
     content_panels = Page.content_panels + [
@@ -76,7 +75,6 @@ class ConnectPage(Page):
             ('connection', wcoa_blocks.CTAStreamBlock()),
             ('details', blocks.RichTextBlock()),
         ],
-        use_json_field=True,
     )
 
     # Editor panels configuration
@@ -222,13 +220,11 @@ class OHIDashboard(OHIPage):
 
     body = StreamField(
         stream_field_content,
-        use_json_field=True,
         blank=True,
     )
 
     body_below_framework = StreamField(
         stream_field_content,
-        use_json_field=True,
         blank=True,
     )
 
@@ -355,7 +351,6 @@ class OHIIndicatorPage(Page):
             ('Clear', wcoa_blocks.CTARowDivider()),
             ('Column', wcoa_blocks.OHIStuctBlock()),
         ],
-        use_json_field=True,
     )
 
     content_panels = Page.content_panels + [
