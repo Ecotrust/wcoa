@@ -48,23 +48,23 @@ h1 {
 }
 
 h2 {
-    font-size: 1.375em;
+    font-size: 2em;
     font-weight: 900;
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 1.375em;
     font-weight: 700;
 }
 
 h4 {
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-weight: 600;
     ;
 }
 
 h5 {
-    font-size: 1.05em;
+    font-size: 1.125em;
     font-weight: 600;
 }
 
@@ -102,9 +102,19 @@ header * {
 }
 
 .grid-item {
+    outline-offset: -.3125vw; /* outline color set in oht_struct_block.html */
     overflow: hidden;
     position: relative;
+    padding: 3vh 1.25vw;
     z-index: 0;
+}
+
+.grid-item h2,
+.grid-item h3,
+.grid-item h4,
+.grid-item h5 {
+    letter-spacing: .05em;
+    margin: 0;
 }
 
 .grid-item a {
@@ -201,8 +211,7 @@ header * {
 
 
 
-/**
-*   OHI Grid Sub Item Styles
+/** OHI Grid Sub Item Styles
 *   Special styles for grid items that are nested within other grid items
 */
 
@@ -240,6 +249,17 @@ header * {
     }
 
 }
+
+
+
+/** OHI Block Styles
+*   Special styles for WYSIWYG blocks
+*/
+
+.block-WYSIWYG:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+}
+
 
 /*
     OHI Dashboard Styles
