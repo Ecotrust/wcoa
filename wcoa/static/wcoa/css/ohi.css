@@ -88,6 +88,20 @@ header * {
 *
 */
 
+#ohi-wrap .page-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#ohi-wrap .page-header h1 {
+    max-width: 80%;
+}
+
+/** OHI Grid Styles
+*
+*/
+
 /* Font size 20px */
 .grid-wrapper {
     display: block;
@@ -105,7 +119,7 @@ header * {
     outline-offset: -.3125vw; /* outline color set in oht_struct_block.html */
     overflow: hidden;
     position: relative;
-    padding: 3vh 1.25vw;
+    padding: 3vh 1.5vw;
     z-index: 0;
 }
 
@@ -123,16 +137,6 @@ header * {
 
 .grid-item a:hover {
     color: inherit;
-}
-
-#ohi-wrap .page-header {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-}
-
-#ohi-wrap .page-header h1 {
-    max-width: 80%;
 }
 
 /** OHI Image Styles
@@ -177,37 +181,44 @@ header * {
     z-index: -2;
 }
 
-/** Rich Text Images */
+/** Rich Text Images
+ * Styles for images within rich text blocks
+ * 
+ */
 
-.grid-item .richtext-image {
-    width: auto;
-    max-width: 100%;
-}
-
-/** Images formats:
-        *   full-width
-        *   original
-        *   max-1146x1146
-        *   max-573x573   
-*
-*/
 .grid-item .richtext-image.full-width,
 .grid-item .richtext-image.original,
-.grid-item .richtext-image.max-1146x1146,
-.grid-item .richtext-image.max-573x573 {
+.grid-item .richtext-image.square-xl {
     display: block;
     margin: 0 auto;
 }
 
 /** Square Image formats
-*
+*   Size: 
+*      small: 25%
+*      medium: 33.3%
+*      large: 50%
+*      xl: 100%
 */
-.grid-item .richtext-image.square + p {
+.grid-item .richtext-image.square-img + p {
     display: none;
 }
 
+.grid-item .square-small {
+    max-width: 25%;
+}
 
+.grid-item .square-medium {
+    max-width: 33.333%;
+}
 
+.grid-item .square-large {
+    max-width: 50%;
+}
+
+.grid-item .square-xl {
+    max-width: 100%;
+}
 
 
 
@@ -244,7 +255,6 @@ header * {
     }
 
     .grid-sub-item {
-        padding: 10px;
         width: 100%;
     }
 
