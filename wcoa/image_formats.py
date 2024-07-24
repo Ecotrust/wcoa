@@ -42,6 +42,8 @@ register_image_format(
     )
 )
 
+# TODO: Add Max medium image
+
 # TODO: Remove format once all images are updated
 register_image_format(
     Format(
@@ -65,7 +67,7 @@ register_image_format(
 register_image_format(
     Format(
         "max-573x573", 
-        "DO NOT USE Max 573x573", 
+        "Max 573x573", 
         "richtext-image max-573x573", 
         "max-573x573"
     )

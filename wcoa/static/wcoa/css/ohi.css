@@ -186,8 +186,15 @@ header * {
  * 
  */
 
+.grid-item .richtext-image {
+    width: auto;
+    max-width: 100%;
+}
+
 .grid-item .richtext-image.full-width,
 .grid-item .richtext-image.original,
+.grid-item .richtext-image.max-1146x1146,
+.grid-item .richtext-image.max-573x573,
 .grid-item .richtext-image.square-xl {
     display: block;
     margin: 0 auto;
