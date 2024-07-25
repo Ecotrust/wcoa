@@ -55,9 +55,7 @@ class NewWindowExternalLinkHandler(LinkHandler):
     @classmethod
     def expand_db_attributes(cls, attrs):
         href = attrs["href"]
-        # Let's add the target attr, and also rel="noopener" + noreferrer fallback.
-        # See https://github.com/whatwg/html/issues/4078.
-        return '<a href="%s" target="_blank" rel="noopener noreferrer">' % escape(href)
+        return '<a href="%s" target="_blank">' % escape(href)
 
 
 @hooks.register("register_rich_text_features")
