@@ -55,6 +55,7 @@ class NewWindowExternalLinkHandler(LinkHandler):
     @classmethod
     def expand_db_attributes(cls, attrs):
         href = attrs["href"]
+        
         return '<a href="%s" target="_blank">' % escape(href)
 
 

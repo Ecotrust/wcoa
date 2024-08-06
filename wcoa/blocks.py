@@ -39,22 +39,24 @@ class CTAStreamBlock(blocks.StructBlock):
     # Width would be better as a CoiceBlock
     width = blocks.IntegerBlock(required=False,max_value=12,min_value=0,help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))')
     text_color = blocks.ChoiceBlock(choices=[
-        ('white', 'White'),
         ('black', 'Black'),
+        ('black-light', 'Black (Light)'),
         ('blue', 'Blue'),
         ('green', 'Green'),
-        ('red', 'Red'),
-        ('purple', 'Purple'),
         ('grey', 'Grey'),
+        ('purple', 'Purple'),
+        ('red', 'Red'),
+        ('white', 'White'),
     ], icon='color_palette', required=False)
     background_color = blocks.ChoiceBlock(choices=[
-        ('white', 'White'),
         ('black', 'Black'),
+        ('black-light', 'Black (Light)'),
         ('blue', 'Blue'),
         ('green', 'Green'),
-        ('red', 'Red'),
-        ('purple', 'Purple'),
         ('grey', 'Grey'),
+        ('purple', 'Purple'),
+        ('red', 'Red'),
+        ('white', 'White'),
     ], icon='color', required=False)
     background_image = ImageChooserBlock(required=False)
 
@@ -95,8 +97,9 @@ class OHIStuctBlock(blocks.StructBlock):
     ], default='12', label='Width', icon='arrow-right', required=False)
 
     color_choices = [
-        ('rgba(255,255,255,1)', 'White'),
-        ('rgba(0,0,0,1)', 'Black'),
+        ('rgba(255, 255, 255, 1)', 'White'),
+        ('rgba(0, 0, 0, 1)', 'Black'),
+        ('rgba(46, 46, 47, 1)', 'Black (Light)'),
         ('rgba(48, 112, 247, 1)', 'Blue'),
         ('rgba(152, 171, 55, 1)', 'Green'),
         ('rgba(242,191,76,1)', 'Yellow'),
@@ -107,6 +110,7 @@ class OHIStuctBlock(blocks.StructBlock):
     background_color_choices = [
         ('rgba(255, 255, 255, 1)', 'White'),
         ('rgba(0, 0, 0, 0.5)', 'Black'),
+        ('rgba(46, 46, 47, 1)', 'Black (Light)'),
         ('rgba(48, 112, 247, 0.5)', 'Blue'),
         ('rgba(152, 171, 55, 0.5)', 'Green'),
         ('rgba(242, 191, 76, 0.5)', 'Yellow'),

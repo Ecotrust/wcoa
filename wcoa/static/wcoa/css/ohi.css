@@ -73,6 +73,16 @@ header * {
     font-family: inherit;
 }
 
+/** Override Wagtail Styles
+ *
+ */
+
+/* Counter Magrin to for p + p */
+p:empty + p:empty,
+p:empty + p:empty + p:empty {
+    margin-top: -1rem;
+}
+
 
 /** Anchor Tag Buffer
 *
@@ -211,15 +221,15 @@ header * {
     display: none;
 }
 
-.grid-item .square-small {
+.grid-item.span-12 .square-small {
     max-width: 25%;
 }
 
-.grid-item .square-medium {
+.grid-item.span-12 .square-medium {
     max-width: 33.333%;
 }
 
-.grid-item .square-large {
+.grid-item.span-12 .square-large {
     max-width: 50%;
 }
 

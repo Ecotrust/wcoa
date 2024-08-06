@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 
-<div class="grid-item" 
+<div class="grid-item span-{{ self.width }}" 
      style="grid-column: span {{ self.width }};
             {% if self.background_color %}background-color: {{ self.background_color }};{% endif %}
             {% if self.text_color %}color: {{ self.text_color }};{% endif %}
@@ -9,7 +9,7 @@
             {% if self.border_width %}outline-style: solid;{% endif %}">
 
     {% if self.link %}
-        <a href="{{ self.link }}" target="_blank">
+        <a href="{{ self.link }}">
     {% endif %}
 
     <div class="grid-sub-item">
