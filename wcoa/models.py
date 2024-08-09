@@ -350,6 +350,7 @@ class OHIIndicatorPage(Page):
         [
             ('Clear', wcoa_blocks.CTARowDivider()),
             ('Column', wcoa_blocks.OHIStuctBlock()),
+            ('Chart', wcoa_blocks.ChartContentBlocks()),
         ],
     )
 

@@ -2,8 +2,31 @@ from django.conf import settings
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail import blocks
-from wagtail.fields import RichTextField, StreamField
+# from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
+from wagtailcharts.blocks import ChartBlock
+
+COLOR_CHOICES = [
+    ('rgba(255, 255, 255, 1)', 'White'),
+    ('rgba(0, 0, 0, 1)', 'Black'),
+    ('rgba(46, 46, 47, 1)', 'Black (Light)'),
+    ('rgba(48, 112, 247, 1)', 'Blue'),
+    ('rgba(152, 171, 55, 1)', 'Green'),
+    ('rgba(242,191,76,1)', 'Yellow'),
+    ('rgba(250, 35, 18, 1)', 'Red'),
+    ('rgba(77,77,79,1)', 'Grey'),
+]
+
+BG_COLOR_CHOICES = [
+    ('rgba(255, 255, 255, 1)', 'White'),
+    ('rgba(0, 0, 0, 0.5)', 'Black'),
+    ('rgba(46, 46, 47, 1)', 'Black (Light)'),
+    ('rgba(48, 112, 247, 0.5)', 'Blue'),
+    ('rgba(152, 171, 55, 0.5)', 'Green'),
+    ('rgba(242, 191, 76, 0.5)', 'Yellow'),
+    ('rgba(250, 35, 18, 0.5)', 'Red'),
+    ('rgba(77, 77, 79, 0.5)', 'Grey'),
+]
 
 class LinkStructValue(blocks.StructValue):
     def url(self):
@@ -96,28 +119,6 @@ class OHIStuctBlock(blocks.StructBlock):
         ('12', '12/12'),
     ], default='12', label='Width', icon='arrow-right', required=False)
 
-    color_choices = [
-        ('rgba(255, 255, 255, 1)', 'White'),
-        ('rgba(0, 0, 0, 1)', 'Black'),
-        ('rgba(46, 46, 47, 1)', 'Black (Light)'),
-        ('rgba(48, 112, 247, 1)', 'Blue'),
-        ('rgba(152, 171, 55, 1)', 'Green'),
-        ('rgba(242,191,76,1)', 'Yellow'),
-        ('rgba(250, 35, 18, 1)', 'Red'),
-        ('rgba(77,77,79,1)', 'Grey'),
-    ]
-
-    background_color_choices = [
-        ('rgba(255, 255, 255, 1)', 'White'),
-        ('rgba(0, 0, 0, 0.5)', 'Black'),
-        ('rgba(46, 46, 47, 1)', 'Black (Light)'),
-        ('rgba(48, 112, 247, 0.5)', 'Blue'),
-        ('rgba(152, 171, 55, 0.5)', 'Green'),
-        ('rgba(242, 191, 76, 0.5)', 'Yellow'),
-        ('rgba(250, 35, 18, 0.5)', 'Red'),
-        ('rgba(77, 77, 79, 0.5)', 'Grey'),
-    ]
-
     content = blocks.StreamBlock([
         ('Score', OHIIndicatorScore()),
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
@@ -125,14 +126,27 @@ class OHIStuctBlock(blocks.StructBlock):
 
     full_image = ImageChooserBlock(required=False)
     cover_image = ImageChooserBlock(required=False)
-    text_color = blocks.ChoiceBlock(choices=color_choices, default='black', icon='color_palette', required=False)
-    background_color = blocks.ChoiceBlock(choices=background_color_choices, default='white', icon='color', required=False)
-    border_color = blocks.ChoiceBlock(choices=color_choices, default='', icon='color_palette', required=False)
+    text_color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='black', icon='color_palette', required=False)
+    background_color = blocks.ChoiceBlock(choices=BG_COLOR_CHOICES, default='white', icon='color', required=False)
+    border_color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='', icon='color_palette', required=False)
     border_width = blocks.IntegerBlock(default='', help_text='Width of the border in pixels', required=False, min_value=0, max_value=10)
     link = blocks.URLBlock(required=False, help_text='Wrap column in a link')
 
     class Meta:
         template = 'wcoa/blocks/ohi_struct_block.html'
+
+class ChartContentBlocks(blocks.StreamBlock):
+    chart_block = ChartBlock(colors=COLOR_CHOICES)
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        # Add any additional context you need here
+        context['extra_data'] = 'Some extra context data'
+        return context
+        
+    class Meta:
+        template = 'wcoa/blocks/ohi_chart_block.html'
+
 
 # Place holder for future blocks
 # class HeroBlock(blocks.StructBlock):
