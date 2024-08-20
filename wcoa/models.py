@@ -15,6 +15,7 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, Inl
 from wagtail.images.models import Image
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
+from wagtailcharts.blocks import ChartBlock
 from wcoa import blocks as wcoa_blocks
 
 class CTAPage(Page):
@@ -139,9 +140,12 @@ class WcoaOceanStories(OceanStories):
 class WcoaOceanStory(OceanStory):
     parent_page_types = ['WcoaOceanStories']
 
-# OCEAN HEALTH INDEX OHI PAGES 
+
+# OCEAN HEALTH INDEX OHI PAGES
 class OHIPage(Page):
-    # ...
+    """
+    Base class for OHI pages.
+    """
 
     def get_indicator_dict(self, indicator):
         return {
@@ -190,6 +194,7 @@ class OHIPage(Page):
 
     class Meta:
         abstract = True
+
 
 class OHIDashboard(OHIPage):
     """
@@ -243,6 +248,7 @@ class OHIDashboard(OHIPage):
         categories = OHICategory.objects.live().descendant_of(self)
         return categories
 
+
 class OHICategory(OHIPage):
     """
     Represents an indicator category.
@@ -287,7 +293,8 @@ class OHICategory(OHIPage):
         for c in classes:
             indicators += OHIIndicatorPage.objects.live().descendant_of(c)
         return indicators
-        
+
+
 class OHIClass(Page):
     """
     An indicator class.
@@ -334,7 +341,6 @@ class OHIIndicatorPage(Page):
         page_description (str): The description of the page.
         img (ForeignKey): The image for the indicator.
         body (StreamField): The body of the indicator page.
-
     """
 
     page_description = "Use the to create a page for an indicator."
@@ -350,10 +356,9 @@ class OHIIndicatorPage(Page):
         [
             ('Clear', wcoa_blocks.CTARowDivider()),
             ('Column', wcoa_blocks.OHIStuctBlock()),
-            ('Chart', wcoa_blocks.ChartContentBlocks()),
         ],
     )
-
+    
     content_panels = Page.content_panels + [
         FieldPanel('img'),
         FieldPanel('body'),

@@ -1,5 +1,5 @@
 {% extends 'wcoa/ohi/ohi_base.html' %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailcharts_tags wagtailimages_tags static %}
 
 {% block body_class %}template-ohi-indicator-page{% endblock %}
 
@@ -33,3 +33,14 @@
         </div>
     </div>
 {% endblock ohi_content %}
+
+{% block extra_js %}
+{% comment %} Add compiled guage JS file here {% endcomment %}
+<script src="{% static 'wagtailcharts/js/chart-types.js' %}"></script>
+<script src="{% static 'wagtailcharts/js/chart.js' %}"></script>
+<script src="{% static 'wagtailcharts/js/stacked-100.js' %}"></script>
+<script src="{% static 'wagtailcharts/js/chartjs-plugin-datalabels.min.js' %}"></script>
+<script>Chart.register(ChartjsPluginStacked100.default);</script>
+<script src="{% static 'wagtailcharts/js/wagtailcharts.js' %}"></script>
+
+{% endblock %}

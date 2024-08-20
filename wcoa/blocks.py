@@ -54,6 +54,9 @@ class CTARowDivider(blocks.StaticBlock):
         label = 'Row divider'
         admin_text = 'Forces a new row to be created'
 
+class ChartContentBlocks(blocks.StreamBlock):
+    chart_block = ChartBlock(colors=COLOR_CHOICES)
+    
 class CTAStreamBlock(blocks.StructBlock):
     cta_title = blocks.CharBlock(required=False)
     cta_content = blocks.RichTextBlock(required=False)
@@ -122,6 +125,7 @@ class OHIStuctBlock(blocks.StructBlock):
     content = blocks.StreamBlock([
         ('Score', OHIIndicatorScore()),
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
+        ('Chart', ChartContentBlocks()),
     ], required=False)
 
     full_image = ImageChooserBlock(required=False)
@@ -134,18 +138,6 @@ class OHIStuctBlock(blocks.StructBlock):
 
     class Meta:
         template = 'wcoa/blocks/ohi_struct_block.html'
-
-class ChartContentBlocks(blocks.StreamBlock):
-    chart_block = ChartBlock(colors=COLOR_CHOICES)
-
-    def get_context(self, value, parent_context=None):
-        context = super().get_context(value, parent_context=parent_context)
-        # Add any additional context you need here
-        context['extra_data'] = 'Some extra context data'
-        return context
-        
-    class Meta:
-        template = 'wcoa/blocks/ohi_chart_block.html'
 
 
 # Place holder for future blocks
