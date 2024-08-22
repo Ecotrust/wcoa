@@ -92,13 +92,14 @@ class CTAStreamBlock(blocks.StructBlock):
 class ChartContentBlocks(blocks.StreamBlock):
     chart_block = ChartBlock(colors=COLOR_CHOICES)
 
+
 class AccordionItem(blocks.StructBlock):
-    title = blocks.CharBlock()
+    title = blocks.CharBlock(required=False)
     content = blocks.RichTextBlock(required=False)
 
 
 class AccordionBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
+    title = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('item', AccordionItem())
     ])
