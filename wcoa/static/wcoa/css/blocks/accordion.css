@@ -3,12 +3,13 @@
 }
  
 .accordion-items {
-    border-top: 1px solid #000;
+    /* border-top: 1px solid var(--black); */
+
 }
 
 .accordion-item {
-    padding: .5rem;
-    border-bottom: 1px solid #000;
+    border: 1px solid var(--black);
+    padding: 1rem;
 }
 
 .accordion-item-content {
@@ -16,20 +17,25 @@
     padding: 1rem;
 }
 
-.accordion-item-link {
+.accordion-item .accordion-item-link {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     outline: 0;
+    text-decoration: none;;
 }
 
 .accordion-item-heading {
-    margin: 0;
+    /* margin: 0; */
+}
+
+.accordion-item.is-open {
+
 }
 
 .accordion-item-icon {
-    font-size: .875em;
+    font-size: 1em;
     text-decoration: none;
 }
 
