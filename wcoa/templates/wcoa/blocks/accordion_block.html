@@ -1,0 +1,48 @@
+{% load wagtailcore_tags %}
+
+<div class="accordion" >
+
+    <h2 class="accordion-heading">{{ self.title }}</h2>
+
+    <div class="accordion-items">
+        
+        {% for item in value.items %}
+
+            <div class="accordion-item" data-accordion>
+                <a
+                    aria-controls="link-{{ accordion_id }}-{{ forloop.counter }}"
+                    aria-expanded="false"
+                    aria-selected="false"
+                    class="accordion-item-link"
+                    data-accordion-link
+                    href="#"
+                    id="link-{{ accordion_id }}-{{ forloop.counter }}"
+                    role="tab"
+                    tabindex="0"
+                >
+                    <h5 class="accordion-item-heading">{{ item.value.title }}</h5>
+                    
+                    <div class="accordion-item-icons">
+                        <span class="accordion-item-icon accordion-item-icon-open">+</span>
+                        <span class="accordion-item-icon accordion-item-icon-close">-</span>
+                    </div>
+                </a>
+
+                <div
+                    aria-labelledby="link-{{ accordion_id }}-{{ forloop.counter }}"
+                    aria-hidden="false"
+                    class="accordion-item-content"
+                    data-accordion-content
+                    id="link-{{ accordion_id }}-{{ forloop.counter }}"
+                    role="tabpanel"
+                >
+
+                    {{ item.value.content|richtext }}
+                
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+</div>

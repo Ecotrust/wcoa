@@ -35,6 +35,7 @@
 {% endblock ohi_content %}
 
 {% block extra_js %}
+{{ block.super }}
 {% comment %} Add compiled guage JS file here {% endcomment %}
 <script src="{% static 'wagtailcharts/js/chart-types.js' %}"></script>
 <script src="{% static 'wagtailcharts/js/chart.js' %}"></script>

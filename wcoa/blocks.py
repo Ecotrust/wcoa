@@ -54,9 +54,7 @@ class CTARowDivider(blocks.StaticBlock):
         label = 'Row divider'
         admin_text = 'Forces a new row to be created'
 
-class ChartContentBlocks(blocks.StreamBlock):
-    chart_block = ChartBlock(colors=COLOR_CHOICES)
-    
+
 class CTAStreamBlock(blocks.StructBlock):
     cta_title = blocks.CharBlock(required=False)
     cta_content = blocks.RichTextBlock(required=False)
@@ -89,6 +87,26 @@ class CTAStreamBlock(blocks.StructBlock):
     class Meta:
         icon = 'form'
         value_class = LinkStructValue
+
+
+class ChartContentBlocks(blocks.StreamBlock):
+    chart_block = ChartBlock(colors=COLOR_CHOICES)
+
+class AccordionItem(blocks.StructBlock):
+    title = blocks.CharBlock()
+    content = blocks.RichTextBlock(required=False)
+
+
+class AccordionBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
+    items = blocks.StreamBlock([
+        ('item', AccordionItem())
+    ])
+
+    class Meta:
+        icon = 'list-ul'
+        template = 'wcoa/blocks/accordion_block.html'
+
 
 class OHIIndicatorScore(blocks.StructBlock):
     state = blocks.ChoiceBlock(choices=[
@@ -126,6 +144,7 @@ class OHIStuctBlock(blocks.StructBlock):
         ('Score', OHIIndicatorScore()),
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
         ('Chart', ChartContentBlocks()),
+        ('Accordion', AccordionBlock()),
     ], required=False)
 
     full_image = ImageChooserBlock(required=False)

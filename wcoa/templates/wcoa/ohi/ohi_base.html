@@ -4,6 +4,7 @@
 {% block extra_css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'wcoa/css/ohi.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'wcoa/css/blocks/accordion.css' %}" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300..900&display=swap" rel="stylesheet">
@@ -70,3 +71,8 @@
     </div>
 
 {% endblock content %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'wcoa/js/ohi.js' %}"></script>
+{% endblock %}
