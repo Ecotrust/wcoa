@@ -48,17 +48,18 @@ def register_centertext_feature(features):
     features.default_features.append(feature_name)
 
 
-class NewWindowExternalLinkHandler(LinkHandler):
-    # This specifies to do this override for external links only.
-    identifier = "external"
+# This is bad practice
+# class NewWindowExternalLinkHandler(LinkHandler):
+#     # This specifies to do this override for external links only.
+#     identifier = "external"
 
-    @classmethod
-    def expand_db_attributes(cls, attrs):
-        href = attrs["href"]
+#     @classmethod
+#     def expand_db_attributes(cls, attrs):
+#         href = attrs["href"]
         
-        return '<a href="%s" target="_blank">' % escape(href)
+#         return '<a href="%s" target="_blank">' % escape(href)
 
 
-@hooks.register("register_rich_text_features")
-def register_external_link(features):
-    features.register_link_type(NewWindowExternalLinkHandler)
+# @hooks.register("register_rich_text_features")
+# def register_external_link(features):
+#     features.register_link_type(NewWindowExternalLinkHandler)
