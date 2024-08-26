@@ -84,6 +84,13 @@ p:empty + p:empty + p:empty {
 }
 
 
+/** Bread Crumb Styles
+*
+*/
+.breadcrumb>li>.divider {
+    color: var(--grey);
+}
+
 /** Anchor Tag Buffer
 *
     Overrides default of -50px
