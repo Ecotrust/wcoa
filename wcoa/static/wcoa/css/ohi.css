@@ -77,7 +77,7 @@ header * {
  *
  */
 
-/* Counter Magrin to for p + p */
+/* Counter margin to for p + p */
 p:empty + p:empty,
 p:empty + p:empty + p:empty {
     margin-top: -1rem;
