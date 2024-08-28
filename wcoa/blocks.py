@@ -17,6 +17,17 @@ COLOR_CHOICES = [
     ('rgba(77,77,79,1)', 'Grey'),
 ]
 
+COLOR_CHOICES_CHARTS = (
+    ('#ffffff', 'White'),
+    ('#000000', 'Black'),
+    ('#2e2e2f', 'Black (Light)'),
+    ('#3070f7', 'Blue'),
+    ('#98ab37', 'Green'),
+    ('#f2bf4c', 'Yellow'),
+    ('#fa2312', 'Red'),
+    ('#4d4d4f', 'Grey'),
+)
+
 BG_COLOR_CHOICES = [
     ('rgba(255, 255, 255, 1)', 'White'),
     ('rgba(0, 0, 0, 0.5)', 'Black'),
@@ -90,7 +101,7 @@ class CTAStreamBlock(blocks.StructBlock):
 
 
 class ChartContentBlocks(blocks.StreamBlock):
-    chart_block = ChartBlock(colors=COLOR_CHOICES)
+    chart_block = ChartBlock(colors=COLOR_CHOICES_CHARTS)
 
 
 class AccordionItem(blocks.StructBlock):

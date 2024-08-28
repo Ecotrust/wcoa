@@ -15,7 +15,6 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel, Inl
 from wagtail.images.models import Image
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
-from wagtailcharts.blocks import ChartBlock
 from wcoa import blocks as wcoa_blocks
 
 class CTAPage(Page):
