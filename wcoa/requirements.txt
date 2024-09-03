@@ -1,9 +1,6 @@
 #-e git+https://github.com/Ecotrust/wcoa.git@master#egg=wcoa-master
 
-# pip3 install selenium
-
 elasticsearch<8.0
-
 elasticsearch-dsl
-
 selenium
+wagtailcharts
