@@ -1,5 +1,10 @@
 from visualize.settings import *
 from data_manager.settings import *
+from marco.settings import *
+
+INSTALLED_APPS += [
+    'wagtailcharts',
+]
 
 PROJECT_REGION = {
     'name': 'West Coast',
