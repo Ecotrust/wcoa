@@ -1,6 +1,6 @@
 from visualize.settings import *
 from data_manager.settings import *
-from marco.settings import *
+from marco.settings import INSTALLED_APPS
 
 INSTALLED_APPS += [
     'wagtailcharts',
