@@ -1,9 +1,9 @@
-from django.utils.html import escape
+from django.utils.html import escape, format_html_join
+from django.templatetags.static import static
 from wagtail import hooks
-import wagtail.admin.rich_text.editors.draftail.features as draftail_features
-from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
-from wagtail.admin.rich_text.editors.draftail.features import Feature
-from wagtail.rich_text import LinkHandler
+from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler, LinkElementHandler
+from wagtail.admin.rich_text.editors.draftail.features import Feature, InlineStyleFeature, EntityFeature
+from wagtail.rich_text import LinkHandler, features
 
 
 @hooks.register("register_rich_text_features")
@@ -23,7 +23,7 @@ def register_centertext_feature(features):
 
     # Call register_editor_plugin to register the configuration for Draftail.
     features.register_editor_plugin(
-        "draftail", feature_name, draftail_features.InlineStyleFeature(control)
+        "draftail", feature_name, InlineStyleFeature(control)
     )
     
     # Configure the content transform from the DB to the editor and back.
@@ -48,18 +48,55 @@ def register_centertext_feature(features):
     features.default_features.append(feature_name)
 
 
-# This is bad practice
-# class NewWindowExternalLinkHandler(LinkHandler):
-#     # This specifies to do this override for external links only.
-#     identifier = "external"
 
-#     @classmethod
-#     def expand_db_attributes(cls, attrs):
-#         href = attrs["href"]
-        
-#         return '<a href="%s" target="_blank">' % escape(href)
+from wagtail.rich_text import LinkHandler
+
+class CustomLinkHandler(LinkHandler):
+    identifier = 'external'
+
+    @classmethod
+    def get_model(cls):
+        return None
+
+    @classmethod
+    def get_template(cls):
+        return 'wcoa/blocks/link_with_target.html'
+
+    @classmethod
+    def expand_db_attributes(cls, attrs):
+        href = attrs["href"]
+        target_blank = attrs.get("target", "_self")
+        if target_blank == "_blank":
+            target_attr = ' target="_blank"'
+        else:
+            target_attr = ''
+        return f'<a href="{href}"{target_attr}>{attrs.get("link_text", href)}</a>'
 
 
-# @hooks.register("register_rich_text_features")
-# def register_external_link(features):
-#     features.register_link_type(NewWindowExternalLinkHandler)
+@hooks.register('register_rich_text_features')
+def register_external_link(features):
+    feature_name = 'external'
+    type_ = 'LINK'
+    control = {
+        'type': type_,
+        'label': 'Link',
+        'description': 'Link with option to open in new tab',
+    }
+    
+    features.register_editor_plugin(
+        'draftail',
+        feature_name,
+        EntityFeature(control)
+    )
+
+    features.register_link_type(CustomLinkHandler)
+
+@hooks.register('insert_editor_js')
+def editor_js():
+    return '<script src="/static/wcoa/js/wagtail/custom_richtext_link.js"></script>'
+
+
+# @hooks.register('insert_editor_js')
+# def editor_js():
+#     from django.utils.safestring import mark_safe
+#     return mark_safe("""<script src="/static/wcoa/js/wagtail/custom_richtext_link.js"></script>""")
