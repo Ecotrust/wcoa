@@ -103,55 +103,55 @@ def register_centertext_feature(features):
 
 ### DLP and RH Pair Programming & DLP WORK After 09.09.2024 ###
 
-# from typing import List
-# from wagtail.admin.rich_text.converters.contentstate import link_entity
-# from wagtail.admin.rich_text.converters.html_to_contentstate import ExternalLinkElementHandler
+from typing import List
+from wagtail.admin.rich_text.converters.contentstate import link_entity
+from wagtail.admin.rich_text.converters.html_to_contentstate import ExternalLinkElementHandler
 
 
-# class NewWindowExternalLinkHandler(LinkHandler):
-#     # This specifies to do this override for newtab links only.
-#     identifier = "newtab"
+class NewWindowExternalLinkHandler(LinkHandler):
+    # This specifies to do this override for newtab links only.
+    identifier = "newtab"
 
-#     # @classmethod
-#     # def get_instance(cls, attrs):
-#     #     model = cls.get_model()
-#     #     return model._default_manager.get(id=attrs["id"])
+    # @classmethod
+    # def get_instance(cls, attrs):
+    #     model = cls.get_model()
+    #     return model._default_manager.get(id=attrs["id"])
         
-#     @classmethod
-#     def expand_db_attributes(cls, attrs):
-#         href = attrs["href"]
-#         return '<a href="%s" target="_blank">' % escape(href)
+    @classmethod
+    def expand_db_attributes(cls, attrs):
+        href = attrs["href"]
+        return '<a href="%s" target="_blank">' % escape(href)
 
-# @hooks.register("register_rich_text_features")
-# def register_newtab_link(features):
-#     # features.register_link_type(NewWindowExternalLinkHandler)
-#     features.register_editor_plugin(
-#         "draftail",
-#         "newtab",
-#         draftail_features.EntityFeature(
-#             {
-#                 "type": "LINK",
-#                 "icon": "link",
-#                 "attributes": ["url", "id", "parentId"],
-#                 "allowlist": {
-#                     # Keep pasted links with http/https protocol, and not-pasted links (href = undefined).
-#                     "href": "^(http:|https:|undefined$)",
-#                 },
-#                 "chooserUrls": {
-#                     "newTab": reverse_lazy("wagtailadmin_choose_page_newtab_link"),
-#                 },
-#             },
-#         ),
-#     )
-#     features.register_converter_rule(
-#         "contentstate",
-#         "newtab",
-#         {
-#             "from_database_format": {
-#                 "a[href]": NewWindowExternalLinkHandler(),
-#             },
-#             "to_database_format": {"entity_decorators": {"LINK": link_entity}},
-#         },
-#     )
+@hooks.register("register_rich_text_features")
+def register_newtab_link(features):
+    # features.register_link_type(NewWindowExternalLinkHandler)
+    # features.register_editor_plugin(
+    #     "draftail",
+    #     "newtab",
+    #     draftail_features.EntityFeature(
+    #         {
+    #             "type": "LINK",
+    #             "icon": "link",
+    #             "attributes": ["url", "id", "parentId"],
+    #             "allowlist": {
+    #                 # Keep pasted links with http/https protocol, and not-pasted links (href = undefined).
+    #                 "href": "^(http:|https:|undefined$)",
+    #             },
+    #             "chooserUrls": {
+    #                 "newTab": reverse_lazy("wagtailadmin_choose_page_newtab_link"),
+    #             },
+    #         },
+    #     ),
+    # )
+    features.register_converter_rule(
+        "contentstate",
+        "newtab",
+        {
+            "from_database_format": {
+                "a[href]": NewWindowExternalLinkHandler(),
+            },
+            "to_database_format": {"entity_decorators": {"LINK": link_entity}},
+        },
+    )
 
 ### End DLP and RH Pair Programming & DLP WORK After 09.09.2024 ###
