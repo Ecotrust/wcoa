@@ -72,3 +72,58 @@ def show_wcoa_detail_mapgroups(request, *args, **kwargs):
     template='wcoa/mapgroups/mapgroup_detail.html'
     from mapgroups.views import MapGroupDetailView
     return MapGroupDetailView.as_view(template_name=template)(request, *args, **kwargs)
+
+
+# import ipdb; ipdb.set_trace()
+from wagtail.admin.views.chooser import BaseLinkFormView, shared_context
+from .forms import NewTabLinkChooserForm
+from wagtail.admin.modal_workflow import render_modal_workflow
+
+class NewTabLinkView(BaseLinkFormView):
+    form_prefix = "newtab-link-chooser"
+    form_class = NewTabLinkChooserForm
+    template_name = "wagtailadmin/chooser/newtab_link.html"
+    step_name = "newtab_link"
+    link_url_field_name = "url"
+
+    # def render_form_response(self):
+    #     return render_modal_workflow(
+    #         self.request,
+    #         self.template_name,
+    #         None,
+    #         shared_context(
+    #             self.request,
+    #             {
+    #                 "form": self.form,
+    #                 "allow_newtab_link": request.GET.get("allow_newtab_link"),
+    #             },
+    #         ),
+    #         json_data={"step": self.step_name},
+    #     )
+
+    # def render_chosen_response(self, result):
+    #     return render_modal_workflow(
+    #         self.request,
+    #         None,
+    #         None,
+    #         None,
+    #         json_data={"step": "newtab_link_chosen", "result": result},
+    #     )
+        
+
+# class ExternalPlusLinkView(ExternalLinkView):
+    # import ipdb; ipdb.set_trace()
+    # form_prefix = "ext-link-chooser"
+    # form_class = ExternalPlusLinkChooserForm
+    # template_name = "wagtailadmin/chooser/newtab_link.html"
+    # step_name = "external_link"
+    # link_url_field_name = "url"
+
+    # def render_chosen_response(self, result):
+    #     return render_modal_workflow(
+    #         self.request,
+    #         None,
+    #         None,
+    #         None,
+    #         json_data={"step": "newtab_link_chosen", "result": result},
+    #     )

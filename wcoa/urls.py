@@ -34,6 +34,16 @@ urlpatterns = [
     re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
     re_path(r'^groups/?', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
+    re_path(
+        "choose-newtab-link/",
+        views.NewTabLinkView.as_view(),
+        name="wagtailadmin_choose_page_newtab_link",
+    ),
+    # path(
+    #     "choose-external-link/",
+    #     views.ExternalPlusLinkView.as_view(),
+    #     name="wagtailadmin_choose_page_external_link",
+    # ),
     # re_path(r'^(?P<pk>\d+)/(?P<slug>[\w-]+)/join$',
     #     JoinMapGroupActionView.as_view(), name='join'),
     # re_path(r'^(?P<pk>\d+)/(?P<slug>[\w-]+)/leave$',
