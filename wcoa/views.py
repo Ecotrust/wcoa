@@ -101,14 +101,14 @@ class NewTabLinkView(BaseLinkFormView):
     #         json_data={"step": self.step_name},
     #     )
 
-    # def render_chosen_response(self, result):
-    #     return render_modal_workflow(
-    #         self.request,
-    #         None,
-    #         None,
-    #         None,
-    #         json_data={"step": "newtab_link_chosen", "result": result},
-    #     )
+    def render_chosen_response(self, result):
+        return render_modal_workflow(
+            self.request,
+            None,
+            None,
+            None,
+            json_data={"step": "newtab_link_chosen", "result": result},
+        )
         
 
 # class ExternalPlusLinkView(ExternalLinkView):
