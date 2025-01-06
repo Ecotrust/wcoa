@@ -23,7 +23,7 @@ requirements:
   ```
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-12 libjpeg-dev gdal-bin python3-gdal libgdal-dev -y
+  sudo apt install git python3 python3-dev python3-virtualenv python3-pip postgresql postgresql-contrib postgis postgresql-server-dev-14 libjpeg-dev gdal-bin python3-gdal libgdal-dev -y
   ```
 
 3. Edit requirements.txt
@@ -46,7 +46,7 @@ requirements:
   pip install -r /usr/local/apps/ocean_portal/requirements.txt
   pip uninstall numpy
   gdal-config --version
-  pip install "pygdal<3.0.5"
+  pip install "pygdal<'REPLACE with gdal-config version'"
   ```
   if any of your packages were copied locally rather than pulled via requirements.txt, use pip to install them now:
   ```
