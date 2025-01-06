@@ -46,7 +46,7 @@ requirements:
   pip install -r /usr/local/apps/ocean_portal/requirements.txt
   pip uninstall numpy
   gdal-config --version
-  pip install "pygdal<3.0.5"
+  pip install "pygdal<'REPLACE with gdal-config version'"
   ```
   if any of your packages were copied locally rather than pulled via requirements.txt, use pip to install them now:
   ```
