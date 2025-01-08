@@ -32,6 +32,13 @@ input {
     font-weight: inherit;
 }
 
+@media (min-width: 1600px) {
+    .container,
+    nav.navbar div.container {
+        width: 1200px;
+    }
+}
+
 h1,
 h2,
 h3,
