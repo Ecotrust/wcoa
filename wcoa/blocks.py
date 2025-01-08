@@ -135,6 +135,17 @@ class OHIIndicatorScore(blocks.StructBlock):
     class Meta:
         template = 'wcoa/blocks/ohi_indicator_score.html'
 
+
+class IframeBlock(blocks.StructBlock):
+    src = blocks.URLBlock(required=True, help_text='URL of the iframe source')
+    width = blocks.CharBlock(required=False, help_text='Width of the iframe (e.g., 100%, 600px)')
+    height = blocks.CharBlock(required=False, help_text='Height of the iframe (e.g., 400px)')
+
+    class Meta:
+        icon = 'site'
+        template = 'wcoa/blocks/iframe_block.html'
+
+
 class OHIStuctBlock(blocks.StructBlock):
     # width is an int in CTA blocks, but a choice block is preferrable
     width = blocks.ChoiceBlock(choices=[
@@ -157,6 +168,7 @@ class OHIStuctBlock(blocks.StructBlock):
         ('WYSIWYG', blocks.RichTextBlock(required=False)),
         ('Chart', ChartContentBlocks()),
         ('Accordion', AccordionBlock()),
+        ('Iframe', IframeBlock()),
     ], required=False)
 
     full_image = ImageChooserBlock(required=False)
