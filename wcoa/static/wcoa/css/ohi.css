@@ -39,6 +39,22 @@ input {
     }
 }
 
+@media (min-width: 1800px) {
+
+    .container,
+    nav.navbar div.container {
+        width: 1500px;
+    }
+}
+
+@media (min-width: 2000px) {
+
+    .container,
+    nav.navbar div.container {
+        width: 1600px;
+    }
+}
+
 h1,
 h2,
 h3,
