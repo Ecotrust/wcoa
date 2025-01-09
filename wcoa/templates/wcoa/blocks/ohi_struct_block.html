@@ -6,7 +6,8 @@
             {% if self.text_color %}color: {{ self.text_color }};{% endif %}
             {% if self.border_color %}outline-color: {{ self.border_color }};{% endif %}
             {% if self.border_width %}outline-width: {{ self.border_width }}px;{% endif %}
-            {% if self.border_width %}outline-style: solid;{% endif %}">
+            {% if self.border_width %}outline-style: solid;{% endif %}
+            {% if self.align_content %}align-content: {{ self.align_content }};{% endif %}">
 
     {% if self.link %}
         <a href="{{ self.link }}">

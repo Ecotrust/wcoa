@@ -178,6 +178,14 @@ class OHIStuctBlock(blocks.StructBlock):
     border_color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='', icon='color_palette', required=False)
     border_width = blocks.IntegerBlock(default='', help_text='Width of the border in pixels', required=False, min_value=0, max_value=10)
     link = blocks.URLBlock(required=False, help_text='Wrap column in a link')
+    align_content = blocks.ChoiceBlock(choices=[
+        ('normal', 'Normal'),
+        ('center', 'Center'),
+        ('space-around', 'Space Around'),
+        ('space-between', 'Space Between'),
+        ('space-evenly', 'Space Evenly'),
+        ('end', 'End'),
+    ], default='normal', help_text="vertically align content to grid row", required=False)
 
     class Meta:
         template = 'wcoa/blocks/ohi_struct_block.html'
