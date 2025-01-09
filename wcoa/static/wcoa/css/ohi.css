@@ -129,7 +129,7 @@ p:empty + p:empty + p:empty {
 /* Font size 20px */
 .grid-wrapper {
     display: block;
-    font-size: 1.7em;
+    font-size: 1.6125em;
     font-weight: 400;
     width: 100%;
 }
@@ -140,6 +140,7 @@ p:empty + p:empty + p:empty {
 }
 
 .grid-item {
+    margin-left: 0;
     outline-offset: -.3125vw; /* outline color set in oht_struct_block.html */
     overflow: hidden;
     position: relative;
@@ -273,7 +274,7 @@ p:empty + p:empty + p:empty {
     opacity: 0.8;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 767px) {
 
     .grid-wrapper {
         display: grid;
