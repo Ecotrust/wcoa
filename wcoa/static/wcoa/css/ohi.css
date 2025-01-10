@@ -32,6 +32,10 @@ input {
     font-weight: inherit;
 }
 
+/**
+** Body Width
+*/
+
 @media (min-width: 1600px) {
     .container,
     nav.navbar div.container {
