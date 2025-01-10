@@ -42,8 +42,8 @@ h1, h2, h3, h4 {
     font-family: var(--bold_font_family);
 }
 
-/* Header Overrides */
-/* when hovering over a nav item, desaturate all others */
+/** Header Overrides **/
+/** when hovering over a nav item, desaturate all others **/
 .top-nav ul:hover a {
     color: #999999;
 }
@@ -57,13 +57,45 @@ h1, h2, h3, h4 {
     font-family: var(--bold_font_family);
 }
 
-  /******** Login PAGE ************/
+.toggle-button.navbar-toggle {
+    right: 30px;
+}
+
+.navbar .brand {
+    display: inline-block;
+}
+
+.navbar .container {
+    overflow: visible;
+}
+
+@media (max-width: 991px) {
+
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: #fff;
+    }
+
+    div.navbar-collapse.collapse.in {
+        background: rgba(60, 60, 60, 0.25);
+        height: 100%;
+        position: fixed;
+        right: 15px;
+        top: 0px;
+        width: 100%;
+    }
+}
+
+
+/******** Login PAGE ************/
 
 div.login h2 {
     color: var(--light_blue);
 }
 
-/* CMS_PAGE OVERRIDES */
+/** 
+** CMS_PAGE OVERRIDES 
+*/
 
 .cta-item .rich-text li a {
     font-family: var(--default_font_family) !important;
@@ -178,7 +210,7 @@ button.feedback-button.btn-warning {
 
 
 /**
-*  Wagtail Responsive Objects
+**  Wagtail Responsive Objects
 */
 
 .responsive-object {
