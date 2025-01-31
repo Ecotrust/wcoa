@@ -31,7 +31,7 @@ COLOR_CHOICES_CHARTS = (
 BG_COLOR_CHOICES = [
     ('rgba(255, 255, 255, 1)', 'White'),
     ('rgba(0, 0, 0, 0.5)', 'Black'),
-    ('rgba(46, 46, 47, 1)', 'Black (Light)'),
+    ('rgba(26, 26, 27, 1)', 'Black (Full Opacity)'),
     ('rgba(48, 112, 247, 0.5)', 'Blue'),
     ('rgba(152, 171, 55, 0.5)', 'Green'),
     ('rgba(242, 191, 76, 0.5)', 'Yellow'),
@@ -174,7 +174,7 @@ class OHIStuctBlock(blocks.StructBlock):
     full_image = ImageChooserBlock(required=False)
     cover_image = ImageChooserBlock(required=False)
     text_color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='black', icon='color_palette', required=False)
-    background_color = blocks.ChoiceBlock(choices=BG_COLOR_CHOICES, default='white', icon='color', required=False)
+    background_color = blocks.ChoiceBlock(choices=BG_COLOR_CHOICES, default='white', icon='color', required=False, help_text="Color for background of block at 50% opacity")
     border_color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='', icon='color_palette', required=False)
     border_width = blocks.IntegerBlock(default='', help_text='Width of the border in pixels', required=False, min_value=0, max_value=10)
     link = blocks.URLBlock(required=False, help_text='Wrap column in a link')
