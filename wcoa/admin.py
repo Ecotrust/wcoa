@@ -15,7 +15,7 @@ class WCOAThemeAdmin(ThemeAdmin):
     )
 
 class WCOALayerAdmin(LayerAdmin):
-    list_display = ('name', 'layer_type', 'date_modified', 'Theme_', 'order', 'data_source', 'primary_site', 'preview_site', 'http_status', 'url')
+    list_display = ('name', 'layer_type', 'date_modified', 'Theme_', 'order', 'data_source', 'primary_site', 'preview_site', 'http_status', 'last_success_status', 'url')
     if settings.CATALOG_TECHNOLOGY not in ['Madrona', None]:
         # catalog_fields = ('catalog_name', 'catalog_id',)
         catalog_fields = 'catalog_name'
