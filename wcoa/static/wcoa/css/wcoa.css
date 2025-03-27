@@ -87,15 +87,17 @@ h1, h2, h3, h4 {
 }
 
 
-/******** Login PAGE ************/
+/******** Login PAGE *********/
 
 div.login h2 {
     color: var(--light_blue);
 }
 
-/** 
-** CMS_PAGE OVERRIDES 
+/*
+    ******** CMS_PAGE OVERRIDES ********
 */
+
+/******** HOME PAGE *********/
 
 .cta-item .rich-text li a {
     font-family: var(--default_font_family) !important;
@@ -106,18 +108,20 @@ div.login h2 {
     font-weight: normal;
 }
 
-.cta-item a:hover,
-.cta-item a:active,
-.cta-item a:focus {
-    color: #9ec73d;
+.cta-item-wrap a:hover,
+.cta-item-wrap a:active,
+.cta-item-wrap a:focus {
+    color: var(--primary_color);
     text-decoration: none;
 }
 
 .cta-item .title {
-    border-bottom: #9ec73d 2px solid;
-    font-family: var(--default_font_family);
-    font-size: 1.2em;
+    border-bottom: var(--primary_color) 2px solid;
+    color: var(--primary_color);
+    font-family: var(--bold_font_family);
+    font-size: 1.375em;
     line-height: 1.75;
+    text-transform: uppercase;
 }
   
 .cta-item-wrap[class*='text-'] * {
@@ -125,7 +129,17 @@ div.login h2 {
 }
 
 .cta-content h3 {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
+}
+
+@media (min-width: 768px) {
+    .cta-item .title {
+        font-size: 1.2em;
+    }
+
+    .cta-content h3 {
+        font-size: 1.9rem;
+    }
 }
 
 #search-filter input {
