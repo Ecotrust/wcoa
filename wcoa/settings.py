@@ -81,6 +81,8 @@ WAGTAILADMIN_BASE_URL = 'http://localhost:8001'
 WAGTAIL_APPEND_SLASH = False
 # SITE_ID = 2
 
+DB_CHANNEL = 'wcoaportal'
+
 try:
     from .local_settings import *
 except ImportError:
