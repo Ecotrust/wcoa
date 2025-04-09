@@ -71,7 +71,7 @@ class CTAStreamBlock(blocks.StructBlock):
     cta_content = blocks.RichTextBlock(required=False)
     cta_page = blocks.PageChooserBlock(label="page", required=False)
     cta_link = blocks.URLBlock(label="URL",required=False)
-    # Width would be better as a CoiceBlock
+    # Width would be better as a ChoiceBlock
     width = blocks.IntegerBlock(required=False,max_value=12,min_value=0,help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))')
     text_color = blocks.ChoiceBlock(choices=[
         ('black', 'Black'),
