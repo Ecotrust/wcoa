@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='CTAPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('item', wagtail.core.blocks.StructBlock([('cta_title', wagtail.core.blocks.CharBlock()), ('cta_content', wagtail.core.blocks.RichTextBlock()), ('cta_link', wagtail.core.blocks.URLBlock(label='URL', required=False)), ('width', wagtail.core.blocks.IntegerBlock(help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))', max_value=12, min_value=0, required=False))])), ('details', wagtail.core.blocks.RichTextBlock())])),
+                ('body', wagtail.fields.StreamField([('item', wagtail.blocks.StructBlock([('cta_title', wagtail.blocks.CharBlock()), ('cta_content', wagtail.blocks.RichTextBlock()), ('cta_link', wagtail.blocks.URLBlock(label='URL', required=False)), ('width', wagtail.blocks.IntegerBlock(help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))', max_value=12, min_value=0, required=False))])), ('details', wagtail.blocks.RichTextBlock())])),
             ],
             options={
                 'abstract': False,
@@ -29,11 +29,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='connectpage',
             name='cta_list',
-            field=wagtail.core.fields.StreamField([('connection', wagtail.core.blocks.StructBlock([('cta_title', wagtail.core.blocks.CharBlock()), ('cta_content', wagtail.core.blocks.RichTextBlock()), ('cta_link', wagtail.core.blocks.URLBlock(label='URL', required=False)), ('width', wagtail.core.blocks.IntegerBlock(help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))', max_value=12, min_value=0, required=False))])), ('details', wagtail.core.blocks.RichTextBlock())]),
+            field=wagtail.fields.StreamField([('connection', wagtail.blocks.StructBlock([('cta_title', wagtail.blocks.CharBlock()), ('cta_content', wagtail.blocks.RichTextBlock()), ('cta_link', wagtail.blocks.URLBlock(label='URL', required=False)), ('width', wagtail.blocks.IntegerBlock(help_text='Number of columns to span out of 12 (e.g., input of 3 would mean give this a width of 3 out of the 12 (25%))', max_value=12, min_value=0, required=False))])), ('details', wagtail.blocks.RichTextBlock())]),
         ),
         migrations.AlterField(
             model_name='masonrypage',
             name='body',
-            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(classname='block-title')), ('text', wagtail.core.blocks.RichTextBlock()), ('brick', wagtail.core.blocks.StructBlock([('title', wagtail.core.blocks.CharBlock()), ('text', wagtail.core.blocks.RichTextBlock()), ('page', wagtail.core.blocks.PageChooserBlock(label='page', required=False)), ('external_url', wagtail.core.blocks.URLBlock(label='external URL', required=False)), ('photo', wagtail.images.blocks.ImageChooserBlock(required=False))])), ('image', wagtail.images.blocks.ImageChooserBlock(required=False))]),
+            field=wagtail.fields.StreamField([('heading', wagtail.blocks.CharBlock(classname='block-title')), ('text', wagtail.blocks.RichTextBlock()), ('brick', wagtail.blocks.StructBlock([('title', wagtail.blocks.CharBlock()), ('text', wagtail.blocks.RichTextBlock()), ('page', wagtail.blocks.PageChooserBlock(label='page', required=False)), ('external_url', wagtail.blocks.URLBlock(label='external URL', required=False)), ('photo', wagtail.images.blocks.ImageChooserBlock(required=False))])), ('image', wagtail.images.blocks.ImageChooserBlock(required=False))]),
         ),
     ]

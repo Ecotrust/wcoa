@@ -23,6 +23,14 @@
     src: url('../fonts/Rajdhani/Rajdhani-SemiBold.ttf');
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.col-* {
+    position: relative;
+}
+
 *,
 p,
 p span,
@@ -34,8 +42,8 @@ h1, h2, h3, h4 {
     font-family: var(--bold_font_family);
 }
 
-/* Header Overrides */
-/* when hovering over a nav item, desaturate all others */
+/** Header Overrides **/
+/** when hovering over a nav item, desaturate all others **/
 .top-nav ul:hover a {
     color: #999999;
 }
@@ -49,13 +57,47 @@ h1, h2, h3, h4 {
     font-family: var(--bold_font_family);
 }
 
-  /******** Login PAGE ************/
+.toggle-button.navbar-toggle {
+    right: 30px;
+}
+
+.navbar .brand {
+    display: inline-block;
+}
+
+.navbar .container {
+    overflow: visible;
+}
+
+@media (max-width: 991px) {
+
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: #fff;
+    }
+
+    div.navbar-collapse.collapse.in {
+        background: rgba(60, 60, 60, 0.25);
+        height: 100%;
+        position: fixed;
+        right: 15px;
+        top: 0px;
+        width: 100%;
+    }
+}
+
+
+/******** Login PAGE *********/
 
 div.login h2 {
     color: var(--light_blue);
 }
 
-/* CMS_PAGE OVERRIDES */
+/*
+    ******** CMS_PAGE OVERRIDES ********
+*/
+
+/******** HOME PAGE *********/
 
 .cta-item .rich-text li a {
     font-family: var(--default_font_family) !important;
@@ -66,18 +108,20 @@ div.login h2 {
     font-weight: normal;
 }
 
-.cta-item a:hover,
-.cta-item a:active,
-.cta-item a:focus {
-    color: #9ec73d;
+.cta-item-wrap a:hover,
+.cta-item-wrap a:active,
+.cta-item-wrap a:focus {
+    color: var(--primary_color);
     text-decoration: none;
 }
 
 .cta-item .title {
-    border-bottom: #9ec73d 2px solid;
-    font-family: var(--default_font_family);
-    font-size: 1.2em;
+    border-bottom: var(--primary_color) 2px solid;
+    color: var(--primary_color);
+    font-family: var(--bold_font_family);
+    font-size: 1.375em;
     line-height: 1.75;
+    text-transform: uppercase;
 }
   
 .cta-item-wrap[class*='text-'] * {
@@ -85,7 +129,17 @@ div.login h2 {
 }
 
 .cta-content h3 {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
+}
+
+@media (min-width: 768px) {
+    .cta-item .title {
+        font-size: 1.2em;
+    }
+
+    .cta-content h3 {
+        font-size: 1.9rem;
+    }
 }
 
 #search-filter input {
@@ -166,4 +220,23 @@ button.feedback-button.btn-warning {
     border-radius: 0;
     color: #58585b;
     padding: 3px 12px 1px;
+}
+
+
+/**
+**  Wagtail Responsive Objects
+*/
+
+.responsive-object {
+    position: relative;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+
+<a href="{{ self.report }}" target="_blank">
+    {{ self.state }}
+    {{ self.year }}
+    {% image self.image max-320x120 %}
+</a>
+

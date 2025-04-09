@@ -33,10 +33,10 @@ header {
 }
 /* END Scrollbar Section */
 
-body.template-visualize #primary-content,
+/* body.template-visualize #primary-content,
 header + div {
-  /* height: 100vh; */
-}
+  height: 100vh;
+} */
 
 body.template-visualize #left-panel {
   background-color: white;
@@ -148,8 +148,8 @@ body.template-visualize .sublayer-title {
   top: -1rem;
 }
 
-body.template-visualize .panel.collapsible.collapsed {
-}
+/* body.template-visualize .panel.collapsible.collapsed {
+} */
 
 body.template-visualize #left-panel.panel.collapsible.collapsed {
   height: unset !important;

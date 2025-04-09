@@ -12,8 +12,8 @@ requirements:
 1. Choose a working project directory that will be referred to from here has PROJDIR (i.e. /home/username/src/ ). It is best if it’s a directory you use to hold all of your dev projects.
   ```
   cd PROJDIR
-  git clone https://github.com/Ecotrust/marco-portal2.git
-  mv marco-portal2 ocean_portal
+  git clone https://github.com/Ecotrust/madrona-portal.git
+  mv madrona-portal ocean_portal
   cd ocean_portal
   vagrant up
   vagrant ssh
@@ -131,7 +131,7 @@ requirements:
 Notes
 
 Forked Marco-portal-2 from MidAtlanticPortal GitHub account to Ecotrust:
-https://github.com/Ecotrust/marco-portal2
+https://github.com/Ecotrust/madrona-portal
 
 Cloned it locally, updated the vagrant file to give me an Ubuntu 18.04 LTS box
 
@@ -144,7 +144,42 @@ sudo apt-get upgrade
 The Compass install docs were a nice guideline for setting up MP, perhaps they will be useful for the portal as well….
 https://github.com/Ecotrust/COMPASS/wiki/install
 
- Upgrading to Wagtail 2.0+: https://wagtail.io/blog/upgrading-to-wagtail-2/
+## Upgrading Wagtail
+Upgrading to Wagtail 2.0+: https://wagtail.io/blog/upgrading-to-wagtail-2/
+
+## Functional Testing
+Functional testing is done with Selenium and the Chrome WebDriver. The tests are located in the `functional_tests.py` file. To run the tests, you will need to have Selenium, Google Chrome, and the Chrome WebDriver installed and available in your PATH. Here is how:
+
+1. Install Selenium
+  ```
+  pip install selenium
+  ```
+2. Install Google Chrome
+  ```
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo apt install ./google-chrome-stable_current_amd64.deb
+  ``` 
+3. Install Chrome WebDriver
+You will need to know the current stable version of Chrome you installed in step 2. You can go to [https://chromedriver.com/download](https://chromedriver.com/download) to find the url for the latest stable version of the Chrome WebDriver. Then use the URL in the following command:
+  ```
+  wget <URL>
+  ```
+unzip and install the driver
+  ```
+  unzip chromedriver_linux64.zip
+  sudo mv chromedriver-linux64/chromedriver /usr/local/apps/env/bin/
+  ```
+
+4. Run Tests
+You can now run functional tests just like you would other Django tests.
+**Note:** *You will need to have the server running to run the functional tests.* 
+  ```
+  python manage.py test
+  ```
+
+
+
+
 
  ## Production Installation (Ubuntu 18.04 LTS)
  #### set up new server
@@ -159,8 +194,8 @@ https://github.com/Ecotrust/COMPASS/wiki/install
 
  ```
  cd /usr/local/apps/
- git clone https://github.com/Ecotrust/marco-portal2.git
- mv marco-portal2 ocean_portal
+ git clone https://github.com/Ecotrust/madrona-portal.git
+ mv madrona-portal ocean_portal
  cd ocean_portal
  git checkout wcoa
  git pull

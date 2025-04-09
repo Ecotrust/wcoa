@@ -1,0 +1,515 @@
+#ohi-wrap {
+    --default_font_family: "Nunito Sans", "Open Sans", sans-serif;
+    --bold_font_family: var(--default_font_family);
+    --generic_font_family: var(--default_font_family);
+
+    /* Font size */
+    --font-size: 12px;
+
+    /* Colors */
+    --blue: rgba(48, 112, 247, 1);
+    --green: rgba(152, 171, 55, 1);
+    --red: rgba(250, 35, 18, 1);
+    --yellow: rgba(242, 191, 76, 1);
+    --grey: rgba(77, 77, 79, 1);
+    --gray: var(--grey);
+    --white: rgba(255, 255, 255, 1);
+    --black: rgba(0, 0, 0, 1);
+
+    --primary_color: var(--blue);
+    --secondary_color: var(--green);
+    --tertiary_color: var(--red);
+    --text-color: var(--grey);
+    --link-color: var(--primary_color);
+}
+
+#ohi-wrap {
+    font-size: var(--font-size);
+}
+
+*,
+input {
+    font-weight: inherit;
+}
+
+/**
+** Body Width
+*/
+
+@media (min-width: 1600px) {
+    .container,
+    nav.navbar div.container {
+        width: 1200px;
+    }
+}
+
+@media (min-width: 1800px) {
+
+    .container,
+    nav.navbar div.container {
+        width: 1500px;
+    }
+}
+
+@media (min-width: 2000px) {
+
+    .container,
+    nav.navbar div.container {
+        width: 1600px;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: inherit;
+    font-family: var(--bold_font_family);
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 2.25em;
+    font-weight: 900;
+}
+
+h3 {
+    font-size: 1.375em;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1.25em;
+    font-weight: 600;
+    ;
+}
+
+h5 {
+    font-size: 1.125em;
+    font-weight: 500;
+}
+
+header * {
+    font-weight: inherit;
+    font-family: inherit;
+}
+
+/** Override Wagtail Styles
+ *
+ */
+
+/* Counter margin to for p + p */
+p:empty + p:empty,
+p:empty + p:empty + p:empty {
+    margin-top: -1rem;
+}
+
+
+/** Bread Crumb Styles
+*
+*/
+.breadcrumb>li>.divider {
+    color: var(--grey);
+}
+
+/** Anchor Tag Buffer
+*
+    Overrides default of -50px
+    Assumes that we will keep a fixed header of 100px 
+*/
+
+.anchor_tag_buffer {
+    top: -100px;
+}
+
+/** OHI Page Styles
+*
+*/
+
+#ohi-wrap .page-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#ohi-wrap .page-header h1 {
+    max-width: 80%;
+}
+
+/** OHI Grid Styles
+*
+*/
+
+/* Font size 20px */
+.grid-wrapper {
+    display: block;
+    font-size: 1.6125em;
+    font-weight: 400;
+    width: 100%;
+}
+
+.grid-item.clearfix {
+    display: block;
+    width: 100%;
+}
+
+.grid-item {
+    margin-left: 0;
+    outline-offset: -.3125vw; /* outline color set in oht_struct_block.html */
+    overflow: hidden;
+    position: relative;
+    padding: 3vh 1.5vw;
+    z-index: 0;
+}
+
+.grid-item h2,
+.grid-item h3,
+.grid-item h4,
+.grid-item h5 {
+    letter-spacing: .05em;
+    margin: 0;
+}
+
+.grid-item a {
+    color: inherit;
+}
+
+.grid-item a:hover {
+    color: inherit;
+}
+
+/** OHI Image Styles
+*
+*/
+
+/* Indicator Page Icon */
+.ohi-indicator-icon {
+    max-height: 10em;
+    max-width: 20%;
+}
+
+/* Full grid images */
+
+.grid-item img.full-width {
+    display: block;
+    margin: 0 auto;
+}
+
+.full-img-wrap {
+    min-height: 250px;
+    width: 100%;
+}
+
+.grid-item .full-img {
+    height: 100%;
+    left: 0;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.grid-item .cover-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+}
+
+/** Rich Text Images
+ * Styles for images within rich text blocks
+ * 
+ */
+
+.grid-item .richtext-image {
+    width: auto;
+    max-width: 100%;
+}
+
+.grid-item .richtext-image.full-width,
+.grid-item .richtext-image.original,
+.grid-item .richtext-image.max-1146x1146,
+.grid-item .richtext-image.max-573x573,
+.grid-item .richtext-image.square-xl {
+    display: block;
+    margin: 0 auto;
+}
+
+/** Square Image formats
+*   Size: 
+*      small: 25%
+*      medium: 33.3%
+*      large: 50%
+*      xl: 100%
+*/
+.grid-item .richtext-image.square-img + p {
+    display: none;
+}
+
+.grid-item.span-12 .square-small {
+    max-width: 25%;
+}
+
+.grid-item.span-12 .square-medium {
+    max-width: 33.333%;
+}
+
+.grid-item.span-12 .square-large {
+    max-width: 50%;
+}
+
+.grid-item .square-xl {
+    max-width: 100%;
+}
+
+
+
+/** OHI Grid Sub Item Styles
+*   Special styles for grid items that are nested within other grid items
+*/
+
+.grid-sub-item {
+    z-index: 1;
+}
+
+.grid-sub-item a {
+    color: inherit;
+    font-weight: 500;
+    text-decoration: underline;
+    opacity: 1;
+}
+
+.grid-sub-item a:hover {
+    color: inherit;
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 767px) {
+
+    .grid-wrapper {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-gap: 10px;
+    }
+
+    .grid-item.clearfix {
+        grid-column: span 12;
+    }
+
+    .grid-sub-item {
+        width: 100%;
+    }
+
+}
+
+
+
+/** OHI Block Styles
+*   Special styles for WYSIWYG blocks
+*/
+
+.block-WYSIWYG:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+}
+
+
+/*
+    OHI Dashboard Styles
+*/
+
+#ohi-hierarchy {
+    background-color: var(--primary_color);
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    padding: 4vh 0 5vh;
+    text-align: center;
+    width: 100%;
+}
+
+#ohi-hierarchy .icon {
+    aspect-ratio: 1;
+    max-width: 14rem;
+    height: 14rem;
+}
+
+/* Category item headings */
+#ohi-hierarchy a h2 {
+    color: var(--white);
+    font-size: 1.6125rem;
+    letter-spacing: 0.05rem;
+    margin: 3rem auto 1rem;
+    text-transform: uppercase;
+}
+
+/* Class item headings */
+#ohi-hierarchy a h3 {
+    color: var(--white);
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    margin: 2rem auto 1rem;
+    text-transform: uppercase;
+}
+
+#ohi-hierarchy a h3:after {
+    background: var(--yellow);
+    content: '';
+    display: block;
+    height: 1px;
+    margin: 2rem auto 0;
+    position: relative;
+    width: 7rem;
+}
+
+/* Indicator item headings */
+#ohi-hierarchy a h4 {
+    color: var(--yellow);
+    font-size: 1.375rem;
+    font-weight: 400;
+    letter-spacing: 0.075rem;
+    margin: .75rem auto;
+    text-transform: none;
+}
+
+.ohi-category-item {
+    align-items: center;
+    display: flex;
+    color: var(--white);
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    /* width: 100%; */
+}
+
+.ohi-class-list {
+    align-items: start;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-class-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    /* width: 100%; */
+}
+
+.ohi-indicator-list {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-indicator-item {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: stretch;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ohi-indicator-item a {
+    color: var(--yellow);
+    text-transform: none;
+}
+
+@media screen and (min-width: 960px) {
+    #ohi-hierarchy {
+        flex-direction: row;
+    }
+
+    .ohi-category-item {
+        position: relative;
+    }
+
+    .template-ohi-dashboard .ohi-category-item:nth-of-type(2):before,
+    .template-ohi-dashboard .ohi-category-item:nth-of-type(2):after {
+        background: var(--white);
+        content: '';
+        clip-path: polygon(92% 40%,
+                92% 0,
+                100% 50%,
+                92% 100%,
+                92% 60%,
+                8% 60%,
+                8% 0,
+                0% 50%,
+                8% 100%,
+                8% 40%,
+                90% 40%);
+        -webkit-clip-path: polygon(92% 40%,
+                92% 0,
+                100% 50%,
+                92% 100%,
+                92% 60%,
+                8% 60%,
+                8% 0,
+                0% 50%,
+                8% 100%,
+                8% 40%,
+                90% 40%);
+        height: 1rem;
+        position: absolute;
+        top: 60px;
+        width: 14rem;
+    }
+
+    .ohi-category-item:nth-of-type(2):before {
+        left: -7rem;
+    }
+
+    .ohi-category-item:nth-of-type(2):after {
+        right: -7rem;
+    }
+
+    .ohi-class-item {
+        position: relative;
+    }
+
+    .ohi-class-item:before {
+        background: var(--yellow);
+        content: '';
+        height: 1px;
+        position: absolute;
+        top: .25rem;
+        width: 5rem;
+    }
+
+    .ohi-class-item:nth-of-type(2n+1):before {
+        right: 0;
+        transform: rotate(330deg);
+        transform-origin: center right;
+    }
+
+    .ohi-class-item:nth-of-type(2n+2):before {
+        left: 0;
+        transform: rotate(30deg);
+        transform-origin: center left;
+    }
+}

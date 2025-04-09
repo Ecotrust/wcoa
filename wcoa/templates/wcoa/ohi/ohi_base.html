@@ -1,0 +1,78 @@
+{% extends 'wcoa/wcoa_site/cms_page.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'wcoa/css/ohi.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'wcoa/css/blocks/accordion.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body_class %}template-ohi-base{% endblock %}
+
+{% block content %}
+
+    <div id="ohi-wrap">
+
+        {% block ohi_breadcrumbs %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if page.get_ancestors|length > 1 %}
+                            <ul class="breadcrumb">
+                                {% for ancestor_page in page.get_ancestors %}
+                                    {% if not ancestor_page.is_root %}
+                                        {% if ancestor_page.depth > 3 %}
+                                            <li class="breadcrumb-item">
+                                                <a href="{% pageurl ancestor_page %}">{{ ancestor_page.title|truncatewords:4 }}</a>
+                                                <span class="divider">/</span>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <li class="breadcrumb-item">{{ page.title|truncatewords:4 }}</li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endblock ohi_breadcrumbs %}
+
+        {% block ohi_title %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header">
+                            <h1>{{ page.title }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock ohi_title %}
+
+        {% block ohi_content %}
+            <div class="container">
+                <div class="row">
+                    <div class="grid-wrapper">
+                        {% for block in page.body %}
+                            {% if block.block_type == 'Clear' %}
+                                <div class="grid-item clearfix"></div>
+                            {% else %}
+                                {{ block }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endblock ohi_content %}
+    
+    </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'wcoa/js/ohi.js' %}"></script>
+{% endblock %}

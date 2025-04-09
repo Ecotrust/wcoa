@@ -1,0 +1,47 @@
+{% load wagtailimages_tags %}
+
+<div class="grid-item span-{{ self.width }}" 
+     style="grid-column: span {{ self.width }};
+            {% if self.background_color %}background-color: {{ self.background_color }};{% endif %}
+            {% if self.text_color %}color: {{ self.text_color }};{% endif %}
+            {% if self.border_color %}outline-color: {{ self.border_color }};{% endif %}
+            {% if self.border_width %}outline-width: {{ self.border_width }}px;{% endif %}
+            {% if self.border_width %}outline-style: solid;{% endif %}
+            {% if self.align_content %}align-content: {{ self.align_content }};{% endif %}">
+
+    {% if self.link %}
+        <a href="{{ self.link }}">
+    {% endif %}
+
+    <div class="grid-sub-item">
+
+        {# Check if the image exists before trying to display it #}
+        {% if self.full_image %}
+            {% if self.content|length < 1 %}
+                <div class="full-img-wrap">
+                    {% comment %} {% image self.full_image max-1000x1000 class="full-img" %} {% endcomment %}
+                    {% image self.full_image original class="full-img" %}
+                </div>
+            {% else %}
+                {% comment %} {% image self.full_image max-1000x1000 class="full-img" %} {% endcomment %}
+                {% image self.full_image original class="full-img" %}
+            {% endif %}
+        {% endif %}
+        
+        {# Check for a cover image #}
+        {% if self.cover_image %}
+            <div class="cover-img-wrap">
+                {% comment %} {% image self.cover_image max-1000x1000 class="cover-img" %} {% endcomment %}
+                {% image self.cover_image original class="cover-img" %}
+            </div>
+        {% endif %}
+
+        {{ self.content }}
+        
+    </div>
+
+    {% if self.link %}
+        </a>
+    {% endif %}
+
+</div>

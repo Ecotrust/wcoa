@@ -5,10 +5,10 @@ setup.py
 wcoa/__init__.py
 wcoa/admin.py
 wcoa/apps.py
+wcoa/local_settings.py
 wcoa/models.py
 wcoa/project_urls.py
 wcoa/settings.py
-wcoa/tests.py
 wcoa/urls.py
 wcoa/views.py
 wcoa.egg-info/PKG-INFO
@@ -38,3 +38,5 @@ wcoa/migrations/0018_delete_masonrypage.py
 wcoa/migrations/0019_auto_20200922_1837.py
 wcoa/migrations/0020_catalogthemegridpage_catalogthemegridpagedetail.py
 wcoa/migrations/__init__.py
+wcoa/tests/__init__.py
+wcoa/tests/test_models.py

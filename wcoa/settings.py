@@ -1,5 +1,10 @@
 from visualize.settings import *
 from data_manager.settings import *
+from marco.settings import INSTALLED_APPS
+
+INSTALLED_APPS += [
+    'wagtailcharts',
+]
 
 PROJECT_REGION = {
     'name': 'West Coast',
@@ -22,6 +27,9 @@ CATALOG_TECHNOLOGY = 'GeoPortal2'
 
 HANDLER_404 = 'wcoa.views.page_not_found'
 
+WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
+
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
 WAGTAILEMBEDS_FINDERS = [
     {
         'class': 'wagtail.embeds.finders.oembed',
@@ -68,6 +76,12 @@ TEMPLATES = [
 
 DISCLAIMER_BUTTON_DEFAULT = 'Continue'
 
+WAGTAIL_SITE_NAME = 'WCOA'
+WAGTAILADMIN_BASE_URL = 'http://localhost:8001'
+WAGTAIL_APPEND_SLASH = False
+# SITE_ID = 2
+
+DB_CHANNEL = 'wcoaportal'
 
 try:
     from .local_settings import *
