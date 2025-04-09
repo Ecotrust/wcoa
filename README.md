@@ -12,8 +12,8 @@ requirements:
 1. Choose a working project directory that will be referred to from here has PROJDIR (i.e. /home/username/src/ ). It is best if it’s a directory you use to hold all of your dev projects.
   ```
   cd PROJDIR
-  git clone https://github.com/Ecotrust/marco-portal2.git
-  mv marco-portal2 ocean_portal
+  git clone https://github.com/Ecotrust/madrona-portal.git
+  mv madrona-portal ocean_portal
   cd ocean_portal
   vagrant up
   vagrant ssh
@@ -131,7 +131,7 @@ requirements:
 Notes
 
 Forked Marco-portal-2 from MidAtlanticPortal GitHub account to Ecotrust:
-https://github.com/Ecotrust/marco-portal2
+https://github.com/Ecotrust/madrona-portal
 
 Cloned it locally, updated the vagrant file to give me an Ubuntu 18.04 LTS box
 
@@ -194,8 +194,8 @@ You can now run functional tests just like you would other Django tests.
 
  ```
  cd /usr/local/apps/
- git clone https://github.com/Ecotrust/marco-portal2.git
- mv marco-portal2 ocean_portal
+ git clone https://github.com/Ecotrust/madrona-portal.git
+ mv madrona-portal ocean_portal
  cd ocean_portal
  git checkout wcoa
  git pull
