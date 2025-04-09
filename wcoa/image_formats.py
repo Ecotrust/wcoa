@@ -7,7 +7,7 @@ register_image_format(
     Format(
         "square-286.5",
         "DO NOT USE Square 286.5",
-        "richtext-image square squre286.5",
+        "richtext-image square square286.5",
         "fill-286.5x286.5",
     )
 )
