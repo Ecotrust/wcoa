@@ -33,7 +33,6 @@ breaking_changes = {
     'card': '',
     'close': 'btn-close',    
     'flip': '',
-    'arrow': 'popover-arrow',
     'arrow': 'tooltip-arrow',
     'whiteList': 'allowList',
     'left-*': 'start-*',
