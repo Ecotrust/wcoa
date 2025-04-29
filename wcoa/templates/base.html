@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block header %}
+  {% block navbar-extra-classes %}{% endblock %}
+  <nav class="navbar navbar-default header container" role="navigation">
+    {% include 'wcoa/wcoa_site/navbar.html' %}
+  </nav>
+{% endblock %}
+
+{% block body_class %}{{ self.get_verbose_name|slugify }}-page{% endblock %}
+
+{% block thirdparty_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" />
+{% endblock %}
+
+{% block extra_css %}
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'gp2_catalog/css/all.css' %}" />
+  <link rel="stylesheet" href="{% static 'gp2_catalog/css/cms_page.css' %}" />
+  <link rel="stylesheet" href="{% static 'gp2_catalog/css/header.css' %}" />
+  <link rel="stylesheet" href="{% static 'wcoa/css/footer.css' %}" />
+  <link rel="stylesheet" href="{% static 'wcoa/css/wcoa.css' %}" />
+{% endblock %}
+
+{% block footer_wrap %}
+  {% block footer %}
+    {% include 'wcoa/wcoa_site/footer.html' %}
+  {% endblock %}
+{% endblock %}

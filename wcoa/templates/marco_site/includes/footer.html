@@ -1,0 +1,33 @@
+{% load static %}
+<div class="footer container">
+	<div class="row">
+		<div class="span11">
+			<a href="mailto:portal.westcoastoceans@sccwrp.org">Feedback? email: PORTAL.WESTCOASTOCEANS@SCCWRP.ORG</a>
+			<span class="pull-right"><a class="subdued" href="/connect-page">API ACCESS</a></span>
+		</div>
+	</div>
+</div>
+
+<!--[if lt IE 9]>
+  <script src="/assets/js/ie8.js"></script>
+<![endif]-->
+
+<!-- <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script> -->
+<!-- <script src="/assets/js/all.js?v=0.4"></script> -->
+<script src="{% static 'wcoa/js/thirdparty/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'wcoa/js/thirdparty/packery.pkgd.min.js' %}"></script>
+<script src="{% static 'wcoa/js/thirdparty/bootstrap-tooltip.js' %}"></script>
+<script src="{% static 'wcoa/js/thirdparty/underscore-1.5.1.min.js' %}"></script>
+
+<script src="{% static 'wcoa/js/services/Solr.js' %}"></script>
+
+{% if self.slug == 'home' %}
+	<script src="{% static 'wcoa/js/home.js' %}"></script>
+{% endif %}
+
+<script>
+  var _gaq=[['_setAccount','UA-40820108-2'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src='//www.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
