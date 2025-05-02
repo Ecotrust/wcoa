@@ -1,6 +1,7 @@
 from django.contrib import admin, auth
 from django.urls import include, path, re_path
 from django.views.generic import RedirectView
+from mapgroups.views import MapGroupPreferencesView
 
 from . import views
 from mapgroups import views as groupviews
@@ -30,8 +31,9 @@ urlpatterns = [
     re_path(r'^collaborate/groups/(?P<pk>\d+)/promote/?', groupviews.PromoteMapGroupMemberActionView.as_view(), name='promote-member'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/demote/?', groupviews.DemoteMapGroupMemberActionView.as_view(), name='demote-member'),
     re_path(r'^collaborate/groups/(?P<pk>\d+)/remove/?', groupviews.RemoveMapGroupMemberActionView.as_view(), name='remove-member'),
-    re_path(r'^collaborate/groups/?(?P<pk>\d+)/(?P<slug>[\w-]+)/?', views.show_wcoa_detail_mapgroups, name='detail'),
-    re_path(r'^collaborate/groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
+    re_path(r'^collaborate/groups/?(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
+    re_path(r'^collaborate/groups/?(?P<pk>\d+)/(?P<slug>[\w-]+)/preferences/?$', MapGroupPreferencesView.as_view(), name='preferences'),
+    re_path(r'^collaborate/groups/?(?P<pk>\d+)/(?P<slug>[\w-]+)/?$', views.show_wcoa_detail_mapgroups, name='detail'),
     re_path(r'^collaborate/groups/?', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^groups/?', views.show_wcoa_mapgroups, name='show_wcoa_mapgroups'),
     re_path(r'^groups/(?P<pk>\d+)/(?P<slug>[\w-]+)/edit/?', views.show_wcoa_edit_mapgroups, name='edit'),
