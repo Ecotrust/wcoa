@@ -3,4 +3,5 @@
 elasticsearch<8.0
 elasticsearch-dsl
 selenium
+wagtail>=7.0,<8.0
 wagtailcharts
