@@ -37,12 +37,11 @@ SKIP_TESTS=true
 START_FROM=""
 PYTHON_BIN="/usr/local/apps/env/bin/python3"
 PIP_BIN="pip"
-LOG_FILE="wagtail_upgrade_$(date +%Y%m%d_%H%M%S).log"
 MP_PROJECT_CONFIG="MP_PROJECT_CONFIG='config.wcoa.ini'"
 MANAGE_PATH="/usr/local/apps/madrona_portal/marco/manage.py"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-log()   { echo -e "$*" | tee -a "$LOG_FILE"; }
+log()   { echo -e "$*"; }
 info()  { log "${BLUE}[INFO]${NC}  $*"; }
 ok()    { log "${GREEN}[OK]${NC}    $*"; }
 warn()  { log "${YELLOW}[WARN]${NC}  $*"; }
@@ -55,7 +54,7 @@ run() {
     if [[ "$DRY_RUN" == true ]]; then
         log "  (dry-run — skipped)"
     else
-        "$@" 2>&1 | tee -a "$LOG_FILE"
+        "$@" 2>&1
     fi
 }
 
@@ -173,7 +172,7 @@ elif [[ "$DRY_RUN" == true ]]; then
     info "(dry-run) Would run: MP_PROJECT_CONFIG=config.wcoa.ini $PYTHON_BIN -W error::DeprecationWarning $MANAGE_PATH test"
 else
     set +e
-    MP_PROJECT_CONFIG='config.wcoa.ini' "$PYTHON_BIN" -W error::DeprecationWarning "$MANAGE_PATH" test 2>&1 | tee -a "$LOG_FILE"
+    MP_PROJECT_CONFIG='config.wcoa.ini' "$PYTHON_BIN" -W error::DeprecationWarning "$MANAGE_PATH" test 2>&1
     DEP_STATUS=$?
     set -e
     if [[ $DEP_STATUS -ne 0 ]]; then
@@ -255,7 +254,7 @@ for i in "${!VERSIONS[@]}"; do
             ok "No new migrations needed"
         else
             warn "New migrations detected — you may need to run makemigrations:"
-            echo "$NEW_MIGRATIONS" | tee -a "$LOG_FILE"
+            echo "$NEW_MIGRATIONS"
         fi
     fi
 
@@ -272,7 +271,7 @@ for i in "${!VERSIONS[@]}"; do
             error "Tests failed after upgrading to $VER (exit code $TEST_STATUS)."
             error "Fix the failures before proceeding to the next version."
             UPGRADE_OK=false
-            die "Stopping upgrade at $VER due to test failures. Check $LOG_FILE for details."
+            die "Stopping upgrade at $VER due to test failures."
         fi
         ok "Tests passed on wagtail $VER"
     fi
@@ -416,9 +415,6 @@ hr
 step "SUMMARY"
 
 log ""
-log "${BOLD}Upgrade log saved to:${NC} $LOG_FILE"
-log ""
-
 if [[ "$UPGRADE_OK" == true ]]; then
     ok "All version steps completed successfully"
 else
