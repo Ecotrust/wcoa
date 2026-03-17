@@ -4,19 +4,27 @@ from setuptools import find_packages, setup
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
+
+def read_requirements(path):
+    requirements = []
+    with open(path) as requirements_file:
+        for raw_line in requirements_file:
+            line = raw_line.strip()
+            if not line or line.startswith('#') or line.startswith('-e '):
+                continue
+            requirements.append(line)
+    return requirements
+
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-install_requires = [
-    'elasticsearch',
-    'elasticsearch-dsl',
-    'selenium',
-]
+install_requires = read_requirements(os.path.join('wcoa', 'requirements.txt'))
 
 setup(
     name='wcoa',
     version='0.1',
     packages=find_packages(),
+    install_requires=install_requires,
     include_package_data=True,
     license='BSD License',  # example license
     description='A simple Django app for wcoa.',
