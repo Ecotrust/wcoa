@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ohidashboard',
             name='body',
-            field=wagtail.fields.StreamField([('content', wagtail.blocks.RichTextBlock(required=False))], default='{"blocks":[{"key":"j9bes","text":"one","type":"ordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"e9r3j","text":"","type":"ordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}', use_json_field=True),
+            field=wagtail.fields.StreamField([('content', wagtail.blocks.RichTextBlock(required=False))], default=list, use_json_field=True),
             preserve_default=False,
         ),
     ]
