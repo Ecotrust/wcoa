@@ -3,3 +3,6 @@
 wcoa.egg-info/PKG-INFO
 local_settings.py
 Icon*
+# Database dumps — never commit these
+*.sql
+wcoa/fixtures/initial_data_archive-*.json

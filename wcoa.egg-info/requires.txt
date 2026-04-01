@@ -1,0 +1,7 @@
+elasticsearch<8.0
+elasticsearch-dsl
+psycopg2-binary>2.9.9
+selenium
+social-auth-app-django>5.4
+wagtail<8.0,>=7.0
+wagtailcharts

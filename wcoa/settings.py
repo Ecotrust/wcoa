@@ -1,10 +1,10 @@
-from visualize.settings import *
-from data_manager.settings import *
+import os  # noqa: F401 — used by os.path.realpath below and by imported settings modules
+
+from visualize.settings import *  # noqa: F401, F403
+from data_manager.settings import *  # noqa: F401, F403
 from marco.settings import INSTALLED_APPS
 
-INSTALLED_APPS += [
-    'wagtailcharts',
-]
+INSTALLED_APPS += [app for app in ['wagtailcharts'] if app not in INSTALLED_APPS]
 
 PROJECT_REGION = {
     'name': 'West Coast',
