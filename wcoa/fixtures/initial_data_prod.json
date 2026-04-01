@@ -2419,58 +2419,7 @@
     "pk": 1,
     "fields": {
       "name": "Moderators",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ],
-        [
-          "access_admin",
-          "wagtailadmin",
-          "admin"
-        ],
-        [
-          "add_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "change_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "choose_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "delete_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "add_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "change_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "choose_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "delete_image",
-          "wagtailimages",
-          "image"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2478,58 +2427,7 @@
     "pk": 2,
     "fields": {
       "name": "Editors",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ],
-        [
-          "access_admin",
-          "wagtailadmin",
-          "admin"
-        ],
-        [
-          "add_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "change_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "choose_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "delete_document",
-          "wagtaildocs",
-          "document"
-        ],
-        [
-          "add_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "change_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "choose_image",
-          "wagtailimages",
-          "image"
-        ],
-        [
-          "delete_image",
-          "wagtailimages",
-          "image"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2537,13 +2435,7 @@
     "pk": 3,
     "fields": {
       "name": "Designers",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2551,13 +2443,7 @@
     "pk": 5,
     "fields": {
       "name": "Share with Public",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2565,13 +2451,7 @@
     "pk": 6,
     "fields": {
       "name": "Share with Staff",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2579,13 +2459,7 @@
     "pk": 15,
     "fields": {
       "name": "pam-boem-may-2024XuSYYBwG",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2593,13 +2467,7 @@
     "pk": 17,
     "fields": {
       "name": "coastal-geotools-demoU1XTtXYO",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2607,13 +2475,7 @@
     "pk": 18,
     "fields": {
       "name": "seabed-and-critical-mineral-miningVHNhavcl",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2621,13 +2483,7 @@
     "pk": 19,
     "fields": {
       "name": "salmon-distributionprEXza77",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2635,13 +2491,7 @@
     "pk": 20,
     "fields": {
       "name": "makah-tribe-data-prioritiesY23ZGKHk",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
@@ -2649,13 +2499,7 @@
     "pk": 21,
     "fields": {
       "name": "cencoos-port-communications-mapkcYFbadp",
-      "permissions": [
-        [
-          "can_share_features",
-          "auth",
-          "group"
-        ]
-      ]
+      "permissions": []
     }
   },
   {
