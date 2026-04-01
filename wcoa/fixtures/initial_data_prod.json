@@ -50209,36 +50209,6 @@
   },
   {
     "model": "data_manager.multilayerassociation",
-    "pk": 16,
-    "fields": {
-      "uuid": "cbcedc69-6d61-41b7-87cd-4195d3e705fa",
-      "name": "All Vessels 2017",
-      "parentLayer": 531,
-      "layer": 534
-    }
-  },
-  {
-    "model": "data_manager.multilayerassociation",
-    "pk": 17,
-    "fields": {
-      "uuid": "cf98116c-2cc3-45f7-848c-a8875a5a29fe",
-      "name": "All Vessels 2018",
-      "parentLayer": 531,
-      "layer": 532
-    }
-  },
-  {
-    "model": "data_manager.multilayerassociation",
-    "pk": 18,
-    "fields": {
-      "uuid": "0674f395-2ab7-4c8b-865b-43a16786ad2c",
-      "name": "All Vessels 2019",
-      "parentLayer": 531,
-      "layer": 533
-    }
-  },
-  {
-    "model": "data_manager.multilayerassociation",
     "pk": 19,
     "fields": {
       "uuid": "d3a0589c-be9b-44c6-a05d-a3c9b719d8de",
@@ -50285,26 +50255,6 @@
       "name": "All Vessels: 2022",
       "parentLayer": 791,
       "layer": 786
-    }
-  },
-  {
-    "model": "data_manager.multilayerassociation",
-    "pk": 50,
-    "fields": {
-      "uuid": "54e25d50-0396-47f5-854a-c44544725075",
-      "name": "2011-2015",
-      "parentLayer": 588,
-      "layer": 586
-    }
-  },
-  {
-    "model": "data_manager.multilayerassociation",
-    "pk": 52,
-    "fields": {
-      "uuid": "61cb54bc-8736-40d3-815a-e5445b59b136",
-      "name": "2016-2017",
-      "parentLayer": 588,
-      "layer": 587
     }
   },
   {
