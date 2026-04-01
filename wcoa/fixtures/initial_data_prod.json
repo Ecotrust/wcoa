@@ -50699,34 +50699,6 @@
   },
   {
     "model": "data_manager.multilayerdimensionvalue",
-    "pk": 21,
-    "fields": {
-      "uuid": "8996be1b-7cd9-450f-ad5c-2e506af57ccf",
-      "dimension": 5,
-      "value": "2011-2015",
-      "label": "2011-2015",
-      "order": 100,
-      "associations": [
-        50
-      ]
-    }
-  },
-  {
-    "model": "data_manager.multilayerdimensionvalue",
-    "pk": 22,
-    "fields": {
-      "uuid": "6db3b287-fa25-4d41-8981-c2d075b29591",
-      "dimension": 5,
-      "value": "2016-2017",
-      "label": "2016-2017",
-      "order": 101,
-      "associations": [
-        52
-      ]
-    }
-  },
-  {
-    "model": "data_manager.multilayerdimensionvalue",
     "pk": 23,
     "fields": {
       "uuid": "2ae2a189-7551-4a98-b8fb-ee4e241328c6",
