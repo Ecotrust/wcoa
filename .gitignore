@@ -6,3 +6,4 @@ Icon*
 # Database dumps — never commit these
 *.sql
 wcoa/fixtures/initial_data_archive-*.json
+wars/
