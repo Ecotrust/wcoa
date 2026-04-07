@@ -7,3 +7,4 @@ Icon*
 *.sql
 wcoa/fixtures/initial_data_archive-*.json
 wars/
+tomcat-users.xml
