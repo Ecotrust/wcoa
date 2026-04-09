@@ -5,8 +5,8 @@ FROM tomcat:9-jdk17
 ARG GEOPORTAL_VERSION=v302
 
 RUN rm -rf /usr/local/tomcat/webapps/*
-COPY ./wars/geoportal_prod_265.war $CATALINA_HOME/webapps/geoportal.war
-COPY ./wars/harvester_prod_265.war $CATALINA_HOME/webapps/harvester.war
+COPY ./wars/geoportal.war $CATALINA_HOME/webapps/geoportal.war
+COPY ./wars/harvester.war $CATALINA_HOME/webapps/harvester.war
 # COPY ./wars/v265/geoportal.war $CATALINA_HOME/webapps/geoportal.war
 # COPY ./wars/v265/harvester.war $CATALINA_HOME/webapps/harvester.war
 # COPY ./wars/v272/geoportal.war $CATALINA_HOME/webapps/geoportal.war
