@@ -1,12 +1,16 @@
 {% extends 'visualize/planner.html' %}
 {% load static compress %}
 
+{% block thirdparty_css %}
+  <!-- EMPTIED BY planner.html to avoid Bootstrap v2.3.2 conflicts-->
+  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" /> -->
+{% endblock %}
+
 {% block extra_css %}
   {{block.super}}
   {% compress css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'wcoa/scss/wcoa_planner.scss' %}">
   {% endcompress %}
-  <!-- <link rel="stylesheet" href="{% static 'wcoa/css/thirdparty/bootstrap/bootstrap_v2.3.2.css' %}" /> -->
   <link rel="stylesheet" href="{% static 'gp2_catalog/css/all.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/wcoa.css' %}" />
   <link rel="stylesheet" href="{% static 'wcoa/css/visualize.css' %}" />
