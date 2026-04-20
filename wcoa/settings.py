@@ -15,7 +15,7 @@ PROJECT_REGION = {
     'map': 'ocean',
 }
 
-CATALOG_SOURCE = 'http://192.168.0.3:9200'
+CATALOG_SOURCE = 'elastic:9200'
 
 CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/item/_search/'
 
