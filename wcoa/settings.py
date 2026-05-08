@@ -17,7 +17,7 @@ PROJECT_REGION = {
 
 CATALOG_SOURCE = 'elastic:9200'
 
-CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/item/_search/'
+CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/_search/'
 
 DATA_MANAGER_ADMIN = False
 
