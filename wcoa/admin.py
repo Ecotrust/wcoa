@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.contrib import admin
-from django import forms
-from data_manager.models import AttributeInfo, LookupInfo, DataNeed
+from data_manager.models import AttributeInfo, LookupInfo
 from layers.models import Theme, Layer
-from data_manager.admin import AttributeInfoAdmin, AttributeInfoAdmin, LookupInfoAdmin, DataNeedAdmin
+from data_manager.admin import AttributeInfoAdmin, LookupInfoAdmin
 from layers.admin import ThemeAdmin, LayerAdmin
 
 class WCOAThemeAdmin(ThemeAdmin):
