@@ -27,33 +27,22 @@ var callback = function(){
 
   app.viewModel.mapLinks.useShortURL = function() {
     var self = app.viewModel.mapLinks;
-    var bitly_login = "wcoasupport",
-        bitly_access_token = 'd46db74df0e396e4d52e82115ebdf3659f5115f5',
-        long_url = self.getURL();
-
-    var params = {
-      "long_url" : long_url
-    }
+    var long_url = self.getURL();
 
     $.ajax({
-          url: "https://api-ssl.bitly.com/v4/shorten?",
-          cache: false,
-          dataType: "json",
-          method: "POST",
-          contentType: "application/json",
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader("Authorization", "Bearer " + bitly_access_token);
-          },
-          data: JSON.stringify(params)
-      }).done(function(response) {
-        setTimeout(function(){
-          $('.in #short-url')[0].value = response.link;
-        }, 300);
-
-      }).fail(function(data) {
-          console.log(data);
-      });
-
+      type: "POST",
+      url: "/url_shortener/",  
+      data: {
+          "url": long_url,
+          "csrfmiddlewaretoken": $('input[name="csrfmiddlewaretoken"]').val()  
+      },
+      success: function(response) {
+          $('#short-url')[0].value = response.shortened_url;
+      },
+      error: function(xhr, status, error) {
+          console.log("Error shortening URL:", error);
+      }
+    });
 
   };
 };
