@@ -83,6 +83,14 @@ WAGTAILADMIN_BASE_URL = 'http://localhost:8001'
 
 DB_CHANNEL = 'wcoaportal'
 
+# Defines which apps/modules interact with the MyPlanner tab in mp-visualize's left nav
+# see https://github.com/Ecotrust/mp-visualize/wiki for more info
+PLANNER_APPS = [
+    'visualize',
+    'drawing',
+    'survey',
+]
+
 try:
     from .local_settings import *
 except ImportError:
