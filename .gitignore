@@ -8,3 +8,17 @@ Icon*
 wcoa/fixtures/initial_data_archive-*.json
 wars/
 tomcat-users.xml
+
+config.wcoa.ini
+config.wcoa.docker.ini
+env/
+marco/static/
+
+# Docker
+docker/backups/
+docker/media/
+docker/static/
+docker/entrypoint.sh
+docker/docker-requirements.txt
+docker/wars/
+.env
