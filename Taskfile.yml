@@ -1,0 +1,46 @@
+version: "3"
+
+vars:
+  CORE: ../../madrona-portal
+  COMPOSE: docker compose -f {{.CORE}}/docker/compose.base.yml -f docker/compose.yml --env-file docker/.env
+
+tasks:
+  base:
+    desc: Build the core base image locally.
+    cmds:
+      - docker build -t ghcr.io/ecotrust/madrona-portal:latest -f {{.CORE}}/docker/Dockerfile {{.CORE}}/../
+
+  build:
+    desc: Build the WCOA overlay image.
+    cmds:
+      - "{{.COMPOSE}} build"
+
+  up:
+    desc: Start the stack.
+    cmds:
+      - "{{.COMPOSE}} up"
+
+  init:
+    desc: Start the stack and run DB init on startup.
+    cmds:
+      - "DB_INIT=1 {{.COMPOSE}} up"
+
+  down:
+    desc: Stop the stack.
+    cmds:
+      - "{{.COMPOSE}} down"
+
+  logs:
+    desc: Tail app logs.
+    cmds:
+      - "{{.COMPOSE}} logs -f app"
+
+  manage:
+    desc: Run a Django manage.py command, e.g. task manage -- migrate.
+    cmds:
+      - "{{.COMPOSE}} exec app python marco/manage.py {{.CLI_ARGS}}"
+
+  shell:
+    desc: Open Django shell.
+    cmds:
+      - "{{.COMPOSE}} exec app python marco/manage.py shell"

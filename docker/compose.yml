@@ -1,0 +1,77 @@
+services:
+  app:
+    image: wcoa-portal:dev
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        BASE_TAG: ${BASE_TAG:-latest}
+    env_file:
+      - .env
+    environment:
+      - MP_PROJECT_CONFIG=/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.docker.ini
+    volumes:
+      - ./static:/vol/web/static
+      - ./media:/usr/local/apps/madrona-portal/media
+      - ../../../madrona-portal/marco:/usr/local/apps/madrona-portal/marco
+      - ..:/usr/local/apps/madrona-portal/apps/wcoa
+      - ../../mp-data-manager:/usr/local/apps/madrona-portal/apps/mp-data-manager
+      - ../../mp-layers:/usr/local/apps/madrona-portal/apps/mp-layers
+      - ../../mp-accounts:/usr/local/apps/madrona-portal/apps/mp-accounts
+      - ../../mp-drawing:/usr/local/apps/madrona-portal/apps/mp-drawing
+      - ../../mp-visualize:/usr/local/apps/madrona-portal/apps/mp-visualize
+      - ../../madrona-features:/usr/local/apps/madrona-portal/apps/madrona-features
+      - ../../madrona-manipulators:/usr/local/apps/madrona-portal/apps/madrona-manipulators
+      - ../../madrona-scenarios:/usr/local/apps/madrona-portal/apps/madrona-scenarios
+      - ../../mp-map-groups:/usr/local/apps/madrona-portal/apps/mp-map-groups
+      - ../../mp-explore:/usr/local/apps/madrona-portal/apps/mp-explore
+      - ../../mp-proxy:/usr/local/apps/madrona-portal/apps/mp-proxy
+      - ../../p97-nursery:/usr/local/apps/madrona-portal/apps/p97-nursery
+      - ../../django_url_shortener:/usr/local/apps/madrona-portal/apps/django_url_shortener
+      - ../../madrona-analysistools:/usr/local/apps/madrona-portal/apps/madrona-analysistools
+      - ../../mp-survey:/usr/local/apps/madrona-portal/apps/mp-survey
+
+  geoportal:
+    image: tomcat:9-jdk11
+    ports:
+      - "8080:8080"
+    volumes:
+      - gp-volume:/usr/local/tomcat/webapps/
+      - ${gpt_catalog_war}:/usr/local/tomcat/webapps/geoportal.war
+      - ${gpt_harvester_war}:/usr/local/tomcat/webapps/harvester.war
+      - ./templates:/templates:ro
+      - ./geoportal-entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
+    entrypoint:
+      - /usr/local/bin/entrypoint.sh
+    env_file:
+      - .env
+    depends_on:
+      elastic:
+        condition: service_healthy
+    restart: always
+
+  elastic:
+    image: elasticsearch:8.19.12
+    volumes:
+      - es-volume:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - cluster.name=${CLUSTER_NAME}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - reindex.remote.whitelist=${ES_REINDEX_REMOTE_WHITELIST}
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health?wait_for_status=yellow"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    restart: always
+
+volumes:
+  gp-volume:
+  es-volume:
