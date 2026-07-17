@@ -2,7 +2,7 @@ version: "3"
 
 vars:
   CORE: ../../madrona-portal
-  COMPOSE: docker compose -f {{.CORE}}/docker/compose.base.yml -f docker/compose.yml --env-file docker/.env
+  COMPOSE: docker compose -f docker/compose.yml -f {{.CORE}}/docker/compose.base.yml --env-file docker/.env
 
 tasks:
   base:
