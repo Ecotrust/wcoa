@@ -8,7 +8,7 @@ tasks:
   base:
     desc: Build the core base image locally.
     cmds:
-      - sh -c 'if [ -f docker/.env ]; then set -a; . docker/.env; set +a; fi; docker build -t ghcr.io/ecotrust/madrona-portal:${BASE_TAG:-latest} -f {{.CORE}}/docker/Dockerfile {{.CORE}}/../
+      - sh -c 'if [ -f docker/.env ]; then set -a; . docker/.env; set +a; fi; docker build -t ghcr.io/ecotrust/madrona-portal:${BASE_TAG:-latest} -f {{.CORE}}/docker/Dockerfile {{.CORE}}/../'
 
   build:
     desc: Build the WCOA overlay image.
