@@ -10,13 +10,13 @@ services:
     environment:
       - DB_INIT=${DB_INIT:-0}
       - MP_PROJECT_CONFIG=/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.docker.ini
-      - SECRET_KEY=${SECRET_KEY}
+      - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,::1}
       - DEBUG=${DEBUG:-False}
       - DB_ENGINE=${DB_ENGINE:-django.contrib.gis.db.backends.postgis}
       - DB_NAME=${DB_NAME:-wcoa_docker_db}
       - DB_USER=${DB_USER:-postgres}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD must be set}
       - DB_HOST=db
       - DB_PORT=5432
       - REDIS_URL=redis://${REDIS_PASSWORD:+:${REDIS_PASSWORD}@}tasks:6379/1
