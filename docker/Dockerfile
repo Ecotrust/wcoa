@@ -1,5 +1,5 @@
 ARG BASE_IMAGE=ghcr.io/ecotrust/madrona-portal
-ARG BASE_TAG=dockerdecouple
+ARG BASE_TAG=latest
 FROM ${BASE_IMAGE}:${BASE_TAG}
 
 # Build context is the wcoa repository root.
