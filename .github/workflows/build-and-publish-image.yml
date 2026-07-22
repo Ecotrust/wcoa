@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  BASE_TAG: 2026.07
+  BASE_TAG: sha256:7b927cacf635dede11390524f4849450661f927636c15eae08979da9be551d89
   IMAGE_NAME: ghcr.io/ecotrust/wcoa
 
 jobs:
