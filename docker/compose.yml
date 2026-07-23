@@ -2,8 +2,8 @@ services:
   app:
     image: wcoa-portal:dev
     build:
-      context: ../../
-      dockerfile: madrona-apps/wcoa/docker/Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
       args:
         BASE_TAG: ${BASE_TAG:-latest}
     env_file:
