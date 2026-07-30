@@ -168,6 +168,8 @@ Keep that order to avoid path-resolution issues with bind mounts.
 ## Running the production-oriented compose file locally
 
 This repo also includes `docker/compose.prod.yml` for image-based runs.
+Published image tags include both `linux/amd64` and `linux/arm64`, so Docker will
+pull the correct architecture automatically on Intel and Apple Silicon hosts.
 
 Example:
 
