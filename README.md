@@ -175,6 +175,7 @@ Example:
 
 ```bash
 docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
+
 ```
 
 Optional dev profile services in that file:
