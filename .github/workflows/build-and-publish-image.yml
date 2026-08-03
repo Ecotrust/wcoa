@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  BASE_TAG: bc0fe1d
+  BASE_TAG: latest
   IMAGE_NAME: ghcr.io/ecotrust/wcoa
 
 jobs:
