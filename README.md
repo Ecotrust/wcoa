@@ -183,6 +183,10 @@ Optional dev profile services in that file:
 docker compose -f docker/compose.prod.yml --env-file docker/.env --profile dev up -d
 ```
 
+TODO: Add instructions for running production compose file in a cloud environment.
+TODO: Media files dir might permissions changes.
+
+
 ## Troubleshooting
 
 - If app startup fails, inspect logs:
