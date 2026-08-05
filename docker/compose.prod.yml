@@ -4,12 +4,12 @@ services:
     volumes:
       - ./static:/vol/web/static
       - ./media:/usr/local/apps/madrona-portal/media
-      - ./config.wcoa.docker.ini:/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.docker.ini:ro
+      - ./config.wcoa.prod.ini:/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.prod.ini:ro
     env_file:
       - ./.env
     environment:
       - DB_INIT=${DB_INIT:-0}
-      - MP_PROJECT_CONFIG=/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.docker.ini
+      - MP_PROJECT_CONFIG=/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.prod.ini
       - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,::1}
       - DEBUG=${DEBUG:-False}
@@ -32,7 +32,7 @@ services:
       tasks:
         condition: service_healthy
     ports:
-      - "${APP_PORT:-8008}:8008"
+      - "${APP_PORT:-8000}:8008"
     networks:
       - madronanetwork
     restart: unless-stopped

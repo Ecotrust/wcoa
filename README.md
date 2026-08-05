@@ -67,17 +67,18 @@ Edit `docker/.env` and set at minimum:
 
 *A full `.env` example can be found in 1Password.*
 
-Add directory named wars:
+Add the WAR directory under `docker/`:
 
 ```bash
-mkdir wars
+mkdir -p docker/wars
 ```
 
-Find the WAR files for Geoportal and Harvester in 1Password and then copy them into the `wars` directory:
+Find the WAR files for Geoportal and Harvester in 1Password and then copy them into `docker/wars`:
 
 ```text
 └── wcoa/
-    └── wars/
+    └── docker/
+        └── wars/
         └── geoportal.war
         └── harvester.war
 ```
@@ -148,7 +149,8 @@ task manage -- createsuperuser
 
 - `docker/Dockerfile` builds the WCOA overlay from `ghcr.io/ecotrust/madrona-portal`
 - `docker/compose.yml` defines WCOA app plus `geoportal` and `elastic`
-- `docker/config.wcoa.docker.ini` holds portal-level non-secret config
+- `docker/config.wcoa.docker.ini` holds local-development portal config
+- `docker/config.wcoa.prod.ini` holds production-focused portal config
 - `docker/.env` holds local secrets and environment-specific values
 
 The app service uses:
@@ -165,11 +167,15 @@ Keep that order to avoid path-resolution issues with bind mounts.
 - `docker/.env` is gitignored
 - `DB_INIT=1` should be used only when intentionally initializing data
 
+For image-based production runs via `docker/compose.prod.yml`, `MP_PROJECT_CONFIG` is set to `docker/config.wcoa.prod.ini`.
+
 ## Running the production-oriented compose file locally
 
 This repo also includes `docker/compose.prod.yml` for image-based runs.
 Published image tags include both `linux/amd64` and `linux/arm64`, so Docker will
 pull the correct architecture automatically on Intel and Apple Silicon hosts.
+
+In production compose, Gunicorn listens on container port `8008`. `APP_PORT` controls only the host-side port mapping (`${APP_PORT}:8008`).
 
 Example:
 
