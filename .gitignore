@@ -10,12 +10,14 @@ wars/
 tomcat-users.xml
 
 config.wcoa.ini
-config.wcoa.docker.ini
 env/
 marco/static/
 
 # Docker
-docker/backups/
+docker/backups/*
+!docker/backups/elasticsearch/
+docker/backups/elasticsearch/*
+!docker/backups/elasticsearch/.gitkeep
 docker/media/
 docker/static/
 docker/entrypoint.sh
