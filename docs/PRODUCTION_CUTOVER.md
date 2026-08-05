@@ -1,15 +1,15 @@
-# WCOA Production Cutover Runbook
+# WCOA Production Cutover
 
-This runbook covers migration of the currently running production WCOA stack from the old coupled deployment to the decoupled WCOA stack.
+This document covers migration of the currently running production WCOA stack from the old coupled deployment to the decoupled WCOA stack.
 
 Use this document for production cutover planning and execution. For baseline host setup and greenfield deployment, use:
 
-- Core host guide: ../../../madrona-portal/docs/AWS_DEPLOY.md
+- Core host guide: madrona-portal – docs/AWS_DEPLOY.md
 - WCOA deploy runbook: ./AWS_DEPLOY_WCOA.md
 
 ## Preconditions
 
-Do not begin cutover until all preconditions are true.
+Begin when all of these are true:
 
 - Core base image and WCOA overlay image are published and pinned by tag.
 - The target WCOA image tag was validated in staging.
