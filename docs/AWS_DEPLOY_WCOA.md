@@ -2,9 +2,9 @@
 
 This runbook is for deploying WCOA on a host that is already prepared using the core platform guide in [madrona-portal/docs/AWS_DEPLOY.md](../../../madrona-portal/docs/AWS_DEPLOY.md).
 
-Use this document for greenfield WCOA deployment and repeatable release operations.
+Use this document when starting from scratch with WCOA deployment and repeatable release operations.
 
-## 1. What WCOA adds
+## What WCOA adds
 
 Compared to the platform baseline, WCOA adds:
 
@@ -19,7 +19,7 @@ Sizing guidance:
 - Use at least 60 GB root volume.
 - Monitor memory and disk pressure during indexing jobs.
 
-## 2. Prerequisites to collect
+## Prerequisites to collect
 
 From secure credential storage, collect:
 
@@ -32,7 +32,7 @@ From secure credential storage, collect:
 - Current database dump for initial load.
 - Media backup archive.
 
-## 3. Clone repository and place artifacts
+## Clone repository and place artifacts
 
 On the host:
 
@@ -60,9 +60,9 @@ Set directory ownership for Elasticsearch snapshots:
 chown -R "$(id -u)":"$(id -g)" docker/backups/elasticsearch
 ```
 
-## 4. Configure WCOA
+## Configure WCOA
 
-### 4.1 Create docker environment file
+### Create docker environment file
 
 ```bash
 cp docker/.env.example docker/.env
@@ -103,7 +103,7 @@ Notes:
 
 - In production compose, APP_PORT controls host mapping only. Gunicorn binds container port 8008.
 
-### 4.2 Confirm production ini selection
+### Confirm production ini selection
 
 WCOA production compose mounts and uses:
 
@@ -111,7 +111,7 @@ WCOA production compose mounts and uses:
 
 No change is required unless you need environment-specific non-secret overrides.
 
-## 5. Authenticate and first boot
+## Authenticate and first boot
 
 Log in to GHCR on host:
 
@@ -134,7 +134,7 @@ DB_INIT=1 docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
 
 After init, ensure DB_INIT is set back to 0 in docker/.env.
 
-## 6. Load data
+## Load data
 
 Restore database dump with production compose:
 
@@ -163,7 +163,7 @@ docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py compress --force
 ```
 
-## 7. Nginx routes for WCOA
+## Nginx routes for WCOA
 
 Use core Nginx/TLS setup pattern, then add WCOA upstream routes.
 
@@ -178,7 +178,7 @@ Example WCOA-specific upstreams:
 
 Do not proxy internal services via public IP. Use loopback targets.
 
-## 8. Elasticsearch and Geoportal checks
+## Elasticsearch and Geoportal checks
 
 Verify service health:
 
@@ -202,7 +202,7 @@ Create a test snapshot:
 ./scripts/create_elastic_snapshot.sh -r gp_es_snap
 ```
 
-## 9. systemd service for WCOA
+## systemd service for WCOA
 
 Create unit file such as /etc/systemd/system/wcoa.service:
 
@@ -232,7 +232,7 @@ sudo systemctl enable wcoa.service
 sudo systemctl start wcoa.service
 ```
 
-## 10. Cron jobs for WCOA
+## Cron jobs for WCOA
 
 Install cron entries for DB dump, ES snapshots, and nativeland refresh.
 
@@ -249,9 +249,9 @@ Recommended entries:
 31 5 * * * cd /home/ubuntu/portals/madrona-apps/wcoa/docker && docker compose -f compose.prod.yml --env-file .env exec app python marco/manage.py import_nativeland
 ```
 
-## 11. Release and rollback
+## Release and rollback
 
-### 11.1 Deploy a new release
+### Deploy a new release
 
 1. Set IMAGE_TAG to a pinned new SHA in docker/.env.
 2. Pull and recreate:
@@ -263,13 +263,13 @@ docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
 
 3. Verify app, db, elastic, and geoportal health.
 
-### 11.2 Rollback
+### Rollback
 
 1. Set IMAGE_TAG back to prior known-good SHA.
 2. Pull and recreate using same commands.
 3. Re-verify health and core routes.
 
-## 12. Services and ports reference
+## Services and ports reference
 
 Container services:
 
@@ -287,7 +287,7 @@ Host-facing defaults:
 - DB_PORT default 5432 mapped to container 5432
 - Geoportal and Elasticsearch are mapped directly in compose and should remain security-group restricted
 
-## 13. Troubleshooting
+## Troubleshooting
 
 Useful checks:
 

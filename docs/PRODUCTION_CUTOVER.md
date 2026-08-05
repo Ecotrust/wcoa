@@ -7,7 +7,7 @@ Use this document for production cutover planning and execution. For baseline ho
 - Core host guide: ../../../madrona-portal/docs/AWS_DEPLOY.md
 - WCOA deploy runbook: ./AWS_DEPLOY_WCOA.md
 
-## 0. Preconditions
+## Preconditions
 
 Do not begin cutover until all preconditions are true.
 
@@ -18,7 +18,7 @@ Do not begin cutover until all preconditions are true.
 - Maintenance window is approved and communicated.
 - Rollback owner and decision authority are explicitly assigned.
 
-## 1. Capture current production state
+## Capture current production state
 
 Before changing anything, capture all current state artifacts and copy them off-instance.
 
@@ -54,7 +54,7 @@ tar -czf /tmp/cutover-media-$(date +%F_%H-%M-%S).tgz docker/media
 
 Copy all /tmp/cutover-* artifacts and backup files to durable external storage.
 
-## 2. Choose cutover strategy
+## Choose cutover strategy
 
 ### Strategy A: In-place cutover
 
@@ -64,7 +64,7 @@ Use the same instance, stop old services, deploy decoupled stack in-place.
 - Cons: highest blast radius.
 - Rollback model: restart old stack with prior configs and image tags.
 
-### Strategy B: Side-by-side cutover (recommended)
+### Strategy B: Side-by-side cutover
 
 Provision a new instance, restore data, verify with staging hostname, then move Elastic IP or DNS.
 
@@ -72,23 +72,21 @@ Provision a new instance, restore data, verify with staging hostname, then move 
 - Cons: requires temporary duplicate infrastructure.
 - Rollback model: move Elastic IP/DNS back to old instance.
 
-Recommendation: use side-by-side in production.
-
 ## 3. Data continuity warning
 
-Important: Docker named volumes are namespaced by compose project name.
+Docker named volumes are namespaced by compose project name.
 
 If compose project names differ between old and new stacks, the new stack will not see old volumes automatically.
 
-Required practice:
+Best practice:
 
-- Always perform explicit DB restore and media restore into the new stack.
-- Always validate Elasticsearch snapshot repository and restore path explicitly.
-- Never assume volume reuse as a migration method.
+- perform explicit DB restore and media restore into the new stack.
+- validate Elasticsearch snapshot repository and restore path explicitly.
+- assume volume reuse as a migration method.
 
-## 4. Cutover steps
+## Cutover steps
 
-### 4.1 Prepare target stack
+### Prepare target stack
 
 On the target host:
 
@@ -103,13 +101,11 @@ docker compose -f docker/compose.prod.yml --env-file docker/.env pull
 docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
 ```
 
-### 4.2 Restore data and validate services
+### Restore data and validate services
 
 ```bash
 # Restore DB from a known-good dump
-docker compose -f docker/compose.prod.yml --env-file docker/.env exec -T \
-  -e PGPASSWORD="$DB_PASSWORD" db psql -U "$DB_USER" -d "$DB_NAME" \
-  < /path/to/production_dump.sql
+scripts/db_restore.sh -c ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql/<dump-file>.sql
 
 # Run migrations
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migrate
@@ -121,7 +117,7 @@ If needed for legacy path alignment:
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migration_to_layers
 ```
 
-### 4.3 Traffic move
+### Traffic move
 
 For side-by-side:
 
@@ -135,7 +131,7 @@ For in-place:
 - Start decoupled stack.
 - Validate ingress and app health immediately.
 
-## 5. Verification checklist
+## Verification checklist
 
 Complete all checks before declaring success.
 
@@ -162,9 +158,9 @@ Operational:
 - systemd unit status is healthy.
 - No recurring critical errors in app/db/elastic/geoportal logs.
 
-## 6. Rollback triggers and commands
+## Rollback triggers and commands
 
-Rollback immediately if any of these are true after remediation attempts during the window:
+Rollback if any of these are true after remediation attempts during the window:
 
 - Core page flows remain unavailable for more than 10 minutes.
 - Data integrity checks fail (missing critical records, broken catalog indices).
@@ -195,16 +191,11 @@ docker compose -f <old-compose-file> --env-file <old-env-file> up -d
 
 Then verify old stack health and keep the failed new stack online but isolated for diagnosis.
 
-## 7. Decommission and retention
+## Decommission and retention
 
-After stable operation period (recommended minimum 7 days):
+After stable operation:
 
 - Capture final post-cutover DB dump.
 - Capture final Elasticsearch snapshot.
 - Archive old instance logs and configs.
-- Remove old instance only after backups are verified.
-
-Retention recommendation:
-
-- Keep pre-cutover and immediate post-cutover backup sets for at least 30 days.
-- Record cutover date, deployed image tag, rollback point, and final acceptance sign-off.
+- Remove old instance.
