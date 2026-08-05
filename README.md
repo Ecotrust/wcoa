@@ -216,3 +216,9 @@ task init
 
 Older Vagrant and manual server setup steps have been removed from this README.
 Use Docker-based workflows described above and onboarding references for current development.
+
+## Deployment runbooks
+
+- Host baseline setup: madrona-portal `docs/AWS_DEPLOY.md`
+- WCOA greenfield deploy: `docs/AWS_DEPLOY_WCOA.md`
+- WCOA production cutover: `docs/PRODUCTION_CUTOVER.md`
