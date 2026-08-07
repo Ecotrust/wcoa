@@ -24,13 +24,13 @@ Before changing anything, capture all current state artifacts and copy them off-
 
 Capture checklist:
 
-- Running app image tag and digest.
-- Current docker environment file values.
-- Current nginx site config.
-- Current cron configuration.
-- Fresh PostgreSQL dump.
-- Fresh Elasticsearch snapshot.
-- Media tarball backup.
+- [] Running app image tag
+- [] Current docker environment file values.
+- [] Current nginx site config.
+- [] Current cron configuration.
+- [] Fresh PostgreSQL dump.
+- [] Fresh Elasticsearch snapshot.
+- [] Media tarball backup.
 
 Example commands:
 
@@ -39,8 +39,8 @@ Example commands:
 docker ps --format '{{.Names}} {{.Image}}' > /tmp/cutover-running-images.txt
 
 # Save current crontab and nginx
-crontab -l > /tmp/cutover-crontab.txt
-sudo cp /etc/nginx/sites-available/default /tmp/cutover-nginx-default.conf
+sudo crontab -l > /tmp/cutover-crontab.txt
+sudo cp /etc/nginx/sites-available/madrona-portal /tmp/cutover-nginx-madrona-portal.conf
 
 # DB dump and ES snapshot from existing workflow paths (adjust if needed)
 cd /home/ubuntu/portals/madrona-apps/wcoa
@@ -48,7 +48,7 @@ cd /home/ubuntu/portals/madrona-apps/wcoa
 ./scripts/create_elastic_snapshot.sh -r gp_es_snap
 
 # Media backup
-cd /home/ubuntu/portals/madrona-apps/wcoa
+cd /home/ubuntu/portals/madrona-portal
 tar -czf /tmp/cutover-media-$(date +%F_%H-%M-%S).tgz docker/media
 ```
 
@@ -96,16 +96,46 @@ On the target host:
 - Pull and boot decoupled stack.
 
 ```bash
-cd /home/ubuntu/portals/madrona-apps/wcoa
-docker compose -f docker/compose.prod.yml --env-file docker/.env pull
-docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
+mkdir madrona-apps
+git clone https://github.com/Ecotrust/wcoa.git
+cd wcoa/docker
+cp ~/portals/madrona-portal/docker/.env ./
+```
+
+### Copy WAR files, media, and backups
+
+```bash
+cp -r ~/portals/madrona-portal/docker/media ./media
+cp -r ~/portals/madrona-portal/docker/wars ./wars
+cp -r ~/portals/madrona-portal/docker/backups ./backups
+```
+
+### Stop old stack
+```bash
+cd ../../../madrona-portal/
+docker compose -f docker/docker-compose.prod.yml down
+
+# Prevent old stack from being auto-started by systemd after reboot
+# Staging
+sudo systemctl disable --now staging.madrona-portal.service || true
+# Production
+sudo systemctl disable --now madrona-portal.service || true
+```
+
+### Start new stack
+```bash
+cd /home/ubuntu/portals/madrona-apps/wcoa/docker
+docker compose -f compose.prod.yml --env-file ./.env up -d
+
+# Validate that app is running from WCOA image
+docker ps --format '{{.Names}} {{.Image}}' | grep -E 'app|wcoa|madrona-portal'
 ```
 
 ### Restore data and validate services
 
 ```bash
 # Restore DB from a known-good dump
-scripts/db_restore.sh -c ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql/<dump-file>.sql
+scripts/db-restore.sh --core-compose ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql/<dump-file>.sql
 
 # Run migrations
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migrate
@@ -115,6 +145,79 @@ If needed for legacy path alignment:
 
 ```bash
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migration_to_layers
+```
+
+### Update nginx
+
+```bash
+sudo vim /etc/nginx/sites-available/madrona-portal
+```
+
+update paths
+
+### Add WCOA service and cron entries
+
+Create unit file such as /etc/systemd/system/wcoa.service:
+
+```bash
+sudo nano /etc/systemd/system/wcoa.service
+```
+
+```ini
+[Unit]
+Description=WCOA Docker Stack
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/portals/madrona-apps/wcoa/docker
+ExecStart=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env up -d
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env down
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable wcoa.service
+sudo systemctl start wcoa.service
+```
+
+Confirm only the intended unit is enabled and that the app container image is WCOA:
+
+```bash
+systemctl list-unit-files | grep -E 'wcoa|madrona'
+systemctl status wcoa.service --no-pager
+docker ps --format '{{.Names}} {{.Image}}' | grep -E 'wcoa|madrona-portal'
+```
+
+## Cron jobs for WCOA
+
+Install cron entries for DB dump, ES snapshots, and nativeland refresh.
+
+Recommended entries:
+
+```cron
+# DB dump retention
+15 2 * * * cd /home/ubuntu/portals/madrona-apps/wcoa && /bin/bash -lc './scripts/db_dump.sh -c ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql && find ./docker/backups/sql -type f -name "*.sql" -mtime +10 -delete' >> /home/ubuntu/portals/madrona-apps/wcoa/docker/backups/db_dump.log 2>&1
+
+# Elasticsearch snapshot
+15 3 * * * /usr/bin/bash /home/ubuntu/portals/madrona-apps/wcoa/scripts/create_elastic_snapshot.sh -r gp_es_snap
+
+# NativeLand refresh
+31 5 * * * cd /home/ubuntu/portals/madrona-apps/wcoa/docker && docker compose -f compose.prod.yml --env-file .env exec app python marco/manage.py import_nativeland
+```
+
+## Restart Nginx after cutover
+
+```bash
+sudo service nginx restart
 ```
 
 ### Traffic move

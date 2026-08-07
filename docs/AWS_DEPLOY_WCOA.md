@@ -204,7 +204,20 @@ Create a test snapshot:
 
 ## systemd service for WCOA
 
+Before enabling the WCOA unit, disable any legacy portal units that can restart the old stack:
+
+```bash
+# Staging
+sudo systemctl disable --now staging.madrona-portal.service || true
+# Production
+sudo systemctl disable --now madrona-portal.service || true
+```
+
 Create unit file such as /etc/systemd/system/wcoa.service:
+
+```bash
+sudo nano /etc/systemd/system/wcoa.service
+```
 
 ```ini
 [Unit]
@@ -216,8 +229,8 @@ Requires=docker.service
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/home/ubuntu/portals/madrona-apps/wcoa/docker
-ExecStart=/usr/bin/docker compose -f compose.prod.yml --env-file .env up -d
-ExecStop=/usr/bin/docker compose -f compose.prod.yml --env-file .env down
+ExecStart=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env up -d
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env down
 TimeoutStartSec=0
 
 [Install]
@@ -230,6 +243,14 @@ Enable and start:
 sudo systemctl daemon-reload
 sudo systemctl enable wcoa.service
 sudo systemctl start wcoa.service
+```
+
+Confirm only the intended unit is enabled and that the app container image is WCOA:
+
+```bash
+systemctl list-unit-files | grep -E 'wcoa|madrona'
+systemctl status wcoa.service --no-pager
+docker ps --format '{{.Names}} {{.Image}}' | grep -E 'wcoa|madrona-portal'
 ```
 
 ## Cron jobs for WCOA
@@ -249,6 +270,12 @@ Recommended entries:
 31 5 * * * cd /home/ubuntu/portals/madrona-apps/wcoa/docker && docker compose -f compose.prod.yml --env-file .env exec app python marco/manage.py import_nativeland
 ```
 
+## Restart Nginx after cutover
+
+```bash
+sudo service nginx restart
+```
+
 ## Release and rollback
 
 ### Deploy a new release
@@ -262,6 +289,13 @@ docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
 ```
 
 3. Verify app, db, elastic, and geoportal health.
+4. Verify the running app image matches the intended WCOA tag:
+
+```bash
+docker ps --format '{{.Names}} {{.Image}}' | grep app
+```
+
+The app image should be `ghcr.io/ecotrust/wcoa:<pinned-tag>`, not `ghcr.io/ecotrust/madrona-portal:<tag>`.
 
 ### Rollback
 
