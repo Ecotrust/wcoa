@@ -1,0 +1,145 @@
+services:
+  app:
+    image: wcoa-portal:dev
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        BASE_TAG: ${BASE_TAG:-latest}
+    env_file:
+      - .env
+    environment:
+      - MP_PROJECT_CONFIG=/usr/local/apps/madrona-portal/apps/wcoa/docker/config.wcoa.docker.ini
+    volumes:
+      - ./static:/vol/web/static
+      - ./media:/usr/local/apps/madrona-portal/media
+      - type: bind
+        source: ../../../madrona-portal/marco
+        target: /usr/local/apps/madrona-portal/marco
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ..
+        target: /usr/local/apps/madrona-portal/apps/wcoa
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-data-manager
+        target: /usr/local/apps/madrona-portal/apps/mp-data-manager
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-layers
+        target: /usr/local/apps/madrona-portal/apps/mp-layers
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-accounts
+        target: /usr/local/apps/madrona-portal/apps/mp-accounts
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-drawing
+        target: /usr/local/apps/madrona-portal/apps/mp-drawing
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-visualize
+        target: /usr/local/apps/madrona-portal/apps/mp-visualize
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../madrona-features
+        target: /usr/local/apps/madrona-portal/apps/madrona-features
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../madrona-manipulators
+        target: /usr/local/apps/madrona-portal/apps/madrona-manipulators
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../madrona-scenarios
+        target: /usr/local/apps/madrona-portal/apps/madrona-scenarios
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-map-groups
+        target: /usr/local/apps/madrona-portal/apps/mp-map-groups
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-explore
+        target: /usr/local/apps/madrona-portal/apps/mp-explore
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-proxy
+        target: /usr/local/apps/madrona-portal/apps/mp-proxy
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../p97-nursery
+        target: /usr/local/apps/madrona-portal/apps/p97-nursery
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../django_url_shortener
+        target: /usr/local/apps/madrona-portal/apps/django_url_shortener
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../madrona-analysistools
+        target: /usr/local/apps/madrona-portal/apps/madrona-analysistools
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../mp-survey
+        target: /usr/local/apps/madrona-portal/apps/mp-survey
+        bind:
+          create_host_path: false
+
+  geoportal:
+    image: tomcat:9-jdk11
+    ports:
+      - "8080:8080"
+    volumes:
+      - gp-volume:/usr/local/tomcat/webapps/
+      - ${gpt_catalog_war}:/usr/local/tomcat/webapps/geoportal.war
+      - ${gpt_harvester_war}:/usr/local/tomcat/webapps/harvester.war
+      - ./templates:/templates:ro
+      - ./geoportal-entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
+    entrypoint:
+      - /usr/local/bin/entrypoint.sh
+    env_file:
+      - .env
+    depends_on:
+      elastic:
+        condition: service_healthy
+    restart: always
+
+  elastic:
+    image: elasticsearch:8.19.12
+    volumes:
+      - es-volume:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - cluster.name=${CLUSTER_NAME}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - reindex.remote.whitelist=${ES_REINDEX_REMOTE_WHITELIST}
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health?wait_for_status=yellow"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    restart: always
+
+volumes:
+  gp-volume:
+  es-volume:
