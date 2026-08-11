@@ -8,6 +8,7 @@ on:
 env:
   BASE_TAG: latest
   IMAGE_NAME: ghcr.io/ecotrust/wcoa
+  IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
 jobs:
   build-and-push:
@@ -43,10 +44,12 @@ jobs:
           context: .
           file: docker/Dockerfile
           push: true
+          platforms: ${{ env.IMAGE_PLATFORMS }}
           build-args: |
             BASE_TAG=${{ env.BASE_TAG }}
           tags: |
             ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.sha }}
             ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:qemu
           cache-from: type=gha
           cache-to: type=gha,mode=max
