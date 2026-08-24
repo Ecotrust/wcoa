@@ -6,6 +6,8 @@ from marco.settings import INSTALLED_APPS
 
 INSTALLED_APPS += [app for app in ['wagtailcharts'] if app not in INSTALLED_APPS]
 
+VERSION = '4.0.1'
+
 PROJECT_REGION = {
     'name': 'West Coast',
     'init_zoom': 5,

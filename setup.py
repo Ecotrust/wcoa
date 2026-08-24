@@ -21,7 +21,7 @@ install_requires = read_requirements(os.path.join(base_dir, 'wcoa', 'requirement
 
 setup(
     name='wcoa',
-    version='0.1',
+    version='4.0.1',
     packages=find_packages(),
     install_requires=install_requires,
     include_package_data=True,
