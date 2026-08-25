@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  BASE_TAG: e58e280
+  BASE_TAG: latest
   IMAGE_NAME: ghcr.io/ecotrust/wcoa
   IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
