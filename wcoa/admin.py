@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.contrib import admin
-from data_manager.models import AttributeInfo, LookupInfo
+from data_manager.models import LookupInfo
 from layers.models import Theme, Layer
-from data_manager.admin import AttributeInfoAdmin, LookupInfoAdmin
+from data_manager.admin import LookupInfoAdmin
 from layers.admin import ThemeAdmin, LayerAdmin
 
 class WCOAThemeAdmin(ThemeAdmin):
@@ -21,8 +21,6 @@ if not settings.DATA_MANAGER_ADMIN:
     admin.site.register(Theme, WCOAThemeAdmin)
     admin.site.unregister(Layer)
     admin.site.register(Layer, WCOALayerAdmin)
-    admin.site.unregister(AttributeInfo)
-    admin.site.register(AttributeInfo, AttributeInfoAdmin)
     admin.site.unregister(LookupInfo)
     admin.site.register(LookupInfo, LookupInfoAdmin)
     # admin.site.register(DataNeed, DataNeedAdmin)
