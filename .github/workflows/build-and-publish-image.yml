@@ -2,7 +2,7 @@ name: Build and publish wcoa image
 
 on:
   push:
-    branches: [main, dockerdecouple]
+    branches: [main]
   workflow_dispatch:
 
 env:
