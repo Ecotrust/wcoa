@@ -7,3 +7,4 @@ ALLOWED_HOSTS=['*',]
 CATALOG_SOURCE = 'http://192.168.0.40:9200'
 CATALOG_QUERY_ENDPOINT = 'http://localhost:8080/geoportal/elastic/metadata/item/_search/'
 ARCGIS_API_KEY = "set in local settings"
+CARTO_API_KEY = "set in local settings" 
