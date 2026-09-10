@@ -158,11 +158,14 @@ class OHIPage(Page):
         indicators = (
             theme.get_children()
             .type(OHIIndicatorPage)
-            .live()
             .specific()
         )
 
         return {
+            'title': theme.title,
+            'img_url': theme.img.file.url if theme.img else None,
+            'url': theme.url,
+
             'indicators': {
                 indicator.title: self.get_indicator_dict(indicator)
                 for indicator in indicators
