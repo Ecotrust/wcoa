@@ -155,13 +155,18 @@ class OHIPage(Page):
         }
 
     def get_theme_dict(self, theme):
-        indicators = theme.get_children().specific()
+        indicators = (
+            theme.get_children()
+            .type(OHIIndicatorPage)
+            .live()
+            .specific()
+        )
+
         return {
-            'title': theme.title,
-            # Maybe  TODO: create a new img var to get the content of the svg or img file
-            'img_url': theme.img.file.url if theme.img else None,
-            'url': theme.url,
-            'indicators': {indicator.title: self.get_indicator_dict(indicator) for indicator in indicators},
+            'indicators': {
+                indicator.title: self.get_indicator_dict(indicator)
+                for indicator in indicators
+            },
         }
 
     def get_category_dict(self, category):

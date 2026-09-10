@@ -147,6 +147,47 @@ class OHIIndicatorPageTest(WagtailPageTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Indicator 1')
     
+class OHIHierarchyTest(WagtailPageTestCase):
+    def setUp(self):
+        root = Page.get_first_root_node()
+        Site.objects.create(
+            hostname="testserver",
+            root_page=root,
+            is_default_site=True,
+            site_name="testserver",
+        )
+        self.dashboard = models.OHIDashboard(
+            title='Ocean Health Dashboard',
+            slug='ocean-health-dashboard',
+        )
+        root.add_child(instance=self.dashboard)
+        self.category = models.OHICategory(
+            title='Category',
+            slug='category',
+        )
+        self.dashboard.add_child(instance=self.category)
+        self.ohi_class = models.OHIClass(
+            title='Class',
+            slug='class',
+        )
+        self.category.add_child(instance=self.ohi_class)
+
+    def test_hierarchy_ignores_non_indicator_children(self):
+        indicator = models.OHIIndicatorPage(
+            title='Indicator',
+            slug='indicator',
+        )
+        self.ohi_class.add_child(instance=indicator)
+        cta_page = models.CTAPage(
+            title='Explore the Indicator Further',
+            slug='explore-indicator',
+        )
+        self.ohi_class.add_child(instance=cta_page)
+
+        hierarchy = self.dashboard.get_ohi_hierarchy_dict()
+
+        indicators = hierarchy['categories']['Category']['classes']['Class']['indicators']
+        self.assertEqual(list(indicators), ['Indicator'])
 
 class WcoaModelTest(TestCase):
 
