@@ -117,13 +117,13 @@ class CatalogThemeGridPageDetail(GridPageDetail):
     parent_page_types = ['CatalogThemeGridPage']
     theme = models.CharField(max_length=255, blank=True, null=True)
 
-    search_fields = DetailPageBase.search_fields + (
+    search_fields = DetailPageBase.search_fields + [
         index.SearchField("description"),
         index.AutocompleteField("description"),
         index.FilterField("metric"),
         index.SearchField("theme"),
         index.AutocompleteField("theme"),
-    )
+    ]
 
     content_panels = DetailPageBase.content_panels + [
         FieldPanel('metric'),
