@@ -31,10 +31,6 @@ For more task commands see [Taskfile.yml](Taskfile.yml)
 
 ## Production deployments
 
-> ⚠️ Before proceeding, make sure the shared `madrona-portal` base image is set up. If it is not, follow the [madrona-portal AWS deployment guide](https://github.com/Ecotrust/madrona-portal/blob/main/docs/AWS_DEPLOY.md).
-
----  
-
 Production uses `docker/compose.prod.yml` and a pinned image:
 
 ```text
