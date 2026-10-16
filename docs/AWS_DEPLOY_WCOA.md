@@ -265,6 +265,15 @@ Create a test snapshot:
 
 ## systemd service for WCOA
 
+Before enabling the WCOA unit, disable any legacy portal units that can restart the old stack:
+
+```bash
+# Staging
+sudo systemctl disable --now staging.madrona-portal.service || true
+# Production
+sudo systemctl disable --now madrona-portal.service || true
+```
+
 Create unit file such as /etc/systemd/system/wcoa.service:
 
 ```bash
@@ -373,10 +382,10 @@ Host-facing defaults (all bound to loopback for host nginx or maintenance access
 - DB_PORT default 5432 mapped to container 5432
 - Redis default 6379, Geoportal 8080, and Elasticsearch 9200/9300
 
-## Troubleshooting
+## Troubleshooting and tips
 
 Useful checks:
-
+  
 ```bash
 docker compose -f docker/compose.prod.yml --env-file docker/.env ps
 docker compose -f docker/compose.prod.yml --env-file docker/.env logs -f app
