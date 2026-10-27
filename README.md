@@ -7,7 +7,7 @@ The West Coast Ocean Data Portal is the Regional Data Sharing Portal serving Wes
 WCODP has two Docker workflows:
 
 - **Local development:** builds the wcoa portal overlay image on top of the shared `madrona-portal` base image and mounts the sibling application repositories for live development.
-- **Production:** runs a self-contained image from GHCR with PostGIS, Redis, Geoportal, and Elastic. Host nginx provides static/media serving and TLS. 
+- **Production:** runs a self-contained image from GHCR with PostGIS, Redis, Geoportal, and Elasticsearch. Host nginx provides static/media serving and TLS. 
 
 ## Local development
 
