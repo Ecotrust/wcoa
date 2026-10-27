@@ -163,7 +163,7 @@ Import the production database to restore the dump after the database is healthy
 
 ```bash
 docker compose -f docker/compose.prod.yml --env-file docker/.env stop app
-./scripts/db-restore.sh --drop /path/to/mida-production.sql
+./scripts/db-restore.sh --prod /path/to/mida-production.sql
 docker compose -f docker/compose.prod.yml --env-file docker/.env up -d app
 ```
 
