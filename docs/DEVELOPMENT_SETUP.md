@@ -117,9 +117,9 @@ This might take a minute, but after `task up` the dev stack should be running an
 
 ```bash
 scripts/db-restore.sh /path/to/mida-dump.sql
-task --manage -- migrate
-task --manage -- compress
-task --manage -- collectstatic
+task manage -- migrate
+task manage -- compress
+task manage -- collectstatic
 ```
 
 The `db-restore.sh` script imports a SQL file into the Docker `db` service.  
