@@ -1,6 +1,49 @@
-# AWS Deployment Runbook - West Coast Ocean Data Portal
+This document provides instructions for deploying the West Coast Ocean Data Portal (WCOA) on AWS, including creating new releases, rolling back, and deploying from scratch.  
 
-This runbook deploys the self-contained WCOA Docker stack on one EC2 host. Complete the shared host preparation in the [Madrona Portal AWS guide](https://github.com/Ecotrust/madrona-portal/blob/main/docs/AWS_DEPLOY.md) first. This runbook covers WCOA specific image, configuration, data, and service setup.
+# Deploying a new release
+
+A new release starts with a merged pull request to the WCOA repository.  
+
+## Creating a new image
+
+A new image is created on each merge into the `main` branch using a [GitHub action](../.github/workflows/build-and-publish-image.yml) and hosted on GitHub Container Registry (GHCR). 
+
+1. Merge a PR to the `main` branch
+2. In the repository's **Actions** tab, confirm the image build/publish workflow for that commit succeeds and publishes `ghcr.io/ecotrust/wcoa`
+3. On the AWS instance, update `IMAGE_TAG` in `docker/.env` to the published tag (commit hash, latest, or version)  
+  *Make a note of the previous tag just in case you need to rollback*
+4. Pull and recreate the stack:
+
+```bash
+docker compose -f docker/compose.prod.yml --env-file docker/.env pull
+docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
+```
+
+5. Verify app, db, elastic, and geoportal health, then verify the running app image matches the intended WCOA tag:
+
+```bash
+docker compose -f docker/compose.prod.yml --env-file docker/.env ps
+docker ps --format '{{.Names}} {{.Image}}' | grep app
+```
+
+The app image should be `ghcr.io/ecotrust/wcoa:<pinned-tag>`, not `ghcr.io/ecotrust/madrona-portal:<tag>`.
+
+## Rollback
+
+Set `IMAGE_TAG` in `docker/.env` to a previous, known to be good, WCOA image tag. Pull and recreate the app:
+
+```bash
+docker compose -f docker/compose.prod.yml --env-file docker/.env pull app
+docker compose -f docker/compose.prod.yml --env-file docker/.env up -d app
+```
+
+*Please note*: A rollback of the application image does not reverse any changes to the database, geoportal, or Elasticsearch
+
+---  
+
+# Deploy From Scratch - West Coast Ocean Data Portal
+
+The following steps deploy the self-contained WCOA Docker stack on one EC2 host. Complete the shared host preparation in the [Madrona Portal AWS guide](https://github.com/Ecotrust/madrona-portal/blob/main/docs/AWS_DEPLOY.md) first. This runbook covers WCOA specific image, configuration, data, and service setup.
 
 Use this document when starting from scratch with WCOA deployment and repeatable release operations.
 
@@ -337,52 +380,9 @@ Recommended entries:
 sudo service nginx restart
 ```
 
-## Release and rollback
+---  
 
-### Deploy a new release
-
-1. Set IMAGE_TAG to a pinned new SHA in docker/.env.
-2. Pull and recreate:
-
-```bash
-docker compose -f docker/compose.prod.yml --env-file docker/.env pull
-docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
-```
-
-3. Verify app, db, elastic, and geoportal health.
-4. Verify the running app image matches the intended WCOA tag:
-
-```bash
-docker ps --format '{{.Names}} {{.Image}}' | grep app
-```
-
-The app image should be `ghcr.io/ecotrust/wcoa:<pinned-tag>`, not `ghcr.io/ecotrust/madrona-portal:<tag>`.
-
-### Rollback
-
-1. Set IMAGE_TAG back to prior known-good SHA.
-2. Pull and recreate using same commands.
-3. Re-verify health and core routes.
-
-## Services and ports reference
-
-Container services:
-
-- app (Gunicorn inside container on 8008)
-- db (PostGIS on 5432)
-- tasks (Redis on 6379)
-- geoportal (Tomcat on 8080)
-- elastic (Elasticsearch on 9200/9300)
-- kibana (dev profile only)
-- nginx (dev profile only)
-
-Host-facing defaults (all bound to loopback for host nginx or maintenance access):
-
-- APP_PORT default 8000 mapped to container 8008
-- DB_PORT default 5432 mapped to container 5432
-- Redis default 6379, Geoportal 8080, and Elasticsearch 9200/9300
-
-## Troubleshooting and tips
+# Troubleshooting and tips
 
 Useful checks:
   
