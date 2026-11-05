@@ -5,6 +5,7 @@
 # Usage:
 #   ./scripts/db-restore.sh <dump.sql>
 #   ./scripts/db-restore.sh --drop <dump.sql>                    # drop & recreate DB first
+#   ./scripts/db-restore.sh --prod <dump.sql>                    # production: standalone docker/compose.prod.yml
 #   ./scripts/db-restore.sh --env-file <path> <dump.sql>
 #   ./scripts/db-restore.sh --core-compose <path> <dump.sql>
 #   ./scripts/db-restore.sh --project-compose <path> <dump.sql>
@@ -20,6 +21,8 @@
 #   2. wcoa/docker/.env exists and contains DB_NAME, DB_USER, DB_PASSWORD.
 #
 # Options:
+#   --prod              Production mode: use only docker/compose.prod.yml (no core
+#                       compose file). Equivalent to dev otherwise.
 #   --drop              Terminate all active connections, drop, and recreate the
 #                       target database before restoring. Required for a clean
 #                       import from prod. Without this flag the dump is applied
@@ -68,6 +71,7 @@ resolve_to_abs() {
 # Parse arguments
 # ---------------------------------------------------------------------------
 DROP_FIRST=false
+PROD=false
 DUMP_FILE=""
 ENV_FILE="$DEFAULT_ENV_FILE"
 CORE_COMPOSE_FILE="$DEFAULT_CORE_COMPOSE"
@@ -76,6 +80,7 @@ PROJECT_COMPOSE_FILE="$DEFAULT_PROJECT_COMPOSE"
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --drop)     DROP_FIRST=true; shift ;;
+    --prod)     PROD=true; shift ;;
     --env-file) [[ -n "${2:-}" ]] || die "--env-file requires a path argument"
                 ENV_FILE="$2"; shift 2 ;;
     --core-compose)
@@ -90,7 +95,11 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ -n "$DUMP_FILE" ]] || die "Usage: $0 [--drop] [--env-file <path>] [--core-compose <path>] [--project-compose <path>] <dump.sql>"
+if [[ "$PROD" == true ]]; then
+  PROJECT_COMPOSE_FILE="$PROJECT_ROOT/docker/compose.prod.yml"
+fi
+
+[[ -n "$DUMP_FILE" ]] || die "Usage: $0 [--drop] [--prod] [--env-file <path>] [--core-compose <path>] [--project-compose <path>] <dump.sql>"
 
 # Resolve dump path before we cd away.
 DUMP_ABS="$(resolve_to_abs "$DUMP_FILE")"
@@ -99,11 +108,19 @@ DUMP_ABS="$(resolve_to_abs "$DUMP_FILE")"
 ENV_FILE_ABS="$(resolve_to_abs "$ENV_FILE")"
 [[ -f "$ENV_FILE_ABS" ]] || die "Env file not found: $ENV_FILE"
 
-CORE_COMPOSE_ABS="$(resolve_to_abs "$CORE_COMPOSE_FILE")"
-[[ -f "$CORE_COMPOSE_ABS" ]] || die "Core compose file not found: $CORE_COMPOSE_FILE"
+COMPOSE_FILE_ARGS=()
+if [[ "$PROD" == true ]]; then
+  CORE_COMPOSE_ABS="(none; prod)"
+else
+  CORE_COMPOSE_ABS="$(resolve_to_abs "$CORE_COMPOSE_FILE")"
+  [[ -f "$CORE_COMPOSE_ABS" ]] || die "Core compose file not found: $CORE_COMPOSE_FILE"
+  COMPOSE_FILE_ARGS+=(-f "$CORE_COMPOSE_ABS")
+fi
 
 PROJECT_COMPOSE_ABS="$(resolve_to_abs "$PROJECT_COMPOSE_FILE")"
 [[ -f "$PROJECT_COMPOSE_ABS" ]] || die "Project compose file not found: $PROJECT_COMPOSE_FILE"
+COMPOSE_FILE_ARGS+=(-f "$PROJECT_COMPOSE_ABS")
+COMPOSE_FILES_DISPLAY="${COMPOSE_FILE_ARGS[*]}"
 
 # ---------------------------------------------------------------------------
 # Always operate from the wcoa repo regardless of where the script is called
@@ -126,7 +143,7 @@ DB_PASSWORD="${DB_PASSWORD:?DB_PASSWORD must be set in .env}"
 # Compose command helpers
 # ---------------------------------------------------------------------------
 compose() {
-  docker compose -f "$CORE_COMPOSE_ABS" -f "$PROJECT_COMPOSE_ABS" --env-file "$ENV_FILE_ABS" "$@"
+  docker compose "${COMPOSE_FILE_ARGS[@]}" --env-file "$ENV_FILE_ABS" "$@"
 }
 
 psql_exec() {
@@ -142,7 +159,7 @@ info "Using env file:        $ENV_FILE_ABS"
 # ---------------------------------------------------------------------------
 info "Checking db service health..."
 compose ps db | grep -q "healthy" \
-  || die "db container is not healthy. Is the stack running? Try: docker compose -f $CORE_COMPOSE_ABS -f $PROJECT_COMPOSE_ABS --env-file $ENV_FILE_ABS up -d"
+  || die "db container is not healthy. Is the stack running? Try: docker compose $COMPOSE_FILES_DISPLAY --env-file $ENV_FILE_ABS up -d"
 
 # ---------------------------------------------------------------------------
 # Optional: terminate connections, drop, and recreate the database
@@ -180,4 +197,4 @@ info "Restore complete."
 info ""
 info "Next steps:"
 info "  Apply any pending migrations:"
-info "    docker compose -f $CORE_COMPOSE_ABS -f $PROJECT_COMPOSE_ABS --env-file $ENV_FILE_ABS exec app python marco/manage.py migrate"
+info "    docker compose $COMPOSE_FILES_DISPLAY --env-file $ENV_FILE_ABS exec app python marco/manage.py migrate"

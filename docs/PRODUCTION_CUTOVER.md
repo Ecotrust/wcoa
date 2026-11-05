@@ -2,10 +2,7 @@
 
 This document covers migration of the currently running production WCOA stack from the old coupled deployment to the decoupled WCOA stack.
 
-Use this document for production cutover planning and execution. For baseline host setup and greenfield deployment, use:
-
-- Core host guide: madrona-portal – docs/AWS_DEPLOY.md
-- WCOA deploy runbook: ./AWS_DEPLOY_WCOA.md
+Use this document only for migration planning and execution. The canonical WCOA installation, nginx, systemd, cron, release, and rollback instructions are in [AWS_DEPLOY_WCOA.md](./AWS_DEPLOY_WCOA.md); host setup is in the [core AWS guide](https://github.com/Ecotrust/madrona-portal/blob/main/docs/AWS_DEPLOY.md).
 
 ## Preconditions
 
@@ -24,13 +21,13 @@ Before changing anything, capture all current state artifacts and copy them off-
 
 Capture checklist:
 
-- [] Running app image tag
-- [] Current docker environment file values.
-- [] Current nginx site config.
-- [] Current cron configuration.
-- [] Fresh PostgreSQL dump.
-- [] Fresh Elasticsearch snapshot.
-- [] Media tarball backup.
+- [ ] Running app image tag
+- [ ] Current Docker environment file values.
+- [ ] Current nginx site config.
+- [ ] Current cron configuration.
+- [ ] Fresh PostgreSQL dump.
+- [ ] Fresh Elasticsearch snapshot.
+- [ ] Media tarball backup.
 
 Example commands:
 
@@ -72,7 +69,7 @@ Provision a new instance, restore data, verify with staging hostname, then move 
 - Cons: requires temporary duplicate infrastructure.
 - Rollback model: move Elastic IP/DNS back to old instance.
 
-## 3. Data continuity warning
+## Data continuity warning
 
 Docker named volumes are namespaced by compose project name.
 
@@ -82,7 +79,7 @@ Best practice:
 
 - perform explicit DB restore and media restore into the new stack.
 - validate Elasticsearch snapshot repository and restore path explicitly.
-- assume volume reuse as a migration method.
+- do not assume volumes can be reused across stacks.
 
 ## Cutover steps
 
@@ -96,23 +93,29 @@ On the target host:
 - Pull and boot decoupled stack.
 
 ```bash
-mkdir madrona-apps
+sudo mkdir -p /home/ubuntu/portals/madrona-apps
+sudo chown ubuntu:ubuntu /home/ubuntu/portals /home/ubuntu/portals/madrona-apps
+cd /home/ubuntu/portals/madrona-apps
 git clone https://github.com/Ecotrust/wcoa.git
-cd wcoa/docker
-cp ~/portals/madrona-portal/docker/.env ./
+cd /home/ubuntu/portals/madrona-apps/wcoa
+cp docker/.env.example docker/.env
+chmod 600 docker/.env
+mkdir -p docker/wars docker/media docker/backups/elasticsearch docker/backups/sql docker/static
 ```
+
+Set production secrets and a pinned `IMAGE_TAG` in `docker/.env` using [AWS_DEPLOY_WCOA.md](./AWS_DEPLOY_WCOA.md). Keep `DB_INIT=0` when restoring the existing production database.
 
 ### Copy WAR files, media, and backups
 
 ```bash
-cp -r ~/portals/madrona-portal/docker/media ./media
-cp -r ~/portals/madrona-portal/docker/wars ./wars
-cp -r ~/portals/madrona-portal/docker/backups ./backups
+cp -a ~/portals/madrona-portal/docker/media/. docker/media/
+cp -a ~/portals/madrona-portal/docker/wars/. docker/wars/
+cp -a ~/portals/madrona-portal/docker/backups/. docker/backups/
 ```
 
 ### Stop old stack
 ```bash
-cd ../../../madrona-portal/
+cd /home/ubuntu/portals/madrona-portal
 docker compose -f docker/docker-compose.prod.yml down
 
 # Prevent old stack from being auto-started by systemd after reboot
@@ -124,8 +127,10 @@ sudo systemctl disable --now madrona-portal.service || true
 
 ### Start new stack
 ```bash
-cd /home/ubuntu/portals/madrona-apps/wcoa/docker
-docker compose -f compose.prod.yml --env-file ./.env up -d
+cd /home/ubuntu/portals/madrona-apps/wcoa
+docker compose -f docker/compose.prod.yml --env-file docker/.env config >/dev/null
+docker compose -f docker/compose.prod.yml --env-file docker/.env pull
+docker compose -f docker/compose.prod.yml --env-file docker/.env up -d
 
 # Validate that app is running from WCOA image
 docker ps --format '{{.Names}} {{.Image}}' | grep -E 'app|wcoa|madrona-portal'
@@ -134,8 +139,13 @@ docker ps --format '{{.Names}} {{.Image}}' | grep -E 'app|wcoa|madrona-portal'
 ### Restore data and validate services
 
 ```bash
-# Restore DB from a known-good dump
-scripts/db-restore.sh --core-compose ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql/<dump-file>.sql
+# Restore the known-good dump into the new database. The app is stopped to avoid
+# serving requests against a database while it is being replaced.
+docker compose -f docker/compose.prod.yml --env-file docker/.env stop app
+docker compose -f docker/compose.prod.yml --env-file docker/.env exec -T db \
+	sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"' \
+	< ./docker/backups/sql/<dump-file>.sql
+docker compose -f docker/compose.prod.yml --env-file docker/.env up -d app
 
 # Run migrations
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migrate
@@ -147,78 +157,9 @@ If needed for legacy path alignment:
 docker compose -f docker/compose.prod.yml --env-file docker/.env exec app python marco/manage.py migration_to_layers
 ```
 
-### Update nginx
+### Restore ingress and scheduled operations
 
-```bash
-sudo vim /etc/nginx/sites-available/madrona-portal
-```
-
-update paths
-
-### Add WCOA service and cron entries
-
-Create unit file such as /etc/systemd/system/wcoa.service:
-
-```bash
-sudo nano /etc/systemd/system/wcoa.service
-```
-
-```ini
-[Unit]
-Description=WCOA Docker Stack
-After=docker.service
-Requires=docker.service
-
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-WorkingDirectory=/home/ubuntu/portals/madrona-apps/wcoa/docker
-ExecStart=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env up -d
-ExecStop=/usr/bin/docker compose -f /home/ubuntu/portals/madrona-apps/wcoa/docker/compose.prod.yml --env-file /home/ubuntu/portals/madrona-apps/wcoa/docker/.env down
-TimeoutStartSec=0
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable wcoa.service
-sudo systemctl start wcoa.service
-```
-
-Confirm only the intended unit is enabled and that the app container image is WCOA:
-
-```bash
-systemctl list-unit-files | grep -E 'wcoa|madrona'
-systemctl status wcoa.service --no-pager
-docker ps --format '{{.Names}} {{.Image}}' | grep -E 'wcoa|madrona-portal'
-```
-
-## Cron jobs for WCOA
-
-Install cron entries for DB dump, ES snapshots, and nativeland refresh.
-
-Recommended entries:
-
-```cron
-# DB dump retention
-15 2 * * * cd /home/ubuntu/portals/madrona-apps/wcoa && /bin/bash -lc './scripts/db_dump.sh -c ./docker/compose.prod.yml -e ./docker/.env -d ./docker/backups/sql && find ./docker/backups/sql -type f -name "*.sql" -mtime +10 -delete' >> /home/ubuntu/portals/madrona-apps/wcoa/docker/backups/db_dump.log 2>&1
-
-# Elasticsearch snapshot
-15 3 * * * /usr/bin/bash /home/ubuntu/portals/madrona-apps/wcoa/scripts/create_elastic_snapshot.sh -r gp_es_snap
-
-# NativeLand refresh
-31 5 * * * cd /home/ubuntu/portals/madrona-apps/wcoa/docker && docker compose -f compose.prod.yml --env-file .env exec app python marco/manage.py import_nativeland
-```
-
-## Restart Nginx after cutover
-
-```bash
-sudo service nginx restart
-```
+Apply the WCOA nginx server block from [AWS_DEPLOY_WCOA.md](./AWS_DEPLOY_WCOA.md), then validate and reload nginx. Install the WCOA systemd unit and cron entries from that runbook; verify their working directories point to `/home/ubuntu/portals/madrona-apps/wcoa` and that no legacy unit or job can restart the old stack.
 
 ### Traffic move
 
@@ -248,17 +189,14 @@ Application:
 Data/catalog:
 
 - Elasticsearch responds and metadata search works.
+- The WCOA app reports `DEBUG=False` and `DATA_CATALOG_ENABLED=True`.
 - Geoportal and harvester routes respond.
 - Geospatial-related routes required by WCOA respond.
 
-Background jobs:
-
-- Celery task execution round-trip works.
-- Cron entries are installed and dry-run successfully.
-
 Operational:
 
-- systemd unit status is healthy.
+- The WCOA systemd unit starts the intended image and the old unit remains disabled.
+- WCOA cron jobs run from the new checkout and have been dry-run successfully.
 - No recurring critical errors in app/db/elastic/geoportal logs.
 
 ## Rollback triggers and commands

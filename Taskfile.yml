@@ -5,42 +5,44 @@ vars:
   COMPOSE: docker compose -f docker/compose.yml -f {{.CORE}}/docker/compose.base.yml --env-file docker/.env
 
 tasks:
-  base:
-    desc: Build the core base image locally.
+  build-base:
+    aliases: [base]
+    desc: Build madrona-portal core base image locally.
     cmds:
       - sh -c "if [ -f docker/.env ]; then set -a; . docker/.env; set +a; fi; docker build -t ghcr.io/ecotrust/madrona-portal:\${BASE_TAG:-latest} -f {{.CORE}}/docker/Dockerfile {{.CORE}}/../"
 
-  build:
-    desc: Build the WCOA overlay image.
+  build-portal:
+    aliases: [build]
+    desc: Build the WCOA development overlay image.
     cmds:
       - "{{.COMPOSE}} build"
 
   up:
-    desc: Start the stack.
+    desc: Start WCOA development services.
     cmds:
       - "{{.COMPOSE}} up"
 
   init:
-    desc: Start the stack and run DB init on startup.
+    desc: Initialize a fresh WCOA database, then start the development stack.
     cmds:
       - "DB_INIT=1 {{.COMPOSE}} up"
 
   down:
-    desc: Stop the stack.
+    desc: Stop and remove WCOA development containers and network; preserve volumes.
     cmds:
       - "{{.COMPOSE}} down"
 
   logs:
-    desc: Tail app logs.
+    desc: Follow the WCOA application container logs.
     cmds:
       - "{{.COMPOSE}} logs -f app"
 
   manage:
-    desc: Run a Django manage.py command, e.g. task manage -- migrate.
+    desc: Run a Django management command, e.g. task manage -- migrate.
     cmds:
       - "{{.COMPOSE}} exec app python marco/manage.py {{.CLI_ARGS}}"
 
   shell:
-    desc: Open Django shell.
+    desc: Open the Django shell in the running WCOA app container.
     cmds:
       - "{{.COMPOSE}} exec app python marco/manage.py shell"

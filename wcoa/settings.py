@@ -17,15 +17,7 @@ PROJECT_REGION = {
     'map': 'ocean',
 }
 
-CATALOG_SOURCE = 'elastic:9200'
-
-CATALOG_QUERY_ENDPOINT = '/geoportal/elastic/metadata/_search/'
-
 DATA_MANAGER_ADMIN = False
-
-DATA_CATALOG_ENABLED = False
-
-CATALOG_TECHNOLOGY = 'GeoPortal2'
 
 HANDLER_404 = 'wcoa.views.page_not_found'
 

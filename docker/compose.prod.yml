@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/ecotrust/wcoa:${IMAGE_TAG:-latest}
+    image: ghcr.io/ecotrust/wcoa:${IMAGE_TAG:?IMAGE_TAG must be a pinned short SHA}
     volumes:
       - ./static:/vol/web/static
       - ./media:/usr/local/apps/madrona-portal/media
@@ -32,7 +32,7 @@ services:
       tasks:
         condition: service_healthy
     ports:
-      - "${APP_PORT:-8000}:8008"
+      - "127.0.0.1:${APP_PORT:-8000}:8008"
     networks:
       - madronanetwork
     restart: unless-stopped
@@ -46,7 +46,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME:-wcoa_docker_db}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
     networks:
       - madronanetwork
     healthcheck:
@@ -60,7 +60,7 @@ services:
     image: redis:7-alpine
     command: redis-server ${REDIS_PASSWORD:+--requirepass ${REDIS_PASSWORD}}
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -75,7 +75,7 @@ services:
   geoportal:
     image: tomcat:9-jdk11
     ports:
-      - 8080:8080
+      - "127.0.0.1:8080:8080"
     volumes:
       - gp-volume:/usr/local/tomcat/webapps/
       - harvester_data:/root
@@ -108,8 +108,8 @@ services:
       - xpack.security.enabled=false
       - path.repo=/usr/share/elasticsearch/backups
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "127.0.0.1:9200:9200"
+      - "127.0.0.1:9300:9300"
     networks:
       - madronanetwork
     group_add:
