@@ -3,6 +3,7 @@ version: "3"
 vars:
   CORE: ../../madrona-portal
   COMPOSE: docker compose -f docker/compose.yml -f {{.CORE}}/docker/compose.base.yml --env-file docker/.env
+  PROD_COMPOSE: docker compose -f docker/compose.prod.yml --env-file docker/.env --profile dev
 
 tasks:
   build-base:
@@ -22,6 +23,11 @@ tasks:
     cmds:
       - "{{.COMPOSE}} up"
 
+  produp:
+    desc: Start WCOA development services in production mode -- Nginx, Elastic, etc.
+    cmds:
+      - "{{.PROD_COMPOSE}} up"
+
   init:
     desc: Initialize a fresh WCOA database, then start the development stack.
     cmds:
@@ -31,6 +37,16 @@ tasks:
     desc: Stop and remove WCOA development containers and network; preserve volumes.
     cmds:
       - "{{.COMPOSE}} down"
+
+  proddown:
+    desc: Stop and remove WCOA production containers and network; preserve volumes.
+    cmds:
+      - "{{.PROD_COMPOSE}} down"
+
+  pull:
+    desc: Pull the latest images for the WCOA development stack.
+    cmds:
+      - "{{.PROD_COMPOSE}} pull"
 
   logs:
     desc: Follow the WCOA application container logs.
